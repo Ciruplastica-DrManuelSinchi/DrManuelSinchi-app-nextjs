@@ -1,27 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===================================
+   VARIABLES CSS GLOBALES
+   =================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #391142;
+  --primary-light: #5a2d6a;
+  --primary-dark: #1f0a24;
+  --accent: #d4a853;
+  --accent-light: #f0e0b8;
+  --accent-dark: #b8944d;
+  --dark: #1a1a1a;
+  --light: #f9f7fa;
+  --gray: #6b7280;
+  --white: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ===================================
+   BASE STYLES
+   =================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-dark bg-light antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply transition-colors duration-300;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===================================
+   COMPONENTES REUTILIZABLES
+   =================================== */
+@layer components {
+
+  /* Botones */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-body font-semibold text-sm rounded-full transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-dark hover:bg-accent-dark;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-white/30 text-white hover:bg-white/10;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary text-primary hover:bg-primary hover:text-white;
+  }
+
+  .btn-dark {
+    @apply btn bg-dark text-white hover:bg-gray-800;
+  }
+
+  .btn-white {
+    @apply btn bg-white text-dark hover:bg-gray-100;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl shadow-card transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-card-hover hover:-translate-y-1;
+  }
+
+  /* Secciones */
+  .section {
+    @apply py-16 md:py-20 lg:py-24 px-4 md:px-8 lg:px-16;
+  }
+
+  .section-header {
+    @apply text-center mb-12 md:mb-16;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl text-dark mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-gray-600 text-base md:text-lg max-w-2xl mx-auto;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary/10 text-primary border border-primary/20;
+  }
+
+  .badge-accent {
+    @apply badge bg-accent/20 text-accent-dark border border-accent/30;
+  }
+
+  /* Trust items */
+  .trust-icon {
+    @apply w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-soft text-primary;
+  }
+
+  /* Form inputs */
+  .input {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl font-body text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300;
+  }
+
+  .input-error {
+    @apply input border-red-500 focus:ring-red-200;
+  }
+
+  /* Links */
+  .link {
+    @apply text-primary font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all duration-300;
+  }
 }
 
+/* ===================================
+   UTILIDADES PERSONALIZADAS
+   =================================== */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+
+  /* Gradientes de texto */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
   }
+
+  /* Overlay oscuro */
+  .overlay-dark {
+    @apply absolute inset-0 bg-black/50;
+  }
+
+  /* Container personalizado */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 md:px-8;
+  }
+
+  /* Hide scrollbar */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Aspect ratios para imágenes */
+  .aspect-before-after {
+    aspect-ratio: 3/4;
+  }
+
+  .aspect-procedure {
+    aspect-ratio: 4/3;
+  }
+
+  .aspect-video-thumb {
+    aspect-ratio: 16/9;
+  }
+}
+
+/* ===================================
+   ANIMACIONES GLOBALES
+   =================================== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ===================================
+   BOTÓN FLOTANTE DE WHATSAPP
+   =================================== */
+.whatsapp-button {
+  @apply fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-[#25d366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300;
+}
+
+.whatsapp-button::before {
+  content: '';
+  @apply absolute inset-0 rounded-full bg-[#25d366] animate-ping opacity-30;
+}
+
+/* ===================================
+   SLIDER ANTES/DESPUÉS
+   =================================== */
+.before-after-slider {
+  @apply relative overflow-hidden rounded-2xl cursor-ew-resize;
+}
+
+.before-after-slider .before-image {
+  @apply absolute inset-0 object-cover;
+}
+
+.before-after-slider .after-image {
+  @apply absolute inset-0 object-cover;
+}
+
+.before-after-slider .divider {
+  @apply absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-10;
+}
+
+.before-after-slider .divider::after {
+  content: '';
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center;
+}
+
+/* ===================================
+   ACCORDION / FAQ
+   =================================== */
+.accordion-item {
+  @apply bg-light rounded-xl overflow-hidden transition-all duration-300;
+}
+
+.accordion-item.open {
+  @apply bg-primary-50;
+}
+
+.accordion-trigger {
+  @apply w-full px-6 py-5 flex items-center justify-between font-semibold text-left cursor-pointer hover:bg-primary-50 transition-colors;
+}
+
+.accordion-content {
+  @apply px-6 pb-5 text-gray-600;
+}
+
+/* ===================================
+   RESPONSIVE HELPERS
+   =================================== */
+@media (max-width: 768px) {
+  .section {
+    @apply py-12 px-4;
+  }
+
+  .section-header {
+    @apply mb-8;
+  }
+}
+
+/* ===================================
+   FOCUS VISIBLE (Accesibilidad)
+   =================================== */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+}
+
+/* ===================================
+   SELECTION
+   =================================== */
+::selection {
+  @apply bg-primary text-white;
 }
