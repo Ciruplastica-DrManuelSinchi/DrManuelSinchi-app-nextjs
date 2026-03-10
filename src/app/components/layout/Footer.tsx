@@ -16,9 +16,9 @@ const footerLinks = {
         { name: 'Contacto', href: '/contacto' },
     ],
     social: [
-        { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/ciruplastica' },
-        { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/ciruplastica' },
-        { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/ciruplastica' },
+        { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/Ciruplastica.pe' },
+        { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/ciruplastica.pe' },
+        { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@ciruplastica' },
         { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/ciruplastica' },
     ],
 }
