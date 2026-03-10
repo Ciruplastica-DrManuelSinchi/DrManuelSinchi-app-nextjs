@@ -5,10 +5,6 @@ import Link from 'next/link'
 import { Calendar, MessageCircle, Star, CheckCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-//Importamos la imagen
-import doctorImg from "@/public/images/dr-manuel-sinchi.jpg"
-
-
 const stats = [
     { number: '+2,500', label: 'Cirugías exitosas' },
     { number: '15+', label: 'Años de experiencia' },
@@ -89,7 +85,7 @@ export default function Hero() {
                         <div className="relative w-full max-w-md mx-auto">
                             <div className="aspect-[3/4] relative rounded-3xl overflow-hidden bg-primary-light/30 border-2 border-white/10">
                                 <Image
-                                    src={doctorImg}
+                                    src="/images/dr-manuel-sinchi.jpg"
                                     alt="Dr. Manuel Sinchi - Cirujano Plástico en Lima"
                                     fill
                                     className="object-cover"

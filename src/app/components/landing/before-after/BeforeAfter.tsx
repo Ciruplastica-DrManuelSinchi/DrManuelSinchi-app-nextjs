@@ -11,7 +11,7 @@ const cases = [
         procedure: 'Rinoplastia',
         detail: 'Paciente femenina, 28 años',
         beforeImage: '/images/before-after/rinoplastia-before.jpg',
-        afterImage: '/images/before-after/rinoplastia-after.jpg',
+        afterImage: '/images/before-after/rinoplastia-after.png',
     },
     {
         id: 2,

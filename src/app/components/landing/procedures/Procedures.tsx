@@ -17,7 +17,7 @@ const procedures = {
     facial: [
         { name: 'Rinoplastia', desc: 'Cirugía de nariz para mejorar forma y función', slug: 'rinoplastia', image: '/images/procedures/rinoplastia.jpg' },
         { name: 'Blefaroplastia', desc: 'Rejuvenecimiento del contorno de ojos', slug: 'blefaroplastia', image: '/images/procedures/blefaroplastia.jpg' },
-        { name: 'Lifting Facial', desc: 'Estiramiento facial para rejuvenecer', slug: 'lifting-facial', image: '/images/procedures/lifting.jpg' },
+        { name: 'Lifting Facial', desc: 'Estiramiento facial para rejuvenecer', slug: 'lifting-facial', image: '/images/procedures/lifting-facial.jpg' },
         { name: 'Bichectomía', desc: 'Afinamiento del rostro', slug: 'bichectomia', image: '/images/procedures/bichectomia.jpg' },
     ],
     corporal: [
@@ -35,8 +35,7 @@ const procedures = {
     reconstructiva: [
         { name: 'Cicatrices', desc: 'Tratamiento y corrección de cicatrices', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg' },
         { name: 'Quemaduras', desc: 'Reconstrucción por quemaduras', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg' },
-        { name: 'Heridas Complejas', desc: 'Tratamiento de úlceras y heridas', slug: 'heridas-ulceras', image: '/images/procedures/heridas.jpg' },
-        { name: 'Reconstrucción', desc: 'Cirugía reconstructiva especializada', slug: 'reconstruccion', image: '/images/procedures/reconstruccion.jpg' },
+        { name: 'Heridas y úlceras complejas', desc: 'Tratamiento de úlceras y heridas', slug: 'heridas-ulceras', image: '/images/procedures/heridas.jpg' },
     ],
 }
 
