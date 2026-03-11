@@ -12,7 +12,6 @@ import {
     Sparkles,
     ArrowRight,
     Check,
-    Play,
     Phone,
     MessageCircle,
     Calendar,
@@ -27,8 +26,10 @@ interface ProcedurePageProps {
 }
 
 export default function ProcedurePage({ data }: ProcedurePageProps) {
+    //Estados
     const [openFaq, setOpenFaq] = useState<number | null>(0)
     const [activeImage, setActiveImage] = useState(0)
+
 
     const doctor = { ...defaultDoctor, ...data.doctor }
     const cta = { ...defaultCTA, ...data.cta }
@@ -460,31 +461,26 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="card-hover overflow-hidden group cursor-pointer"
+                                    className="card overflow-hidden"
                                 >
-                                    <div className="relative aspect-video bg-gray-200">
-                                        <Image
-                                            src={video.thumbnail}
-                                            alt={video.title}
-                                            fill
-                                            className="object-cover"
+                                    <div className="relative aspect-video">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                                            title={video.title}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
                                         />
-                                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                                            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                                <Play className="w-6 h-6 text-primary ml-1" />
-                                            </div>
-                                        </div>
-                                        <span className="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                                            {video.duration}
-                                        </span>
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="font-semibold text-dark group-hover:text-primary transition-colors">
+                                        <h3 className="font-semibold text-dark">
                                             {video.title}
                                         </h3>
                                     </div>
                                 </motion.div>
                             ))}
+
+
                         </div>
 
                         <div className="text-center mt-10">
@@ -542,9 +538,8 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                     >
                                         <span className="font-semibold text-dark pr-4">{faq.question}</span>
                                         <ChevronDown
-                                            className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${
-                                                openFaq === index ? 'rotate-180' : ''
-                                            }`}
+                                            className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${openFaq === index ? 'rotate-180' : ''
+                                                }`}
                                         />
                                     </button>
                                     <AnimatePresence>

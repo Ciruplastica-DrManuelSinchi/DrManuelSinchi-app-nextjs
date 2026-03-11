@@ -140,6 +140,7 @@ const lipoesculturaData: ProcedureData = {
             title: '¿Qué es la lipoescultura?',
             thumbnail: '/images/video-thumbnail.jpg',
             duration: '4:30',
+            youtubeId: 'fUUGe4-wLnc',
         },
         {
             title: 'Lipoescultura 360: resultados completos',

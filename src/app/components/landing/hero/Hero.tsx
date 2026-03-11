@@ -1,138 +1,133 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MessageCircle, Star, CheckCircle } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
-
-const stats = [
-    { number: '+2,500', label: 'Cirugías exitosas' },
-    { number: '15+', label: 'Años de experiencia' },
-    { number: '98%', label: 'Satisfacción' },
-]
 
 export default function Hero() {
     return (
-        <section className="relative min-h-[90vh] bg-hero-gradient overflow-hidden">
-            <div className="container-custom">
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[90vh] py-20 lg:py-0">
-
-                    {/* Contenido izquierdo */}
-                    <motion.div
-                        className="text-white z-10"
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+        <section className="relative h-screen w-full overflow-hidden">
+            {/* Background Video with Ken Burns Effect */}
+            <motion.div
+                className="absolute inset-0 w-full h-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5 }}
+            >
+                <motion.div
+                    className="absolute inset-0 w-full h-full"
+                    animate={{
+                        scale: [1, 1.05, 1],
+                    }}
+                    transition={{
+                        duration: 20,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "linear",
+                    }}
+                >
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        poster="/images/hero-captura.png"
+                        className="absolute inset-0 w-full h-full object-cover"
                     >
-                        {/* Badge de certificación */}
-                        <div className="badge-accent mb-6 inline-flex items-center gap-2">
-                            <CheckCircle className="w-4 h-4" />
-                            <span>Clínica Certificada</span>
-                        </div>
+                        <source src="/videos/hero.mp4" type="video/mp4" />
+                    </video>
+                </motion.div>
+            </motion.div>
 
-                        {/* Título principal */}
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-                            Resultados naturales que{' '}
-                            <span className="text-accent">transforman vidas</span>
-                        </h1>
+            {/* Radial Vignette Overlay */}
+            <div
+                className="absolute inset-0 z-10"
+                style={{
+                    background: `radial-gradient(
+                        ellipse at center,
+                        rgba(57, 17, 66, 0.7) 0%,
+                        rgba(31, 10, 36, 0.4) 70%,
+                        rgba(20, 5, 25, 0.6) 100%
+                    )`,
+                }}
+            />
 
-                        {/* Subtítulo */}
-                        <p className="text-lg md:text-xl text-white/80 mb-8 max-w-xl">
-                            Más de 15 años de experiencia en cirugía plástica y reconstructiva
-                            con los más altos estándares de seguridad.
-                        </p>
+            {/* Content Container */}
+            <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4">
+                {/* Main Title */}
+                <motion.h1
+                    className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white uppercase tracking-[0.3em] sm:tracking-[0.4em] font-bold mb-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    Ciruplástica
+                </motion.h1>
 
-                        {/* Estadísticas */}
-                        <div className="flex flex-wrap gap-8 mb-10">
-                            {stats.map((stat, index) => (
-                                <motion.div
-                                    key={stat.label}
-                                    className="text-center"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                                >
-                                    <div className="font-display text-3xl md:text-4xl text-accent font-bold">
-                                        {stat.number}
-                                    </div>
-                                    <div className="text-sm text-white/70 mt-1">
-                                        {stat.label}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
+                {/* Decorative Gold Line */}
+                <motion.div
+                    className="w-16 h-[2px] bg-accent mb-6"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                />
 
-                        {/* Botones CTA */}
-                        <div className="flex flex-wrap gap-4">
-                            <Link href="/contacto" className="btn-primary text-base px-8 py-4">
-                                <Calendar className="w-5 h-5" />
-                                Agendar Consulta
-                            </Link>
-                            <Link href="/casos-reales" className="btn-secondary text-base px-8 py-4">
-                                Ver Casos Reales
-                            </Link>
-                        </div>
-                    </motion.div>
+                {/* Subtitle */}
+                <motion.p
+                    className="font-body font-light text-lg sm:text-xl md:text-2xl text-white/90 tracking-wider mb-10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                >
+                    Cirugía Plástica & Medicina Estética
+                </motion.p>
 
-                    {/* Imagen derecha */}
-                    <motion.div
-                        className="relative hidden lg:block"
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
+                {/* CTA Button */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                >
+                    <Link
+                        href="/contacto"
+                        className="group relative inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-body font-medium tracking-widest text-accent uppercase border border-accent/60 bg-transparent transition-all duration-500 hover:bg-accent hover:text-primary hover:border-accent overflow-hidden"
                     >
-                        {/* Imagen del doctor */}
-                        <div className="relative w-full max-w-md mx-auto">
-                            <div className="aspect-[3/4] relative rounded-3xl overflow-hidden bg-primary-light/30 border-2 border-white/10">
-                                <Image
-                                    src="/images/dr-manuel-sinchi.jpg"
-                                    alt="Dr. Manuel Sinchi - Cirujano Plástico en Lima"
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
-                            </div>
-
-                            {/* Card flotante - Reviews */}
-                            <motion.div
-                                className="absolute -left-8 bottom-20 bg-white rounded-xl p-4 shadow-strong"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.6, delay: 0.6 }}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <div>
-                                        <div className="flex text-yellow-400 mb-1">
-                                            {[...Array(5)].map((_, i) => (
-                                                <Star key={i} className="w-4 h-4 fill-current" />
-                                            ))}
-                                        </div>
-                                        <div className="font-bold text-dark">5/5</div>
-                                        <div className="text-xs text-gray-500">3 reseñas en Google</div>
-                                    </div>
-                                </div>
-                            </motion.div>
-
-                            {/* Card flotante - WhatsApp */}
-                            <motion.div
-                                className="absolute -right-4 top-20 bg-[#25d366] text-white rounded-xl px-4 py-3 shadow-strong"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.6, delay: 0.8 }}
-                            >
-                                <div className="flex items-center gap-2">
-                                    <MessageCircle className="w-5 h-5" />
-                                    <span className="font-semibold text-sm">Chat en línea</span>
-                                </div>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                </div>
+                        <span className="relative z-10">Agenda tu consulta</span>
+                        <span className="absolute inset-0 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                        <span className="absolute inset-0 z-10 flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            Agenda tu consulta
+                        </span>
+                    </Link>
+                </motion.div>
             </div>
 
-            {/* Decoración de fondo */}
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-dark/50 to-transparent pointer-events-none" />
+            {/* Scroll Indicator */}
+            <motion.div
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                onClick={() => {
+                    window.scrollTo({
+                        top: window.innerHeight,
+                        behavior: 'smooth'
+                    })
+                }}
+            >
+                <span className="text-white/50 text-xs tracking-[0.2em] uppercase mb-2 font-body">
+                    Descubrir
+                </span>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                >
+                    <ChevronDown className="w-5 h-5 text-accent/80" />
+                </motion.div>
+            </motion.div>
         </section>
     )
 }
-

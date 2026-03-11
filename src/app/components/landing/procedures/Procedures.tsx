@@ -23,19 +23,19 @@ const procedures = {
     corporal: [
         { name: 'Lipoescultura', desc: 'Moldea tu figura eliminando grasa localizada', slug: 'lipoescultura', image: '/images/procedures/lipoescultura.jpg' },
         { name: 'Abdominoplastia', desc: 'Abdomen plano y tonificado', slug: 'abdominoplastia', image: '/images/procedures/abdominoplastia.jpg' },
-        { name: 'Mamoplastia', desc: 'Aumento o reducción mamaria', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia.jpg' },
+        { name: 'Mamoplastia', desc: 'Aumento o reducción mamaria', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia-aumento.jpg' },
         { name: 'Gluteoplastia', desc: 'Aumento y levantamiento de glúteos', slug: 'gluteoplastia', image: '/images/procedures/gluteoplastia.jpg' },
     ],
     estetica: [
         { name: 'Botox', desc: 'Elimina arrugas de expresión', slug: 'botox', image: '/images/procedures/botox.jpg' },
         { name: 'Ácido Hialurónico', desc: 'Relleno facial para mayor volumen', slug: 'acido-hialuronico', image: '/images/procedures/acido-hialuronico.jpg' },
-        { name: 'Relleno de Labios', desc: 'Labios más voluminosos y definidos', slug: 'rellenos-labios', image: '/images/procedures/labios.jpg' },
+        { name: 'Relleno de Labios', desc: 'Labios más voluminosos y definidos', slug: 'rellenos-labios', image: '/images/procedures/relleno-labios.jpg' },
         { name: 'PRP', desc: 'Plasma rico en plaquetas rejuvenecedor', slug: 'plasma-rico-plaquetas', image: '/images/procedures/prp.jpg' },
     ],
     reconstructiva: [
         { name: 'Cicatrices', desc: 'Tratamiento y corrección de cicatrices', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg' },
         { name: 'Quemaduras', desc: 'Reconstrucción por quemaduras', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg' },
-        { name: 'Heridas y úlceras complejas', desc: 'Tratamiento de úlceras y heridas', slug: 'heridas-ulceras', image: '/images/procedures/heridas.jpg' },
+        { name: 'Heridas y úlceras complejas', desc: 'Tratamiento de úlceras y heridas', slug: 'heridas-ulceras', image: '/images/procedures/heridas-y-ulceras-complejas.jpg' },
     ],
 }
 

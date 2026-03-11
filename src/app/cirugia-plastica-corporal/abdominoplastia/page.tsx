@@ -31,7 +31,7 @@ const abdominoplastiaData: ProcedureData = {
         duration: '2-4 horas',
         recovery: '14-21 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/abdominoplastia-hero.jpg',
+        heroImage: '/images/procedures/abdominoplastia.jpg',
         whatsappMessage: 'Hola, me interesa información sobre abdominoplastia',
     },
 
@@ -42,7 +42,7 @@ const abdominoplastiaData: ProcedureData = {
             'La abdominoplastia, también conocida como "tummy tuck", es una cirugía que elimina el exceso de piel y grasa del abdomen, además de reparar los músculos abdominales debilitados o separados (diástasis de rectos).',
             'Es especialmente beneficiosa para personas que han experimentado cambios significativos de peso, mujeres después del embarazo, o quienes tienen flacidez abdominal que no responde a dieta ni ejercicio. El resultado es un <strong class="text-primary">abdomen más plano, firme y definido</strong>.',
         ],
-        image: '/images/procedures/abdominoplastia-tecnica.jpg',
+        image: '/images/procedures/abdominoplastia.jpg',
         highlights: {
             title: 'Tipos de Abdominoplastia',
             icon: Scissors,

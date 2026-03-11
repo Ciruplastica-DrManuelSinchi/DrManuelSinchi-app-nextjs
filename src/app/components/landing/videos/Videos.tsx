@@ -1,29 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import { Play, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const videos = [
     {
         id: 1,
         title: '¿Qué es la Lipoescultura?',
-        duration: '5:32 min',
-        thumbnail: '/images/videos/lipoescultura-thumb.jpg',
         youtubeId: 'VIDEO_ID_1',
     },
     {
         id: 2,
         title: 'Rinoplastia: Proceso y Recuperación',
-        duration: '7:15 min',
-        thumbnail: '/images/videos/rinoplastia-thumb.jpg',
         youtubeId: 'VIDEO_ID_2',
     },
     {
         id: 3,
         title: 'Cuidados Post-Operatorios',
-        duration: '4:48 min',
-        thumbnail: '/images/videos/postop-thumb.jpg',
         youtubeId: 'VIDEO_ID_3',
     },
 ]
@@ -45,33 +39,28 @@ export default function Videos() {
                     {videos.map((video, index) => (
                         <motion.div
                             key={video.id}
-                            className="card-hover overflow-hidden group cursor-pointer"
+                            className="card overflow-hidden"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
                         >
-                            {/* Thumbnail */}
-                            <div className="relative aspect-video bg-gray-900">
-                                {/* Placeholder para thumbnail */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" />
-
-                                {/* Botón de play */}
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110">
-                                        <Play className="w-6 h-6 text-dark fill-current ml-1" />
-                                    </div>
-                                </div>
+                            {/* Video Iframe */}
+                            <div className="relative aspect-video">
+                                <iframe
+                                    className="w-full h-full"
+                                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                                    title={video.title}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
                             </div>
 
                             {/* Info */}
-                            <div className="p-5">
-                                <h3 className="font-semibold text-dark mb-2">
+                            <div className="p-4">
+                                <h3 className="font-semibold text-dark">
                                     {video.title}
                                 </h3>
-                                <p className="text-sm text-gray-500">
-                                    {video.duration}
-                                </p>
                             </div>
                         </motion.div>
                     ))}

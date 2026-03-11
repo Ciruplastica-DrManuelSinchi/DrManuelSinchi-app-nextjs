@@ -55,7 +55,7 @@ export interface Video {
     title: string
     thumbnail: string
     duration: string
-    youtubeId?: string
+    youtubeId?: string | null
 }
 
 export interface DoctorCredential {
