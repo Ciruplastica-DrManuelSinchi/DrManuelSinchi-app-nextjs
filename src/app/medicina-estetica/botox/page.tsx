@@ -31,7 +31,6 @@ const botoxData: ProcedureData = {
         duration: '15-30 min',
         recovery: 'Inmediata',
         anesthesia: 'Sin anestesia',
-        heroImage: '/images/procedures/botox-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre Botox',
     },
 
@@ -42,7 +41,7 @@ const botoxData: ProcedureData = {
             'El Botox (toxina botulínica tipo A) es un tratamiento inyectable que relaja temporalmente los músculos faciales responsables de las arrugas de expresión. Es el procedimiento estético no quirúrgico más realizado en el mundo.',
             'Actúa bloqueando las señales nerviosas que causan las contracciones musculares, <strong class="text-primary">suavizando las arrugas existentes y previniendo la formación de nuevas</strong>. Los resultados son naturales y no alteran tu capacidad de expresión.',
         ],
-        image: '/images/procedures/botox-tecnica.jpg',
+        image: '/images/procedures/que-es/botox-tecnica.jpg',
         highlights: {
             title: 'Zonas de Aplicación',
             icon: Zap,

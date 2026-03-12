@@ -6,7 +6,6 @@ import {
     Shield,
     Heart,
     Calendar,
-    Timer,
     Star,
     Smile,
     Target
@@ -31,7 +30,6 @@ const rellenosLabiosData: ProcedureData = {
         duration: '20-30 min',
         recovery: 'Inmediata',
         anesthesia: 'Anestesia tópica',
-        heroImage: '/images/procedures/rellenos-labios-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre rellenos de labios',
     },
 
@@ -42,7 +40,7 @@ const rellenosLabiosData: ProcedureData = {
             'Los rellenos de labios utilizan ácido hialurónico para aumentar el volumen, definir el contorno y mejorar la forma de los labios. Es uno de los tratamientos estéticos más populares para realzar la sensualidad del rostro.',
             'Ofrecemos resultados desde <strong class="text-primary">muy sutiles hasta más pronunciados</strong>, según tus preferencias. El objetivo es lograr labios armónicos que complementen tus rasgos faciales de forma natural.',
         ],
-        image: '/images/procedures/rellenos-labios-tecnica.jpg',
+        image: '/images/procedures/que-es/relleno-labios-tecnica.jpg',
         highlights: {
             title: 'Lo que podemos lograr',
             icon: Smile,

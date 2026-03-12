@@ -31,7 +31,6 @@ const lipoPapadaData: ProcedureData = {
         duration: '1 hora',
         recovery: '5-7 días recuperación',
         anesthesia: 'Anestesia local + sedación',
-        heroImage: '/images/procedures/lipo-papada-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre liposucción de papada',
     },
 
@@ -42,7 +41,7 @@ const lipoPapadaData: ProcedureData = {
             'La liposucción de papada, también conocida como liposucción submentoniana, es un procedimiento que elimina la grasa acumulada debajo del mentón. Esta grasa, conocida como "doble mentón" o papada, es resistente a dieta y ejercicio.',
             'Mediante pequeñas incisiones prácticamente invisibles, se utiliza una <strong class="text-primary">cánula fina para aspirar la grasa</strong>, definiendo el ángulo cérvico-facial y rejuveneciendo el perfil. Es un procedimiento ambulatorio con recuperación rápida.',
         ],
-        image: '/images/procedures/lipo-papada-tecnica.jpg',
+        image: '/images/procedures/que-es/lipo-papada-tecnica.jpg',
         highlights: {
             title: 'Beneficios del Procedimiento',
             icon: Target,

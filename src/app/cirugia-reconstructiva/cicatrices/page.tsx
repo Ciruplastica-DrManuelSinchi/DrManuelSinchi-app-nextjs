@@ -30,7 +30,6 @@ const cicatricesData: ProcedureData = {
         duration: '30 min - 2 horas',
         recovery: '7-21 días',
         anesthesia: 'Local o sedación',
-        heroImage: '/images/procedures/cicatrices-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre tratamiento de cicatrices',
     },
 
@@ -41,7 +40,7 @@ const cicatricesData: ProcedureData = {
             'El tratamiento de cicatrices incluye diversas técnicas quirúrgicas y no quirúrgicas para mejorar la apariencia de cicatrices que causan molestias estéticas o funcionales. Cada cicatriz es única y requiere un enfoque personalizado.',
             'Evaluamos el tipo de cicatriz, su ubicación, tiempo de evolución y características para seleccionar el <strong class="text-primary">tratamiento más efectivo</strong>: desde infiltraciones hasta revisión quirúrgica, pasando por láser y otras terapias.',
         ],
-        image: '/images/procedures/cicatrices-tecnica.jpg',
+        image: '/images/procedures/que-es/cicatrices-tecnica.jpg',
         highlights: {
             title: 'Tipos de Cicatrices que Tratamos',
             icon: Layers,

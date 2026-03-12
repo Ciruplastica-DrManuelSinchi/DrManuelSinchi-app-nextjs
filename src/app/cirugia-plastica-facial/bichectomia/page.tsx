@@ -31,7 +31,6 @@ const bichectomiaData: ProcedureData = {
         duration: '45 minutos',
         recovery: '3-5 días recuperación',
         anesthesia: 'Anestesia local',
-        heroImage: '/images/procedures/bichectomia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre bichectomía',
     },
 
@@ -42,7 +41,7 @@ const bichectomiaData: ProcedureData = {
             'La bichectomía es un procedimiento quirúrgico que consiste en la extracción de las bolsas de Bichat, cúmulos de grasa ubicados en las mejillas. Este procedimiento afina el rostro y define los pómulos, creando un aspecto más angular y estilizado.',
             'Es una cirugía <strong class="text-primary">mínimamente invasiva</strong> que se realiza a través de pequeñas incisiones dentro de la boca, sin dejar cicatrices visibles. El procedimiento es rápido y la recuperación muy corta.',
         ],
-        image: '/images/procedures/bichectomia-tecnica.jpg',
+        image: '/images/procedures/que-es/bichectomia-tecnica.jpg',
         highlights: {
             title: 'Beneficios de la Bichectomía',
             icon: Sparkles,

@@ -6,7 +6,6 @@ import {
     Shield,
     Heart,
     Calendar,
-    Timer,
     Star,
     Droplet,
     RefreshCw
@@ -31,7 +30,6 @@ const prpData: ProcedureData = {
         duration: '45-60 min',
         recovery: '24-48 horas',
         anesthesia: 'Anestesia tópica',
-        heroImage: '/images/procedures/prp-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre Plasma Rico en Plaquetas',
     },
 
@@ -42,7 +40,7 @@ const prpData: ProcedureData = {
             'El Plasma Rico en Plaquetas (PRP) es un tratamiento regenerativo que utiliza tu propia sangre. Se extrae una pequeña muestra, se procesa para concentrar las plaquetas y sus factores de crecimiento, y se aplica en la zona a tratar.',
             'Los factores de crecimiento estimulan la <strong class="text-primary">producción natural de colágeno, elastina y ácido hialurónico</strong>, mejorando la textura, firmeza y luminosidad de la piel de forma progresiva y natural.',
         ],
-        image: '/images/procedures/prp-tecnica.jpg',
+        image: '/images/procedures/que-es/prp-tecnica.jpg',
         highlights: {
             title: 'Beneficios del PRP',
             icon: Droplet,

@@ -30,7 +30,6 @@ const liftingFacialData: ProcedureData = {
         duration: '3-4 horas',
         recovery: '14-21 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/lifting-facial-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre lifting facial',
     },
 
@@ -41,7 +40,7 @@ const liftingFacialData: ProcedureData = {
             'El lifting facial, también conocido como ritidectomía, es una cirugía que corrige los signos del envejecimiento en el rostro y cuello. Reposiciona los tejidos faciales profundos, elimina el exceso de piel y restaura los contornos juveniles.',
             'Utilizamos técnicas avanzadas de <strong class="text-primary">lifting SMAS (Sistema Músculo-Aponeurótico Superficial)</strong> que trabajan las capas profundas del rostro, logrando resultados más naturales y duraderos que las técnicas superficiales.',
         ],
-        image: '/images/procedures/lifting-facial-tecnica.jpg',
+        image: '/images/procedures/que-es/lifting-facial-tecnica.jpg',
         highlights: {
             title: 'Áreas que trata el Lifting Facial',
             icon: Sparkles,

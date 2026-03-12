@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:ciruplastica.pe)"
+      "WebFetch(domain:ciruplastica.pe)",
+      "WebSearch",
+      "WebFetch(domain:www.ciruplastica.pe)",
+      "WebFetch(domain:www.youtube.com)"
     ]
   }
 }

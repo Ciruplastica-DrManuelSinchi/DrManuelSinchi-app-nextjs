@@ -31,7 +31,6 @@ const otoplastiaData: ProcedureData = {
         duration: '1-2 horas',
         recovery: '7 días recuperación',
         anesthesia: 'Anestesia local + sedación',
-        heroImage: '/images/procedures/otoplastia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre otoplastia',
     },
 
@@ -42,7 +41,7 @@ const otoplastiaData: ProcedureData = {
             'La otoplastia es una cirugía que corrige la forma, posición y proporción de las orejas. Es más conocida por tratar las "orejas de soplillo" o prominentes, pero también corrige asimetrías, lóbulos grandes y otras malformaciones.',
             'Es un procedimiento muy gratificante que puede realizarse <strong class="text-primary">desde los 6-7 años de edad</strong>, cuando las orejas han alcanzado casi su tamaño adulto. En adultos, la cirugía se realiza con anestesia local.',
         ],
-        image: '/images/procedures/otoplastia-tecnica.jpg',
+        image: '/images/procedures/que-es/otoplastia-tecnica.jpg',
         highlights: {
             title: 'Correcciones que realiza la Otoplastia',
             icon: Ear,

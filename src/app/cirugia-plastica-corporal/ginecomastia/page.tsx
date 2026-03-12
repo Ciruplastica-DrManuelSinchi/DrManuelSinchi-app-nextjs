@@ -31,7 +31,6 @@ const ginecomastiaData: ProcedureData = {
         duration: '1-2 horas',
         recovery: '7-14 días recuperación',
         anesthesia: 'Anestesia general o sedación',
-        heroImage: '/images/procedures/ginecomastia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre ginecomastia',
     },
 
@@ -42,7 +41,7 @@ const ginecomastiaData: ProcedureData = {
             'La ginecomastia es el desarrollo excesivo del tejido mamario en hombres, que puede causar incomodidad física y emocional. La cirugía de ginecomastia reduce este tejido para crear un pecho más plano y masculino.',
             'El procedimiento puede incluir <strong class="text-primary">liposucción, escisión de glándula mamaria o ambas técnicas</strong>, dependiendo de si el exceso es principalmente graso, glandular o mixto.',
         ],
-        image: '/images/procedures/ginecomastia-tecnica.jpg',
+        image: '/images/procedures/que-es/ginecomastia-tecnica.jpg',
         highlights: {
             title: 'Tipos de Ginecomastia',
             icon: User,

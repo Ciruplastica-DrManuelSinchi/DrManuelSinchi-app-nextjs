@@ -31,7 +31,6 @@ const mamoplastiaReduccionData: ProcedureData = {
         duration: '2-3 horas',
         recovery: '14-21 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/mamoplastia-reduccion-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre mamoplastia de reducción',
     },
 
@@ -42,7 +41,7 @@ const mamoplastiaReduccionData: ProcedureData = {
             'La mamoplastia de reducción es una cirugía que disminuye el tamaño de los senos removiendo tejido mamario, grasa y piel. Además de mejorar la estética, alivia síntomas físicos asociados a senos muy grandes.',
             'Es un procedimiento que combina la reducción del volumen con el <strong class="text-primary">levantamiento y remodelación</strong> de los senos, logrando una forma más armónica y proporcionada con el resto del cuerpo.',
         ],
-        image: '/images/procedures/mamoplastia-reduccion-tecnica.jpg',
+        image: '/images/procedures/que-es/mamoplastia-reduccion-tecnica.jpg',
         highlights: {
             title: 'Beneficios de la Reducción',
             icon: ArrowDown,

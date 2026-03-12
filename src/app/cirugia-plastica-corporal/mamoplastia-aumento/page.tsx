@@ -31,7 +31,6 @@ const mamoplastiaAumentoData: ProcedureData = {
         duration: '1-2 horas',
         recovery: '7-14 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/mamoplastia-aumento-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre mamoplastia de aumento',
     },
 
@@ -42,7 +41,7 @@ const mamoplastiaAumentoData: ProcedureData = {
             'La mamoplastia de aumento es una cirugía que incrementa el tamaño y mejora la forma de los senos mediante implantes mamarios. Es uno de los procedimientos estéticos más realizados en el mundo.',
             'Utilizamos implantes de <strong class="text-primary">última generación</strong> con gel cohesivo de silicona, disponibles en diferentes formas (redondos o anatómicos), tamaños y perfiles para lograr un resultado personalizado y natural.',
         ],
-        image: '/images/procedures/mamoplastia-aumento-tecnica.jpg',
+        image: '/images/procedures/que-es/mamoplastia-aumento-tecnica.jpg',
         highlights: {
             title: 'Opciones de Implantes',
             icon: CircleDot,

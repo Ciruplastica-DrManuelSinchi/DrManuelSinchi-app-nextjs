@@ -31,7 +31,6 @@ const mentoplastiaData: ProcedureData = {
         duration: '1-2 horas',
         recovery: '7-10 días recuperación',
         anesthesia: 'Anestesia local + sedación',
-        heroImage: '/images/procedures/mentoplastia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre mentoplastia',
     },
 
@@ -42,7 +41,7 @@ const mentoplastiaData: ProcedureData = {
             'La mentoplastia es una cirugía que modifica la forma, tamaño y proyección del mentón para lograr un perfil facial equilibrado. Puede realizarse mediante implantes de silicona o mediante osteotomía (modificación del hueso).',
             'Este procedimiento es especialmente efectivo para corregir mentones <strong class="text-primary">retraídos, prominentes o asimétricos</strong>. Frecuentemente se combina con rinoplastia para lograr una armonía facial completa.',
         ],
-        image: '/images/procedures/mentoplastia-tecnica.jpg',
+        image: '/images/procedures/que-es/mentoplastia-tecnica.jpg',
         highlights: {
             title: 'Tipos de Mentoplastia',
             icon: Maximize2,

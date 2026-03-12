@@ -6,7 +6,6 @@ import {
     Shield,
     Heart,
     Calendar,
-    Timer,
     Star,
     Droplets,
     RefreshCw
@@ -31,7 +30,6 @@ const acidoHialuronicoData: ProcedureData = {
         duration: '30-45 min',
         recovery: 'Inmediata',
         anesthesia: 'Anestesia tópica',
-        heroImage: '/images/procedures/acido-hialuronico-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre ácido hialurónico',
     },
 
@@ -42,7 +40,7 @@ const acidoHialuronicoData: ProcedureData = {
             'El ácido hialurónico es una sustancia que se encuentra naturalmente en nuestro cuerpo, especialmente en la piel, donde retiene agua y mantiene la hidratación y volumen. Con la edad, su producción disminuye.',
             'Los rellenos de ácido hialurónico restauran el volumen perdido, rellenan arrugas y surcos, y mejoran los contornos faciales. Es <strong class="text-primary">completamente biocompatible y reversible</strong>, lo que lo convierte en uno de los tratamientos más seguros.',
         ],
-        image: '/images/procedures/acido-hialuronico-tecnica.jpg',
+        image: '/images/procedures/que-es/acido-hialuronico-tecnica.jpg',
         highlights: {
             title: 'Aplicaciones del Ácido Hialurónico',
             icon: Droplets,

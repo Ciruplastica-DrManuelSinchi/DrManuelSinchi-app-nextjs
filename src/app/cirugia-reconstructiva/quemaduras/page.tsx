@@ -30,7 +30,6 @@ const quemadurasData: ProcedureData = {
         duration: 'Variable',
         recovery: 'Según extensión',
         anesthesia: 'Según procedimiento',
-        heroImage: '/images/procedures/quemaduras-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre tratamiento de quemaduras',
     },
 
@@ -41,7 +40,7 @@ const quemadurasData: ProcedureData = {
             'El tratamiento de quemaduras abarca desde el manejo inicial de la lesión aguda hasta la reconstrucción de las secuelas. Las quemaduras pueden afectar no solo la piel sino también la función de las extremidades y articulaciones.',
             'Ofrecemos tratamiento en <strong class="text-primary">todas las fases</strong>: manejo agudo con curaciones especializadas e injertos, y reconstrucción tardía de secuelas como cicatrices retráctiles, bridas y limitaciones funcionales.',
         ],
-        image: '/images/procedures/quemaduras-tecnica.jpg',
+        image: '/images/procedures/que-es/quemaduras-tecnica.jpg',
         highlights: {
             title: 'Servicios de Quemaduras',
             icon: Flame,

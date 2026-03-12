@@ -11,7 +11,6 @@ export interface ProcedureHero {
     duration: string
     recovery: string
     anesthesia: string
-    heroImage: string
     whatsappMessage?: string
 }
 
@@ -53,8 +52,6 @@ export interface FAQ {
 
 export interface Video {
     title: string
-    thumbnail: string
-    duration: string
     youtubeId?: string | null
 }
 

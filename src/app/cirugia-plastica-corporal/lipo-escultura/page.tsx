@@ -31,7 +31,6 @@ const lipoesculturaData: ProcedureData = {
         duration: '2-4 horas',
         recovery: '7-14 días recuperación',
         anesthesia: 'Anestesia general o sedación',
-        heroImage: '/images/procedures/lipoescultura-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre lipoescultura',
     },
 
@@ -42,7 +41,7 @@ const lipoesculturaData: ProcedureData = {
             'La lipoescultura es una técnica avanzada de liposucción que no solo elimina grasa localizada, sino que también esculpe y define los contornos corporales. A diferencia de la liposucción tradicional, busca crear una silueta armónica y estética.',
             'Se puede realizar en múltiples zonas como abdomen, cintura, espalda, brazos, muslos y papada. La grasa extraída puede <strong class="text-primary">reinyectarse en otras áreas</strong> como glúteos o senos (lipotransferencia) para un resultado más completo.',
         ],
-        image: '/images/procedures/lipoescultura-tecnica.jpg',
+        image: '/images/procedures/que-es/lipoescultura-tecnica.jpg',
         highlights: {
             title: 'Zonas que se pueden tratar',
             icon: Target,
@@ -137,20 +136,16 @@ const lipoesculturaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué es la lipoescultura?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
+            title: 'Lo que debes saber sobre la lipoescultura - Radio Miraflores',
             youtubeId: 'fUUGe4-wLnc',
         },
         {
-            title: 'Lipoescultura 360: resultados completos',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:15',
+            title: 'Lipoescultura vs. Lipoabdominoplastia 🧐',
+            youtubeId: 'ZBiNoZkeF2E',
         },
         {
-            title: 'Recuperación de la lipoescultura',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
+            title: 'Resultado real de lipoescultura',
+            youtubeId: '8GrpYNpd9Js',
         },
     ],
 

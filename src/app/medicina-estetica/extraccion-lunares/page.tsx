@@ -6,7 +6,6 @@ import {
     Shield,
     Heart,
     Calendar,
-    Timer,
     Star,
     CircleDot,
     Scissors
@@ -31,7 +30,6 @@ const extraccionLunaresData: ProcedureData = {
         duration: '15-30 min',
         recovery: '5-7 días',
         anesthesia: 'Anestesia local',
-        heroImage: '/images/procedures/extraccion-lunares-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre extracción de lunares',
     },
 
@@ -42,7 +40,7 @@ const extraccionLunaresData: ProcedureData = {
             'La extracción de lunares es un procedimiento ambulatorio que permite remover lesiones cutáneas de forma segura. Puede realizarse por razones estéticas o médicas, especialmente cuando hay sospecha de cambios anormales.',
             'Utilizamos técnicas como <strong class="text-primary">excisión quirúrgica, shaving o electrocoagulación</strong>, seleccionando la más adecuada según el tipo, tamaño y ubicación de la lesión para obtener el mejor resultado estético.',
         ],
-        image: '/images/procedures/extraccion-lunares-tecnica.jpg',
+        image: '/images/procedures/que-es/extraccion-lunares-tecnica.jpg',
         highlights: {
             title: 'Lesiones que tratamos',
             icon: CircleDot,

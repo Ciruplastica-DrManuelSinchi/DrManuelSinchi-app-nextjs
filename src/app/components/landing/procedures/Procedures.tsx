@@ -21,7 +21,7 @@ const procedures = {
         { name: 'Bichectomía', desc: 'Afinamiento del rostro', slug: 'bichectomia', image: '/images/procedures/bichectomia.jpg' },
     ],
     corporal: [
-        { name: 'Lipoescultura', desc: 'Moldea tu figura eliminando grasa localizada', slug: 'lipoescultura', image: '/images/procedures/lipoescultura.jpg' },
+        { name: 'Lipoescultura', desc: 'Moldea tu figura eliminando grasa localizada', slug: 'lipo-escultura', image: '/images/procedures/lipoescultura.jpg' },
         { name: 'Abdominoplastia', desc: 'Abdomen plano y tonificado', slug: 'abdominoplastia', image: '/images/procedures/abdominoplastia.jpg' },
         { name: 'Mamoplastia', desc: 'Aumento o reducción mamaria', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia-aumento.jpg' },
         { name: 'Gluteoplastia', desc: 'Aumento y levantamiento de glúteos', slug: 'gluteoplastia', image: '/images/procedures/gluteoplastia.jpg' },

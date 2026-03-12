@@ -31,7 +31,6 @@ const gluteoplastiaData: ProcedureData = {
         duration: '2-3 horas',
         recovery: '14-21 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/gluteoplastia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre gluteoplastia',
     },
 
@@ -42,7 +41,7 @@ const gluteoplastiaData: ProcedureData = {
             'La gluteoplastia es un procedimiento quirúrgico que aumenta el volumen y mejora la forma de los glúteos. Puede realizarse mediante implantes de silicona o mediante lipotransferencia (también conocido como BBL - Brazilian Butt Lift).',
             'La técnica de <strong class="text-primary">lipotransferencia o BBL</strong> utiliza tu propia grasa extraída de otras zonas del cuerpo (abdomen, cintura, espalda) y la reinyecta en los glúteos, logrando un resultado natural y doble beneficio.',
         ],
-        image: '/images/procedures/gluteoplastia-tecnica.jpg',
+        image: '/images/procedures/que-es/gluteoplastia-tecnica.jpg',
         highlights: {
             title: 'Técnicas Disponibles',
             icon: TrendingUp,

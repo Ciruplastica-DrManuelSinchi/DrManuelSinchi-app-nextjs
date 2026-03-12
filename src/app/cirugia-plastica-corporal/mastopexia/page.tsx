@@ -31,7 +31,6 @@ const mastopexiaData: ProcedureData = {
         duration: '2-3 horas',
         recovery: '14-21 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/mastopexia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre mastopexia',
     },
 
@@ -42,7 +41,7 @@ const mastopexiaData: ProcedureData = {
             'La mastopexia o levantamiento de senos es una cirugía que corrige la caída (ptosis) mamaria, elevando y remodelando los senos para devolverles una posición más juvenil y firme.',
             'Durante el procedimiento se remueve el exceso de piel, se reposiciona el pezón y la areola, y se remodela el tejido mamario. Puede combinarse con <strong class="text-primary">implantes</strong> si se desea aumentar el volumen (mastopexia con aumento).',
         ],
-        image: '/images/procedures/mastopexia-tecnica.jpg',
+        image: '/images/procedures/que-es/mastopexia-tecnica.jpg',
         highlights: {
             title: 'Tipos de Mastopexia',
             icon: ArrowUp,

@@ -16,10 +16,10 @@ import {
     MessageCircle,
     Calendar,
     Timer,
-    BadgeCheck
+    
 } from 'lucide-react'
 
-import { ProcedureData, defaultDoctor, defaultCTA } from './types'
+import { ProcedureData,  defaultCTA } from './types'
 
 interface ProcedurePageProps {
     data: ProcedureData
@@ -31,7 +31,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
     const [activeImage, setActiveImage] = useState(0)
 
 
-    const doctor = { ...defaultDoctor, ...data.doctor }
+    // const doctor = { ...defaultDoctor, ...data.doctor }
     const cta = { ...defaultCTA, ...data.cta }
 
     const whatsappMessage = data.hero.whatsappMessage || `Hola, me interesa información sobre ${data.hero.title.toLowerCase()}`
@@ -44,7 +44,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
 
                 <div className="container-custom relative z-10">
                     {/* Breadcrumbs */}
-                    <nav className="flex items-center gap-2 text-sm text-white/60 mb-8">
+                    <nav className="flex items-center justify-start gap-2 text-sm text-white/60 mb-8">
                         <Link href="/" className="hover:text-white transition-colors">
                             Inicio
                         </Link>
@@ -56,13 +56,12 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                         <span className="text-accent">{data.hero.title}</span>
                     </nav>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="max-w-4xl mr-auto ml-0 text-left">
                         {/* Content */}
-                        <div>
                             <motion.span
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="badge-accent mb-6"
+                                className="badge-accent mb-6 inline-flex"
                             >
                                 <Sparkles className="w-4 h-4 mr-2" />
                                 {data.hero.badge}
@@ -72,10 +71,18 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-white mb-6"
+                                className="text-white mb-4"
                             >
                                 {data.hero.title}
                             </motion.h1>
+
+                            {/* Línea decorativa dorada */}
+                            <motion.div
+                                initial={{ scaleX: 0 }}
+                                animate={{ scaleX: 1 }}
+                                transition={{ delay: 0.15, duration: 0.6 }}
+                                className="h-[2px] w-20 bg-accent mr-auto mb-6"
+                            />
 
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
@@ -86,12 +93,12 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 {data.hero.description}
                             </motion.p>
 
-                            {/* Quick Info Pills */}
+                            {/* Quick Info Pills - Hidden on mobile for cleaner UX */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="flex flex-wrap gap-4 mb-8"
+                                className="hidden md:flex flex-wrap justify-start gap-4 mb-8"
                             >
                                 <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                                     <Clock className="w-4 h-4 text-accent" />
@@ -112,7 +119,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
-                                className="flex flex-col sm:flex-row gap-4"
+                                className="flex flex-col sm:flex-row justify-start gap-4"
                             >
                                 <Link href="/contacto" className="btn-primary">
                                     <Calendar className="w-4 h-4" />
@@ -129,40 +136,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 </a>
                             </motion.div>
                         </div>
-
-                        {/* Hero Image */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3, duration: 0.5 }}
-                            className="relative hidden lg:block"
-                        >
-                            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-strong">
-                                <Image
-                                    src={data.hero.heroImage}
-                                    alt={data.hero.title}
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
-                            </div>
-
-                            {/* Floating Card */}
-                            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-medium">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
-                                        <BadgeCheck className="w-6 h-6 text-accent-dark" />
-                                    </div>
-                                    <div>
-                                        <div className="font-semibold text-dark">{doctor.credentials[1]?.value || '+5000'}</div>
-                                        <div className="text-sm text-gray-500">{doctor.credentials[1]?.label || 'Pacientes satisfechos'}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
                     </div>
-                </div>
             </section>
 
             {/* ==================== INFO SECTION ==================== */}
@@ -337,66 +311,8 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                 </div>
             </section>
 
-            {/* ==================== DOCTOR SECTION ==================== */}
-            <section className="section bg-hero-gradient">
-                <div className="container-custom">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative"
-                        >
-                            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
-                                <Image
-                                    src={doctor.image}
-                                    alt="Dr. Manuel Sinchi"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <span className="badge-accent mb-4">{doctor.subtitle}</span>
-                            <h2 className="text-white mb-6">{doctor.title}</h2>
-                            <p className="text-white/80 mb-8 text-lg">{doctor.description}</p>
-
-                            <div className="grid grid-cols-2 gap-4 mb-8">
-                                {doctor.credentials.map((stat, index) => (
-                                    <div key={index} className="bg-white/10 rounded-xl p-4">
-                                        <div className="text-2xl md:text-3xl font-display font-bold text-accent">
-                                            {stat.value}
-                                        </div>
-                                        <div className="text-sm text-white/70">{stat.label}</div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <ul className="space-y-3 mb-8">
-                                {doctor.features.map((feature, index) => (
-                                    <li key={index} className="flex items-center gap-3 text-white/90">
-                                        <BadgeCheck className="w-5 h-5 text-accent flex-shrink-0" />
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <Link href="/dr-manuel-sinchi" className="btn-primary">
-                                Conocer más sobre el Dr. Sinchi
-                                <ArrowRight className="w-4 h-4" />
-                            </Link>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
             {/* ==================== PROCESS & RECOVERY ==================== */}
-            <section className="section bg-white">
+            <section className="section bg-light">
                 <div className="container-custom">
                     <div className="section-header">
                         <span className="badge-primary mb-4">Tu Experiencia</span>
@@ -443,7 +359,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
 
             {/* ==================== VIDEOS ==================== */}
             {data.videos.length > 0 && (
-                <section className="section bg-light">
+                <section className="section bg-white">
                     <div className="container-custom">
                         <div className="section-header">
                             <span className="badge-accent mb-4">Contenido Educativo</span>
@@ -494,7 +410,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
             )}
 
             {/* ==================== FAQ ==================== */}
-            <section className="section bg-white">
+            <section className="section bg-light">
                 <div className="container-custom">
                     <div className="grid lg:grid-cols-2 gap-12">
                         <div>
@@ -562,7 +478,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
             </section>
 
             {/* ==================== CTA FINAL ==================== */}
-            <section className="section bg-light">
+            <section className="section bg-white">
                 <div className="container-custom">
                     <div className="bg-hero-gradient rounded-3xl p-8 md:p-12 lg:p-16 relative overflow-hidden">
                         <div className="absolute inset-0 bg-[url('/images/pattern-dots.png')] opacity-5" />

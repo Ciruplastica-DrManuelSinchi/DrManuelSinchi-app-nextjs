@@ -31,7 +31,6 @@ const blefaroplastiaData: ProcedureData = {
         duration: '1-2 horas',
         recovery: '5-7 días recuperación',
         anesthesia: 'Anestesia local + sedación',
-        heroImage: '/images/procedures/blefaroplastia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre blefaroplastia',
     },
 
@@ -42,7 +41,7 @@ const blefaroplastiaData: ProcedureData = {
             'La blefaroplastia es una cirugía que corrige el exceso de piel, músculo y grasa en los párpados superiores e inferiores. Es uno de los procedimientos más efectivos para rejuvenecer la mirada y eliminar el aspecto de cansancio.',
             'Este procedimiento puede realizarse en párpados superiores, inferiores o ambos, según las necesidades de cada paciente. Las <strong class="text-primary">incisiones se ocultan en los pliegues naturales</strong>, dejando cicatrices prácticamente invisibles.',
         ],
-        image: '/images/procedures/blefaroplastia-tecnica.jpg',
+        image: '/images/procedures/que-es/blefaroplastia-tecnica.jpg',
         highlights: {
             title: 'Beneficios de la Blefaroplastia',
             icon: Eye,
@@ -137,19 +136,16 @@ const blefaroplastiaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿En qué consiste la blefaroplastia?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:15',
+            title: '👀 Resultado de una Blefaroplastia Inferior ',
+            youtubeId: 't4CJHFDtT-w'
         },
         {
-            title: 'Recuperación después de la cirugía de párpados',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:28',
+            title: 'Rinoseptoplastia y Blefaroplastia',
+            youtubeId: '2UThbvUrJ0Y'
         },
         {
-            title: 'Testimonio: Mi experiencia con blefaroplastia',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:02',
+            title: '👀 Resultado de una Blefaroplastia Inferior ',
+            youtubeId: 't4CJHFDtT-w'
         },
     ],
 

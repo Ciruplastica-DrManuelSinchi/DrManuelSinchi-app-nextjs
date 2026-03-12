@@ -31,7 +31,6 @@ const abdominoplastiaData: ProcedureData = {
         duration: '2-4 horas',
         recovery: '14-21 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/abdominoplastia.jpg',
         whatsappMessage: 'Hola, me interesa información sobre abdominoplastia',
     },
 

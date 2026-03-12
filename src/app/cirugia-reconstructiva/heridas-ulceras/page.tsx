@@ -30,7 +30,6 @@ const heridasUlcerasData: ProcedureData = {
         duration: 'Variable',
         recovery: 'Según el caso',
         anesthesia: 'Según procedimiento',
-        heroImage: '/images/procedures/heridas-ulceras-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre tratamiento de heridas complejas',
     },
 
@@ -41,7 +40,7 @@ const heridasUlcerasData: ProcedureData = {
             'Las heridas complejas son aquellas que no cicatrizan en el tiempo esperado o que presentan complicaciones como infección, exposición de estructuras profundas o pérdida significativa de tejido. Las úlceras crónicas incluyen las úlceras por presión, vasculares y diabéticas.',
             'El manejo requiere un <strong class="text-primary">enfoque integral</strong> que incluye control de factores de riesgo, tratamiento de la causa subyacente, manejo local de la herida y, cuando es necesario, procedimientos quirúrgicos reconstructivos.',
         ],
-        image: '/images/procedures/heridas-ulceras-tecnica.jpg',
+        image: '/images/procedures/que-es/heridas-ulceras-tecnica.jpg',
         highlights: {
             title: 'Tipos de Heridas que Tratamos',
             icon: Activity,

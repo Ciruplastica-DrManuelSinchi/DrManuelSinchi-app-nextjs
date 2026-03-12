@@ -1,5 +1,5 @@
 "use client"
-
+//La dirección llega a una carpeta, no a archivos especificos
 import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Zap,
@@ -31,7 +31,6 @@ const rinoplastiaData: ProcedureData = {
         duration: '2-3 horas',
         recovery: '7-10 días recuperación',
         anesthesia: 'Anestesia general',
-        heroImage: '/images/procedures/rinoplastia-hero.jpg',
         whatsappMessage: 'Hola, me interesa información sobre rinoplastia',
     },
 
@@ -42,7 +41,7 @@ const rinoplastiaData: ProcedureData = {
             'La rinoplastia es una cirugía que permite modificar la forma, tamaño y proporciones de la nariz para lograr un equilibrio armónico con el resto del rostro. Puede corregir tanto aspectos estéticos como funcionales.',
             'En nuestra clínica utilizamos la <strong class="text-primary">técnica ultrasónica (Piezo)</strong>, un avance revolucionario que permite esculpir el hueso nasal con instrumentos piezoeléctricos de alta precisión, sin necesidad de martillo y cincel tradicionales.',
         ],
-        image: '/images/procedures/rinoplastia-tecnica.jpg',
+        image: '/images/procedures/que-es/rinoplastia-tecnica.jpg',
         highlights: {
             title: 'Ventajas de la Técnica Ultrasónica',
             icon: Zap,
@@ -142,19 +141,16 @@ const rinoplastiaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué es la rinoplastia ultrasónica?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:32',
+            title: 'Todo sobre la Rinoplastia / Dr. Manuel Sinchi',
+            youtubeId: 'cy5N4Z_DRmM'
         },
         {
-            title: 'Mi experiencia: Testimonio de paciente',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
+            title: 'Rinoplastia ultrasónica vs convencional',
+            youtubeId: 'EfC0TdjHIv8'
         },
         {
-            title: 'Cuidados post-operatorios',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:18',
+            title: 'Resultados naturales con Rinoseptoplastia Ultrasónica',
+            youtubeId: '7oveiyGPTW8'
         },
     ],
 
