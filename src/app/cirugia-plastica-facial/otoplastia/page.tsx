@@ -136,19 +136,16 @@ const otoplastiaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué es la otoplastia?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:58',
+            title: 'Caso real de OTOPLASTIA',
+            youtubeId: 'POg1Mb-UHcs'
         },
         {
-            title: 'Otoplastia en niños: lo que debes saber',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:45',
+            title: '¿Desde qué edad se puede corregir las orejas prominentes? 👂',
+            youtubeId: 'cTv5VZm7o6k'
         },
         {
-            title: 'Recuperación después de la otoplastia',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:20',
+            title: '🎥 ¿Tienes las orejas prominentes?',
+            youtubeId: 'UnkpLmMddCw'
         },
     ],
 

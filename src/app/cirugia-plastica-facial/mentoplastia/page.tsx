@@ -136,19 +136,16 @@ const mentoplastiaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué es la mentoplastia?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:20',
+            title: 'Caso real: PERFILAMIENTO FACIAL',
+            youtubeId: 'r_ptdooFxDA'
         },
         {
-            title: 'Mentoplastia con implante vs osteotomía',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:15',
+            title: '✨ PERFILOPLASTIA: Rinoplastia ultrasónica + Mentoplastia con implante ✨',
+            youtubeId: 'PnuhU1EBdXQ'
         },
         {
-            title: 'Perfiloplastia: rinoplastia + mentoplastia',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:02',
+            title: 'Mentoplastia: lo que debes saber',
+            youtubeId: 'WDsZMaIWFYk'
         },
     ],
 

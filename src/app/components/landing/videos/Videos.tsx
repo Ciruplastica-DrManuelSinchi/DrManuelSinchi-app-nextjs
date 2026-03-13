@@ -7,18 +7,18 @@ import { motion } from 'framer-motion'
 const videos = [
     {
         id: 1,
-        title: '¿Qué es la Lipoescultura?',
-        youtubeId: 'VIDEO_ID_1',
+        title: 'Lipoescultura vs. Lipoabdominoplastia 🧐',
+        youtubeId: 'ZBiNoZkeF2E',
     },
     {
         id: 2,
-        title: 'Rinoplastia: Proceso y Recuperación',
-        youtubeId: 'VIDEO_ID_2',
+        title: 'Rinoplastia ultrasónica vs convencional',
+        youtubeId: 'EfC0TdjHIv8',
     },
     {
         id: 3,
-        title: 'Cuidados Post-Operatorios',
-        youtubeId: 'VIDEO_ID_3',
+        title: '🎥 ¿Cómo elegir el IMPLANTE MAMARIO ideal?',
+        youtubeId: '7PJPZJw9AL8',
     },
 ]
 

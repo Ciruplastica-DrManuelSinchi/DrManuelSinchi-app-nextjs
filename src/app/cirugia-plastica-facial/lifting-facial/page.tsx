@@ -135,19 +135,18 @@ const liftingFacialData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué es el lifting facial SMAS?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:15',
+            title: 'Cambio sutil, resultado natural',
+            youtubeId: 'kEQEN_kO4a0'
         },
         {
-            title: 'Recuperación del lifting facial: día a día',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:42',
+            title: 'PERFILOPLASTIA: Rinoplastia ultrasónica + Afinamiento facial',
+            youtubeId: '0zQ0cvgBYrs'
+
         },
         {
-            title: 'Testimonio: Mi experiencia con lifting facial',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:58',
+            title: 'Caso real: Lipoescultura, Rinoseptoplastia y Afinamiento facial',
+            youtubeId: 'wxMCK-kXHeg'
+
         },
     ],
 

@@ -136,19 +136,19 @@ const bichectomiaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué son las bolsas de Bichat?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
+            title: 'Caso real: Perfilamiento facial',
+            youtubeId: 'r_ptdooFxDA'
+            
         },
         {
-            title: 'Bichectomía: antes y después',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:12',
+            title: 'Caso real: Afinamiento de rostro',
+            youtubeId: '9isCtT3yYk0'
+            
         },
         {
-            title: 'Mi experiencia con la bichectomía',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:30',
+            title: 'Caso real: Rinoplastia y Afinamiento Facial',
+            youtubeId: '9rmvDWxDHIE'
+            
         },
     ],
 

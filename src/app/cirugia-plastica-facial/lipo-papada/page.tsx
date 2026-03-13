@@ -136,19 +136,16 @@ const lipoPapadaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Cómo funciona la liposucción de papada?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:10',
+            title: 'Caso de afinamiento de rostro',
+            youtubeId: '9isCtT3yYk0'
         },
         {
             title: 'Liposucción de papada: antes y después',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
+            youtubeId: '8ldGYrTf488'
         },
         {
-            title: 'Recuperación de la lipo de papada',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:28',
+            title: 'Caso de liposucción de papada',
+            youtubeId: '24c5BD3LU1s'
         },
     ],
 
