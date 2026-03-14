@@ -135,21 +135,7 @@ const ginecomastiaData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Qué es la ginecomastia?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:20',
-        },
-        {
-            title: 'Cirugía de ginecomastia: el procedimiento',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:15',
-        },
-        {
-            title: 'Recuperación de la ginecomastia',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
-        },
+    
     ],
 
     // FAQs

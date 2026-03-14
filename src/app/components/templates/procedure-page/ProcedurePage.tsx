@@ -16,10 +16,11 @@ import {
     MessageCircle,
     Calendar,
     Timer,
-    
+    PlayCircle,
+    Youtube,
 } from 'lucide-react'
 
-import { ProcedureData,  defaultCTA } from './types'
+import { ProcedureData, defaultCTA } from './types'
 
 interface ProcedurePageProps {
     data: ProcedureData
@@ -58,85 +59,85 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
 
                     <div className="max-w-4xl mr-auto ml-0 text-left">
                         {/* Content */}
-                            <motion.span
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="badge-accent mb-6 inline-flex"
-                            >
-                                <Sparkles className="w-4 h-4 mr-2" />
-                                {data.hero.badge}
-                            </motion.span>
+                        <motion.span
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="badge-accent mb-6 inline-flex"
+                        >
+                            <Sparkles className="w-4 h-4 mr-2" />
+                            {data.hero.badge}
+                        </motion.span>
 
-                            <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.1 }}
-                                className="text-white mb-4"
-                            >
-                                {data.hero.title}
-                            </motion.h1>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-white mb-4"
+                        >
+                            {data.hero.title}
+                        </motion.h1>
 
-                            {/* Línea decorativa dorada */}
-                            <motion.div
-                                initial={{ scaleX: 0 }}
-                                animate={{ scaleX: 1 }}
-                                transition={{ delay: 0.15, duration: 0.6 }}
-                                className="h-[2px] w-20 bg-accent mr-auto mb-6"
-                            />
+                        {/* Línea decorativa dorada */}
+                        <motion.div
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ delay: 0.15, duration: 0.6 }}
+                            className="h-[2px] w-20 bg-accent mr-auto mb-6"
+                        />
 
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.2 }}
-                                className="text-lg md:text-xl text-white/80 leading-relaxed mb-8"
-                            >
-                                {data.hero.description}
-                            </motion.p>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-lg md:text-xl text-white/80 leading-relaxed mb-8"
+                        >
+                            {data.hero.description}
+                        </motion.p>
 
-                            {/* Quick Info Pills - Hidden on mobile for cleaner UX */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3 }}
-                                className="hidden md:flex flex-wrap justify-start gap-4 mb-8"
-                            >
-                                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                                    <Clock className="w-4 h-4 text-accent" />
-                                    <span className="text-white text-sm">{data.hero.duration}</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                                    <Timer className="w-4 h-4 text-accent" />
-                                    <span className="text-white text-sm">{data.hero.recovery}</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                                    <Shield className="w-4 h-4 text-accent" />
-                                    <span className="text-white text-sm">{data.hero.anesthesia}</span>
-                                </div>
-                            </motion.div>
+                        {/* Quick Info Pills - Hidden on mobile for cleaner UX */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="hidden md:flex flex-wrap justify-start gap-4 mb-8"
+                        >
+                            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                                <Clock className="w-4 h-4 text-accent" />
+                                <span className="text-white text-sm">{data.hero.duration}</span>
+                            </div>
+                            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                                <Timer className="w-4 h-4 text-accent" />
+                                <span className="text-white text-sm">{data.hero.recovery}</span>
+                            </div>
+                            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                                <Shield className="w-4 h-4 text-accent" />
+                                <span className="text-white text-sm">{data.hero.anesthesia}</span>
+                            </div>
+                        </motion.div>
 
-                            {/* CTAs */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
-                                className="flex flex-col sm:flex-row justify-start gap-4"
+                        {/* CTAs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="flex flex-col sm:flex-row justify-start gap-4"
+                        >
+                            <Link href="/contacto" className="btn-primary">
+                                <Calendar className="w-4 h-4" />
+                                Agendar Consulta
+                            </Link>
+                            <a
+                                href={`https://wa.me/${cta.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-secondary"
                             >
-                                <Link href="/contacto" className="btn-primary">
-                                    <Calendar className="w-4 h-4" />
-                                    Agendar Consulta
-                                </Link>
-                                <a
-                                    href={`https://wa.me/${cta.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn-secondary"
-                                >
-                                    <MessageCircle className="w-4 h-4" />
-                                    Consultar por WhatsApp
-                                </a>
-                            </motion.div>
-                        </div>
+                                <MessageCircle className="w-4 h-4" />
+                                Consultar por WhatsApp
+                            </a>
+                        </motion.div>
                     </div>
+                </div>
             </section>
 
             {/* ==================== INFO SECTION ==================== */}
@@ -358,7 +359,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
             </section>
 
             {/* ==================== VIDEOS ==================== */}
-            {data.videos.length > 0 && (
+            {data.videos.length > 0 ? (
                 <section className="section bg-white">
                     <div className="container-custom">
                         <div className="section-header">
@@ -405,6 +406,63 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
+                    </div>
+                </section>
+            ) : (
+                <section className="py-12 bg-white">
+                    <div className="container-custom">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="max-w-3xl mx-auto"
+                        >
+                            <div className="relative bg-hero-gradient rounded-2xl p-6 md:p-8 overflow-hidden">
+                                {/* Background Pattern */}
+                                <div className="absolute inset-0 bg-[url('/images/pattern-dots.png')] opacity-5" />
+
+                                {/* Decorative Element */}
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+
+                                <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
+                                    {/* Play Icon */}
+                                    <motion.div
+                                        animate={{ scale: [1, 1.05, 1] }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                        className="flex-shrink-0"
+                                    >
+                                        <div className="relative">
+                                            <div className="absolute inset-0 bg-accent/30 rounded-full blur-lg scale-125" />
+                                            <div className="relative w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center">
+                                                <PlayCircle className="w-8 h-8 text-dark" />
+                                            </div>
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Content */}
+                                    <div className="flex-1 text-center md:text-left">
+                                        <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+                                            Videos <span className="text-accent">Próximamente</span>
+                                        </h3>
+                                        <p className="text-white/70 text-sm">
+                                            Estamos preparando contenido educativo sobre este procedimiento.
+                                        </p>
+                                    </div>
+
+                                    {/* CTA */}
+                                    <a
+                                        href="https://www.youtube.com/@drmanuelsinchi"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group flex-shrink-0 inline-flex items-center gap-2 bg-white text-primary font-semibold px-5 py-2.5 rounded-full text-sm transition-all hover:bg-accent hover:text-dark"
+                                    >
+                                        <Youtube className="w-4 h-4" />
+                                        Ver Canal
+                                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                                    </a>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 </section>
             )}

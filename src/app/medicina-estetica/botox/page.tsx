@@ -128,21 +128,7 @@ const botoxData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Cómo funciona el Botox?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
-        },
-        {
-            title: 'Botox: mitos y verdades',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
-        },
-        {
-            title: 'Mi primera vez con Botox',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:15',
-        },
+
     ],
 
     // FAQs

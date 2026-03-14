@@ -4,7 +4,8 @@
       "WebFetch(domain:ciruplastica.pe)",
       "WebSearch",
       "WebFetch(domain:www.ciruplastica.pe)",
-      "WebFetch(domain:www.youtube.com)"
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(dir \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\" /b)"
     ]
   }
 }

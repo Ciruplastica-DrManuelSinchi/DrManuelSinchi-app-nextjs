@@ -136,19 +136,16 @@ const mamoplastiaReduccionData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿En qué consiste la reducción de senos?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:30',
+            title: '🎥 ¿Cómo elegir el IMPLANTE MAMARIO ideal?',
+            youtubeId: '7PJPZJw9AL8'
         },
         {
-            title: 'Recuperación de mamoplastia de reducción',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:45',
+            title: 'Implantes mamarios: Cirugía de aumento de mamas',
+            youtubeId: 'kgu9YpK7uzs'
         },
         {
-            title: 'Testimonio: Mi vida después de la reducción',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:10',
+            title: 'Caso real de mamoplastia',
+            youtubeId: '6pN61A1gLHI'
         },
     ],
 

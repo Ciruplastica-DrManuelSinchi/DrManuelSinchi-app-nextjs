@@ -127,21 +127,6 @@ const cicatricesData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: 'Tipos de cicatrices y sus tratamientos',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:30',
-        },
-        {
-            title: '¿Cómo tratar cicatrices queloides?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:45',
-        },
-        {
-            title: 'Revisión quirúrgica de cicatrices',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:00',
-        },
     ],
 
     // FAQs

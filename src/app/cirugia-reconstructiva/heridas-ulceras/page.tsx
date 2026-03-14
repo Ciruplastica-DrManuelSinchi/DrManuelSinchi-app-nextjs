@@ -127,21 +127,6 @@ const heridasUlcerasData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Por qué algunas heridas no cicatrizan?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:15',
-        },
-        {
-            title: 'Terapia de presión negativa (VAC)',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
-        },
-        {
-            title: 'Prevención de úlceras por presión',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:00',
-        },
     ],
 
     // FAQs

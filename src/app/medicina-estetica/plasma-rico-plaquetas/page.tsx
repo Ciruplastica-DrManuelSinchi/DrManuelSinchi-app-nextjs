@@ -127,21 +127,7 @@ const prpData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Cómo funciona el PRP?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
-        },
-        {
-            title: 'PRP facial: el procedimiento paso a paso',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:20',
-        },
-        {
-            title: 'Resultados del Plasma Rico en Plaquetas',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:45',
-        },
+
     ],
 
     // FAQs

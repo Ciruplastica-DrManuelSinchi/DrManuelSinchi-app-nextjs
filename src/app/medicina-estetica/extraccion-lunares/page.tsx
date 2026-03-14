@@ -127,21 +127,7 @@ const extraccionLunaresData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Cuándo debo remover un lunar?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:15',
-        },
-        {
-            title: 'Técnicas de extracción de lunares',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:00',
-        },
-        {
-            title: 'Cuidados después de remover un lunar',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:30',
-        },
+
     ],
 
     // FAQs

@@ -135,20 +135,17 @@ const gluteoplastiaData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Qué es el BBL (Brazilian Butt Lift)?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:45',
+       {
+            title: '¿Te hiciste una lipotransferencia? ¡Cuídala bien así!',
+            youtubeId: 'LZeJiFcQtnI',
         },
         {
-            title: 'BBL vs Implantes de glúteos',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:20',
+            title: 'Transformación total con Liposucción + RibxCar + Transferencia de grasa 💥',
+            youtubeId: '5-75lv9Q4nI',
         },
         {
-            title: 'Recuperación de la gluteoplastia',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
+            title: '👉 ¿Te hiciste una lipotransferencia? ¡Cuídala bien así! 👈',
+            youtubeId: 'LZeJiFcQtnI',
         },
     ],
 

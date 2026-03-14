@@ -128,19 +128,16 @@ const rellenosLabiosData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: 'Relleno de labios: el procedimiento',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '3:30',
+            title: '🎥 Descubre todo sobre el Lip Lift con el Dr. Manuel Sinchi 💋',
+            youtubeId: 'pkUsW_-EHBI'
         },
         {
-            title: '¿Cómo lograr labios naturales?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:15',
+            title: '🎥 Todo lo que debes saber sobre el Lip Lift con el Dr. Manuel Sinchi',
+            youtubeId: '61QYlk7UzFk'
         },
         {
-            title: 'Mi experiencia con rellenos de labios',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:00',
+            title: '🎥 Descubre todo sobre el Lip Lift con el Dr. Manuel Sinchi 💋',
+            youtubeId: 'pkUsW_-EHBI'
         },
     ],
 

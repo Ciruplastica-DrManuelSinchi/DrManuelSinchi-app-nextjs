@@ -127,21 +127,6 @@ const quemadurasData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: 'Grados de quemaduras y su tratamiento',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:45',
-        },
-        {
-            title: '¿Qué son las bridas cicatriciales?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:20',
-        },
-        {
-            title: 'Reconstrucción de secuelas de quemaduras',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:30',
-        },
     ],
 
     // FAQs

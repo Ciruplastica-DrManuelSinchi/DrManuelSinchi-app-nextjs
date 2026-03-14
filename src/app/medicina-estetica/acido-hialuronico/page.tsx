@@ -127,21 +127,6 @@ const acidoHialuronicoData: ProcedureData = {
 
     // Videos
     videos: [
-        {
-            title: '¿Qué es el ácido hialurónico?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:20',
-        },
-        {
-            title: 'Rellenos faciales: todo lo que debes saber',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:45',
-        },
-        {
-            title: 'Mi experiencia con ácido hialurónico',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:10',
-        },
     ],
 
     // FAQs

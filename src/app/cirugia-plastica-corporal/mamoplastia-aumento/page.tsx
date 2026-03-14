@@ -136,19 +136,16 @@ const mamoplastiaAumentoData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Cómo elegir el tamaño de implantes?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:20',
+            title: '🎥 ¿Cómo elegir el IMPLANTE MAMARIO ideal?',
+            youtubeId: '7PJPZJw9AL8'
         },
         {
-            title: 'Tipos de implantes mamarios',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:15',
+            title: 'Implantes mamarios: Cirugía de aumento de mamas',
+            youtubeId: 'kgu9YpK7uzs'
         },
         {
-            title: 'Recuperación de aumento de senos',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
+            title: 'Caso real de mamoplastia',
+            youtubeId: '6pN61A1gLHI'
         },
     ],
 

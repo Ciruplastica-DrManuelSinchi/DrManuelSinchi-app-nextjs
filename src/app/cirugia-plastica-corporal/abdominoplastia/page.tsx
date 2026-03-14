@@ -136,20 +136,19 @@ const abdominoplastiaData: ProcedureData = {
     // Videos
     videos: [
         {
-            title: '¿Qué es la abdominoplastia?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:45',
+            title: 'Lipoescultura vs. Lipoabdominoplastia 🧐',
+            youtubeId: 'ZBiNoZkeF2E',
         },
         {
-            title: 'Abdominoplastia: recuperación paso a paso',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '6:20',
+            title: 'Caso real: Mamá de 2 hijos, recupera su figura',
+            youtubeId: 'Z6Jq0DVJdzs',
         },
+
         {
-            title: 'Testimonio: Mi experiencia con abdominoplastia',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:30',
+            title: 'Caso de Pilar: Lipoabdominoplastia',
+            youtubeId: '7GFKXZEwiis',
         },
+
     ],
 
     // FAQs
