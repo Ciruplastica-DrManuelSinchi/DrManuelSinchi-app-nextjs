@@ -68,6 +68,19 @@ const config: Config = {
         'strong': '0 10px 60px rgba(57, 17, 66, 0.15)',
         'card': '0 4px 20px rgba(0, 0, 0, 0.06)',
         'card-hover': '0 10px 40px rgba(0, 0, 0, 0.12)',
+        // Sistema de elevación
+        'elevation-1': '0 1px 3px rgba(57, 17, 66, 0.12), 0 1px 2px rgba(57, 17, 66, 0.08)',
+        'elevation-2': '0 4px 6px rgba(57, 17, 66, 0.1), 0 2px 4px rgba(57, 17, 66, 0.06)',
+        'elevation-3': '0 10px 20px rgba(57, 17, 66, 0.1), 0 4px 8px rgba(57, 17, 66, 0.06)',
+        'elevation-4': '0 25px 50px rgba(57, 17, 66, 0.15), 0 12px 24px rgba(57, 17, 66, 0.1)',
+        // Efectos de brillo
+        'glow-accent': '0 0 40px rgba(212, 168, 83, 0.4)',
+        'glow-primary': '0 0 40px rgba(57, 17, 66, 0.4)',
+        'glow-accent-sm': '0 0 20px rgba(212, 168, 83, 0.3)',
+        'glow-primary-sm': '0 0 20px rgba(57, 17, 66, 0.3)',
+        // Brillo interior
+        'inner-glow': 'inset 0 0 30px rgba(212, 168, 83, 0.1)',
+        'inner-glow-white': 'inset 0 0 30px rgba(255, 255, 255, 0.1)',
       },
 
       // Animaciones

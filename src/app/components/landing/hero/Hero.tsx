@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { FloatingParticles, OrbitalGradients } from '@/app/components/shared/AnimatedShapes'
 
 export default function Hero() {
     return (
@@ -51,6 +52,12 @@ export default function Hero() {
                     )`,
                 }}
             />
+
+            {/* Animated Effects Layer */}
+            <div className="absolute inset-0 z-[11]">
+                <OrbitalGradients />
+                <FloatingParticles count={15} />
+            </div>
 
             {/* Content Container */}
             <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4">

@@ -5,7 +5,9 @@
       "WebSearch",
       "WebFetch(domain:www.ciruplastica.pe)",
       "WebFetch(domain:www.youtube.com)",
-      "Bash(dir \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\" /b)"
+      "Bash(dir \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\" /b)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma generate:*)"
     ]
   }
 }

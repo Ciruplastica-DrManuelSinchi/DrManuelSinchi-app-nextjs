@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 const categories = [
     { id: 'facial', name: 'Cirugía Facial' },
@@ -46,6 +46,102 @@ const categoryPaths: Record<string, string> = {
     reconstructiva: 'cirugia-reconstructiva',
 }
 
+// Componente de Card 3D
+function ProcedureCard3D({
+    proc,
+    categoryPath,
+    index,
+}: {
+    proc: { name: string; desc: string; slug: string; image: string }
+    categoryPath: string
+    index: number
+}) {
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+
+    const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 })
+    const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 })
+
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg'])
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg'])
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        const width = rect.width
+        const height = rect.height
+        const mouseX = e.clientX - rect.left
+        const mouseY = e.clientY - rect.top
+        const xPct = mouseX / width - 0.5
+        const yPct = mouseY / height - 0.5
+        x.set(xPct)
+        y.set(yPct)
+    }
+
+    const handleMouseLeave = () => {
+        x.set(0)
+        y.set(0)
+    }
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                rotateX,
+                rotateY,
+                transformStyle: 'preserve-3d',
+            }}
+            className="relative group perspective-1000"
+        >
+            {/* Glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent/40 via-primary/40 to-accent/40 rounded-2xl blur-xl opacity-0 group-hover:opacity-75 transition-opacity duration-500" />
+
+            <Link
+                href={`/${categoryPath}/${proc.slug}`}
+                className="relative block overflow-hidden rounded-2xl bg-white shadow-card group-hover:shadow-elevation-4 transition-shadow duration-500"
+                style={{ transformStyle: 'preserve-3d' }}
+            >
+                {/* Imagen */}
+                <div className="relative aspect-procedure overflow-hidden bg-primary-100">
+                    <Image
+                        src={proc.image}
+                        alt={proc.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+
+                {/* Info */}
+                <div
+                    className="p-5 relative bg-white"
+                    style={{ transform: 'translateZ(30px)' }}
+                >
+                    <h3 className="font-semibold text-dark mb-2 group-hover:text-primary transition-colors duration-300">
+                        {proc.name}
+                    </h3>
+                    <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                        {proc.desc}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all duration-300">
+                        Conocer más
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                </div>
+
+                {/* Shine effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </div>
+            </Link>
+        </motion.div>
+    )
+}
+
 export default function Procedures() {
     const [activeCategory, setActiveCategory] = useState('facial')
 
@@ -53,28 +149,49 @@ export default function Procedures() {
         <section className="section bg-light-gradient">
             <div className="container-custom">
                 {/* Header */}
-                <div className="section-header">
+                <motion.div
+                    className="section-header"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <span className="badge-primary mb-4">Especialidades</span>
                     <h2 className="section-title">Nuestros Procedimientos</h2>
                     <p className="section-subtitle">
-                        Tratamientos personalizados para cada necesidad
+                        Tratamientos personalizados con técnicas de vanguardia
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Tabs de categorías */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                <motion.div
+                    className="flex flex-wrap justify-center gap-3 mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                >
                     {categories.map((category) => (
-                        <button
+                        <motion.button
                             key={category.id}
                             onClick={() => setActiveCategory(category.id)}
-                            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category.id
-                                ? 'bg-primary text-white'
+                            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden ${activeCategory === category.id
+                                ? 'bg-primary text-white shadow-glow-primary-sm'
                                 : 'bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary'
                                 }`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            {category.name}
-                        </button>
+                            {activeCategory === category.id && (
+                                <motion.span
+                                    className="absolute inset-0 bg-primary"
+                                    layoutId="activeTab"
+                                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                                />
+                            )}
+                            <span className="relative z-10">{category.name}</span>
+                        </motion.button>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Grid de procedimientos */}
                 <AnimatePresence mode="wait">
@@ -86,57 +203,33 @@ export default function Procedures() {
                         transition={{ duration: 0.3 }}
                         className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
                     >
-                        {/*Mostrar contenido seleccionado */}
                         {procedures[activeCategory as keyof typeof procedures].map((proc, index) => (
-                            <motion.div
+                            <ProcedureCard3D
                                 key={proc.slug}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.3, delay: index * 0.1 }}
-                            >
-                                <Link
-                                    href={`/${categoryPaths[activeCategory]}/${proc.slug}`}
-                                    className="card-hover block overflow-hidden group"
-                                >
-                                    {/* Imagen */}
-                                    <div className="relative aspect-procedure overflow-hidden bg-primary-100">
-                                        <Image
-                                            src={proc.image}
-                                            alt={proc.name}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                    </div>
-
-                                    {/* Info */}
-                                    <div className="p-5">
-                                        <h3 className="font-semibold text-dark mb-2">
-                                            {proc.name}
-                                        </h3>
-                                        <p className="text-sm text-gray-500 mb-4 line-clamp-2">
-                                            {proc.desc}
-                                        </p>
-                                        <span className="link text-sm">
-                                            Conocer más
-                                            <ArrowRight className="w-4 h-4" />
-                                        </span>
-                                    </div>
-                                </Link>
-                            </motion.div>
+                                proc={proc}
+                                categoryPath={categoryPaths[activeCategory]}
+                                index={index}
+                            />
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
                 {/* Link ver todos */}
-                <div className="text-center mt-12">
+                <motion.div
+                    className="text-center mt-12"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                >
                     <Link
                         href={`/${categoryPaths[activeCategory]}`}
-                        className="link text-primary"
+                        className="group inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
                     >
                         Ver todos los procedimientos
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
-                </div>
+                </motion.div>
             </div>
         </section>
     )

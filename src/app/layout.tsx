@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
+import { Providers } from './providers'
 import Header from '@/app/components/layout/Header'
 import Footer from '@/app/components/layout/Footer'
 import WhatsAppButton from '@/app/components/layout/WhatsAppButton'
@@ -121,19 +122,21 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="font-body antialiased">
-        {/* Header */}
-        <Header />
+        <Providers>
+          {/* Header */}
+          <Header />
 
-        {/* Contenido principal */}
-        <main className="min-h-screen">
-          {children}
-        </main>
+          {/* Contenido principal */}
+          <main className="min-h-screen">
+            {children}
+          </main>
 
-        {/* Footer */}
-        <Footer />
+          {/* Footer */}
+          <Footer />
 
-        {/* Botón flotante de WhatsApp */}
-        <WhatsAppButton />
+          {/* Botón flotante de WhatsApp */}
+          <WhatsAppButton />
+        </Providers>
 
         {/* Schema.org JSON-LD para SEO */}
         <script

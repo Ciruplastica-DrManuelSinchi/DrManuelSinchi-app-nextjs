@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
 
 const cases = [
     {
@@ -34,59 +34,45 @@ export default function BeforeAfter() {
         <section className="section bg-white">
             <div className="container-custom">
                 {/* Header */}
-                <div className="section-header">
-                    <h2 className="section-title">Casos Reales</h2>
+                <motion.div
+                    className="section-header"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <span className="badge-accent mb-4">Resultados Reales</span>
+                    <h2 className="section-title">Casos Antes y Después</h2>
                     <p className="section-subtitle">
-                        Resultados verificables de nuestros pacientes
+                        Desliza para comparar los resultados de nuestros pacientes
                     </p>
-                </div>
+                </motion.div>
 
-                {/* Grid de casos */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Grid de casos con slider interactivo */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {cases.map((caseItem, index) => (
                         <motion.div
                             key={caseItem.id}
-                            className="card-hover overflow-hidden"
-                            initial={{ opacity: 0, y: 20 }}
+                            className="group"
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            transition={{ duration: 0.5, delay: index * 0.15 }}
                             viewport={{ once: true }}
                         >
-                            {/* Imagen antes/después */}
-                            <div className="relative aspect-[4/5] overflow-hidden">
-                                {/* Imagen Before (izquierda) */}
-                                <div className="absolute inset-0 w-1/2 overflow-hidden">
-                                    <Image
-                                        src={caseItem.beforeImage}
-                                        alt={`${caseItem.procedure} - Antes`}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <span className="absolute bottom-3 left-3 bg-black/50 text-white text-xs px-3 py-1 rounded-full">
-                                        Antes
-                                    </span>
-                                </div>
+                            {/* Slider interactivo */}
+                            <div className="relative">
+                                {/* Glow effect on hover */}
+                                <div className="absolute -inset-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                {/* Imagen After (derecha) */}
-                                <div className="absolute inset-0 left-1/2 w-1/2 overflow-hidden">
-                                    <Image
-                                        src={caseItem.afterImage}
-                                        alt={`${caseItem.procedure} - Después`}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <span className="absolute bottom-3 right-3 bg-accent text-dark text-xs px-3 py-1 rounded-full font-semibold">
-                                        Después
-                                    </span>
-                                </div>
-
-                                {/* Línea divisoria */}
-                                <div className="absolute top-0 bottom-0 left-1/2 w-[3px] bg-white -translate-x-1/2 z-10" />
+                                <BeforeAfterSlider
+                                    beforeImage={caseItem.beforeImage}
+                                    afterImage={caseItem.afterImage}
+                                    className="relative shadow-elevation-2 group-hover:shadow-elevation-4 transition-shadow duration-500"
+                                />
                             </div>
 
                             {/* Info del caso */}
-                            <div className="p-5">
-                                <h3 className="font-semibold text-dark text-lg">
+                            <div className="mt-4 text-center">
+                                <h3 className="font-semibold text-dark text-lg group-hover:text-primary transition-colors">
                                     {caseItem.procedure}
                                 </h3>
                                 <p className="text-sm text-gray-500 mt-1">
@@ -98,12 +84,21 @@ export default function BeforeAfter() {
                 </div>
 
                 {/* Link Ver más */}
-                <div className="text-center mt-12">
-                    <Link href="/casos-reales" className="link text-primary">
+                <motion.div
+                    className="text-center mt-12"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 }}
+                >
+                    <Link
+                        href="/casos-reales"
+                        className="group inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:bg-primary-dark transition-all hover:gap-3"
+                    >
                         Ver todos los casos
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
-                </div>
+                </motion.div>
             </div>
         </section>
     )
