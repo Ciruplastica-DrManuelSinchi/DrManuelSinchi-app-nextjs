@@ -32,6 +32,13 @@ interface StatsData {
 
 const adminActions = [
   {
+    title: 'Gestión de Reservas',
+    description: 'Administrar citas y consultas de pacientes',
+    icon: Calendar,
+    href: '/admin/bookings',
+    color: 'bg-green-500',
+  },
+  {
     title: 'Gestión de Usuarios',
     description: 'Ver, editar y administrar cuentas de pacientes',
     icon: Users,
@@ -210,7 +217,7 @@ export default function AdminPage() {
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Herramientas de Administración
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {adminActions.map((action, index) => {
             const Icon = action.icon
             return (

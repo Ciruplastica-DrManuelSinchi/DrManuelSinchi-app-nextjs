@@ -137,18 +137,15 @@ const mastopexiaData: ProcedureData = {
     videos: [
         {
             title: '¿Qué es la mastopexia?',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:45',
+            youtubeId: null,
         },
         {
             title: 'Mastopexia con o sin implantes',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '5:30',
+            youtubeId: null,
         },
         {
             title: 'Recuperación del levantamiento de senos',
-            thumbnail: '/images/video-thumbnail.jpg',
-            duration: '4:15',
+            youtubeId: null,
         },
     ],
 

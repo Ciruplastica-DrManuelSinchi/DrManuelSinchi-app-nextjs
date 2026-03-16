@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useCallback } from 'react'
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 import Image from 'next/image'
 
 interface BeforeAfterSliderProps {
@@ -73,21 +73,6 @@ export default function BeforeAfterSlider({
 
     const handleTouchEnd = () => {
         setIsDragging(false)
-    }
-
-    // Animación al hacer hover cerca del borde
-    const handleHoverNearEdge = (clientX: number) => {
-        if (isDragging || !containerRef.current) return
-        const rect = containerRef.current.getBoundingClientRect()
-        const x = clientX - rect.left
-        const percentage = x / rect.width
-
-        // Si está muy cerca de los bordes, animar sutilmente hacia ellos
-        if (percentage < 0.1) {
-            animate(position, 0.1, { duration: 0.3 })
-        } else if (percentage > 0.9) {
-            animate(position, 0.9, { duration: 0.3 })
-        }
     }
 
     return (

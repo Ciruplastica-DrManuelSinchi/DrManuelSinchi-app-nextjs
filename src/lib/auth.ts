@@ -1,18 +1,25 @@
 import NextAuth from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import Credentials from 'next-auth/providers/credentials'
+import Google from 'next-auth/providers/google'
 import { prisma } from './prisma'
 import { verifyPassword } from './password'
 import type { UserRole, AccountStatus } from '@prisma/client'
+import type { Adapter } from 'next-auth/adapters'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   session: { strategy: 'jwt' },
   pages: {
     signIn: '/login',
     error: '/login',
   },
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
+    }),
     Credentials({
       name: 'credentials',
       credentials: {
@@ -105,12 +112,51 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
+    async signIn({ user, account }) {
+      // Para OAuth (Google), activar usuario automáticamente
+      if (account?.provider === 'google' && user.email) {
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email },
+        })
+
+        if (existingUser) {
+          // Actualizar usuario existente si viene de Google
+          if (!existingUser.emailVerified) {
+            await prisma.user.update({
+              where: { id: existingUser.id },
+              data: {
+                emailVerified: new Date(),
+                status: 'ACTIVE',
+                image: user.image || existingUser.image,
+              },
+            })
+          }
+        } else {
+          // El PrismaAdapter creará el usuario, pero actualizamos el status
+          // Esto se maneja en el evento createUser abajo
+        }
+      }
+      return true
+    },
+    async jwt({ token, user, trigger, session, account }) {
       if (user) {
-        token.id = user.id
-        token.role = user.role as UserRole
-        token.status = user.status as AccountStatus
-        token.emailVerified = user.emailVerified
+        // Para usuarios OAuth nuevos, obtener datos actualizados de la BD
+        if (account?.provider === 'google') {
+          const dbUser = await prisma.user.findUnique({
+            where: { email: user.email! },
+          })
+          if (dbUser) {
+            token.id = dbUser.id
+            token.role = dbUser.role
+            token.status = dbUser.status
+            token.emailVerified = dbUser.emailVerified
+          }
+        } else {
+          token.id = user.id
+          token.role = user.role as UserRole
+          token.status = user.status as AccountStatus
+          token.emailVerified = user.emailVerified
+        }
       }
 
       // Actualizar token cuando se actualiza la sesión
@@ -129,6 +175,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.emailVerified = token.emailVerified
       }
       return session
+    },
+  },
+  events: {
+    async createUser({ user }) {
+      // Cuando se crea un usuario via OAuth, activarlo automáticamente
+      if (user.email) {
+        await prisma.user.update({
+          where: { email: user.email },
+          data: {
+            status: 'ACTIVE',
+            emailVerified: new Date(),
+            role: 'PATIENT',
+          },
+        })
+      }
     },
   },
 })

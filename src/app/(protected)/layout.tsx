@@ -2,7 +2,6 @@
 
 import { SessionProvider } from 'next-auth/react'
 import Header from '@/app/components/layout/Header'
-import Footer from '@/app/components/layout/Footer'
 
 export default function ProtectedLayout({
   children,
@@ -16,7 +15,6 @@ export default function ProtectedLayout({
         <main className="flex-1 pt-24 pb-12">
           {children}
         </main>
-        <Footer />
       </div>
     </SessionProvider>
   )

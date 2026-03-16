@@ -2,38 +2,94 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown, Phone, MessageCircle } from 'lucide-react'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { Menu, X, ChevronDown, Phone, MessageCircle, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import UserMenu from '@/app/components/auth/UserMenu'
 
-const navigation = [
-    { name: 'Dr. Manuel Sinchi', href: '/dr-manuel-sinchi' },
+interface NavChild {
+    name: string
+    href: string
+}
+
+interface NavCategory {
+    category: string
+    href: string
+    items: NavChild[]
+}
+
+interface NavItem {
+    name: string
+    href: string
+    megaMenu?: boolean
+    categories?: NavCategory[]
+}
+
+const navigation: NavItem[] = [
+    { name: 'El Doctor', href: '/dr-manuel-sinchi' },
     {
-        name: 'Cirugía Plástica',
+        name: 'Procedimientos',
         href: '#',
-        children: [
-            { name: 'Cirugía Facial', href: '/cirugia-plastica-facial' },
-            { name: 'Cirugía Corporal', href: '/cirugia-plastica-corporal' },
+        megaMenu: true,
+        categories: [
+            {
+                category: 'Cirugía Facial',
+                href: '/cirugia-plastica-facial',
+                items: [
+                    { name: 'Rinoplastia', href: '/cirugia-plastica-facial/rinoplastia' },
+                    { name: 'Blefaroplastia', href: '/cirugia-plastica-facial/blefaroplastia' },
+                    { name: 'Lifting Facial', href: '/cirugia-plastica-facial/lifting-facial' },
+                    { name: 'Bichectomía', href: '/cirugia-plastica-facial/bichectomia' },
+                    { name: 'Mentoplastia', href: '/cirugia-plastica-facial/mentoplastia' },
+                    { name: 'Otoplastia', href: '/cirugia-plastica-facial/otoplastia' },
+                    { name: 'Lipo de Papada', href: '/cirugia-plastica-facial/lipo-papada' },
+                ],
+            },
+            {
+                category: 'Cirugía Corporal',
+                href: '/cirugia-plastica-corporal',
+                items: [
+                    { name: 'Lipoescultura', href: '/cirugia-plastica-corporal/lipo-escultura' },
+                    { name: 'Abdominoplastia', href: '/cirugia-plastica-corporal/abdominoplastia' },
+                    { name: 'Aumento de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
+                    { name: 'Reducción de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
+                    { name: 'Mastopexia', href: '/cirugia-plastica-corporal/mastopexia' },
+                    { name: 'Gluteoplastia', href: '/cirugia-plastica-corporal/gluteoplastia' },
+                    { name: 'Ginecomastia', href: '/cirugia-plastica-corporal/ginecomastia' },
+                ],
+            },
+            {
+                category: 'Medicina Estética',
+                href: '/medicina-estetica',
+                items: [
+                    { name: 'Botox', href: '/medicina-estetica/botox' },
+                    { name: 'Ácido Hialurónico', href: '/medicina-estetica/acido-hialuronico' },
+                    { name: 'Relleno de Labios', href: '/medicina-estetica/rellenos-labios' },
+                    { name: 'PRP Facial', href: '/medicina-estetica/plasma-rico-plaquetas' },
+                    { name: 'Extracción de Lunares', href: '/medicina-estetica/extraccion-lunares' },
+                ],
+            },
+            {
+                category: 'Reconstructiva',
+                href: '/cirugia-reconstructiva',
+                items: [
+                    { name: 'Cicatrices', href: '/cirugia-reconstructiva/cicatrices' },
+                    { name: 'Quemaduras', href: '/cirugia-reconstructiva/quemaduras' },
+                    { name: 'Heridas y Úlceras', href: '/cirugia-reconstructiva/heridas-ulceras' },
+                ],
+            },
         ],
     },
-    {
-        name: 'Medicina Estética',
-        href: '/medicina-estetica',
-        children: [
-            { name: 'Botox', href: '/medicina-estetica/botox' },
-            { name: 'Ácido Hialurónico', href: '/medicina-estetica/acido-hialuronico' },
-            { name: 'Relleno de Labios', href: '/medicina-estetica/rellenos-labios' },
-            { name: 'PRP', href: '/medicina-estetica/plasma-rico-plaquetas' },
-        ],
-    },
-    { name: 'Casos Reales', href: '/casos-reales' },
-    { name: 'FAQ', href: '/preguntas-frecuentes' },
+    { name: 'Resultados', href: '/casos-reales' },
 ]
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+    const [mounted, setMounted] = useState(false)
+    const pathname = usePathname()
 
     // Progress bar de scroll
     const { scrollYProgress } = useScroll()
@@ -43,9 +99,21 @@ export default function Header() {
         restDelta: 0.001,
     })
 
+    // Marcar como montado y verificar scroll inicial
+    useEffect(() => {
+        setMounted(true)
+        setIsScrolled(window.scrollY > 50)
+    }, [])
+
+    // Cerrar menú móvil al cambiar de ruta
+    useEffect(() => {
+        setIsMobileMenuOpen(false)
+    }, [pathname])
+
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
+            // Activar fondo blanco después de 100vh
+            setIsScrolled(window.scrollY > window.innerHeight * 0.9)
         }
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
@@ -62,42 +130,52 @@ export default function Header() {
             />
 
             <header
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                    ? 'glass shadow-lg py-3 mt-1'
-                    : 'bg-primary/95 py-4'
+                className={`fixed top-0 left-0 right-0 z-50 ${mounted ? 'transition-all duration-500' : ''} ${isScrolled
+                    ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
+                    : 'bg-transparent py-5'
                     }`}
             >
                 <div className="container-custom">
                     <div className="flex items-center justify-between">
 
                         {/* Logo */}
-                        <Link href="/" className="relative z-10 group">
-                            <motion.span
-                                className="text-white font-display text-xl font-bold inline-block"
+                        <Link href="/" className="relative z-10">
+                            <motion.div
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                             >
-                                CIRUPLÁSTICA
-                            </motion.span>
-                            {/* Underline effect */}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
+                                <Image
+                                    src="/images/logo.png"
+                                    alt="Ciruplástica"
+                                    width={200}
+                                    height={56}
+                                    className={`h-14 w-auto transition-all duration-500 ${
+                                        isScrolled ? '' : 'brightness-0 invert'
+                                    }`}
+                                    priority
+                                />
+                            </motion.div>
                         </Link>
 
                         {/* Navegación Desktop */}
-                        <nav className="hidden lg:flex items-center gap-6">
+                        <nav className="hidden lg:flex items-center gap-8">
                             {navigation.map((item) => (
                                 <div
                                     key={item.name}
                                     className="relative group"
-                                    onMouseEnter={() => item.children && setOpenDropdown(item.name)}
+                                    onMouseEnter={() => item.megaMenu && setOpenDropdown(item.name)}
                                     onMouseLeave={() => setOpenDropdown(null)}
                                 >
                                     <Link
                                         href={item.href}
-                                        className="text-white/90 hover:text-white text-sm font-medium flex items-center gap-1 py-2 transition-colors relative"
+                                        className={`text-lg font-medium flex items-center gap-1 py-2 transition-all duration-500 relative ${
+                                            isScrolled
+                                                ? 'text-gray-700 hover:text-primary'
+                                                : 'text-white/90 hover:text-white'
+                                        }`}
                                     >
                                         {item.name}
-                                        {item.children && (
+                                        {item.megaMenu && (
                                             <motion.span
                                                 animate={{ rotate: openDropdown === item.name ? 180 : 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -105,37 +183,48 @@ export default function Header() {
                                                 <ChevronDown className="w-4 h-4" />
                                             </motion.span>
                                         )}
-                                        {/* Hover underline */}
                                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
                                     </Link>
 
-                                    {/* Dropdown */}
+                                    {/* Mega Menu */}
                                     <AnimatePresence>
-                                        {item.children && openDropdown === item.name && (
+                                        {item.megaMenu && item.categories && openDropdown === item.name && (
                                             <motion.div
-                                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                transition={{ duration: 0.2, ease: 'easeOut' }}
-                                                className="absolute top-full left-0 pt-2"
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 10 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
                                             >
-                                                <div className="glass-light rounded-xl shadow-elevation-3 py-2 min-w-[200px] overflow-hidden">
-                                                    {item.children.map((child, index) => (
-                                                        <motion.div
-                                                            key={child.name}
-                                                            initial={{ opacity: 0, x: -10 }}
-                                                            animate={{ opacity: 1, x: 0 }}
-                                                            transition={{ delay: index * 0.05 }}
-                                                        >
+                                                <div className="bg-white rounded-2xl shadow-xl p-6 min-w-[800px] grid grid-cols-4 gap-6">
+                                                    {item.categories.map((cat) => (
+                                                        <div key={cat.category}>
                                                             <Link
-                                                                href={child.href}
-                                                                className="block px-4 py-2.5 text-sm text-dark hover:bg-primary/5 hover:text-primary transition-all duration-200 relative group/item"
+                                                                href={cat.href}
+                                                                className="text-primary font-semibold text-sm mb-3 block hover:text-accent transition-colors"
                                                             >
-                                                                <span className="relative z-10">{child.name}</span>
-                                                                {/* Hover indicator */}
-                                                                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-6 bg-accent/20 transition-all duration-200 group-hover/item:w-1 rounded-r" />
+                                                                {cat.category}
                                                             </Link>
-                                                        </motion.div>
+                                                            <ul className="space-y-1.5">
+                                                                {cat.items.map((subItem) => (
+                                                                    <li key={subItem.name}>
+                                                                        <Link
+                                                                            href={subItem.href}
+                                                                            className="text-gray-600 hover:text-primary text-sm transition-colors block py-0.5"
+                                                                        >
+                                                                            {subItem.name}
+                                                                        </Link>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                            <Link
+                                                                href={cat.href}
+                                                                className="inline-flex items-center gap-1 text-accent hover:text-primary text-xs font-medium mt-3 transition-colors group"
+                                                            >
+                                                                Ver todos
+                                                                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                                                            </Link>
+                                                        </div>
                                                     ))}
                                                 </div>
                                             </motion.div>
@@ -149,7 +238,11 @@ export default function Header() {
                         <div className="hidden lg:flex items-center gap-4">
                             <a
                                 href="tel:+51961360074"
-                                className="text-white/80 hover:text-white text-sm flex items-center gap-2 transition-colors"
+                                className={`text-sm flex items-center gap-2 transition-all duration-500 ${
+                                    isScrolled
+                                        ? 'text-gray-600 hover:text-primary'
+                                        : 'text-white/80 hover:text-white'
+                                }`}
                             >
                                 <motion.span
                                     animate={{ rotate: [0, 10, -10, 0] }}
@@ -171,12 +264,14 @@ export default function Header() {
                                 Agendar Consulta
                             </motion.a>
                             {/* User Menu */}
-                            <UserMenu />
+                            <UserMenu isScrolled={isScrolled} />
                         </div>
 
                         {/* Botón menú móvil */}
                         <motion.button
-                            className="lg:hidden text-white p-2 relative"
+                            className={`lg:hidden p-2 relative transition-colors duration-500 ${
+                                isScrolled ? 'text-primary' : 'text-white'
+                            }`}
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             whileTap={{ scale: 0.9 }}
                         >
@@ -215,34 +310,54 @@ export default function Header() {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="lg:hidden glass overflow-hidden"
+                            className="lg:hidden bg-white border-t border-gray-100 shadow-lg overflow-hidden max-h-[80vh] overflow-y-auto"
                         >
-                            <nav className="container-custom py-6 space-y-4">
+                            <nav className="container-custom py-4 space-y-3">
                                 {navigation.map((item, index) => (
                                     <motion.div
                                         key={item.name}
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.1 }}
+                                        transition={{ delay: index * 0.05 }}
                                     >
                                         <Link
                                             href={item.href}
-                                            className="block text-white py-2 font-medium"
-                                            onClick={() => !item.children && setIsMobileMenuOpen(false)}
+                                            className="block text-gray-800 py-1.5 font-medium"
+                                            onClick={() => !item.megaMenu && setIsMobileMenuOpen(false)}
                                         >
                                             {item.name}
                                         </Link>
-                                        {item.children && (
-                                            <div className="pl-4 space-y-2 mt-2">
-                                                {item.children.map((child) => (
-                                                    <Link
-                                                        key={child.name}
-                                                        href={child.href}
-                                                        className="block text-white/70 py-1 text-sm hover:text-accent transition-colors"
-                                                        onClick={() => setIsMobileMenuOpen(false)}
-                                                    >
-                                                        {child.name}
-                                                    </Link>
+                                        {item.categories && (
+                                            <div className="grid grid-cols-2 gap-3 mt-2 pl-2">
+                                                {item.categories.map((cat) => (
+                                                    <div key={cat.category} className="bg-gray-50 rounded-lg p-2.5">
+                                                        <Link
+                                                            href={cat.href}
+                                                            className="block text-primary font-medium text-xs mb-1.5"
+                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                        >
+                                                            {cat.category}
+                                                        </Link>
+                                                        <div className="space-y-0.5">
+                                                            {cat.items.slice(0, 4).map((subItem) => (
+                                                                <Link
+                                                                    key={subItem.name}
+                                                                    href={subItem.href}
+                                                                    className="block text-gray-600 py-0.5 text-xs hover:text-primary transition-colors"
+                                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                                >
+                                                                    {subItem.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                        <Link
+                                                            href={cat.href}
+                                                            className="inline-flex items-center gap-1 text-accent text-[10px] font-medium mt-1.5"
+                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                        >
+                                                            Ver todos <ArrowRight className="w-2.5 h-2.5" />
+                                                        </Link>
+                                                    </div>
                                                 ))}
                                             </div>
                                         )}
@@ -251,7 +366,7 @@ export default function Header() {
 
                                 {/* CTA móvil */}
                                 <motion.div
-                                    className="pt-4 border-t border-white/20"
+                                    className="pt-4 border-t border-gray-200"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}

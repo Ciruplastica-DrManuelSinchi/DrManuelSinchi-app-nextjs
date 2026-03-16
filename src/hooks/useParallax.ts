@@ -55,12 +55,19 @@ export function useParallax(options: UseParallaxOptions = {}): UseParallaxReturn
     const opacityTransform = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.6])
     const rotateTransform = useTransform(scrollYProgress, [0, 1], [-rotateRange, rotateRange])
 
-    // Aplicar spring si está habilitado
-    const y = smooth ? useSpring(yTransform, springConfig) : yTransform
-    const x = smooth ? useSpring(xTransform, springConfig) : xTransform
-    const scale = smooth ? useSpring(scaleTransform, springConfig) : scaleTransform
-    const opacity = smooth ? useSpring(opacityTransform, springConfig) : opacityTransform
-    const rotate = smooth ? useSpring(rotateTransform, springConfig) : rotateTransform
+    // Siempre llamar useSpring para cumplir con las reglas de hooks
+    const ySpring = useSpring(yTransform, springConfig)
+    const xSpring = useSpring(xTransform, springConfig)
+    const scaleSpring = useSpring(scaleTransform, springConfig)
+    const opacitySpring = useSpring(opacityTransform, springConfig)
+    const rotateSpring = useSpring(rotateTransform, springConfig)
+
+    // Seleccionar versión smooth o directa
+    const y = smooth ? ySpring : yTransform
+    const x = smooth ? xSpring : xTransform
+    const scale = smooth ? scaleSpring : scaleTransform
+    const opacity = smooth ? opacitySpring : opacityTransform
+    const rotate = smooth ? rotateSpring : rotateTransform
 
     return { ref: ref as React.RefObject<HTMLDivElement>, y, x, scale, opacity, rotate }
 }

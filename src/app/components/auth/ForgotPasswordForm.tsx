@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Mail, Loader2, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react'
+import { Mail, Loader2, AlertCircle, ArrowLeft } from 'lucide-react'
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState('')

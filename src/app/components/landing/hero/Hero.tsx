@@ -96,7 +96,7 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.8 }}
                 >
                     <Link
-                        href="/contacto"
+                        href="/reservar"
                         className="group relative inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-body font-medium tracking-widest text-accent uppercase border border-accent/60 bg-transparent transition-all duration-500 hover:bg-accent hover:text-primary hover:border-accent overflow-hidden"
                     >
                         <span className="relative z-10">Agenda tu consulta</span>

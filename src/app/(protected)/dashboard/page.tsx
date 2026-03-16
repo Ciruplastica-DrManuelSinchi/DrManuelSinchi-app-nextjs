@@ -1,29 +1,43 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import {
   Calendar,
   Clock,
   User,
-  FileText,
   MessageSquare,
-  Bell,
   ChevronRight,
   Sparkles,
   Heart,
   Shield,
+  Plus,
+  CalendarCheck,
+  Hourglass,
+  CheckCircle,
 } from 'lucide-react'
+import BookingList from '@/app/components/booking/BookingList'
+
+interface Booking {
+  id: string
+  procedureName: string
+  procedureCategory: string
+  date: string
+  timeSlot: string
+  message?: string
+  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
+  createdAt: string
+}
 
 const quickActions = [
   {
-    title: 'Agendar Consulta',
-    description: 'Reserva una cita con el Dr. Sinchi',
-    icon: Calendar,
-    href: 'https://api.whatsapp.com/send?phone=51961360074&text=Deseo%20agendar%20una%20consulta',
+    title: 'Nueva Reserva',
+    description: 'Agenda una consulta',
+    icon: Plus,
+    href: '/reservar',
     color: 'bg-primary',
-    external: true,
   },
   {
     title: 'Mi Perfil',
@@ -40,7 +54,7 @@ const quickActions = [
     color: 'bg-purple-500',
   },
   {
-    title: 'Preguntas Frecuentes',
+    title: 'Preguntas',
     description: 'Resuelve tus dudas',
     icon: MessageSquare,
     href: '/preguntas-frecuentes',
@@ -48,26 +62,48 @@ const quickActions = [
   },
 ]
 
-const upcomingFeatures = [
-  {
-    title: 'Historial de Consultas',
-    description: 'Próximamente podrás ver tu historial de citas y tratamientos.',
-    icon: FileText,
-  },
-  {
-    title: 'Notificaciones',
-    description: 'Recibe recordatorios de tus citas y ofertas especiales.',
-    icon: Bell,
-  },
-  {
-    title: 'Chat con el Doctor',
-    description: 'Comunicación directa para seguimiento post-operatorio.',
-    icon: MessageSquare,
-  },
-]
-
 export default function DashboardPage() {
   const { data: session, status } = useSession()
+  const [bookings, setBookings] = useState<Booking[]>([])
+  const [loadingBookings, setLoadingBookings] = useState(true)
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await fetch('/api/bookings')
+        if (response.ok) {
+          const data = await response.json()
+          setBookings(data.bookings)
+        }
+      } catch (error) {
+        console.error('Error fetching bookings:', error)
+      } finally {
+        setLoadingBookings(false)
+      }
+    }
+
+    if (session?.user) {
+      fetchBookings()
+    }
+  }, [session])
+
+  const handleCancelBooking = async (id: string) => {
+    try {
+      const response = await fetch(`/api/bookings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cancel: true }),
+      })
+
+      if (response.ok) {
+        setBookings(prev =>
+          prev.map(b => (b.id === id ? { ...b, status: 'CANCELLED' as const } : b))
+        )
+      }
+    } catch (error) {
+      console.error('Error cancelling booking:', error)
+    }
+  }
 
   if (status === 'loading') {
     return (
@@ -85,6 +121,14 @@ export default function DashboardPage() {
       : currentHour < 18
         ? 'Buenas tardes'
         : 'Buenas noches'
+
+  // Filtrar reservas
+  const upcomingBookings = bookings.filter(
+    b => ['PENDING', 'CONFIRMED'].includes(b.status) && new Date(b.date) >= new Date()
+  )
+  const pendingCount = bookings.filter(b => b.status === 'PENDING').length
+  const confirmedCount = bookings.filter(b => b.status === 'CONFIRMED').length
+  const completedCount = bookings.filter(b => b.status === 'COMPLETED').length
 
   return (
     <div className="container-custom">
@@ -127,6 +171,31 @@ export default function DashboardPage() {
             <span className="text-sm">Paciente</span>
           </div>
         </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/20">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 text-2xl font-bold">
+              <Hourglass className="w-5 h-5" />
+              {pendingCount}
+            </div>
+            <p className="text-xs text-white/70 mt-1">Pendientes</p>
+          </div>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 text-2xl font-bold">
+              <CalendarCheck className="w-5 h-5" />
+              {confirmedCount}
+            </div>
+            <p className="text-xs text-white/70 mt-1">Confirmadas</p>
+          </div>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 text-2xl font-bold">
+              <CheckCircle className="w-5 h-5" />
+              {completedCount}
+            </div>
+            <p className="text-xs text-white/70 mt-1">Completadas</p>
+          </div>
+        </div>
       </motion.div>
 
       {/* Acciones rápidas */}
@@ -139,14 +208,9 @@ export default function DashboardPage() {
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Acciones Rápidas
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {quickActions.map((action, index) => {
             const Icon = action.icon
-            const Component = action.external ? 'a' : Link
-            const props = action.external
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {}
-
             return (
               <motion.div
                 key={action.title}
@@ -154,9 +218,8 @@ export default function DashboardPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * (index + 3) }}
               >
-                <Component
+                <Link
                   href={action.href}
-                  {...props}
                   className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 group border border-gray-100"
                 >
                   <div
@@ -168,62 +231,75 @@ export default function DashboardPage() {
                     {action.title}
                   </h3>
                   <p className="text-sm text-gray-500">{action.description}</p>
-                  <div className="mt-3 flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>Ir</span>
-                    <ChevronRight className="w-4 h-4 ml-1" />
-                  </div>
-                </Component>
+                </Link>
               </motion.div>
             )
           })}
         </div>
       </motion.div>
 
-      {/* Próximas funcionalidades */}
+      {/* Próximas Citas */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.3 }}
+        className="mb-8"
       >
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Próximamente
-        </h2>
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          {upcomingFeatures.map((feature, index) => {
-            const Icon = feature.icon
-            return (
-              <div
-                key={feature.title}
-                className={`flex items-start gap-4 p-5 ${
-                  index !== upcomingFeatures.length - 1
-                    ? 'border-b border-gray-100'
-                    : ''
-                }`}
-              >
-                <div className="bg-gray-100 w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-5 h-5 text-gray-400" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-gray-800 mb-1">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm text-gray-500">{feature.description}</p>
-                </div>
-                <span className="ml-auto text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full whitespace-nowrap">
-                  Pronto
-                </span>
-              </div>
-            )
-          })}
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-800">
+            Mis Reservas
+          </h2>
+          {bookings.length > 0 && (
+            <Link
+              href="/reservar"
+              className="text-sm text-primary font-medium hover:underline flex items-center gap-1"
+            >
+              Nueva reserva
+              <Plus className="w-4 h-4" />
+            </Link>
+          )}
         </div>
+
+        {loadingBookings ? (
+          <div className="bg-white rounded-xl p-8 text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mx-auto"></div>
+            <p className="text-gray-500 mt-4">Cargando reservas...</p>
+          </div>
+        ) : upcomingBookings.length > 0 ? (
+          <BookingList
+            bookings={upcomingBookings.slice(0, 3)}
+            onCancelBooking={handleCancelBooking}
+          />
+        ) : (
+          <div className="bg-white rounded-xl border border-gray-100 p-8 text-center">
+            <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-700 mb-2">
+              No tienes citas programadas
+            </h3>
+            <p className="text-gray-500 text-sm mb-4">
+              Agenda tu primera consulta con el Dr. Sinchi
+            </p>
+            <Link href="/reservar" className="btn-primary inline-flex">
+              Agendar Consulta
+            </Link>
+          </div>
+        )}
+
+        {upcomingBookings.length > 3 && (
+          <div className="text-center mt-4">
+            <button className="text-sm text-primary font-medium hover:underline">
+              Ver todas las reservas ({upcomingBookings.length})
+            </button>
+          </div>
+        )}
       </motion.div>
 
       {/* Info de contacto */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="mt-8 bg-accent/10 rounded-xl p-6 border border-accent/20"
+        transition={{ delay: 0.4 }}
+        className="bg-accent/10 rounded-xl p-6 border border-accent/20"
       >
         <div className="flex items-start gap-4">
           <div className="bg-accent w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -235,7 +311,7 @@ export default function DashboardPage() {
             </h3>
             <p className="text-sm text-gray-600 mb-3">
               Nuestro equipo está disponible para atenderte de lunes a sábado de
-              9:00 AM a 7:00 PM.
+              9:00 AM a 6:00 PM.
             </p>
             <a
               href="https://api.whatsapp.com/send?phone=51961360074&text=Hola,%20necesito%20ayuda"

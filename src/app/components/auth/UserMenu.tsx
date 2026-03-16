@@ -2,11 +2,16 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSession, signOut } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { User, LogOut, Settings, LayoutDashboard, Shield, ChevronDown } from 'lucide-react'
 
-export default function UserMenu() {
+interface UserMenuProps {
+  isScrolled?: boolean
+}
+
+export default function UserMenu({ isScrolled = false }: UserMenuProps) {
   const { data: session, status } = useSession()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -33,7 +38,11 @@ export default function UserMenu() {
     return (
       <Link
         href="/login"
-        className="text-white/90 hover:text-white text-sm font-medium transition-colors"
+        className={`text-sm font-medium transition-all duration-500 ${
+          isScrolled
+            ? 'text-gray-700 hover:text-primary'
+            : 'text-white/90 hover:text-white'
+        }`}
       >
         Iniciar Sesión
       </Link>
@@ -59,12 +68,14 @@ export default function UserMenu() {
         whileTap={{ scale: 0.95 }}
       >
         {/* Avatar */}
-        <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-primary font-semibold text-sm">
+        <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-primary font-semibold text-sm overflow-hidden relative">
           {session.user.image ? (
-            <img
+            <Image
               src={session.user.image}
               alt={session.user.name || ''}
-              className="w-full h-full rounded-full object-cover"
+              fill
+              className="object-cover"
+              unoptimized
             />
           ) : (
             initials
@@ -72,14 +83,16 @@ export default function UserMenu() {
         </div>
 
         {/* Name (hidden on mobile) */}
-        <span className="hidden md:block text-white/90 text-sm font-medium max-w-[120px] truncate">
+        <span className={`hidden md:block text-sm font-medium max-w-[120px] truncate transition-colors duration-500 ${
+          isScrolled ? 'text-gray-700' : 'text-white/90'
+        }`}>
           {session.user.name || session.user.email}
         </span>
 
         <ChevronDown
-          className={`hidden md:block w-4 h-4 text-white/70 transition-transform ${
+          className={`hidden md:block w-4 h-4 transition-all duration-500 ${
             isOpen ? 'rotate-180' : ''
-          }`}
+          } ${isScrolled ? 'text-gray-500' : 'text-white/70'}`}
         />
 
         {/* Admin badge */}
