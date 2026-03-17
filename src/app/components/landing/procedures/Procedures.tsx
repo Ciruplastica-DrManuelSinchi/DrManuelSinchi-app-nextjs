@@ -33,9 +33,10 @@ const procedures = {
         { name: 'PRP', desc: 'Plasma rico en plaquetas rejuvenecedor', slug: 'plasma-rico-plaquetas', image: '/images/procedures/prp.jpg' },
     ],
     reconstructiva: [
+        { name: 'Tumores y Carcinomas', desc: 'Resección oncológica con reconstrucción estética', slug: 'tumores-carcinomas', image: '/images/procedures/tumores-carcinomas.jpg' },
         { name: 'Cicatrices', desc: 'Tratamiento y corrección de cicatrices', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg' },
         { name: 'Quemaduras', desc: 'Reconstrucción por quemaduras', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg' },
-        { name: 'Heridas y úlceras complejas', desc: 'Tratamiento de úlceras y heridas', slug: 'heridas-ulceras', image: '/images/procedures/heridas-y-ulceras-complejas.jpg' },
+        { name: 'Retiro de Biopolímeros', desc: 'Extracción segura de sustancias no autorizadas', slug: 'retiro-biopolimeros', image: '/images/procedures/retiro-biopolimeros.jpg' },
     ],
 }
 

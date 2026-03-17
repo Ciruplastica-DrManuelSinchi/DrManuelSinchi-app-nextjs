@@ -7,7 +7,14 @@
       "WebFetch(domain:www.youtube.com)",
       "Bash(dir \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\" /b)",
       "Bash(npm install:*)",
-      "Bash(npx prisma generate:*)"
+      "Bash(npx prisma generate:*)",
+      "Bash(findstr:*)",
+      "Bash(npx prisma db pull:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build:*)",
+      "Bash(cat:*)",
+      "Bash(npx prisma db push:*)",
+      "Bash(npx tsc --noEmit)"
     ]
   }
 }

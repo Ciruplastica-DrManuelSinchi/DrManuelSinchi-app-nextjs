@@ -10,6 +10,9 @@ export const doctorData = {
     shortBio: 'Especialista con más de 15 años de experiencia en cirugía plástica, reconstructiva y medicina estética. Comprometido con resultados naturales y la seguridad del paciente.',
     fullBio: 'El Dr. Manuel Sinchi es un destacado cirujano plástico con formación en las mejores instituciones médicas de Perú y el extranjero. Su enfoque combina técnicas quirúrgicas avanzadas con un profundo respeto por la anatomía natural de cada paciente, buscando siempre resultados armoniosos que realcen la belleza individual.',
 
+    // Descripción introductoria para la sección de trayectoria/CV
+    cvIntroduction: 'Con más de una década dedicada a la cirugía plástica, reconstructiva y medicina estética, el Dr. Manuel Sinchi ha construido una sólida trayectoria profesional respaldada por formación de excelencia tanto en Perú como en prestigiosos centros internacionales. Su compromiso con la actualización constante y la adopción de técnicas de vanguardia le permite ofrecer a sus pacientes los más altos estándares de calidad y seguridad.',
+
     stats: [
         { value: '+15', label: 'Años de experiencia', icon: 'calendar' },
         { value: '+5,000', label: 'Procedimientos realizados', icon: 'users' },

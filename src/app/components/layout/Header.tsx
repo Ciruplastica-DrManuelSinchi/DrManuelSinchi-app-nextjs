@@ -37,46 +37,62 @@ const navigation: NavItem[] = [
                 category: 'Cirugía Facial',
                 href: '/cirugia-plastica-facial',
                 items: [
-                    { name: 'Rinoplastia', href: '/cirugia-plastica-facial/rinoplastia' },
                     { name: 'Blefaroplastia', href: '/cirugia-plastica-facial/blefaroplastia' },
-                    { name: 'Lifting Facial', href: '/cirugia-plastica-facial/lifting-facial' },
-                    { name: 'Bichectomía', href: '/cirugia-plastica-facial/bichectomia' },
-                    { name: 'Mentoplastia', href: '/cirugia-plastica-facial/mentoplastia' },
+                    { name: 'Lifting / Fox-eyes', href: '/cirugia-plastica-facial/lifting-facial' },
+                    { name: 'Rinoplastia', href: '/cirugia-plastica-facial/rinoplastia' },
+                    { name: 'Rellenos Faciales', href: '/cirugia-plastica-facial/rellenos-faciales' },
                     { name: 'Otoplastia', href: '/cirugia-plastica-facial/otoplastia' },
+                    { name: 'Extracción de Lunares', href: '/cirugia-plastica-facial/extraccion-lunares' },
+                    { name: 'Mentoplastia', href: '/cirugia-plastica-facial/mentoplastia' },
                     { name: 'Lipo de Papada', href: '/cirugia-plastica-facial/lipo-papada' },
+                    { name: 'Bichectomía', href: '/cirugia-plastica-facial/bichectomia' },
+                    { name: 'Aumento de Pómulos', href: '/cirugia-plastica-facial/aumento-pomulos' },
+                    { name: 'Marcación Mandibular', href: '/cirugia-plastica-facial/marcacion-mandibular' },
+                    { name: 'Afinamiento Facial', href: '/cirugia-plastica-facial/afinamiento-facial' },
+                    { name: 'Perfiloplastia', href: '/cirugia-plastica-facial/perfiloplastia' },
                 ],
             },
             {
                 category: 'Cirugía Corporal',
                 href: '/cirugia-plastica-corporal',
                 items: [
+                    { name: 'Aumento de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
+                    { name: 'Mastopexia', href: '/cirugia-plastica-corporal/mastopexia' },
+                    { name: 'Reducción de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
                     { name: 'Lipoescultura', href: '/cirugia-plastica-corporal/lipo-escultura' },
                     { name: 'Abdominoplastia', href: '/cirugia-plastica-corporal/abdominoplastia' },
-                    { name: 'Aumento de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
-                    { name: 'Reducción de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
-                    { name: 'Mastopexia', href: '/cirugia-plastica-corporal/mastopexia' },
+                    { name: 'Lipoabdominoplastia', href: '/cirugia-plastica-corporal/lipoabdominoplastia' },
                     { name: 'Gluteoplastia', href: '/cirugia-plastica-corporal/gluteoplastia' },
+                    { name: 'Mommy Makeover', href: '/cirugia-plastica-corporal/mommy-makeover' },
                     { name: 'Ginecomastia', href: '/cirugia-plastica-corporal/ginecomastia' },
+                    { name: 'Cirugía de Género', href: '/cirugia-plastica-corporal/cirugia-genero' },
+                    { name: 'Reconstrucción de Mama', href: '/cirugia-plastica-corporal/reconstruccion-mama' },
                 ],
             },
             {
                 category: 'Medicina Estética',
                 href: '/medicina-estetica',
                 items: [
-                    { name: 'Botox', href: '/medicina-estetica/botox' },
                     { name: 'Ácido Hialurónico', href: '/medicina-estetica/acido-hialuronico' },
-                    { name: 'Relleno de Labios', href: '/medicina-estetica/rellenos-labios' },
+                    { name: 'Botox', href: '/medicina-estetica/botox' },
+                    { name: 'Bioestimuladores', href: '/medicina-estetica/bioestimuladores' },
+                    { name: 'Radiofrecuencia / Ultrasonido', href: '/medicina-estetica/radiofrecuencia-ultrasonido' },
+                    { name: 'Tratamientos Postoperatorios', href: '/medicina-estetica/tratamientos-postoperatorios' },
+                    { name: 'Láser Facial', href: '/medicina-estetica/laser-facial' },
                     { name: 'PRP Facial', href: '/medicina-estetica/plasma-rico-plaquetas' },
-                    { name: 'Extracción de Lunares', href: '/medicina-estetica/extraccion-lunares' },
+                    { name: 'Vitamina C Endovenosa', href: '/medicina-estetica/vitamina-c-endovenosa' },
+                    { name: 'Relleno de Labios', href: '/medicina-estetica/rellenos-labios' },
                 ],
             },
             {
                 category: 'Reconstructiva',
                 href: '/cirugia-reconstructiva',
                 items: [
+                    { name: 'Tumores y Carcinomas', href: '/cirugia-reconstructiva/tumores-carcinomas' },
                     { name: 'Cicatrices', href: '/cirugia-reconstructiva/cicatrices' },
-                    { name: 'Quemaduras', href: '/cirugia-reconstructiva/quemaduras' },
                     { name: 'Heridas y Úlceras', href: '/cirugia-reconstructiva/heridas-ulceras' },
+                    { name: 'Quemaduras', href: '/cirugia-reconstructiva/quemaduras' },
+                    { name: 'Retiro de Biopolímeros', href: '/cirugia-reconstructiva/retiro-biopolimeros' },
                 ],
             },
         ],
@@ -91,6 +107,9 @@ export default function Header() {
     const [mounted, setMounted] = useState(false)
     const pathname = usePathname()
 
+    // Detectar si estamos en la landing page
+    const isHomePage = pathname === '/'
+
     // Progress bar de scroll
     const { scrollYProgress } = useScroll()
     const scaleX = useSpring(scrollYProgress, {
@@ -102,8 +121,13 @@ export default function Header() {
     // Marcar como montado y verificar scroll inicial
     useEffect(() => {
         setMounted(true)
-        setIsScrolled(window.scrollY > 50)
-    }, [])
+        // En páginas internas, siempre sólido; en home, depende del scroll
+        if (!isHomePage) {
+            setIsScrolled(true)
+        } else {
+            setIsScrolled(window.scrollY > 50)
+        }
+    }, [isHomePage])
 
     // Cerrar menú móvil al cambiar de ruta
     useEffect(() => {
@@ -111,13 +135,19 @@ export default function Header() {
     }, [pathname])
 
     useEffect(() => {
+        // Solo aplicar lógica de scroll en la homepage
+        if (!isHomePage) {
+            setIsScrolled(true)
+            return
+        }
+
         const handleScroll = () => {
             // Activar fondo blanco después de 100vh
             setIsScrolled(window.scrollY > window.innerHeight * 0.9)
         }
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    }, [isHomePage])
 
     const whatsappLink = 'https://api.whatsapp.com/send?phone=51961360074&text=Deseo%20más%20información'
 
@@ -261,7 +291,7 @@ export default function Header() {
                                 whileTap={{ scale: 0.95 }}
                             >
                                 <MessageCircle className="w-4 h-4" />
-                                Agendar Consulta
+                                Agendar Cita
                             </motion.a>
                             {/* User Menu */}
                             <UserMenu isScrolled={isScrolled} />

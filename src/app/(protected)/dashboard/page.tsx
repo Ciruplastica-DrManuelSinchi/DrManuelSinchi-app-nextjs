@@ -280,7 +280,7 @@ export default function DashboardPage() {
               Agenda tu primera consulta con el Dr. Sinchi
             </p>
             <Link href="/reservar" className="btn-primary inline-flex">
-              Agendar Consulta
+              Agendar Cita
             </Link>
           </div>
         )}

@@ -24,33 +24,33 @@ const liftingFacialData: ProcedureData = {
 
     // Hero Section
     hero: {
-        badge: 'Rejuvenecimiento Integral',
-        title: 'Lifting Facial',
-        description: 'Rejuvenece tu rostro de forma integral corrigiendo la flacidez y las arrugas. Resultados naturales que te devuelven una apariencia fresca y descansada.',
-        duration: '3-4 horas',
-        recovery: '14-21 días recuperación',
-        anesthesia: 'Anestesia general',
+        badge: 'Estiramiento Facial',
+        title: 'Lifting Facial y Lifting de Cejas',
+        description: 'Rejuvenece tu rostro con técnicas de estiramiento facial. Incluye Lifting de Cejas (Fox-eyes), Lifting Frontal, Lifting Facial completo y Lifting Cervical para resultados naturales.',
+        duration: '1-4 horas',
+        recovery: '7-21 días recuperación',
+        anesthesia: 'Local con sedación / General',
         whatsappMessage: 'Hola, me interesa información sobre lifting facial',
     },
 
     // Info Section
     info: {
-        title: '¿Qué es el Lifting Facial?',
+        title: '¿Qué es el Lifting (Estiramiento Facial)?',
         content: [
-            'El lifting facial, también conocido como ritidectomía, es una cirugía que corrige los signos del envejecimiento en el rostro y cuello. Reposiciona los tejidos faciales profundos, elimina el exceso de piel y restaura los contornos juveniles.',
-            'Utilizamos técnicas avanzadas de <strong class="text-primary">lifting SMAS (Sistema Músculo-Aponeurótico Superficial)</strong> que trabajan las capas profundas del rostro, logrando resultados más naturales y duraderos que las técnicas superficiales.',
+            'El lifting o estiramiento facial incluye diversas técnicas para rejuvenecer diferentes zonas del rostro. Desde el popular <strong class="text-primary">Lifting de Cejas (Fox-eyes)</strong> que crea una mirada almendrada y felina, hasta el lifting facial completo que corrige la flacidez de todo el rostro.',
+            'Ofrecemos: <strong class="text-primary">Lifting de Cejas / Fox-eyes</strong> (levantamiento de cejas para mirada más expresiva), <strong class="text-primary">Lifting Frontal</strong> (frente y entrecejo), <strong class="text-primary">Lifting Facial</strong> (tercio medio e inferior) y <strong class="text-primary">Lifting Cervical</strong> (cuello y papada).',
         ],
         image: '/images/procedures/que-es/lifting-facial-tecnica.jpg',
         highlights: {
-            title: 'Áreas que trata el Lifting Facial',
+            title: 'Tipos de Lifting Disponibles',
             icon: Sparkles,
             items: [
-                'Mejillas caídas y surcos nasogenianos',
-                'Líneas de marioneta',
-                'Papada y cuello flácido',
-                'Mandíbula poco definida',
-                'Arrugas profundas del rostro',
-                'Pérdida de volumen facial',
+                'Lifting de Cejas (Fox-eyes)',
+                'Levantamiento de cejas',
+                'Lifting Frontal',
+                'Lifting Facial (SMAS)',
+                'Lifting Cervical (cuello)',
+                'Mini-lifting facial',
             ],
         },
     },
@@ -153,28 +153,32 @@ const liftingFacialData: ProcedureData = {
     // FAQs
     faqs: [
         {
-            question: '¿A qué edad es recomendable hacerse un lifting facial?',
-            answer: 'Generalmente se realiza entre los 45-70 años, cuando hay signos evidentes de flacidez facial. Sin embargo, la edad ideal depende del grado de envejecimiento individual. Algunos pacientes se benefician a los 40 años, otros esperan hasta los 60.',
+            question: '¿Qué es el Lifting de Cejas o Fox-eyes?',
+            answer: 'El Lifting de Cejas eleva las cejas caídas para abrir la mirada. El "Fox-eyes" es una técnica que además inclina las cejas hacia arriba en el extremo externo, creando un aspecto almendrado y felino muy popular actualmente. Es ideal para pacientes jóvenes que desean este look específico.',
         },
         {
-            question: '¿Cuánto duran los resultados del lifting facial?',
-            answer: 'Los resultados duran típicamente entre 7-10 años. El envejecimiento continúa naturalmente, pero siempre lucirás años más joven que si no te hubieras operado. Muchos pacientes optan por un segundo lifting después de una década.',
+            question: '¿Cuál es la diferencia entre los tipos de lifting?',
+            answer: 'El Lifting de Cejas/Fox-eyes solo trabaja las cejas. El Lifting Frontal incluye frente y entrecejo. El Lifting Facial trata mejillas, mandíbula y surcos. El Lifting Cervical se enfoca en cuello y papada. Pueden combinarse según tus necesidades.',
         },
         {
-            question: '¿El lifting facial deja cicatrices visibles?',
-            answer: 'Las incisiones se ocultan estratégicamente en la línea del cabello, alrededor de las orejas y debajo del mentón. Una vez cicatrizadas (3-6 meses), son prácticamente imperceptibles.',
+            question: '¿A qué edad es recomendable hacerse un lifting?',
+            answer: 'Depende del tipo. El Fox-eyes se realiza desde los 25-30 años por estética. El lifting frontal desde los 35-40. El lifting facial completo generalmente entre 45-70 años cuando hay flacidez evidente.',
         },
         {
-            question: '¿Puedo combinar el lifting con otros procedimientos?',
-            answer: 'Sí, es muy común combinar el lifting facial con blefaroplastia (párpados), lifting de cuello, lipotransferencia facial o láser de resurfacing para resultados más completos.',
+            question: '¿Cuánto duran los resultados?',
+            answer: 'El Fox-eyes dura 2-5 años. El lifting frontal 5-7 años. El lifting facial completo 7-10 años. El envejecimiento continúa naturalmente, pero siempre lucirás mejor que si no te hubieras operado.',
         },
         {
-            question: '¿Cuánto tiempo de reposo necesito?',
-            answer: 'Se recomienda 2-3 semanas de reposo social. Puedes retomar actividades ligeras a las 2 semanas y ejercicio después de 4-6 semanas. La inflamación visible desaparece en 3-4 semanas.',
+            question: '¿El lifting deja cicatrices visibles?',
+            answer: 'Las incisiones se ocultan en la línea del cabello, detrás de las orejas o en pliegues naturales. Para Fox-eyes, las técnicas con hilos no dejan cicatrices visibles. Una vez cicatrizadas son prácticamente imperceptibles.',
         },
         {
-            question: '¿Es muy doloroso el procedimiento?',
-            answer: 'El lifting facial tiene una recuperación moderada. Hay inflamación y algo de incomodidad los primeros días, pero el dolor es manejable con medicación. La mayoría de pacientes describen más molestias que dolor intenso.',
+            question: '¿Puedo combinar diferentes tipos de lifting?',
+            answer: 'Sí, es muy común. Por ejemplo: Fox-eyes + Blefaroplastia, o Lifting Facial + Lifting Cervical. También se combina con rinoplastia, rellenos o lipotransferencia para resultados más completos.',
+        },
+        {
+            question: '¿Cuánto tiempo de recuperación necesito?',
+            answer: 'El Fox-eyes requiere 5-7 días. El lifting frontal 7-10 días. El lifting facial completo 2-3 semanas de reposo social. La inflamación visible desaparece gradualmente.',
         },
     ],
 

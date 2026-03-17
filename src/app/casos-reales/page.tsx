@@ -1,9 +1,270 @@
-import React from 'react'
+'use client'
+
+import { useState, useMemo } from 'react'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronRight, Sparkles, ArrowRight, Camera } from 'lucide-react'
+import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
+import CaseModal from '@/app/components/ui/case-modal/CaseModal'
+import { cases, categories, getCasesByCategory, CaseCategory, Case } from '@/data/casos-reales'
 
 export default function CasosReales() {
+    const [activeCategory, setActiveCategory] = useState<CaseCategory>('todos')
+    const [selectedCase, setSelectedCase] = useState<Case | null>(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const filteredCases = useMemo(() => getCasesByCategory(activeCategory), [activeCategory])
+
+    const currentIndex = useMemo(() => {
+        if (!selectedCase) return 0
+        return filteredCases.findIndex(c => c.id === selectedCase.id)
+    }, [selectedCase, filteredCases])
+
+    const handleCaseClick = (caseItem: Case) => {
+        setSelectedCase(caseItem)
+        setIsModalOpen(true)
+    }
+
+    const handleNavigate = (direction: 'prev' | 'next') => {
+        if (!selectedCase) return
+
+        const newIndex = direction === 'prev'
+            ? Math.max(0, currentIndex - 1)
+            : Math.min(filteredCases.length - 1, currentIndex + 1)
+
+        setSelectedCase(filteredCases[newIndex])
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false)
+        setTimeout(() => setSelectedCase(null), 300)
+    }
+
+    const categoryLabels: Record<string, string> = {
+        facial: 'Cirugía Facial',
+        corporal: 'Cirugía Corporal',
+        estetica: 'Medicina Estética',
+        reconstructiva: 'Reconstructiva',
+    }
+
     return (
-        <div>
-            Casos Reales
-        </div>
+        <main className="min-h-screen">
+            {/* Hero Section */}
+            <section className="relative bg-hero-gradient pt-32 pb-20 md:pt-40 md:pb-28">
+                <div className="absolute inset-0 bg-[url('/images/pattern-dots.png')] opacity-5" />
+
+                <div className="container-custom relative z-10">
+                    {/* Breadcrumbs */}
+                    <nav className="flex items-center gap-2 text-sm text-white/60 mb-8">
+                        <Link href="/" className="hover:text-white transition-colors">
+                            Inicio
+                        </Link>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="text-accent">Casos Reales</span>
+                    </nav>
+
+                    <div className="max-w-3xl">
+                        <motion.span
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="badge-accent mb-6"
+                        >
+                            <Camera className="w-4 h-4 mr-2" />
+                            Resultados Verificables
+                        </motion.span>
+
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-white mb-6"
+                        >
+                            Casos Reales
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-lg md:text-xl text-white/80 leading-relaxed"
+                        >
+                            Resultados reales de pacientes del Dr. Manuel Sinchi.
+                            Cada caso demuestra nuestro compromiso con la excelencia y resultados naturales.
+                        </motion.p>
+                    </div>
+
+                    {/* Stats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl"
+                    >
+                        {[
+                            { value: '5000+', label: 'Procedimientos realizados' },
+                            { value: '98%', label: 'Pacientes satisfechos' },
+                            { value: '15+', label: 'Años de experiencia' },
+                        ].map((stat, index) => (
+                            <div key={index} className="text-center md:text-left">
+                                <div className="text-2xl md:text-4xl font-display font-bold text-accent">
+                                    {stat.value}
+                                </div>
+                                <div className="text-xs md:text-sm text-white/60 mt-1">
+                                    {stat.label}
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Cases Section */}
+            <section className="section bg-light">
+                <div className="container-custom">
+                    {/* Filter Tabs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="flex flex-wrap justify-center gap-3 mb-12"
+                    >
+                        {categories.map((cat) => {
+                            const count = cat.id === 'todos' ? cases.length : cases.filter(c => c.category === cat.id).length
+                            return (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setActiveCategory(cat.id)}
+                                    className={`
+                                        px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300
+                                        ${activeCategory === cat.id
+                                            ? 'bg-primary text-white shadow-medium'
+                                            : 'bg-white text-gray-600 hover:bg-primary/5 hover:text-primary shadow-soft'
+                                        }
+                                    `}
+                                >
+                                    {cat.label}
+                                    <span className={`
+                                        ml-2 text-xs px-2 py-0.5 rounded-full
+                                        ${activeCategory === cat.id
+                                            ? 'bg-white/20 text-white'
+                                            : 'bg-gray-100 text-gray-500'
+                                        }
+                                    `}>
+                                        {count}
+                                    </span>
+                                </button>
+                            )
+                        })}
+                    </motion.div>
+
+                    {/* Cases Grid */}
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeCategory}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        >
+                            {filteredCases.map((caseItem, index) => (
+                                <motion.div
+                                    key={caseItem.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    onClick={() => handleCaseClick(caseItem)}
+                                    className="cursor-pointer group"
+                                >
+                                    <div className="relative bg-white rounded-2xl shadow-card overflow-hidden hover:shadow-elevation-4 transition-all duration-300">
+                                        {/* Before/After Slider */}
+                                        <div className="pointer-events-none">
+                                            <BeforeAfterSlider
+                                                beforeImage={caseItem.beforeImage}
+                                                afterImage={caseItem.afterImage}
+                                                className="!rounded-t-2xl !rounded-b-none"
+                                            />
+                                        </div>
+
+                                        {/* Overlay on hover */}
+                                        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300 pointer-events-none rounded-t-2xl" />
+
+                                        {/* Click indicator */}
+                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                            Ver detalle
+                                        </div>
+
+                                        {/* Info */}
+                                        <div className="p-5">
+                                            <span className="text-xs text-primary font-semibold uppercase tracking-wider">
+                                                {categoryLabels[caseItem.category]}
+                                            </span>
+                                            <h3 className="text-lg font-semibold text-dark mt-1 group-hover:text-primary transition-colors">
+                                                {caseItem.procedure}
+                                            </h3>
+                                            <p className="text-sm text-gray-500 mt-1">
+                                                {caseItem.patientInfo}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </AnimatePresence>
+
+                    {/* Empty State */}
+                    {filteredCases.length === 0 && (
+                        <div className="text-center py-16">
+                            <Sparkles className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                            <p className="text-gray-500">No hay casos disponibles en esta categoría.</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="section bg-white">
+                <div className="container-custom">
+                    <div className="bg-hero-gradient rounded-3xl p-8 md:p-12 lg:p-16 text-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[url('/images/pattern-dots.png')] opacity-5" />
+
+                        <div className="relative z-10 max-w-2xl mx-auto">
+                            <h2 className="text-white text-2xl md:text-3xl lg:text-4xl mb-4">
+                                ¿Listo para tu transformación?
+                            </h2>
+                            <p className="text-white/80 mb-8">
+                                Agenda una consulta de valoración y descubre cómo podemos ayudarte
+                                a alcanzar los resultados que deseas.
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link href="/contacto" className="btn-primary">
+                                    Agendar Consulta
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                                <a
+                                    href="https://wa.me/51961360074?text=Hola, vi los casos reales y me gustaría agendar una consulta."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-secondary"
+                                >
+                                    Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Case Modal */}
+            <CaseModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                currentCase={selectedCase}
+                cases={filteredCases}
+                onNavigate={handleNavigate}
+                currentIndex={currentIndex}
+            />
+        </main>
     )
 }

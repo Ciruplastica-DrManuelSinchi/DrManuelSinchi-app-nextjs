@@ -18,15 +18,15 @@ import {
 const extraccionLunaresData: ProcedureData = {
     // Routing & Category
     slug: 'extraccion-lunares',
-    category: 'estetica',
-    categoryLabel: 'Medicina Estética',
-    categoryPath: '/medicina-estetica',
+    category: 'facial',
+    categoryLabel: 'Cirugía Plástica Facial',
+    categoryPath: '/cirugia-plastica-facial',
 
     // Hero Section
     hero: {
-        badge: 'Dermatología Estética',
+        badge: 'Cirugía Dermatológica',
         title: 'Extracción de Lunares',
-        description: 'Remoción segura de lunares, verrugas y lesiones cutáneas con técnicas que minimizan cicatrices. Incluye análisis patológico cuando es necesario.',
+        description: 'Remoción segura de lunares, verrugas y lesiones cutáneas con técnicas quirúrgicas que minimizan cicatrices. Incluye análisis patológico cuando es necesario.',
         duration: '15-30 min',
         recovery: '5-7 días',
         anesthesia: 'Anestesia local',
@@ -126,9 +126,7 @@ const extraccionLunaresData: ProcedureData = {
     ],
 
     // Videos
-    videos: [
-
-    ],
+    videos: [],
 
     // FAQs
     faqs: [

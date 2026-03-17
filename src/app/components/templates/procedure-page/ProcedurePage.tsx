@@ -124,7 +124,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                         >
                             <Link href="/contacto" className="btn-primary">
                                 <Calendar className="w-4 h-4" />
-                                Agendar Consulta
+                                Agendar Cita
                             </Link>
                             <a
                                 href={`https://wa.me/${cta.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
@@ -569,7 +569,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                             >
                                 <Link href="/contacto" className="btn-primary">
                                     <Calendar className="w-4 h-4" />
-                                    Agendar Consulta
+                                    Agendar Cita
                                 </Link>
                                 <a href={`tel:${cta.phoneNumber}`} className="btn-secondary">
                                     <Phone className="w-4 h-4" />

@@ -27,7 +27,7 @@ const blefaroplastiaData: ProcedureData = {
     hero: {
         badge: 'Rejuvenecimiento de Mirada',
         title: 'Blefaroplastia',
-        description: 'Rejuvenece tu mirada eliminando el exceso de piel y bolsas en los párpados. Resultados naturales que te harán lucir descansado y fresco.',
+        description: 'Rejuvenece tu mirada eliminando el exceso de piel y bolsas en los párpados. Ofrecemos blefaroplastia superior, inferior y combinada con lifting para resultados naturales.',
         duration: '1-2 horas',
         recovery: '5-7 días recuperación',
         anesthesia: 'Anestesia local + sedación',
@@ -39,19 +39,19 @@ const blefaroplastiaData: ProcedureData = {
         title: '¿Qué es la Blefaroplastia?',
         content: [
             'La blefaroplastia es una cirugía que corrige el exceso de piel, músculo y grasa en los párpados superiores e inferiores. Es uno de los procedimientos más efectivos para rejuvenecer la mirada y eliminar el aspecto de cansancio.',
-            'Este procedimiento puede realizarse en párpados superiores, inferiores o ambos, según las necesidades de cada paciente. Las <strong class="text-primary">incisiones se ocultan en los pliegues naturales</strong>, dejando cicatrices prácticamente invisibles.',
+            'Ofrecemos: <strong class="text-primary">Blefaroplastia Superior</strong> (párpados caídos), <strong class="text-primary">Blefaroplastia Inferior</strong> (bolsas y ojeras), y <strong class="text-primary">Blefaroplastia con Lifting</strong> (combinada con estiramiento facial). Las <strong class="text-primary">incisiones se ocultan en los pliegues naturales</strong>, dejando cicatrices prácticamente invisibles.',
         ],
         image: '/images/procedures/que-es/blefaroplastia-tecnica.jpg',
         highlights: {
-            title: 'Beneficios de la Blefaroplastia',
+            title: 'Tipos de Blefaroplastia',
             icon: Eye,
             items: [
-                'Mirada más joven y descansada',
-                'Elimina bolsas y ojeras',
-                'Mejora el campo visual',
-                'Cicatrices imperceptibles',
-                'Resultados duraderos',
-                'Recuperación rápida',
+                'Blefaroplastia superior',
+                'Blefaroplastia inferior',
+                'Blefaroplastia completa (superior + inferior)',
+                'Blefaroplastia con lifting de cejas',
+                'Blefaroplastia con lifting facial',
+                'Cantopexia (ojos almendrados)',
             ],
         },
     },
@@ -156,6 +156,14 @@ const blefaroplastiaData: ProcedureData = {
             answer: 'No hay una edad específica. El procedimiento se recomienda cuando existe exceso de piel o bolsas que afectan la estética o la visión. Generalmente esto ocurre a partir de los 35-40 años, aunque puede variar según la genética.',
         },
         {
+            question: '¿Cuál es la diferencia entre blefaroplastia superior e inferior?',
+            answer: 'La blefaroplastia superior corrige el exceso de piel en el párpado de arriba (párpado caído). La inferior trata las bolsas y el exceso de piel debajo del ojo. Muchos pacientes se benefician de ambas.',
+        },
+        {
+            question: '¿Puedo combinar blefaroplastia con lifting de cejas?',
+            answer: 'Sí, es una combinación muy frecuente y recomendada. Al tratar párpados y cejas juntos se logra un rejuvenecimiento más completo y armonioso de la mirada.',
+        },
+        {
             question: '¿La blefaroplastia deja cicatrices visibles?',
             answer: 'Las incisiones se realizan en los pliegues naturales del párpado superior y justo debajo de las pestañas en el inferior. Una vez cicatrizadas, son prácticamente imperceptibles.',
         },
@@ -170,10 +178,6 @@ const blefaroplastiaData: ProcedureData = {
         {
             question: '¿Cuándo puedo volver a trabajar?',
             answer: 'La mayoría de pacientes retoman sus actividades laborales entre 7-10 días después de la cirugía. El maquillaje puede usarse después de 10-14 días.',
-        },
-        {
-            question: '¿Es doloroso el procedimiento?',
-            answer: 'La cirugía se realiza con anestesia local y sedación, por lo que no sentirás dolor. En el postoperatorio, las molestias son leves y se controlan fácilmente con medicación.',
         },
         {
             question: '¿Puede la blefaroplastia mejorar mi visión?',

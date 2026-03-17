@@ -150,7 +150,7 @@ export default function ContactCTA() {
                                 className="btn-dark btn-shine text-base px-8 py-4 shadow-elevation-3"
                             >
                                 <Calendar className="w-5 h-5" />
-                                Agendar Consulta
+                                Agendar Cita
                             </Link>
                         </motion.div>
 

@@ -20,6 +20,7 @@ import {
     Building,
 } from 'lucide-react'
 import { doctorData } from '@/data/doctor'
+import WorldMap from '@/app/components/ui/world-map/WorldMap'
 
 const specialtyIcons = {
     sparkles: Sparkles,
@@ -77,7 +78,7 @@ export default function DoctorPage() {
                                     className="btn-accent inline-flex items-center gap-2"
                                 >
                                     <Phone className="w-5 h-5" />
-                                    Agendar consulta
+                                    Agendar Cita
                                 </Link>
                                 <a
                                     href="#trayectoria"
@@ -239,6 +240,19 @@ export default function DoctorPage() {
                         </p>
                     </motion.div>
 
+                    {/* Descripción introductoria del CV */}
+                    <motion.div
+                        className="max-w-3xl mx-auto mb-12"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        viewport={{ once: true }}
+                    >
+                        <p className="text-lg text-gray-600 leading-relaxed text-center bg-white/50 p-6 rounded-2xl border border-primary-100">
+                            {doctorData.cvIntroduction}
+                        </p>
+                    </motion.div>
+
                     <div className="max-w-3xl mx-auto">
                         {/* Formación Académica */}
                         <div className="mb-12">
@@ -331,6 +345,18 @@ export default function DoctorPage() {
                         </p>
                     </motion.div>
 
+                    {/* Mapa Mundial */}
+                    <motion.div
+                        className="mb-12"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        viewport={{ once: true }}
+                    >
+                        <WorldMap />
+                    </motion.div>
+
+                    {/* Lista de países */}
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         {doctorData.internationalTraining.map((training, index) => (
                             <motion.div

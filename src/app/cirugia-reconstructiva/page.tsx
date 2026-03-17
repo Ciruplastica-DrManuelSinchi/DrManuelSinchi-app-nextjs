@@ -25,6 +25,15 @@ interface Procedure {
 const procedures: Procedure[] = [
     {
         id: 1,
+        slug: 'tumores-carcinomas',
+        name: 'Tumores y Carcinomas',
+        shortDescription: 'Resección oncológica de tumores de piel y tejidos blandos con reconstrucción estética inmediata.',
+        duration: '1-4 horas',
+        recovery: '7-21 días',
+        image: '/images/procedures/tumores-carcinomas.jpg',
+    },
+    {
+        id: 2,
         slug: 'cicatrices',
         name: 'Tratamiento de Cicatrices',
         shortDescription: 'Mejora la apariencia de cicatrices quirúrgicas, traumáticas, por acné o queloides con técnicas especializadas.',
@@ -33,7 +42,7 @@ const procedures: Procedure[] = [
         image: '/images/procedures/cicatrices.jpg',
     },
     {
-        id: 2,
+        id: 3,
         slug: 'heridas-ulceras',
         name: 'Heridas y Úlceras Complejas',
         shortDescription: 'Manejo especializado de heridas crónicas, úlceras por presión, vasculares y diabéticas que no cicatrizan.',
@@ -42,13 +51,22 @@ const procedures: Procedure[] = [
         image: '/images/procedures/heridas-ulceras.jpg',
     },
     {
-        id: 3,
+        id: 4,
         slug: 'quemaduras',
         name: 'Quemaduras',
         shortDescription: 'Tratamiento agudo y reconstrucción de secuelas de quemaduras para recuperar función y estética.',
         duration: 'Variable',
         recovery: 'Según extensión',
         image: '/images/procedures/quemaduras.jpg',
+    },
+    {
+        id: 5,
+        slug: 'retiro-biopolimeros',
+        name: 'Retiro de Biopolímeros',
+        shortDescription: 'Extracción segura de sustancias no autorizadas como metacrilato, silicona industrial y otros biopolímeros.',
+        duration: '2-5 horas',
+        recovery: '2-4 semanas',
+        image: '/images/procedures/retiro-biopolimeros.jpg',
     },
 ]
 
