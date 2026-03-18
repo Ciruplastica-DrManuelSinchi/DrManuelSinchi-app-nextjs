@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import BookingForm from '@/app/components/booking/BookingForm'
-import { procedures } from '@/data/procedures'
-import { Calendar, Clock, Phone, Shield } from 'lucide-react'
+import { prisma } from '@/lib/prisma'
+import { Calendar, Clock, Shield } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Reservar Cita | Ciruplástica - Dr. Manuel Sinchi',
@@ -15,12 +15,26 @@ export default async function ReservarPage({
 }) {
   const params = await searchParams
 
-  const proceduresList = procedures.map(p => ({
-    id: p.id,
-    name: p.name,
-    category: p.category,
-    categoryLabel: p.categoryLabel,
-  }))
+  // Cargar procedimientos activos desde la base de datos
+  const categories = await prisma.procedureCategory.findMany({
+    where: { isActive: true },
+    orderBy: { order: 'asc' },
+    include: {
+      procedures: {
+        where: { isActive: true },
+        orderBy: { order: 'asc' },
+      },
+    },
+  })
+
+  const proceduresList = categories.flatMap((category) =>
+    category.procedures.map((procedure) => ({
+      id: procedure.slug,
+      name: procedure.name,
+      category: category.slug,
+      categoryLabel: category.name,
+    }))
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -79,23 +93,18 @@ export default async function ReservarPage({
                   </ul>
                 </div>
 
-                {/* Contact Card */}
+                {/* Security Card */}
                 <div className="bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-6 text-white">
                   <h3 className="font-semibold mb-3">
-                    ¿Prefieres contactarnos directamente?
+                    Pago 100% Seguro
                   </h3>
                   <p className="text-sm text-white/80 mb-4">
-                    Estamos disponibles para atenderte por WhatsApp o llamada.
+                    Aceptamos tarjetas de crédito/débito y Yape. Tu información está protegida.
                   </p>
-                  <a
-                    href="https://wa.me/51961360074?text=Hola,%20me%20gustaría%20agendar%20una%20consulta"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-white text-primary font-medium px-4 py-2.5 rounded-xl hover:bg-white/90 transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    Contactar por WhatsApp
-                  </a>
+                  <div className="flex items-center gap-3 text-white/70 text-xs">
+                    <Shield className="w-4 h-4" />
+                    <span>Procesado por Culqi - Certificado PCI DSS</span>
+                  </div>
                 </div>
 
                 {/* Horarios */}

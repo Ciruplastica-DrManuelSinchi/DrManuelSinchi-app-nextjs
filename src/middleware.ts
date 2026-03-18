@@ -25,9 +25,15 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route))
   const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route))
 
-  // Si está en ruta de auth y ya está logueado, redirigir a dashboard
+  // Si es admin y está en la página principal, redirigir a /admin
+  if (pathname === '/' && isAuthenticated && token.role === 'ADMIN') {
+    return NextResponse.redirect(new URL('/admin', request.url))
+  }
+
+  // Si está en ruta de auth y ya está logueado, redirigir según rol
   if (isAuthRoute && isAuthenticated) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    const redirectUrl = token.role === 'ADMIN' ? '/admin' : '/dashboard'
+    return NextResponse.redirect(new URL(redirectUrl, request.url))
   }
 
   // Si intenta acceder a ruta protegida sin auth
@@ -47,6 +53,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/',
     '/login',
     '/register',
     '/forgot-password',

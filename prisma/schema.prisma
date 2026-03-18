@@ -113,6 +113,76 @@ model VerificationToken {
 }
 
 // ============================================
+// CATÁLOGO DE PROCEDIMIENTOS
+// ============================================
+
+model ProcedureCategory {
+  id          String      @id @default(cuid())
+  name        String      // "Cirugía Plástica Facial"
+  slug        String      @unique  // "facial"
+  urlPath     String?     // "cirugia-plastica-facial" - para construir URLs
+  description String?
+  order       Int         @default(0)
+  isActive    Boolean     @default(true)
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  procedures  Procedure[]
+  realCases   RealCase[]
+
+  @@index([isActive])
+  @@index([order])
+  @@map("procedure_categories")
+}
+
+model Procedure {
+  id          String            @id @default(cuid())
+  name        String            // "Rinoplastia"
+  slug        String            @unique  // "rinoplastia"
+  categoryId  String
+  order       Int               @default(0)
+  isActive    Boolean           @default(true)
+
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  category    ProcedureCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([isActive])
+  @@index([order])
+  @@map("procedures")
+}
+
+// ============================================
+// CASOS REALES (ANTES/DESPUÉS)
+// ============================================
+
+model RealCase {
+  id              String            @id @default(cuid())
+  procedureName   String            // "Rinoplastia"
+  procedureSlug   String            // "rinoplastia" - para enlazar a la página
+  categoryId      String
+  patientInfo     String            // "Paciente femenina, 28 años"
+  description     String            @db.Text
+  beforeImage     String            // URL de imagen antes
+  afterImage      String            // URL de imagen después
+  order           Int               @default(0)
+  isActive        Boolean           @default(true)
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  category        ProcedureCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([isActive])
+  @@index([order])
+  @@map("real_cases")
+}
+
+// ============================================
 // SISTEMA DE RESERVAS
 // ============================================
 
@@ -139,6 +209,7 @@ model Booking {
   timeSlot          String
   message           String?       @db.Text
   status            BookingStatus @default(PENDING)
+  calendarEventId   String?       // ID del evento en Google Calendar
 
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt

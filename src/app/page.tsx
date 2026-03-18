@@ -7,10 +7,12 @@ import Testimonials from '@/app/components/landing/testimonials/Testimonials'
 import Videos from '@/app/components/landing/videos/Videos'
 import FAQ from '@/app/components/landing/faq/FAQ'
 import ContactCTA from '@/app/components/landing/contact-cta/ContactCTA'
+import AdminRedirect from '@/app/components/auth/AdminRedirect'
 
 export default function Home() {
   return (
     <main>
+      <AdminRedirect />
       <Hero />
       <TrustBar />
       <BeforeAfter />

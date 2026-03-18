@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar, Clock, FileText, AlertTriangle, CheckCircle, XCircle, Hourglass } from 'lucide-react'
+import { Calendar, Clock, FileText, AlertTriangle, CheckCircle, XCircle, Hourglass, CalendarPlus } from 'lucide-react'
 
 interface Booking {
   id: string
@@ -72,6 +72,34 @@ export default function BookingList({ bookings, onCancelBooking }: BookingListPr
     return new Date(dateString) > new Date()
   }
 
+  // Genera enlace directo para agregar a Google Calendar
+  const getGoogleCalendarLink = (booking: Booking) => {
+    const bookingDate = new Date(booking.date)
+    const [hours, minutes] = booking.timeSlot.split(':').map(Number)
+
+    // Formato local sin conversión UTC: YYYYMMDDTHHmmss
+    const year = bookingDate.getFullYear()
+    const month = String(bookingDate.getMonth() + 1).padStart(2, '0')
+    const day = String(bookingDate.getDate()).padStart(2, '0')
+    const startHour = String(hours).padStart(2, '0')
+    const startMin = String(minutes).padStart(2, '0')
+    const endHour = String(hours + 1).padStart(2, '0')
+
+    const startDateTime = `${year}${month}${day}T${startHour}${startMin}00`
+    const endDateTime = `${year}${month}${day}T${endHour}${startMin}00`
+
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: `Consulta: ${booking.procedureName} - Dr. Manuel Sinchi`,
+      dates: `${startDateTime}/${endDateTime}`,
+      details: `Procedimiento: ${booking.procedureName}\nCategoría: ${booking.procedureCategory}${booking.message ? `\nNotas: ${booking.message}` : ''}\n\nCiruplástica - Dr. Manuel Sinchi\nTel: +51 961 360 074`,
+      location: 'Av. Javier Prado Este 499, San Isidro, Lima, Perú',
+      ctz: 'America/Lima',
+    })
+
+    return `https://calendar.google.com/calendar/render?${params.toString()}`
+  }
+
   if (bookings.length === 0) {
     return (
       <div className="text-center py-12 bg-gray-50 rounded-2xl">
@@ -132,15 +160,31 @@ export default function BookingList({ bookings, onCancelBooking }: BookingListPr
                   )}
                 </div>
 
-                {canCancel && onCancelBooking && (
-                  <button
-                    onClick={() => setShowCancelModal(booking.id)}
-                    disabled={cancellingId === booking.id}
-                    className="text-sm text-red-600 hover:text-red-700 font-medium transition-colors disabled:opacity-50"
-                  >
-                    Cancelar
-                  </button>
-                )}
+                <div className="flex items-center gap-3">
+                  {/* Enlace directo para agregar a Google Calendar */}
+                  {['PENDING', 'CONFIRMED'].includes(booking.status) && isUpcoming(booking.date) && (
+                    <a
+                      href={getGoogleCalendarLink(booking)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                      title="Agregar a Google Calendar"
+                    >
+                      <CalendarPlus className="w-4 h-4" />
+                      <span className="hidden sm:inline">Agregar a Calendario</span>
+                    </a>
+                  )}
+
+                  {canCancel && onCancelBooking && (
+                    <button
+                      onClick={() => setShowCancelModal(booking.id)}
+                      disabled={cancellingId === booking.id}
+                      className="text-sm text-red-600 hover:text-red-700 font-medium transition-colors disabled:opacity-50"
+                    >
+                      Cancelar
+                    </button>
+                  )}
+                </div>
               </div>
             </motion.div>
           )

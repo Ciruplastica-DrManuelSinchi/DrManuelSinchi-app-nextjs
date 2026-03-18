@@ -394,14 +394,29 @@ export default function UsersPage() {
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span
-                          className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                            statusConfig[user.status].color
-                          }`}
-                        >
-                          <StatusIcon className="w-3 h-3" />
-                          {statusConfig[user.status].label}
-                        </span>
+                        {user.id === session?.user?.id ? (
+                          <span
+                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                              statusConfig[user.status].color
+                            }`}
+                          >
+                            <StatusIcon className="w-3 h-3" />
+                            {statusConfig[user.status].label}
+                          </span>
+                        ) : (
+                          <select
+                            value={user.status}
+                            onChange={(e) => handleStatusChange(user.id, e.target.value)}
+                            disabled={actionLoading === user.id}
+                            className={`px-2 py-1 rounded-lg text-xs font-medium border-0 cursor-pointer focus:ring-2 focus:ring-primary/20 outline-none ${
+                              statusConfig[user.status].color
+                            } ${actionLoading === user.id ? 'opacity-50' : ''}`}
+                          >
+                            <option value="ACTIVE" className="bg-white text-gray-800">Activo</option>
+                            <option value="PENDING_VERIFICATION" className="bg-white text-gray-800">Pendiente</option>
+                            <option value="SUSPENDED" className="bg-white text-gray-800">Suspendido</option>
+                          </select>
+                        )}
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-500">
                         {formatDate(user.createdAt)}
@@ -438,29 +453,6 @@ export default function UsersPage() {
                                 <Edit className="w-4 h-4" />
                                 Editar usuario
                               </Link>
-                              {user.status !== 'ACTIVE' && (
-                                <button
-                                  onClick={() =>
-                                    handleStatusChange(user.id, 'ACTIVE')
-                                  }
-                                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-green-700 hover:bg-green-50"
-                                >
-                                  <UserCheck className="w-4 h-4" />
-                                  Activar cuenta
-                                </button>
-                              )}
-                              {user.status !== 'SUSPENDED' &&
-                                user.id !== session?.user?.id && (
-                                  <button
-                                    onClick={() =>
-                                      handleStatusChange(user.id, 'SUSPENDED')
-                                    }
-                                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-yellow-700 hover:bg-yellow-50"
-                                  >
-                                    <UserX className="w-4 h-4" />
-                                    Suspender cuenta
-                                  </button>
-                                )}
                               {user.id !== session?.user?.id && (
                                 <button
                                   onClick={() => setDeleteConfirm(user.id)}

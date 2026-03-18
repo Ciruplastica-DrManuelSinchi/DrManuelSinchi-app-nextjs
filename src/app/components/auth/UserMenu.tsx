@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useSession, signOut } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { User, LogOut, Settings, LayoutDashboard, Shield, ChevronDown } from 'lucide-react'
+import { User, LogOut, LayoutDashboard, Shield, ChevronDown } from 'lucide-react'
 
 interface UserMenuProps {
   isScrolled?: boolean
@@ -126,33 +126,35 @@ export default function UserMenu({ isScrolled = false }: UserMenuProps) {
 
             {/* Menu items */}
             <div className="py-1">
-              <Link
-                href="/dashboard"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
-              >
-                <LayoutDashboard className="w-4 h-4" />
-                Dashboard
-              </Link>
-
-              <Link
-                href="/profile"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
-              >
-                <User className="w-4 h-4" />
-                Mi Perfil
-              </Link>
-
-              {isAdmin && (
+              {isAdmin ? (
                 <Link
                   href="/admin"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
                 >
-                  <Settings className="w-4 h-4" />
+                  <Shield className="w-4 h-4" />
                   Panel Admin
                 </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+
+                  <Link
+                    href="/profile"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                  >
+                    <User className="w-4 h-4" />
+                    Mi Perfil
+                  </Link>
+                </>
               )}
             </div>
 

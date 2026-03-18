@@ -267,7 +267,9 @@ export default function Header() {
                         {/* CTA Desktop */}
                         <div className="hidden lg:flex items-center gap-4">
                             <a
-                                href="tel:+51961360074"
+                                href={whatsappLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className={`text-sm flex items-center gap-2 transition-all duration-500 ${
                                     isScrolled
                                         ? 'text-gray-600 hover:text-primary'
@@ -282,17 +284,18 @@ export default function Header() {
                                 </motion.span>
                                 961 360 074
                             </a>
-                            <motion.a
-                                href={whatsappLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn-primary btn-shine text-sm px-5 py-2"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                            <Link
+                                href="/reservar"
                             >
-                                <MessageCircle className="w-4 h-4" />
-                                Agendar Cita
-                            </motion.a>
+                                <motion.span
+                                    className="btn-primary btn-shine text-sm px-5 py-2 flex items-center gap-2"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <MessageCircle className="w-4 h-4" />
+                                    Agendar Cita
+                                </motion.span>
+                            </Link>
                             {/* User Menu */}
                             <UserMenu isScrolled={isScrolled} />
                         </div>
@@ -396,19 +399,27 @@ export default function Header() {
 
                                 {/* CTA móvil */}
                                 <motion.div
-                                    className="pt-4 border-t border-gray-200"
+                                    className="pt-4 border-t border-gray-200 space-y-3"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
                                 >
+                                    <Link
+                                        href="/reservar"
+                                        className="btn-primary btn-shine w-full justify-center"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        <MessageCircle className="w-5 h-5" />
+                                        Agendar Cita
+                                    </Link>
                                     <a
                                         href={whatsappLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="btn-primary btn-shine w-full justify-center"
+                                        className="flex items-center justify-center gap-2 text-primary font-medium py-2"
                                     >
-                                        <MessageCircle className="w-5 h-5" />
-                                        Contactar por WhatsApp
+                                        <Phone className="w-4 h-4" />
+                                        961 360 074
                                     </a>
                                 </motion.div>
                             </nav>

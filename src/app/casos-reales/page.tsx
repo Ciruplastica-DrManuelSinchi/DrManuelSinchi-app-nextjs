@@ -1,19 +1,68 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronRight, Sparkles, ArrowRight, Camera } from 'lucide-react'
+import { ChevronRight, Sparkles, ArrowRight, Camera, Loader2 } from 'lucide-react'
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
 import CaseModal from '@/app/components/ui/case-modal/CaseModal'
-import { cases, categories, getCasesByCategory, CaseCategory, Case } from '@/data/casos-reales'
+
+// Tipos
+type CaseCategory = 'todos' | 'facial' | 'corporal' | 'estetica' | 'reconstructiva'
+
+interface Case {
+    id: string
+    procedure: string
+    category: Exclude<CaseCategory, 'todos'>
+    categoryLabel: string
+    categoryPath: string
+    patientInfo: string
+    description: string
+    beforeImage: string
+    afterImage: string
+    procedureSlug: string
+}
+
+// Categorías estáticas para filtros
+const categories = [
+    { id: 'todos' as CaseCategory, label: 'Todos' },
+    { id: 'facial' as CaseCategory, label: 'Cirugía Facial' },
+    { id: 'corporal' as CaseCategory, label: 'Cirugía Corporal' },
+    { id: 'estetica' as CaseCategory, label: 'Medicina Estética' },
+    { id: 'reconstructiva' as CaseCategory, label: 'Reconstructiva' },
+]
 
 export default function CasosReales() {
+    const [cases, setCases] = useState<Case[]>([])
+    const [loading, setLoading] = useState(true)
     const [activeCategory, setActiveCategory] = useState<CaseCategory>('todos')
     const [selectedCase, setSelectedCase] = useState<Case | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const filteredCases = useMemo(() => getCasesByCategory(activeCategory), [activeCategory])
+    // Cargar casos desde la API
+    useEffect(() => {
+        const fetchCases = async () => {
+            try {
+                const res = await fetch('/api/cases')
+                const data = await res.json()
+                if (res.ok) {
+                    setCases(data.cases)
+                }
+            } catch (error) {
+                console.error('Error loading cases:', error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchCases()
+    }, [])
+
+    const filteredCases = useMemo(() => {
+        if (activeCategory === 'todos') {
+            return cases
+        }
+        return cases.filter(c => c.category === activeCategory)
+    }, [activeCategory, cases])
 
     const currentIndex = useMemo(() => {
         if (!selectedCase) return 0
@@ -38,13 +87,6 @@ export default function CasosReales() {
     const handleCloseModal = () => {
         setIsModalOpen(false)
         setTimeout(() => setSelectedCase(null), 300)
-    }
-
-    const categoryLabels: Record<string, string> = {
-        facial: 'Cirugía Facial',
-        corporal: 'Cirugía Corporal',
-        estetica: 'Medicina Estética',
-        reconstructiva: 'Reconstructiva',
     }
 
     return (
@@ -121,6 +163,13 @@ export default function CasosReales() {
             {/* Cases Section */}
             <section className="section bg-light">
                 <div className="container-custom">
+                    {/* Loading State */}
+                    {loading ? (
+                        <div className="flex justify-center items-center py-20">
+                            <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                        </div>
+                    ) : (
+                        <>
                     {/* Filter Tabs */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -197,7 +246,7 @@ export default function CasosReales() {
                                         {/* Info */}
                                         <div className="p-5">
                                             <span className="text-xs text-primary font-semibold uppercase tracking-wider">
-                                                {categoryLabels[caseItem.category]}
+                                                {caseItem.categoryLabel}
                                             </span>
                                             <h3 className="text-lg font-semibold text-dark mt-1 group-hover:text-primary transition-colors">
                                                 {caseItem.procedure}
@@ -218,6 +267,8 @@ export default function CasosReales() {
                             <Sparkles className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                             <p className="text-gray-500">No hay casos disponibles en esta categoría.</p>
                         </div>
+                    )}
+                        </>
                     )}
                 </div>
             </section>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { cancelCalendarEvent } from '@/lib/google-calendar'
 
 // GET /api/bookings/[id] - Obtener detalle de una reserva
 export async function GET(
@@ -96,6 +97,11 @@ export async function PATCH(
       data: updateData,
     })
 
+    // Si se canceló, también cancelar el evento en Google Calendar
+    if (cancel === true && existingBooking.calendarEventId) {
+      await cancelCalendarEvent(existingBooking.calendarEventId)
+    }
+
     return NextResponse.json({
       success: true,
       booking,
@@ -144,6 +150,11 @@ export async function DELETE(
         { error: 'No se puede cancelar una reserva completada' },
         { status: 400 }
       )
+    }
+
+    // Cancelar evento en Google Calendar si existe
+    if (existingBooking.calendarEventId) {
+      await cancelCalendarEvent(existingBooking.calendarEventId)
     }
 
     // Cancelar en lugar de eliminar (soft delete)

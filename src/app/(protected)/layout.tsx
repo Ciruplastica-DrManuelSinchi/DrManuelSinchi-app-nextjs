@@ -1,20 +1,30 @@
 'use client'
 
 import { SessionProvider } from 'next-auth/react'
-import Header from '@/app/components/layout/Header'
+import { usePathname } from 'next/navigation'
 
 export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+  const isAdminRoute = pathname?.startsWith('/admin')
+
+  // Admin tiene su propio layout completo
+  if (isAdminRoute) {
+    return (
+      <SessionProvider>
+        {children}
+      </SessionProvider>
+    )
+  }
+
+  // Páginas protegidas de cliente (dashboard, profile, etc.)
   return (
     <SessionProvider>
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 to-slate-100">
-        <Header />
-        <main className="flex-1 pt-24 pb-12">
-          {children}
-        </main>
+      <div className="pt-24 pb-12">
+        {children}
       </div>
     </SessionProvider>
   )

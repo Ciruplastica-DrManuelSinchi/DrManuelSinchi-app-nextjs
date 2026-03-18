@@ -5,7 +5,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
-import { Case } from '@/data/casos-reales'
+
+interface Case {
+    id: string | number
+    procedure: string
+    category: string
+    categoryLabel?: string
+    categoryPath: string
+    patientInfo: string
+    description: string
+    beforeImage: string
+    afterImage: string
+    procedureSlug: string
+}
 
 interface CaseModalProps {
     isOpen: boolean
@@ -48,12 +60,15 @@ export default function CaseModal({
 
     if (!currentCase) return null
 
+    // Mapeo de categorías como fallback
     const categoryLabels: Record<string, string> = {
         facial: 'Cirugía Facial',
         corporal: 'Cirugía Corporal',
         estetica: 'Medicina Estética',
         reconstructiva: 'Reconstructiva',
     }
+
+    const categoryLabel = currentCase.categoryLabel || categoryLabels[currentCase.category] || currentCase.category
 
     return (
         <AnimatePresence>
@@ -123,7 +138,7 @@ export default function CaseModal({
                             <div>
                                 {/* Category Badge */}
                                 <span className="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4">
-                                    {categoryLabels[currentCase.category]}
+                                    {categoryLabel}
                                 </span>
 
                                 {/* Procedure Name */}

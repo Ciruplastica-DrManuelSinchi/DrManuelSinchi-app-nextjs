@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { createCalendarEvent } from '@/lib/google-calendar'
 import { z } from 'zod'
 
 const createBookingSchema = z.object({
@@ -10,7 +11,16 @@ const createBookingSchema = z.object({
   date: z.string().refine((val) => !isNaN(Date.parse(val)), 'Fecha inválida'),
   timeSlot: z.string().min(1, 'El horario es requerido'),
   message: z.string().optional(),
+  paymentMethod: z.enum(['culqi', 'yape', 'whatsapp']).optional(),
+  paymentReference: z.string().optional(),
+  paymentAmount: z.number().optional(),
 })
+
+const paymentMethodMap = {
+  culqi: 'CULQI_CARD',
+  yape: 'YAPE',
+  whatsapp: 'WHATSAPP_ONLY',
+} as const
 
 // GET /api/bookings - Obtener reservas del usuario actual
 export async function GET() {
@@ -65,7 +75,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { procedureId, procedureName, procedureCategory, date, timeSlot, message } = result.data
+    const { procedureId, procedureName, procedureCategory, date, timeSlot, message, paymentMethod, paymentReference, paymentAmount } = result.data
 
     // Verificar que la fecha sea futura
     const bookingDate = new Date(date)
@@ -92,7 +102,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Crear reserva
+    // Crear reserva con pago
     const booking = await prisma.booking.create({
       data: {
         userId: session.user.id,
@@ -103,14 +113,50 @@ export async function POST(request: NextRequest) {
         timeSlot,
         message,
         status: 'PENDING',
+        ...(paymentMethod && paymentAmount && {
+          payment: {
+            create: {
+              amount: paymentAmount,
+              method: paymentMethodMap[paymentMethod],
+              culqiChargeId: paymentMethod === 'culqi' ? paymentReference : null,
+              status: paymentMethod === 'culqi' ? 'completed' : 'pending',
+            },
+          },
+        }),
+      },
+      include: {
+        payment: true,
       },
     })
+
+    // Crear evento en Google Calendar y enviar invitación al paciente
+    const calendarResult = await createCalendarEvent({
+      patientName: session.user.name || 'Paciente',
+      patientEmail: session.user.email!,
+      procedureName,
+      procedureCategory,
+      date: bookingDate,
+      timeSlot,
+      message,
+      bookingId: booking.id,
+    })
+
+    // Guardar el ID del evento si se creó exitosamente
+    if (calendarResult.success && calendarResult.eventId) {
+      await prisma.booking.update({
+        where: { id: booking.id },
+        data: { calendarEventId: calendarResult.eventId },
+      })
+    }
 
     return NextResponse.json(
       {
         success: true,
         booking,
-        message: 'Reserva creada exitosamente. Te contactaremos pronto para confirmar.',
+        calendarEventCreated: calendarResult.success,
+        message: calendarResult.success
+          ? 'Reserva creada exitosamente. Recibirás una invitación de calendario en tu correo.'
+          : 'Reserva creada exitosamente. Te contactaremos pronto para confirmar.',
       },
       { status: 201 }
     )

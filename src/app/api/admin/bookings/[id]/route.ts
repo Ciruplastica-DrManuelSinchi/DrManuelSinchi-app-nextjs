@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { cancelCalendarEvent, updateCalendarEvent } from '@/lib/google-calendar'
 
 // GET /api/admin/bookings/[id] - Obtener detalle de reserva
 export async function GET(
@@ -111,6 +112,23 @@ export async function PATCH(
       },
     })
 
+    // Sincronizar con Google Calendar
+    if (existingBooking.calendarEventId) {
+      // Si se canceló la reserva, cancelar el evento del calendario
+      if (status === 'CANCELLED') {
+        await cancelCalendarEvent(existingBooking.calendarEventId)
+      }
+      // Si se cambió la fecha/hora, actualizar el evento
+      else if (date || timeSlot) {
+        await updateCalendarEvent(existingBooking.calendarEventId, {
+          date: date ? new Date(date) : existingBooking.date,
+          timeSlot: timeSlot || existingBooking.timeSlot,
+          patientName: booking.user.name || 'Paciente',
+          procedureName: existingBooking.procedureName,
+        })
+      }
+    }
+
     return NextResponse.json({
       success: true,
       booking,
@@ -148,6 +166,11 @@ export async function DELETE(
         { error: 'Reserva no encontrada' },
         { status: 404 }
       )
+    }
+
+    // Cancelar evento en Google Calendar si existe
+    if (existingBooking.calendarEventId) {
+      await cancelCalendarEvent(existingBooking.calendarEventId)
     }
 
     // Eliminar reserva (y pagos asociados por cascade)

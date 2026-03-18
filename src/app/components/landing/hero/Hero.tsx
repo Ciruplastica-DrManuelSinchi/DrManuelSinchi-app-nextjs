@@ -99,10 +99,10 @@ export default function Hero() {
                         href="/reservar"
                         className="group relative inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-body font-medium tracking-widest text-accent uppercase border border-accent/60 bg-transparent transition-all duration-500 hover:bg-accent hover:text-primary hover:border-accent overflow-hidden"
                     >
-                        <span className="relative z-10">Agenda tu consulta</span>
+                        <span className="relative z-10">Agendar Cita</span>
                         <span className="absolute inset-0 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                         <span className="absolute inset-0 z-10 flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                            Agenda tu consulta
+                            Agendar Cita
                         </span>
                     </Link>
                 </motion.div>
