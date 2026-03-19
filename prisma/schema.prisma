@@ -187,10 +187,12 @@ model RealCase {
 // ============================================
 
 enum BookingStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
-  COMPLETED
+  AWAITING_PAYMENT  // Esperando pago (30 min límite)
+  PENDING           // Pagado, esperando confirmación del doctor
+  CONFIRMED         // Confirmada por el doctor
+  CANCELLED         // Cancelada
+  COMPLETED         // Completada
+  EXPIRED           // Expirada (no se completó el pago a tiempo)
 }
 
 enum PaymentMethod {
@@ -199,16 +201,38 @@ enum PaymentMethod {
   WHATSAPP_ONLY
 }
 
+enum DocumentType {
+  DNI
+  CE              // Carnet de Extranjería
+  PASSPORT
+}
+
 model Booking {
   id                String        @id @default(cuid())
   userId            String
+
+  // Datos personales del paciente
+  birthDate         DateTime?
+  documentType      DocumentType?
+  documentNumber    String?
+  address           String?
+  city              String?
+  occupation        String?
+
+  // Datos de la cita
   procedureId       String
   procedureName     String
   procedureCategory String
   date              DateTime
   timeSlot          String
+  weight            Decimal?      @db.Decimal(5, 2)  // Peso en kg (ej: 75.50)
+  height            Decimal?      @db.Decimal(5, 2)  // Talla en cm (ej: 170.00)
+  referralSource    String?       // ¿Cómo se enteró de nosotros?
   message           String?       @db.Text
-  status            BookingStatus @default(PENDING)
+
+  // Estado y pago
+  status            BookingStatus @default(AWAITING_PAYMENT)
+  paymentDeadline   DateTime?     // Fecha límite para completar el pago (30 min desde creación)
   calendarEventId   String?       // ID del evento en Google Calendar
 
   createdAt         DateTime      @default(now())
@@ -220,6 +244,7 @@ model Booking {
   @@index([userId])
   @@index([status])
   @@index([date])
+  @@index([paymentDeadline])
   @@map("bookings")
 }
 
@@ -239,3 +264,69 @@ model Payment {
   @@index([bookingId])
   @@map("payments")
 }
+
+// ============================================
+// SISTEMA DE BLOG
+// ============================================
+
+enum BlogStatus {
+  DRAFT         // Borrador
+  PUBLISHED     // Publicado
+  ARCHIVED      // Archivado
+}
+
+model BlogCategory {
+  id          String   @id @default(cuid())
+  name        String   // "Cirugía Plástica", "Cuidados", "Novedades"
+  slug        String   @unique
+  description String?
+  color       String?  // Color para badges (ej: "#8B5CF6")
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  posts       BlogPost[]
+
+  @@index([isActive])
+  @@index([order])
+  @@map("blog_categories")
+}
+
+model BlogPost {
+  id            String       @id @default(cuid())
+  title         String
+  slug          String       @unique
+  excerpt       String       @db.Text     // Resumen corto para listados
+  content       String       @db.Text     // Contenido completo (HTML o Markdown)
+  coverImage    String?                   // URL de imagen de portada
+  categoryId    String?
+  authorName    String       @default("Dr. Manuel Sinchi")
+  authorImage   String?
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+
+  // Estado y visibilidad
+  status        BlogStatus   @default(DRAFT)
+  featured      Boolean      @default(false)  // Destacado en home
+  publishedAt   DateTime?
+
+  // Métricas
+  views         Int          @default(0)
+  readingTime   Int?                         // Tiempo de lectura en minutos
+
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  category      BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([categoryId])
+  @@index([featured])
+  @@index([publishedAt])
+  @@map("blog_posts")
+}
+

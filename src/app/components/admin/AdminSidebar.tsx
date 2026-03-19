@@ -11,6 +11,7 @@ import {
   Stethoscope,
   FolderOpen,
   Image,
+  FileText,
   BarChart3,
   Settings,
   ChevronLeft,
@@ -50,6 +51,11 @@ const menuItems = [
     title: 'Casos Reales',
     href: '/admin/cases',
     icon: Image,
+  },
+  {
+    title: 'Blog',
+    href: '/admin/blog',
+    icon: FileText,
   },
   {
     title: 'Estadísticas',

@@ -5,6 +5,7 @@ import Procedures from '@/app/components/landing/procedures/Procedures'
 import DoctorSection from '@/app/components/landing/doctor-section/DoctorSection'
 import Testimonials from '@/app/components/landing/testimonials/Testimonials'
 import Videos from '@/app/components/landing/videos/Videos'
+import BlogSection from '@/app/components/landing/BlogSection'
 import FAQ from '@/app/components/landing/faq/FAQ'
 import ContactCTA from '@/app/components/landing/contact-cta/ContactCTA'
 import AdminRedirect from '@/app/components/auth/AdminRedirect'
@@ -20,6 +21,7 @@ export default function Home() {
       <DoctorSection />
       <Testimonials />
       <Videos />
+      <BlogSection />
       <FAQ />
       <ContactCTA />
     </main>

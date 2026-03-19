@@ -17,7 +17,10 @@
       "Bash(npx tsc --noEmit)",
       "Bash(npx prisma db seed)",
       "Bash(npx tsx:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(ls:*)",
+      "Bash(npx prisma migrate dev:*)",
+      "Bash(npx next build:*)"
     ]
   }
 }

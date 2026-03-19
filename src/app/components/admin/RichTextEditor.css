@@ -1,0 +1,184 @@
+/* TipTap Editor Styles */
+
+.tiptap {
+  outline: none;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Prose styles */
+.tiptap.prose {
+  max-width: none;
+}
+
+.tiptap h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+.tiptap h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.tiptap h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+.tiptap p {
+  margin-bottom: 1em;
+}
+
+.tiptap ul,
+.tiptap ol {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+  margin-left: 0.5em;
+}
+
+.tiptap ul {
+  list-style-type: disc !important;
+  list-style-position: outside;
+}
+
+.tiptap ul li {
+  display: list-item !important;
+}
+
+.tiptap ul li::marker {
+  color: #391142;
+}
+
+.tiptap ol {
+  list-style-type: decimal !important;
+  list-style-position: outside;
+}
+
+.tiptap ol li {
+  display: list-item !important;
+}
+
+.tiptap ol li::marker {
+  color: #391142;
+  font-weight: 600;
+}
+
+.tiptap li {
+  margin-bottom: 0.25em;
+}
+
+.tiptap li p {
+  margin: 0;
+  display: inline;
+}
+
+.tiptap blockquote {
+  border-left: 4px solid #391142;
+  padding-left: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.tiptap code {
+  background-color: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+  font-family: ui-monospace, monospace;
+}
+
+.tiptap pre {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+.tiptap pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.tiptap a {
+  color: #391142;
+  text-decoration: underline;
+}
+
+.tiptap a:hover {
+  color: #5a1d6b;
+}
+
+.tiptap img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1em auto;
+  display: block;
+}
+
+.tiptap mark,
+.tiptap .highlight-marker {
+  background-color: #fef08a;
+  padding: 0.1em 0.2em;
+  border-radius: 0.125em;
+  color: inherit !important;
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 2em 0;
+}
+
+/* YouTube embed */
+.tiptap div[data-youtube-video] {
+  margin: 1em 0;
+}
+
+.tiptap div[data-youtube-video] iframe {
+  border-radius: 0.75rem;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Selection */
+.tiptap ::selection {
+  background-color: #391142;
+  color: white;
+}
+
+/* Text alignment */
+.tiptap [style*="text-align: center"] {
+  text-align: center;
+}
+
+.tiptap [style*="text-align: right"] {
+  text-align: right;
+}
+
+.tiptap [style*="text-align: left"] {
+  text-align: left;
+}

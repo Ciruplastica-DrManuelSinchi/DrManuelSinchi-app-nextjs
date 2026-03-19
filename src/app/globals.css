@@ -682,3 +682,58 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
+
+/* ===================================
+   PROSE STYLES - BLOG CONTENT
+   =================================== */
+.prose ul {
+  list-style-type: disc !important;
+  padding-left: 1.5em !important;
+  margin-left: 0.5em;
+}
+
+.prose ul li {
+  display: list-item !important;
+  padding-left: 0.25em;
+}
+
+.prose ul li::marker {
+  color: var(--primary);
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5em !important;
+  margin-left: 0.5em;
+}
+
+.prose ol li {
+  display: list-item !important;
+  padding-left: 0.25em;
+}
+
+.prose ol li::marker {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.prose li p {
+  margin: 0 !important;
+  display: inline;
+}
+
+/* Highlight que preserva el color del texto */
+.prose mark,
+.prose .highlight-marker {
+  background-color: #fef08a;
+  padding: 0.1em 0.2em;
+  border-radius: 0.125em;
+  color: inherit !important;
+}
+
+/* Divisor horizontal */
+.prose hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 2em 0;
+}
