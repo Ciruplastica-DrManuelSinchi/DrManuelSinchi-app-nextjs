@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     // Construir filtros
     const where: Record<string, unknown> = {}
 
-    if (status && ['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED'].includes(status)) {
+    if (status && ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'EXPIRED'].includes(status)) {
       where.status = status
     }
 
@@ -95,10 +95,12 @@ export async function GET(request: NextRequest) {
         totalPages: Math.ceil(total / limit),
       },
       stats: {
+        awaitingPayment: statusCounts['AWAITING_PAYMENT'] || 0,
         pending: statusCounts['PENDING'] || 0,
         confirmed: statusCounts['CONFIRMED'] || 0,
         completed: statusCounts['COMPLETED'] || 0,
         cancelled: statusCounts['CANCELLED'] || 0,
+        expired: statusCounts['EXPIRED'] || 0,
       },
     })
   } catch (error) {

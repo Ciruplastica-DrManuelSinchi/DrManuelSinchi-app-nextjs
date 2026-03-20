@@ -481,14 +481,22 @@ export default function AdminCasesPage() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Slug
+                      Slug {editingCase && <span className="text-gray-400 font-normal">(no editable)</span>}
                     </label>
                     <input
                       type="text"
                       value={formData.procedureSlug}
-                      onChange={(e) => setFormData({ ...formData, procedureSlug: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono text-sm"
+                      onChange={(e) => !editingCase && setFormData({ ...formData, procedureSlug: e.target.value })}
+                      className={`w-full px-4 py-2 border border-gray-200 rounded-lg font-mono text-sm ${
+                        editingCase
+                          ? 'bg-gray-50 text-gray-500 cursor-not-allowed'
+                          : 'focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none'
+                      }`}
+                      readOnly={!!editingCase}
                     />
+                    {!editingCase && (
+                      <p className="text-xs text-gray-400 mt-0.5">Auto-generado</p>
+                    )}
                   </div>
                 </div>
 

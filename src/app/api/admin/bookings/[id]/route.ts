@@ -79,7 +79,7 @@ export async function PATCH(
 
     const updateData: Record<string, unknown> = {}
 
-    if (status && ['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED'].includes(status)) {
+    if (status && ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'EXPIRED'].includes(status)) {
       updateData.status = status
     }
 

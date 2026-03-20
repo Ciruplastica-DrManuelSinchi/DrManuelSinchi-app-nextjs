@@ -20,6 +20,8 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || ''
     const role = searchParams.get('role') || ''
     const status = searchParams.get('status') || ''
+    const dateFrom = searchParams.get('dateFrom')
+    const dateTo = searchParams.get('dateTo')
 
     const skip = (page - 1) * limit
 
@@ -39,6 +41,19 @@ export async function GET(request: NextRequest) {
 
     if (status && ['ACTIVE', 'PENDING_VERIFICATION', 'SUSPENDED'].includes(status)) {
       where.status = status
+    }
+
+    // Filtro por rango de fechas
+    if (dateFrom || dateTo) {
+      where.createdAt = {}
+      if (dateFrom) {
+        (where.createdAt as Record<string, Date>).gte = new Date(dateFrom)
+      }
+      if (dateTo) {
+        const endDate = new Date(dateTo)
+        endDate.setHours(23, 59, 59, 999)
+        ;(where.createdAt as Record<string, Date>).lte = endDate
+      }
     }
 
     // Obtener usuarios y total

@@ -23,7 +23,11 @@ import {
   Trash2,
   RefreshCw,
   AlertCircle,
+  FileDown,
 } from 'lucide-react'
+import { generateUsersPDF } from '@/lib/pdf-generator'
+import { generateUsersExcel } from '@/lib/excel-generator'
+import { FileSpreadsheet } from 'lucide-react'
 
 interface User {
   id: string
@@ -74,6 +78,10 @@ export default function UsersPage() {
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [exportPdfLoading, setExportPdfLoading] = useState(false)
+  const [exportExcelLoading, setExportExcelLoading] = useState(false)
+  const [dateFrom, setDateFrom] = useState('')
+  const [dateTo, setDateTo] = useState('')
 
   const fetchUsers = useCallback(async () => {
     setLoading(true)
@@ -86,6 +94,8 @@ export default function UsersPage() {
       if (search) params.set('search', search)
       if (roleFilter) params.set('role', roleFilter)
       if (statusFilter) params.set('status', statusFilter)
+      if (dateFrom) params.set('dateFrom', dateFrom)
+      if (dateTo) params.set('dateTo', dateTo)
 
       const res = await fetch(`/api/admin/users?${params}`)
       const data = await res.json()
@@ -101,7 +111,65 @@ export default function UsersPage() {
     } finally {
       setLoading(false)
     }
-  }, [pagination.page, pagination.limit, search, roleFilter, statusFilter])
+  }, [pagination.page, pagination.limit, search, roleFilter, statusFilter, dateFrom, dateTo])
+
+  const handleExportPDF = async () => {
+    setExportPdfLoading(true)
+    try {
+      // Fetch all users without pagination for PDF
+      const params = new URLSearchParams({ limit: '1000' })
+      if (search) params.set('search', search)
+      if (roleFilter) params.set('role', roleFilter)
+      if (statusFilter) params.set('status', statusFilter)
+      if (dateFrom) params.set('dateFrom', dateFrom)
+      if (dateTo) params.set('dateTo', dateTo)
+
+      const res = await fetch(`/api/admin/users?${params}`)
+      const data = await res.json()
+
+      if (res.ok) {
+        const dateRange = dateFrom && dateTo
+          ? { from: new Date(dateFrom), to: new Date(dateTo) }
+          : undefined
+        generateUsersPDF(data.users, dateRange)
+      } else {
+        setError(data.error || 'Error al exportar')
+      }
+    } catch {
+      setError('Error al generar PDF')
+    } finally {
+      setExportPdfLoading(false)
+    }
+  }
+
+  const handleExportExcel = async () => {
+    setExportExcelLoading(true)
+    try {
+      // Fetch all users without pagination for Excel
+      const params = new URLSearchParams({ limit: '1000' })
+      if (search) params.set('search', search)
+      if (roleFilter) params.set('role', roleFilter)
+      if (statusFilter) params.set('status', statusFilter)
+      if (dateFrom) params.set('dateFrom', dateFrom)
+      if (dateTo) params.set('dateTo', dateTo)
+
+      const res = await fetch(`/api/admin/users?${params}`)
+      const data = await res.json()
+
+      if (res.ok) {
+        const dateRange = dateFrom && dateTo
+          ? { from: new Date(dateFrom), to: new Date(dateTo) }
+          : undefined
+        await generateUsersExcel(data.users, dateRange)
+      } else {
+        setError(data.error || 'Error al exportar')
+      }
+    } catch {
+      setError('Error al generar Excel')
+    } finally {
+      setExportExcelLoading(false)
+    }
+  }
 
   useEffect(() => {
     fetchUsers()
@@ -194,13 +262,31 @@ export default function UsersPage() {
               </p>
             </div>
           </div>
-          <button
-            onClick={fetchUsers}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            Actualizar
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleExportExcel}
+              disabled={exportExcelLoading || users.length === 0}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white hover:bg-green-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FileSpreadsheet className={`w-4 h-4 ${exportExcelLoading ? 'animate-pulse' : ''}`} />
+              Excel
+            </button>
+            <button
+              onClick={handleExportPDF}
+              disabled={exportPdfLoading || users.length === 0}
+              className="flex items-center gap-2 px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FileDown className={`w-4 h-4 ${exportPdfLoading ? 'animate-pulse' : ''}`} />
+              PDF
+            </button>
+            <button
+              onClick={fetchUsers}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              Actualizar
+            </button>
+          </div>
         </div>
       </motion.div>
 
@@ -292,11 +378,31 @@ export default function UsersPage() {
                 <option value="SUSPENDED">Suspendido</option>
               </select>
             </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-1">Desde</label>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-1">Hasta</label>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+              />
+            </div>
             <button
               type="button"
               onClick={() => {
                 setRoleFilter('')
                 setStatusFilter('')
+                setDateFrom('')
+                setDateTo('')
               }}
               className="self-end px-4 py-2 text-gray-600 hover:text-primary transition-colors"
             >

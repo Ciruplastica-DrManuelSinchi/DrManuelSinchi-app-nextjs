@@ -531,18 +531,26 @@ export default function AdminBlogPage() {
                     {/* Slug */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        URL
+                        URL {editingPost && <span className="text-gray-400 font-normal">(no editable)</span>}
                       </label>
                       <div className="flex items-center">
                         <span className="text-gray-500 text-sm mr-2">/blog/</span>
                         <input
                           type="text"
                           value={formData.slug}
-                          onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                          className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                          onChange={(e) => !editingPost && setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                          className={`flex-1 px-4 py-3 border border-gray-200 rounded-xl ${
+                            editingPost
+                              ? 'bg-gray-50 text-gray-500 cursor-not-allowed'
+                              : 'focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none'
+                          }`}
                           required
+                          readOnly={!!editingPost}
                         />
                       </div>
+                      {!editingPost && (
+                        <p className="text-xs text-gray-400 mt-1">Se genera automáticamente desde el título</p>
+                      )}
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

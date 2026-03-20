@@ -97,7 +97,7 @@ export default function Footer() {
             </div>
 
             {/* Footer bottom */}
-            <div className="border-t border-gray-800">
+            <div className="border-t border-white/10">
                 <div className="container-custom py-6 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-gray-500 text-sm">
                         © {new Date().getFullYear()} Ciruplástica. Todos los derechos reservados.

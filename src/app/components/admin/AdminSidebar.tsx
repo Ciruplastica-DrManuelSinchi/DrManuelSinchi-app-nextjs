@@ -21,51 +21,41 @@ import {
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
-const menuItems = [
+interface MenuItem {
+  title: string
+  href: string
+  icon: typeof LayoutDashboard
+}
+
+interface MenuSection {
+  title: string
+  items: MenuItem[]
+}
+
+const menuSections: MenuSection[] = [
   {
-    title: 'Dashboard',
-    href: '/admin',
-    icon: LayoutDashboard,
+    title: 'General',
+    items: [
+      { title: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+      { title: 'Reservas', href: '/admin/bookings', icon: Calendar },
+      { title: 'Usuarios', href: '/admin/users', icon: Users },
+      { title: 'Estadísticas', href: '/admin/stats', icon: BarChart3 },
+    ],
   },
   {
-    title: 'Reservas',
-    href: '/admin/bookings',
-    icon: Calendar,
+    title: 'Contenido Web',
+    items: [
+      { title: 'Categorías', href: '/admin/categories', icon: FolderOpen },
+      { title: 'Procedimientos', href: '/admin/procedures', icon: Stethoscope },
+      { title: 'Casos Reales', href: '/admin/cases', icon: Image },
+      { title: 'Blog', href: '/admin/blog', icon: FileText },
+    ],
   },
   {
-    title: 'Usuarios',
-    href: '/admin/users',
-    icon: Users,
-  },
-  {
-    title: 'Procedimientos',
-    href: '/admin/procedures',
-    icon: Stethoscope,
-  },
-  {
-    title: 'Categorías',
-    href: '/admin/categories',
-    icon: FolderOpen,
-  },
-  {
-    title: 'Casos Reales',
-    href: '/admin/cases',
-    icon: Image,
-  },
-  {
-    title: 'Blog',
-    href: '/admin/blog',
-    icon: FileText,
-  },
-  {
-    title: 'Estadísticas',
-    href: '/admin/stats',
-    icon: BarChart3,
-  },
-  {
-    title: 'Configuración',
-    href: '/admin/settings',
-    icon: Settings,
+    title: 'Sistema',
+    items: [
+      { title: 'Configuración', href: '/admin/settings', icon: Settings },
+    ],
   },
 ]
 
@@ -118,43 +108,67 @@ export default function AdminSidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 py-4 px-3 overflow-y-auto">
-          <ul className="space-y-1">
-            {menuItems.map((item) => {
-              const Icon = item.icon
-              const active = isActive(item.href)
+          <div className="space-y-6">
+            {menuSections.map((section, sectionIndex) => (
+              <div key={section.title}>
+                {/* Section Header */}
+                <AnimatePresence mode="wait">
+                  {!isCollapsed && (
+                    <motion.h3
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider"
+                    >
+                      {section.title}
+                    </motion.h3>
+                  )}
+                </AnimatePresence>
+                {isCollapsed && sectionIndex > 0 && (
+                  <div className="border-t border-gray-100 mx-2 mb-2" />
+                )}
 
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`
-                      flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200
-                      ${active
-                        ? 'bg-primary text-white shadow-md'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-dark'
-                      }
-                      ${isCollapsed ? 'justify-center' : ''}
-                    `}
-                    title={isCollapsed ? item.title : undefined}
-                  >
-                    <Icon className={`w-5 h-5 flex-shrink-0 ${active ? 'text-white' : ''}`} />
-                    <AnimatePresence mode="wait">
-                      {!isCollapsed && (
-                        <motion.span
-                          initial={{ opacity: 0, width: 0 }}
-                          animate={{ opacity: 1, width: 'auto' }}
-                          exit={{ opacity: 0, width: 0 }}
-                          className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                {/* Section Items */}
+                <ul className="space-y-1">
+                  {section.items.map((item) => {
+                    const Icon = item.icon
+                    const active = isActive(item.href)
+
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className={`
+                            flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200
+                            ${active
+                              ? 'bg-primary text-white shadow-md'
+                              : 'text-gray-600 hover:bg-gray-100 hover:text-dark'
+                            }
+                            ${isCollapsed ? 'justify-center' : ''}
+                          `}
+                          title={isCollapsed ? item.title : undefined}
                         >
-                          {item.title}
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+                          <Icon className={`w-5 h-5 flex-shrink-0 ${active ? 'text-white' : ''}`} />
+                          <AnimatePresence mode="wait">
+                            {!isCollapsed && (
+                              <motion.span
+                                initial={{ opacity: 0, width: 0 }}
+                                animate={{ opacity: 1, width: 'auto' }}
+                                exit={{ opacity: 0, width: 0 }}
+                                className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                              >
+                                {item.title}
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
         </nav>
 
         {/* Footer */}

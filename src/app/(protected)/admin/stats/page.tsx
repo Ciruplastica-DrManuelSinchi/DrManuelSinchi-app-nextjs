@@ -6,17 +6,22 @@ import Link from 'next/link'
 import {
   ArrowLeft,
   BarChart3,
-  Users,
-  UserCheck,
-  UserX,
   TrendingUp,
   TrendingDown,
   RefreshCw,
   AlertCircle,
-  Shield,
-  Clock,
   Calendar,
+  FileDown,
+  Filter,
+  Stethoscope,
+  DollarSign,
+  CheckCircle,
+  CalendarClock,
+  Scissors,
 } from 'lucide-react'
+import { generateStatsPDF } from '@/lib/pdf-generator'
+import { generateStatsExcel } from '@/lib/excel-generator'
+import { FileSpreadsheet } from 'lucide-react'
 
 interface StatsData {
   overview: {
@@ -41,32 +46,62 @@ interface StatsData {
     status: string
     role: string
   }>
-}
-
-const StatusBadge = ({ status }: { status: string }) => {
-  const config: Record<string, { color: string; label: string }> = {
-    ACTIVE: { color: 'bg-green-100 text-green-700', label: 'Activo' },
-    PENDING_VERIFICATION: { color: 'bg-yellow-100 text-yellow-700', label: 'Pendiente' },
-    SUSPENDED: { color: 'bg-red-100 text-red-700', label: 'Suspendido' },
+  surgeon?: {
+    bookings: {
+      total: number
+      thisMonth: number
+      growth: number
+      confirmed: number
+      completed: number
+      cancelled: number
+      pending: number
+      confirmationRate: number
+      upcoming: number
+    }
+    revenue: {
+      total: number
+      thisMonth: number
+      growth: number
+      transactions: number
+    }
+    topProcedures: Array<{
+      name: string
+      category: string
+      count: number
+    }>
+    recentBookings: Array<{
+      id: string
+      procedureName: string
+      date: string
+      timeSlot: string
+      status: string
+      user: {
+        name: string | null
+        email: string
+      }
+    }>
   }
-  const { color, label } = config[status] || { color: 'bg-gray-100 text-gray-700', label: status }
-  return (
-    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${color}`}>
-      {label}
-    </span>
-  )
 }
 
 export default function StatsPage() {
   const [stats, setStats] = useState<StatsData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [exportPdfLoading, setExportPdfLoading] = useState(false)
+  const [exportExcelLoading, setExportExcelLoading] = useState(false)
+  const [showFilters, setShowFilters] = useState(false)
+  const [dateFrom, setDateFrom] = useState('')
+  const [dateTo, setDateTo] = useState('')
 
   const fetchStats = async () => {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/admin/stats')
+      const params = new URLSearchParams()
+      if (dateFrom) params.set('dateFrom', dateFrom)
+      if (dateTo) params.set('dateTo', dateTo)
+
+      const res = await fetch(`/api/admin/stats?${params}`)
       const data = await res.json()
 
       if (res.ok) {
@@ -81,17 +116,49 @@ export default function StatsPage() {
     }
   }
 
+  const handleExportPDF = () => {
+    if (!stats) return
+    setExportPdfLoading(true)
+    try {
+      const dateRange = dateFrom && dateTo
+        ? { from: new Date(dateFrom), to: new Date(dateTo) }
+        : undefined
+      generateStatsPDF(stats, dateRange)
+    } catch {
+      setError('Error al generar PDF')
+    } finally {
+      setExportPdfLoading(false)
+    }
+  }
+
+  const handleExportExcel = async () => {
+    if (!stats) return
+    setExportExcelLoading(true)
+    try {
+      const dateRange = dateFrom && dateTo
+        ? { from: new Date(dateFrom), to: new Date(dateTo) }
+        : undefined
+      await generateStatsExcel(stats, dateRange)
+    } catch {
+      setError('Error al generar Excel')
+    } finally {
+      setExportExcelLoading(false)
+    }
+  }
+
+  const handleApplyFilters = () => {
+    fetchStats()
+  }
+
+  const handleClearFilters = () => {
+    setDateFrom('')
+    setDateTo('')
+    fetchStats()
+  }
+
   useEffect(() => {
     fetchStats()
   }, [])
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('es-PE', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    })
-  }
 
   if (loading) {
     return (
@@ -130,15 +197,94 @@ export default function StatsPage() {
               </p>
             </div>
           </div>
-          <button
-            onClick={fetchStats}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            Actualizar
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors ${
+                showFilters || dateFrom || dateTo
+                  ? 'bg-primary text-white border-primary'
+                  : 'border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              <Filter className="w-4 h-4" />
+              Filtros
+            </button>
+            <button
+              onClick={handleExportExcel}
+              disabled={exportExcelLoading || !stats}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white hover:bg-green-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FileSpreadsheet className={`w-4 h-4 ${exportExcelLoading ? 'animate-pulse' : ''}`} />
+              Excel
+            </button>
+            <button
+              onClick={handleExportPDF}
+              disabled={exportPdfLoading || !stats}
+              className="flex items-center gap-2 px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FileDown className={`w-4 h-4 ${exportPdfLoading ? 'animate-pulse' : ''}`} />
+              PDF
+            </button>
+            <button
+              onClick={fetchStats}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              Actualizar
+            </button>
+          </div>
         </div>
       </motion.div>
+
+      {/* Filters */}
+      {showFilters && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          className="mb-6 bg-white rounded-xl shadow-sm border border-gray-100 p-4"
+        >
+          <div className="flex flex-wrap items-end gap-4">
+            <div>
+              <label className="block text-sm text-gray-600 mb-1">Desde</label>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-1">Hasta</label>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+              />
+            </div>
+            <button
+              onClick={handleApplyFilters}
+              className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              Aplicar
+            </button>
+            <button
+              onClick={handleClearFilters}
+              className="px-4 py-2 text-gray-600 hover:text-primary transition-colors"
+            >
+              Limpiar
+            </button>
+          </div>
+          {(dateFrom || dateTo) && (
+            <p className="mt-3 text-sm text-gray-500">
+              Mostrando estadísticas{' '}
+              {dateFrom && `desde ${new Date(dateFrom).toLocaleDateString('es-PE')}`}
+              {dateFrom && dateTo && ' '}
+              {dateTo && `hasta ${new Date(dateTo).toLocaleDateString('es-PE')}`}
+            </p>
+          )}
+        </motion.div>
+      )}
 
       {/* Error */}
       {error && (
@@ -154,275 +300,211 @@ export default function StatsPage() {
 
       {stats && (
         <>
-          {/* Overview Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
-          >
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-start justify-between mb-3">
-                <div className="bg-blue-500 w-10 h-10 rounded-lg flex items-center justify-center">
-                  <Users className="w-5 h-5 text-white" />
-                </div>
-                <span
-                  className={`text-xs px-2 py-1 rounded-full flex items-center gap-1 ${
-                    stats.overview.userGrowth >= 0
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                  }`}
-                >
-                  {stats.overview.userGrowth >= 0 ? (
-                    <TrendingUp className="w-3 h-3" />
-                  ) : (
-                    <TrendingDown className="w-3 h-3" />
-                  )}
-                  {stats.overview.userGrowth >= 0 ? '+' : ''}
-                  {stats.overview.userGrowth}%
-                </span>
-              </div>
-              <p className="text-2xl font-bold text-gray-800 mb-1">
-                {stats.overview.totalUsers}
-              </p>
-              <p className="text-sm text-gray-500">Usuarios totales</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-start justify-between mb-3">
-                <div className="bg-green-500 w-10 h-10 rounded-lg flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-white" />
-                </div>
-              </div>
-              <p className="text-2xl font-bold text-gray-800 mb-1">
-                {stats.overview.usersThisMonth}
-              </p>
-              <p className="text-sm text-gray-500">Nuevos este mes</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-start justify-between mb-3">
-                <div className="bg-purple-500 w-10 h-10 rounded-lg flex items-center justify-center">
-                  <UserCheck className="w-5 h-5 text-white" />
-                </div>
-              </div>
-              <p className="text-2xl font-bold text-gray-800 mb-1">
-                {stats.overview.verificationRate}%
-              </p>
-              <p className="text-sm text-gray-500">Tasa de verificación</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-start justify-between mb-3">
-                <div className="bg-accent w-10 h-10 rounded-lg flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-white" />
-                </div>
-              </div>
-              <p className="text-2xl font-bold text-gray-800 mb-1">
-                {stats.overview.usersThisWeek}
-              </p>
-              <p className="text-sm text-gray-500">Nuevos esta semana</p>
-            </div>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Distribution Charts */}
+          {/* Métricas del Cirujano */}
+          {stats.surgeon && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="lg:col-span-2 grid sm:grid-cols-2 gap-6"
+              className="mb-8"
             >
-              {/* Role Distribution */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  Distribución por Rol
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-600">Pacientes</span>
-                      <span className="font-medium">
-                        {stats.distributions.role.patients}
-                      </span>
+              <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                <Stethoscope className="w-5 h-5 text-primary" />
+                Métricas de Consulta
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Citas del mes */}
+                <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 shadow-sm text-white">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center">
+                      <Calendar className="w-5 h-5 text-white" />
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-3">
-                      <div
-                        className="bg-blue-500 h-3 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${
-                            stats.overview.totalUsers > 0
-                              ? (stats.distributions.role.patients /
-                                  stats.overview.totalUsers) *
-                                100
-                              : 0
-                          }%`,
-                        }}
-                      />
-                    </div>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full flex items-center gap-1 ${
+                        stats.surgeon.bookings.growth >= 0
+                          ? 'bg-green-400/30 text-green-100'
+                          : 'bg-red-400/30 text-red-100'
+                      }`}
+                    >
+                      {stats.surgeon.bookings.growth >= 0 ? (
+                        <TrendingUp className="w-3 h-3" />
+                      ) : (
+                        <TrendingDown className="w-3 h-3" />
+                      )}
+                      {stats.surgeon.bookings.growth >= 0 ? '+' : ''}
+                      {stats.surgeon.bookings.growth}%
+                    </span>
                   </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-600 flex items-center gap-1">
-                        <Shield className="w-3 h-3" />
-                        Administradores
-                      </span>
-                      <span className="font-medium">
-                        {stats.distributions.role.admins}
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-100 rounded-full h-3">
-                      <div
-                        className="bg-purple-500 h-3 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${
-                            stats.overview.totalUsers > 0
-                              ? (stats.distributions.role.admins /
-                                  stats.overview.totalUsers) *
-                                100
-                              : 0
-                          }%`,
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <p className="text-3xl font-bold mb-1">
+                    {stats.surgeon.bookings.thisMonth}
+                  </p>
+                  <p className="text-sm text-white/80">Citas este mes</p>
+                  <p className="text-xs text-white/60 mt-1">
+                    {stats.surgeon.bookings.total} total
+                  </p>
                 </div>
-              </div>
 
-              {/* Status Distribution */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  Distribución por Estado
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-600 flex items-center gap-1">
-                        <UserCheck className="w-3 h-3 text-green-500" />
-                        Activos
-                      </span>
-                      <span className="font-medium">
-                        {stats.distributions.status.active}
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-100 rounded-full h-3">
-                      <div
-                        className="bg-green-500 h-3 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${
-                            stats.overview.totalUsers > 0
-                              ? (stats.distributions.status.active /
-                                  stats.overview.totalUsers) *
-                                100
-                              : 0
-                          }%`,
-                        }}
-                      />
+                {/* Tasa de confirmación */}
+                <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-5 shadow-sm text-white">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center">
+                      <CheckCircle className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-600 flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-yellow-500" />
-                        Pendientes
-                      </span>
-                      <span className="font-medium">
-                        {stats.distributions.status.pending}
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-100 rounded-full h-3">
-                      <div
-                        className="bg-yellow-500 h-3 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${
-                            stats.overview.totalUsers > 0
-                              ? (stats.distributions.status.pending /
-                                  stats.overview.totalUsers) *
-                                100
-                              : 0
-                          }%`,
-                        }}
-                      />
+                  <p className="text-3xl font-bold mb-1">
+                    {stats.surgeon.bookings.confirmationRate}%
+                  </p>
+                  <p className="text-sm text-white/80">Tasa de confirmación</p>
+                  <p className="text-xs text-white/60 mt-1">
+                    {stats.surgeon.bookings.confirmed + stats.surgeon.bookings.completed} confirmadas
+                  </p>
+                </div>
+
+                {/* Próximas citas */}
+                <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl p-5 shadow-sm text-white">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center">
+                      <CalendarClock className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-600 flex items-center gap-1">
-                        <UserX className="w-3 h-3 text-red-500" />
-                        Suspendidos
-                      </span>
-                      <span className="font-medium">
-                        {stats.distributions.status.suspended}
-                      </span>
+                  <p className="text-3xl font-bold mb-1">
+                    {stats.surgeon.bookings.upcoming}
+                  </p>
+                  <p className="text-sm text-white/80">Próximos 7 días</p>
+                  <p className="text-xs text-white/60 mt-1">
+                    {stats.surgeon.bookings.pending} pendientes
+                  </p>
+                </div>
+
+                {/* Ingresos */}
+                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl p-5 shadow-sm text-white">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center">
+                      <DollarSign className="w-5 h-5 text-white" />
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-3">
-                      <div
-                        className="bg-red-500 h-3 rounded-full transition-all duration-500"
-                        style={{
-                          width: `${
-                            stats.overview.totalUsers > 0
-                              ? (stats.distributions.status.suspended /
-                                  stats.overview.totalUsers) *
-                                100
-                              : 0
-                          }%`,
-                        }}
-                      />
-                    </div>
+                    {stats.surgeon.revenue.growth !== 0 && (
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full flex items-center gap-1 ${
+                          stats.surgeon.revenue.growth >= 0
+                            ? 'bg-green-400/30 text-green-100'
+                            : 'bg-red-400/30 text-red-100'
+                        }`}
+                      >
+                        {stats.surgeon.revenue.growth >= 0 ? (
+                          <TrendingUp className="w-3 h-3" />
+                        ) : (
+                          <TrendingDown className="w-3 h-3" />
+                        )}
+                        {stats.surgeon.revenue.growth >= 0 ? '+' : ''}
+                        {stats.surgeon.revenue.growth}%
+                      </span>
+                    )}
                   </div>
+                  <p className="text-3xl font-bold mb-1">
+                    S/ {stats.surgeon.revenue.thisMonth.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-white/80">Ingresos del mes</p>
+                  <p className="text-xs text-white/60 mt-1">
+                    {stats.surgeon.revenue.transactions} transacciones
+                  </p>
                 </div>
               </div>
             </motion.div>
+          )}
 
-            {/* Recent Users */}
+          {/* Procedimientos más solicitados y citas recientes */}
+          {stats.surgeon && (stats.surgeon.topProcedures.length > 0 || stats.surgeon.recentBookings.length > 0) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="bg-white rounded-xl shadow-sm border border-gray-100"
+              transition={{ delay: 0.1 }}
+              className="grid lg:grid-cols-2 gap-6 mb-8"
             >
-              <div className="p-4 border-b border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  Usuarios Recientes
-                </h3>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {stats.recentUsers.map((user) => (
-                  <Link
-                    key={user.id}
-                    href={`/admin/users/${user.id}`}
-                    className="flex items-center gap-3 p-4 hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                      <span className="text-gray-500 font-medium">
-                        {(user.name || user.email)[0].toUpperCase()}
-                      </span>
+              {/* Procedimientos más solicitados */}
+              {stats.surgeon.topProcedures.length > 0 && (
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div className="p-4 border-b border-gray-100 flex items-center gap-2">
+                    <Scissors className="w-5 h-5 text-primary" />
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Procedimientos más solicitados
+                    </h3>
+                  </div>
+                  <div className="p-4">
+                    <div className="space-y-4">
+                      {stats.surgeon.topProcedures.map((proc, index) => (
+                        <div key={proc.name} className="flex items-center gap-3">
+                          <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                            index === 0 ? 'bg-amber-100 text-amber-700' :
+                            index === 1 ? 'bg-gray-200 text-gray-600' :
+                            index === 2 ? 'bg-orange-100 text-orange-700' :
+                            'bg-gray-100 text-gray-500'
+                          }`}>
+                            {index + 1}
+                          </span>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-gray-800 truncate">{proc.name}</p>
+                            <p className="text-xs text-gray-500">{proc.category}</p>
+                          </div>
+                          <span className="text-sm font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                            {proc.count} citas
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-gray-800 truncate">
-                        {user.name || 'Sin nombre'}
-                      </p>
-                      <p className="text-sm text-gray-500 truncate">{user.email}</p>
-                    </div>
-                    <div className="text-right">
-                      <StatusBadge status={user.status} />
-                      <p className="text-xs text-gray-400 mt-1">
-                        {formatDate(user.createdAt)}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              <div className="p-4 border-t border-gray-100">
-                <Link
-                  href="/admin/users"
-                  className="text-sm text-primary hover:underline"
-                >
-                  Ver todos los usuarios
-                </Link>
-              </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Citas recientes */}
+              {stats.surgeon.recentBookings.length > 0 && (
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div className="p-4 border-b border-gray-100 flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-primary" />
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Citas recientes
+                    </h3>
+                  </div>
+                  <div className="divide-y divide-gray-100">
+                    {stats.surgeon.recentBookings.map((booking) => (
+                      <Link
+                        key={booking.id}
+                        href="/admin/bookings"
+                        className="flex items-center gap-3 p-4 hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                          <Stethoscope className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-gray-800 truncate">
+                            {booking.procedureName}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {booking.user.name || booking.user.email}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm text-gray-600">
+                            {new Date(booking.date).toLocaleDateString('es-PE', {
+                              day: '2-digit',
+                              month: 'short',
+                            })}
+                          </p>
+                          <p className="text-xs text-gray-400">{booking.timeSlot}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="p-4 border-t border-gray-100">
+                    <Link
+                      href="/admin/bookings"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Ver todas las citas
+                    </Link>
+                  </div>
+                </div>
+              )}
             </motion.div>
-          </div>
+          )}
         </>
       )}
     </div>

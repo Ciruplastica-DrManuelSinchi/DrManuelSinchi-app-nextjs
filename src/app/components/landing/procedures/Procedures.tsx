@@ -1,16 +1,24 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-const categories = [
-    { id: 'facial', name: 'Cirugía Facial' },
-    { id: 'corporal', name: 'Cirugía Corporal' },
-    { id: 'estetica', name: 'Medicina Estética' },
-    { id: 'reconstructiva', name: 'Reconstructiva' },
+interface Category {
+    id: string
+    name: string
+    slug: string
+    urlPath: string | null
+}
+
+// Categorías por defecto (fallback si la API falla)
+const defaultCategories: Category[] = [
+    { id: 'facial', name: 'Cirugía Facial', slug: 'facial', urlPath: 'cirugia-plastica-facial' },
+    { id: 'corporal', name: 'Cirugía Corporal', slug: 'corporal', urlPath: 'cirugia-plastica-corporal' },
+    { id: 'estetica', name: 'Medicina Estética', slug: 'estetica', urlPath: 'medicina-estetica' },
+    { id: 'reconstructiva', name: 'Reconstructiva', slug: 'reconstructiva', urlPath: 'cirugia-reconstructiva' },
 ]
 
 const procedures = {
@@ -40,7 +48,8 @@ const procedures = {
     ],
 }
 
-const categoryPaths: Record<string, string> = {
+// Mapeo de slugs a rutas URL (fallback)
+const categoryPathsMap: Record<string, string> = {
     facial: 'cirugia-plastica-facial',
     corporal: 'cirugia-plastica-corporal',
     estetica: 'medicina-estetica',
@@ -144,7 +153,33 @@ function ProcedureCard3D({
 }
 
 export default function Procedures() {
+    const [categories, setCategories] = useState<Category[]>(defaultCategories)
     const [activeCategory, setActiveCategory] = useState('facial')
+
+    // Cargar categorías desde la API
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch('/api/categories')
+                const data = await res.json()
+                if (res.ok && data.categories?.length > 0) {
+                    setCategories(data.categories)
+                    // Establecer la primera categoría como activa
+                    setActiveCategory(data.categories[0].slug)
+                }
+            } catch (error) {
+                console.error('Error fetching categories:', error)
+                // Mantener las categorías por defecto
+            }
+        }
+        fetchCategories()
+    }, [])
+
+    // Obtener la ruta URL de la categoría activa
+    const getActiveCategoryPath = () => {
+        const category = categories.find(c => c.slug === activeCategory)
+        return category?.urlPath || categoryPathsMap[activeCategory] || activeCategory
+    }
 
     return (
         <section className="section bg-light-gradient">
@@ -174,15 +209,15 @@ export default function Procedures() {
                     {categories.map((category) => (
                         <motion.button
                             key={category.id}
-                            onClick={() => setActiveCategory(category.id)}
-                            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden ${activeCategory === category.id
+                            onClick={() => setActiveCategory(category.slug)}
+                            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden ${activeCategory === category.slug
                                 ? 'bg-primary text-white shadow-glow-primary-sm'
                                 : 'bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary'
                                 }`}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            {activeCategory === category.id && (
+                            {activeCategory === category.slug && (
                                 <motion.span
                                     className="absolute inset-0 bg-primary"
                                     layoutId="activeTab"
@@ -204,11 +239,11 @@ export default function Procedures() {
                         transition={{ duration: 0.3 }}
                         className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
                     >
-                        {procedures[activeCategory as keyof typeof procedures].map((proc, index) => (
+                        {procedures[activeCategory as keyof typeof procedures]?.map((proc, index) => (
                             <ProcedureCard3D
                                 key={proc.slug}
                                 proc={proc}
-                                categoryPath={categoryPaths[activeCategory]}
+                                categoryPath={getActiveCategoryPath()}
                                 index={index}
                             />
                         ))}
@@ -224,7 +259,7 @@ export default function Procedures() {
                     transition={{ delay: 0.3 }}
                 >
                     <Link
-                        href={`/${categoryPaths[activeCategory]}`}
+                        href={`/${getActiveCategoryPath()}`}
                         className="group inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
                     >
                         Ver todos los procedimientos
