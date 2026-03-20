@@ -225,9 +225,9 @@ export async function GET(request: NextRequest) {
       _sum: { amount: true },
     })
 
-    const totalRevenue = paymentsData._sum.amount || 0
-    const revenueThisMonth = paymentsThisMonth._sum.amount || 0
-    const revenueLastMonth = paymentsLastMonth._sum.amount || 0
+    const totalRevenue = Number(paymentsData._sum.amount || 0)
+    const revenueThisMonth = Number(paymentsThisMonth._sum.amount || 0)
+    const revenueLastMonth = Number(paymentsLastMonth._sum.amount || 0)
 
     const revenueGrowth = revenueLastMonth > 0
       ? Math.round(((revenueThisMonth - revenueLastMonth) / revenueLastMonth) * 100)

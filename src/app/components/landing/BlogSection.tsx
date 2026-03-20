@@ -48,9 +48,19 @@ export default async function BlogSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Carrusel deslizable en móvil, grid en desktop */}
+        <div
+          className="
+            flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4 -mx-4 px-4
+            md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:snap-none md:mx-auto md:px-0 md:pb-0 md:max-w-6xl
+          "
+        >
           {posts.map((post) => (
-            <Link key={post.id} href={`/blog/${post.slug}`} className="group">
+            <Link
+              key={post.id}
+              href={`/blog/${post.slug}`}
+              className="group snap-start shrink-0 w-[300px] md:w-auto md:shrink"
+            >
               <article className="bg-white rounded-2xl shadow-card overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
                 <div className="relative h-52">
                   {post.coverImage ? (
@@ -97,6 +107,8 @@ export default async function BlogSection() {
               </article>
             </Link>
           ))}
+          {/* Spacer para mostrar parte del siguiente elemento */}
+          <div className="shrink-0 w-4 md:hidden" aria-hidden="true" />
         </div>
 
         <div className="text-center mt-12">

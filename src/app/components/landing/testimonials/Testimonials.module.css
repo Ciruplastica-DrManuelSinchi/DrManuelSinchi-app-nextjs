@@ -28,6 +28,46 @@
     font-size: 1rem;
 }
 
+/* Mobile Carousel - Deslizable */
+.mobileCarousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1rem 1rem 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.mobileCarousel::-webkit-scrollbar {
+    display: none;
+}
+
+.mobileCarousel .card {
+    scroll-snap-align: start;
+    width: 280px;
+    min-width: 280px;
+}
+
+.mobileCarouselSpacer {
+    flex-shrink: 0;
+    width: 1rem;
+}
+
+/* Ocultar marquee en móvil, mostrar carrusel */
+@media (max-width: 767px) {
+    .marqueeWrapper {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobileCarousel {
+        display: none;
+    }
+}
+
 /* Marquee Styles */
 .marqueeWrapper {
     width: 100%;

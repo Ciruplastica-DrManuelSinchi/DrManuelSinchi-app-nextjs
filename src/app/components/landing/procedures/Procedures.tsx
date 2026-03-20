@@ -229,7 +229,7 @@ export default function Procedures() {
                     ))}
                 </motion.div>
 
-                {/* Grid de procedimientos */}
+                {/* Grid de procedimientos - Carrusel deslizable en móvil */}
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeCategory}
@@ -237,16 +237,26 @@ export default function Procedures() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                        className="
+                            flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4 -mx-4 px-4
+                            sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:mx-0 sm:px-0 sm:pb-0
+                            lg:grid-cols-4 sm:gap-6
+                        "
                     >
                         {procedures[activeCategory as keyof typeof procedures]?.map((proc, index) => (
-                            <ProcedureCard3D
+                            <div
                                 key={proc.slug}
-                                proc={proc}
-                                categoryPath={getActiveCategoryPath()}
-                                index={index}
-                            />
+                                className="snap-start shrink-0 w-[280px] sm:w-auto sm:shrink"
+                            >
+                                <ProcedureCard3D
+                                    proc={proc}
+                                    categoryPath={getActiveCategoryPath()}
+                                    index={index}
+                                />
+                            </div>
                         ))}
+                        {/* Spacer para mostrar parte del siguiente elemento */}
+                        <div className="shrink-0 w-4 sm:hidden" aria-hidden="true" />
                     </motion.div>
                 </AnimatePresence>
 

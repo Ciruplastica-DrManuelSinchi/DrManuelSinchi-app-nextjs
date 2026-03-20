@@ -163,7 +163,19 @@ export default function Testimonials() {
                 </motion.div>
             </div>
 
-            {/* Marquee Container */}
+            {/* Mobile: Carrusel deslizable */}
+            <div className={styles.mobileCarousel}>
+                {testimonials.map((testimonial) => (
+                    <TestimonialCard
+                        key={`mobile-${testimonial.id}`}
+                        testimonial={testimonial}
+                    />
+                ))}
+                {/* Spacer para mostrar parte del siguiente */}
+                <div className={styles.mobileCarouselSpacer} aria-hidden="true" />
+            </div>
+
+            {/* Desktop: Marquee Container */}
             <div className={styles.marqueeWrapper}>
                 <div className={styles.marquee}>
                     <div className={styles.marqueeContent}>
