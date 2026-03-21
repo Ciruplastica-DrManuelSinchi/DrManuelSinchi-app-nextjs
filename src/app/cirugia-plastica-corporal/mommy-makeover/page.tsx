@@ -38,7 +38,7 @@ const mommyMakeoverData: ProcedureData = {
             'El Mommy Makeover es un conjunto de procedimientos diseñados para restaurar el cuerpo de la mujer después del embarazo y la lactancia. Se personaliza según las necesidades de cada paciente para abordar los cambios específicos que experimentó su cuerpo.',
             'Típicamente incluye procedimientos como: <strong class="text-primary">Mamoplastia</strong> (aumento, reducción o lifting de senos), <strong class="text-primary">Lipoabdominoplastia</strong> para el abdomen, <strong class="text-primary">Liposucción</strong> de flancos y espalda, y <strong class="text-primary">Gluteoplastia</strong> si se desea.',
         ],
-        image: '/images/procedures/que-es/mommy-makeover.jpg',
+        image: '/images/procedures/que-es/mommy-makeover-tecnica.jpg',
         highlights: {
             title: 'Procedimientos Comunes',
             icon: Baby,

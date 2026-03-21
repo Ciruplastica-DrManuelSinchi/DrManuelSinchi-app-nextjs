@@ -37,7 +37,7 @@ const perfiloplastiaData: ProcedureData = {
             'La perfiloplastia es un procedimiento combinado diseñado para armonizar el perfil facial completo. Consiste en intervenir simultáneamente la nariz y el mentón (y otras estructuras si es necesario) para lograr proporciones ideales.',
             'Las combinaciones más comunes son: <strong class="text-primary">Rinoplastia + Mentoplastia</strong> para corregir el perfil lateral, y <strong class="text-primary">Rinoplastia + Afinamiento Facial</strong> para una transformación más completa incluyendo mandíbula, papada y mejillas.',
         ],
-        image: '/images/procedures/que-es/perfiloplastia.jpg',
+        image: '/images/procedures/que-es/perfiloplastia-tecnica.jpg',
         highlights: {
             title: 'Combinaciones Disponibles',
             icon: UserCircle,

@@ -38,7 +38,7 @@ const lipoabdominoplastiaData: ProcedureData = {
             'La lipoabdominoplastia es un procedimiento avanzado que combina lo mejor de la liposucción de alta definición con la abdominoplastia. A diferencia de la abdominoplastia tradicional, permite esculpir el abdomen mientras se retira el exceso de piel.',
             'Ofrecemos técnicas de última generación: <strong class="text-primary">Lipoabdominoplastia HD</strong> con marcación de abdominales, <strong class="text-primary">Renuvion J-Plasma</strong> para retracción de piel y <strong class="text-primary">BodyTite</strong> con radiofrecuencia interna para resultados superiores.',
         ],
-        image: '/images/procedures/que-es/lipoabdominoplastia.jpg',
+        image: '/images/procedures/que-es/lipoabdominoplastia-tecnica.jpg',
         highlights: {
             title: 'Técnicas Disponibles',
             icon: Layers,

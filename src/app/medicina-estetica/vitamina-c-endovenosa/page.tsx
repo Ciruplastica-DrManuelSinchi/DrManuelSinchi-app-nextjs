@@ -37,7 +37,7 @@ const vitaminaCData: ProcedureData = {
             'La vitamina C endovenosa es una terapia que administra altas dosis de ácido ascórbico directamente al torrente sanguíneo, logrando concentraciones mucho más altas que las posibles por vía oral.',
             'Esta terapia es un <strong class="text-primary">potente antioxidante</strong> que combate los radicales libres, <strong class="text-primary">estimula la producción de colágeno</strong> para una piel más firme, y <strong class="text-primary">fortalece el sistema inmunológico</strong>. Además, proporciona energía y vitalidad.',
         ],
-        image: '/images/procedures/que-es/vitamina-c-endovenosa.jpg',
+        image: '/images/procedures/que-es/vitamina-c-tecnica.jpg',
         highlights: {
             title: 'Beneficios de la Terapia',
             icon: Droplets,

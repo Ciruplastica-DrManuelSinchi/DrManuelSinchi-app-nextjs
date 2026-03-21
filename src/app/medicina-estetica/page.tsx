@@ -108,7 +108,7 @@ const treatments: Treatment[] = [
         duration: '30-60 min',
         recovery: 'Inmediata',
         category: ['rejuvenecimiento', 'piel'],
-        image: '/images/procedures/vitamina-c-endovenosa.jpg',
+        image: '/images/procedures/vitamina-c.jpg',
     },
 ]
 

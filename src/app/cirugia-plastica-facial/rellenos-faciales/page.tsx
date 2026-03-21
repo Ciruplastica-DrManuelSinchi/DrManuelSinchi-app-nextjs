@@ -38,7 +38,7 @@ const rellenosFacialesData: ProcedureData = {
             'Los rellenos faciales son procedimientos diseñados para restaurar el volumen perdido por el envejecimiento, corregir asimetrías o mejorar los contornos del rostro. Son una solución versátil que puede aplicarse en pómulos, surcos nasogenianos, labios, mentón y otras áreas.',
             'Ofrecemos tres opciones principales: <strong class="text-primary">Transferencia de grasa autóloga</strong> (usando tu propia grasa), <strong class="text-primary">Ácido Hialurónico</strong> (relleno temporal reabsorbible) e <strong class="text-primary">Implantes faciales</strong> (solución permanente de silicona).',
         ],
-        image: '/images/procedures/que-es/rellenos-faciales.jpg',
+        image: '/images/procedures/que-es/rellenos-faciales-tecnica.jpg',
         highlights: {
             title: 'Tipos de Rellenos',
             icon: Droplets,

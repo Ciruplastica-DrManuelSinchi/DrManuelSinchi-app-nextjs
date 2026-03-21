@@ -38,7 +38,7 @@ const reconstruccionMamaData: ProcedureData = {
             'La reconstrucción mamaria es un procedimiento que restaura la forma del seno después de una mastectomía (extirpación del seno por cáncer) o cirugía conservadora. Puede realizarse inmediatamente después de la mastectomía o de forma diferida.',
             'Ofrecemos múltiples técnicas: <strong class="text-primary">Con tejidos propios</strong> (transferencia de grasa, colgajos TRAM/DIEP, músculo dorsal ancho) y <strong class="text-primary">Con implantes</strong> (expansores tisulares y prótesis de gel de silicona).',
         ],
-        image: '/images/procedures/que-es/reconstruccion-mama.jpg',
+        image: '/images/procedures/que-es/reconstruccion-mama-tecnica.jpg',
         highlights: {
             title: 'Técnicas Disponibles',
             icon: HeartPulse,

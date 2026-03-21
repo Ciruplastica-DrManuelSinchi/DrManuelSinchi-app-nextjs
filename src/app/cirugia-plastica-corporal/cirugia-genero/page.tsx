@@ -37,7 +37,7 @@ const cirugiaGeneroData: ProcedureData = {
             'La cirugía de reafirmación de género incluye procedimientos diseñados para alinear las características físicas con la identidad de género de la persona. Ofrecemos un ambiente seguro, respetuoso y libre de juicios.',
             'Realizamos: <strong class="text-primary">Mastectomía / Masculinización de tórax (Top Surgery)</strong> para hombres trans y personas no binarias, y <strong class="text-primary">Mamoplastia de aumento</strong> para mujeres trans que desean desarrollar un busto femenino.',
         ],
-        image: '/images/procedures/que-es/cirugia-genero.jpg',
+        image: '/images/procedures/que-es/cirugia-genero-tecnica.jpg',
         highlights: {
             title: 'Procedimientos Disponibles',
             icon: Users,

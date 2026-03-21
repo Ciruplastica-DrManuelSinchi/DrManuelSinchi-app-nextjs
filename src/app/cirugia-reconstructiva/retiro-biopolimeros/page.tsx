@@ -38,7 +38,7 @@ const retiroBiopolimerosData: ProcedureData = {
             'Los biopolímeros son sustancias como silicona líquida, PMMA, aceites y otros materiales que fueron inyectados (generalmente de forma ilegal) para aumentar volumen en glúteos, cara, senos u otras áreas. Estos materiales pueden causar complicaciones graves.',
             'El retiro de biopolímeros es un procedimiento complejo que requiere <strong class="text-primary">experiencia en cirugía reconstructiva</strong>. Extraemos el mayor volumen posible del material y tratamos los tejidos dañados, aunque la remoción completa no siempre es posible.',
         ],
-        image: '/images/procedures/que-es/retiro-biopolimeros.jpg',
+        image: '/images/procedures/que-es/retiro-de-biopolimeros-tecnica.jpg',
         highlights: {
             title: 'Materiales que Retiramos',
             icon: AlertTriangle,

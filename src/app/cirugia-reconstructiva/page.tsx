@@ -30,7 +30,7 @@ const procedures: Procedure[] = [
         shortDescription: 'Resección oncológica de tumores de piel y tejidos blandos con reconstrucción estética inmediata.',
         duration: '1-4 horas',
         recovery: '7-21 días',
-        image: '/images/procedures/tumores-carcinomas.jpg',
+        image: '/images/procedures/tumores-y-carcinomas.jpg',
     },
     {
         id: 2,
@@ -48,7 +48,7 @@ const procedures: Procedure[] = [
         shortDescription: 'Manejo especializado de heridas crónicas, úlceras por presión, vasculares y diabéticas que no cicatrizan.',
         duration: 'Variable',
         recovery: 'Según caso',
-        image: '/images/procedures/heridas-ulceras.jpg',
+        image: '/images/procedures/heridas-y-ulceras-complejas.jpg',
     },
     {
         id: 4,
@@ -66,7 +66,7 @@ const procedures: Procedure[] = [
         shortDescription: 'Extracción segura de sustancias no autorizadas como metacrilato, silicona industrial y otros biopolímeros.',
         duration: '2-5 horas',
         recovery: '2-4 semanas',
-        image: '/images/procedures/retiro-biopolimeros.jpg',
+        image: '/images/procedures/retiro-de-biopolimeros.jpg',
     },
 ]
 

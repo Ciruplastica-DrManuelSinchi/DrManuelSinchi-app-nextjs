@@ -37,7 +37,7 @@ const tumoresCarcinomasData: ProcedureData = {
             'Tratamos tumores cutáneos benignos (quistes, lipomas, nevos) y carcinomas no-melanoma como el carcinoma basocelular y espinocelular. La cirugía busca la extracción completa del tumor con márgenes oncológicos adecuados.',
             'Como cirujanos plásticos, aportamos valor en la <strong class="text-primary">reconstrucción del defecto</strong> resultante, utilizando técnicas como colgajos locales, injertos de piel y otras para lograr el mejor resultado estético posible.',
         ],
-        image: '/images/procedures/que-es/tumores-carcinomas.jpg',
+        image: '/images/procedures/que-es/tumores-y-carcinomas-tecnica.jpg',
         highlights: {
             title: 'Lesiones que Tratamos',
             icon: Search,

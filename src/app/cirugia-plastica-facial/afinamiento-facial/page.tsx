@@ -37,7 +37,7 @@ const afinamientoFacialData: ProcedureData = {
             'El afinamiento facial es un procedimiento integral que combina múltiples técnicas para lograr un rostro más delgado, definido y armonioso. Es ideal para quienes desean una transformación completa del tercio inferior del rostro.',
             'Este tratamiento incluye: <strong class="text-primary">Bichectomía</strong> (extracción de bolsas de Bichat), <strong class="text-primary">Liposucción de papada y cara</strong>, <strong class="text-primary">Marcación mandibular</strong> y <strong class="text-primary">Mentoplastia</strong>. La combinación de estas técnicas logra resultados superiores a cada procedimiento por separado.',
         ],
-        image: '/images/procedures/que-es/afinamiento-facial.jpg',
+        image: '/images/procedures/que-es/afinamiento-facial-tecnica.jpg',
         highlights: {
             title: 'Procedimientos Incluidos',
             icon: Minimize2,

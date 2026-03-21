@@ -37,7 +37,7 @@ const bioestimuladoresData: ProcedureData = {
             'Los bioestimuladores son sustancias inyectables que estimulan a tu propio cuerpo a producir colágeno nuevo. A diferencia de los rellenos tradicionales que añaden volumen inmediato, los bioestimuladores trabajan gradualmente mejorando la calidad de la piel desde adentro.',
             'Los más utilizados son el <strong class="text-primary">Ácido Poliláctico (Sculptra)</strong> y la <strong class="text-primary">Hidroxiapatita de Calcio (Radiesse)</strong>. Ambos son reabsorbibles y seguros, con resultados que pueden durar hasta 2 años.',
         ],
-        image: '/images/procedures/que-es/bioestimuladores.jpg',
+        image: '/images/procedures/que-es/bioestimuladores-tecnica.jpg',
         highlights: {
             title: 'Tipos de Bioestimuladores',
             icon: Zap,

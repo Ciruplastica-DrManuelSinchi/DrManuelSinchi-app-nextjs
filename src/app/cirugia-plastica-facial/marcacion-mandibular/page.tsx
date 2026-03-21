@@ -37,7 +37,7 @@ const marcacionMandibularData: ProcedureData = {
             'La marcación mandibular es un procedimiento que define y realza el ángulo y borde de la mandíbula para crear un rostro más estructurado y atractivo. Es uno de los procedimientos más solicitados tanto por hombres como mujeres.',
             'Ofrecemos dos técnicas: <strong class="text-primary">Lipotransferencia (grasa autóloga)</strong> para un aumento sutil y natural, e <strong class="text-primary">Implantes mandibulares de silicona</strong> para una definición más marcada y angular.',
         ],
-        image: '/images/procedures/que-es/marcacion-mandibular.jpg',
+        image: '/images/procedures/que-es/marcacion-mandibular-tecnica.jpg',
         highlights: {
             title: 'Técnicas Disponibles',
             icon: Square,

@@ -88,7 +88,7 @@ const procedures: Procedure[] = [
         duration: '15-30 min',
         recovery: '5-7 días',
         category: ['rostro'],
-        image: '/images/procedures/extraccion-lunares.jpg',
+        image: '/images/procedures/extraccion-de-lunares.jpg',
     },
     {
         id: 7,
@@ -129,7 +129,7 @@ const procedures: Procedure[] = [
         duration: '45-90 min',
         recovery: '7-14 días',
         category: ['contorno'],
-        image: '/images/procedures/aumento-pomulos.jpg',
+        image: '/images/procedures/aumento-de-pomulos.jpg',
     },
     {
         id: 11,

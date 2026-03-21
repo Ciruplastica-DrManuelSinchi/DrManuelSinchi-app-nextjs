@@ -37,7 +37,7 @@ const aumentoPomulosData: ProcedureData = {
             'El aumento de pómulos es un procedimiento que añade volumen a la región malar para crear un rostro más definido, juvenil y armonioso. Unos pómulos bien proyectados son un signo de juventud y belleza en todas las culturas.',
             'Ofrecemos dos técnicas principales: <strong class="text-primary">Lipotransferencia (grasa autóloga)</strong> que utiliza tu propia grasa para un resultado natural, e <strong class="text-primary">Implantes de silicona</strong> para una proyección más definida y permanente.',
         ],
-        image: '/images/procedures/que-es/aumento-pomulos.jpg',
+        image: '/images/procedures/que-es/aumento-de-pomulos-tecnica.jpg',
         highlights: {
             title: 'Técnicas Disponibles',
             icon: Gem,
