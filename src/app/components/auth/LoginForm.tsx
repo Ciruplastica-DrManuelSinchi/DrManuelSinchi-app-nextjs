@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { signIn, getSession } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import { Mail, Lock, Eye, EyeOff, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -12,7 +12,7 @@ export default function LoginForm() {
   const t = useTranslations('auth.login')
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
+  const callbackUrl = searchParams.get('callbackUrl')
   const verified = searchParams.get('verified')
   const error = searchParams.get('error')
 
@@ -40,7 +40,16 @@ export default function LoginForm() {
       if (result?.error) {
         setFormError(result.error)
       } else {
-        router.push(callbackUrl)
+        // Obtener sesión para verificar el rol del usuario
+        const session = await getSession()
+
+        // Determinar la URL de redirección según el rol
+        let redirectUrl = callbackUrl || '/dashboard'
+        if (session?.user?.role === 'ADMIN') {
+          redirectUrl = callbackUrl || '/admin'
+        }
+
+        router.push(redirectUrl)
         router.refresh()
       }
     } catch {
@@ -190,7 +199,7 @@ export default function LoginForm() {
       {/* Google Sign In */}
       <motion.button
         type="button"
-        onClick={() => signIn('google', { callbackUrl })}
+        onClick={() => signIn('google', { callbackUrl: callbackUrl || '/dashboard' })}
         className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all text-gray-700 font-medium"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}

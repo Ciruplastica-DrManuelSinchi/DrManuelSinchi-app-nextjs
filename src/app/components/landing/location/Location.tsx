@@ -3,6 +3,23 @@
 import { MapPin, Phone, Mail, Clock, Navigation, LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
+
+// Importar el mapa de forma dinámica para evitar errores de SSR
+const InteractiveMap = dynamic(
+    () => import('@/app/components/ui/interactive-map/InteractiveMap'),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="w-full h-full min-h-[400px] bg-gray-100 animate-pulse rounded-2xl flex items-center justify-center">
+                <div className="text-gray-400 flex flex-col items-center gap-2">
+                    <MapPin className="w-8 h-8" />
+                    <span>Cargando mapa...</span>
+                </div>
+            </div>
+        ),
+    }
+)
 
 interface ContactItem {
     icon: LucideIcon
@@ -136,7 +153,7 @@ export default function Location() {
                         </motion.a>
                     </motion.div>
 
-                    {/* Google Maps Embed */}
+                    {/* Mapa Interactivo */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -144,16 +161,7 @@ export default function Location() {
                         transition={{ duration: 0.5 }}
                         className="rounded-2xl overflow-hidden shadow-medium h-full min-h-[400px]"
                     >
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.0647663291265!2d-77.03253448893925!3d-12.107718742990034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c86b2d055555%3A0xcf31611e344dd943!2sDr.%20Manuel%20Sinchi%20-%20Cirupl%C3%A1stica!5e0!3m2!1ses-419!2spe!4v1773980030346!5m2!1ses-419!2spe"
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0, minHeight: '400px' }}
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Ubicación de Ciruplástica - Dr. Manuel Sinchi"
-                        />
+                        <InteractiveMap className="rounded-2xl" />
                     </motion.div>
                 </div>
             </div>

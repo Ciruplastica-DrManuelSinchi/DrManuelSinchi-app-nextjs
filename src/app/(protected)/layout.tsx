@@ -2,6 +2,8 @@
 
 import { SessionProvider } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
+import Header from '@/app/components/layout/Header'
+import Footer from '@/app/components/layout/Footer'
 
 export default function ProtectedLayout({
   children,
@@ -23,9 +25,11 @@ export default function ProtectedLayout({
   // Páginas protegidas de cliente (dashboard, profile, etc.)
   return (
     <SessionProvider>
-      <div className="pt-24 pb-12">
+      <Header />
+      <main className="pt-24 pb-12 min-h-screen">
         {children}
-      </div>
+      </main>
+      <Footer />
     </SessionProvider>
   )
 }

@@ -127,6 +127,9 @@ function CountdownTimer({
   )
 }
 
+// Verificar si estamos en modo desarrollo
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+
 export default function PaymentStep({
   procedureName,
   amount = CONSULTATION_PRICE,
@@ -143,6 +146,12 @@ export default function PaymentStep({
   const [paymentLoading, setPaymentLoading] = useState(false)
   const [error, setError] = useState('')
   const [holdExpired, setHoldExpired] = useState(false)
+  const [isDev, setIsDev] = useState(false)
+
+  // Verificar modo desarrollo en el cliente
+  useEffect(() => {
+    setIsDev(IS_DEVELOPMENT || window.location.hostname === 'localhost')
+  }, [])
 
   // Generar código corto de reserva (últimos 6 caracteres del ID)
   const bookingCode = bookingId.slice(-6).toUpperCase()
@@ -493,6 +502,46 @@ Mi consulta es:`
             </div>
           </button>
         </div>
+
+        {/* MODO DESARROLLO: Botón de pago simulado */}
+        {isDev && (
+          <div className="border-t-2 border-dashed border-orange-300 pt-4 mt-4">
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <AlertTriangle className="w-5 h-5 text-orange-600" />
+                <span className="text-sm font-medium text-orange-800">Modo Desarrollo</span>
+              </div>
+              <p className="text-xs text-orange-700 mb-3">
+                Este botón solo aparece en desarrollo. Simula un pago exitoso sin procesar dinero real.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setPaymentLoading(true)
+                  // Simular delay de procesamiento
+                  setTimeout(() => {
+                    onComplete('simulated', `SIM-${Date.now()}`)
+                    setPaymentLoading(false)
+                  }, 1500)
+                }}
+                disabled={paymentLoading || holdExpired}
+                className="w-full py-3 bg-orange-500 text-white rounded-xl font-medium hover:bg-orange-600 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {paymentLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Simulando pago...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="w-5 h-5" />
+                    Simular Pago Exitoso (Dev)
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Info */}

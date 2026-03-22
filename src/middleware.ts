@@ -99,6 +99,40 @@ export async function middleware(request: NextRequest) {
 
   // Para rutas raíz sin prefijo, no aplicar intlMiddleware
   if (isRootLevelRoute(pathname)) {
+    // Obtener token de sesión para rutas protegidas
+    const token = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+    })
+
+    const isAuthenticated = !!token
+    const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route))
+    const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route))
+    const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route))
+
+    // Si está en ruta de auth y ya está logueado, redirigir según rol
+    if (isAuthRoute && isAuthenticated) {
+      const redirectPath = token.role === 'ADMIN' ? '/admin' : '/dashboard'
+      return NextResponse.redirect(new URL(redirectPath, request.url))
+    }
+
+    // Si intenta acceder a ruta protegida sin auth
+    if (isProtectedRoute && !isAuthenticated) {
+      const loginUrl = new URL('/login', request.url)
+      loginUrl.searchParams.set('callbackUrl', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+
+    // Si intenta acceder a ruta admin sin ser admin
+    if (isAdminRoute && isAuthenticated && token.role !== 'ADMIN') {
+      return NextResponse.redirect(new URL('/dashboard', request.url))
+    }
+
+    // Si un ADMIN accede a /dashboard, redirigir a /admin
+    if (pathname === '/dashboard' && isAuthenticated && token.role === 'ADMIN') {
+      return NextResponse.redirect(new URL('/admin', request.url))
+    }
+
     // Leer el locale de la cookie o usar el default
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
     const locale = cookieLocale && ['es', 'en'].includes(cookieLocale) ? cookieLocale : 'es'
@@ -151,6 +185,11 @@ export async function middleware(request: NextRequest) {
   // Si intenta acceder a ruta admin sin ser admin
   if (isAdminRoute && isAuthenticated && token.role !== 'ADMIN') {
     return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+
+  // Si un ADMIN accede a /dashboard, redirigir a /admin
+  if (pathnameWithoutLocale === '/dashboard' && isAuthenticated && token.role === 'ADMIN') {
+    return NextResponse.redirect(new URL('/admin', request.url))
   }
 
   return response

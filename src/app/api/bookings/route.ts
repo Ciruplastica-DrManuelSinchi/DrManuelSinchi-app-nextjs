@@ -53,7 +53,7 @@ export async function GET() {
     const bookings = await prisma.booking.findMany({
       where: {
         userId: session.user.id,
-        status: { notIn: ['EXPIRED'] } // No mostrar expiradas al usuario
+        // Mostrar todas las reservas incluyendo pendientes de pago y expiradas
       },
       orderBy: { date: 'desc' },
       include: {

@@ -199,6 +199,7 @@ enum PaymentMethod {
   CULQI_CARD
   YAPE
   WHATSAPP_ONLY
+  SIMULATED       // Solo para desarrollo/pruebas
 }
 
 enum DocumentType {

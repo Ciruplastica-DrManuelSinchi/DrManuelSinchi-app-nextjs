@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar, Clock, FileText, AlertTriangle, CheckCircle, XCircle, Hourglass, CalendarPlus } from 'lucide-react'
+import { Calendar, Clock, FileText, AlertTriangle, CheckCircle, XCircle, Hourglass, CalendarPlus, CreditCard, TimerOff } from 'lucide-react'
+import PaymentModal from './PaymentModal'
 
 interface Booking {
   id: string
@@ -11,16 +12,23 @@ interface Booking {
   date: string
   timeSlot: string
   message?: string
-  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
+  status: 'AWAITING_PAYMENT' | 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED' | 'EXPIRED'
+  paymentDeadline?: string
   createdAt: string
 }
 
 interface BookingListProps {
   bookings: Booking[]
   onCancelBooking?: (id: string) => Promise<void>
+  onPaymentComplete?: () => void
 }
 
 const statusConfig = {
+  AWAITING_PAYMENT: {
+    label: 'Pendiente de pago',
+    color: 'bg-orange-100 text-orange-800',
+    icon: CreditCard,
+  },
   PENDING: {
     label: 'Pendiente',
     color: 'bg-yellow-100 text-yellow-800',
@@ -41,11 +49,17 @@ const statusConfig = {
     color: 'bg-blue-100 text-blue-800',
     icon: CheckCircle,
   },
+  EXPIRED: {
+    label: 'Expirada',
+    color: 'bg-gray-100 text-gray-600',
+    icon: TimerOff,
+  },
 }
 
-export default function BookingList({ bookings, onCancelBooking }: BookingListProps) {
+export default function BookingList({ bookings, onCancelBooking, onPaymentComplete }: BookingListProps) {
   const [cancellingId, setCancellingId] = useState<string | null>(null)
   const [showCancelModal, setShowCancelModal] = useState<string | null>(null)
+  const [paymentBooking, setPaymentBooking] = useState<Booking | null>(null)
 
   const handleCancel = async (id: string) => {
     if (!onCancelBooking) return
@@ -161,6 +175,17 @@ export default function BookingList({ bookings, onCancelBooking }: BookingListPr
                 </div>
 
                 <div className="flex items-center gap-3">
+                  {/* Botón para continuar con el pago */}
+                  {booking.status === 'AWAITING_PAYMENT' && booking.paymentDeadline && new Date(booking.paymentDeadline) > new Date() && (
+                    <button
+                      onClick={() => setPaymentBooking(booking)}
+                      className="flex items-center gap-1.5 text-sm bg-orange-500 text-white px-3 py-1.5 rounded-lg hover:bg-orange-600 font-medium transition-colors"
+                    >
+                      <CreditCard className="w-4 h-4" />
+                      <span>Completar pago</span>
+                    </button>
+                  )}
+
                   {/* Enlace directo para agregar a Google Calendar */}
                   {['PENDING', 'CONFIRMED'].includes(booking.status) && isUpcoming(booking.date) && (
                     <a
@@ -236,6 +261,27 @@ export default function BookingList({ bookings, onCancelBooking }: BookingListPr
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Modal de Pago */}
+      {paymentBooking && (
+        <PaymentModal
+          isOpen={!!paymentBooking}
+          onClose={() => setPaymentBooking(null)}
+          booking={{
+            id: paymentBooking.id,
+            procedureName: paymentBooking.procedureName,
+            date: paymentBooking.date,
+            timeSlot: paymentBooking.timeSlot,
+            paymentDeadline: paymentBooking.paymentDeadline,
+          }}
+          onPaymentComplete={() => {
+            setPaymentBooking(null)
+            if (onPaymentComplete) {
+              onPaymentComplete()
+            }
+          }}
+        />
+      )}
     </>
   )
 }

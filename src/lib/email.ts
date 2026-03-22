@@ -4,7 +4,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Usar dominio de prueba de Resend si no hay dominio verificado
 // Para producción, verificar dominio en https://resend.com/domains
-const FROM_EMAIL = process.env.EMAIL_FROM || 'Ciruplástica <onboarding@resend.dev>'
+const FROM_EMAIL ='onboarding@resend.dev'
 const APP_URL = process.env.NEXTAUTH_URL || 'http://localhost:3000'
 
 export async function sendVerificationEmail(
@@ -92,8 +92,13 @@ export async function sendPasswordResetEmail(
 ): Promise<{ success: boolean; error?: string }> {
   const resetUrl = `${APP_URL}/reset-password?token=${token}`
 
+  console.log('🔑 API Key configurada:', process.env.RESEND_API_KEY ? 'Sí' : 'No')
+  console.log('📧 Enviando email de recuperación a:', email)
+  console.log('📧 Desde:', FROM_EMAIL)
+  console.log('📧 URL de reset:', resetUrl)
+
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
       subject: 'Restablecer contraseña - Ciruplástica',
@@ -152,9 +157,11 @@ export async function sendPasswordResetEmail(
       `,
     })
 
+    console.log('✅ Email de recuperación enviado:', result)
     return { success: true }
   } catch (error) {
-    console.error('Error sending password reset email:', error)
-    return { success: false, error: 'Error al enviar el correo' }
+    console.error('❌ Error sending password reset email:', error)
+    const errorMessage = error instanceof Error ? error.message : JSON.stringify(error)
+    return { success: false, error: errorMessage }
   }
 }

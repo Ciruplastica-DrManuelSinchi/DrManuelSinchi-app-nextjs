@@ -39,7 +39,12 @@ export async function POST(request: NextRequest) {
     const token = await createVerificationToken(user.email, 'password_reset')
 
     // Enviar email
-    await sendPasswordResetEmail(user.email, token, user.name || undefined)
+    const resultado = await sendPasswordResetEmail(user.email, token, user.name || undefined)
+    console.log('API KEY:', process.env.RESEND_API_KEY)
+    
+    if(!resultado.success){
+      console.error('❌ Error enviando email:', resultado.error)
+    }
 
     return NextResponse.json({
       success: true,

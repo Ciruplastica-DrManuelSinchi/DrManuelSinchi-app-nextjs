@@ -5,15 +5,17 @@ import { createCalendarEvent } from '@/lib/google-calendar'
 import { z } from 'zod'
 
 const completePaymentSchema = z.object({
-  paymentMethod: z.enum(['culqi', 'yape', 'whatsapp']),
+  paymentMethod: z.enum(['culqi', 'yape', 'whatsapp', 'card', 'simulated']),
   paymentReference: z.string().optional(),
   paymentAmount: z.number(),
 })
 
 const paymentMethodMap = {
   culqi: 'CULQI_CARD',
+  card: 'CULQI_CARD',
   yape: 'YAPE',
   whatsapp: 'WHATSAPP_ONLY',
+  simulated: 'SIMULATED',
 } as const
 
 // POST /api/bookings/[id]/complete-payment - Completar pago de una reserva
@@ -93,13 +95,14 @@ export async function POST(
     // Actualizar reserva y crear pago en transacción
     const updatedBooking = await prisma.$transaction(async (tx) => {
       // Crear el pago
+      const isAutoCompleted = ['culqi', 'card', 'simulated'].includes(paymentMethod)
       await tx.payment.create({
         data: {
           bookingId: id,
           amount: paymentAmount,
           method: paymentMethodMap[paymentMethod],
-          culqiChargeId: paymentMethod === 'culqi' ? paymentReference : null,
-          status: paymentMethod === 'culqi' ? 'completed' : 'pending',
+          culqiChargeId: ['culqi', 'card'].includes(paymentMethod) ? paymentReference : null,
+          status: isAutoCompleted ? 'completed' : 'pending',
         },
       })
 

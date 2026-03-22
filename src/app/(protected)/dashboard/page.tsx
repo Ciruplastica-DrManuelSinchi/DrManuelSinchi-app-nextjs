@@ -17,6 +17,7 @@ import {
   CalendarCheck,
   Hourglass,
   CheckCircle,
+  CreditCard,
 } from 'lucide-react'
 import BookingList from '@/app/components/booking/BookingList'
 
@@ -27,7 +28,8 @@ interface Booking {
   date: string
   timeSlot: string
   message?: string
-  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
+  status: 'AWAITING_PAYMENT' | 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED' | 'EXPIRED'
+  paymentDeadline?: string
   createdAt: string
 }
 
@@ -67,25 +69,30 @@ export default function DashboardPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loadingBookings, setLoadingBookings] = useState(true)
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await fetch('/api/bookings')
-        if (response.ok) {
-          const data = await response.json()
-          setBookings(data.bookings)
-        }
-      } catch (error) {
-        console.error('Error fetching bookings:', error)
-      } finally {
-        setLoadingBookings(false)
+  const fetchBookings = async () => {
+    try {
+      const response = await fetch('/api/bookings')
+      if (response.ok) {
+        const data = await response.json()
+        setBookings(data.bookings)
       }
+    } catch (error) {
+      console.error('Error fetching bookings:', error)
+    } finally {
+      setLoadingBookings(false)
     }
+  }
 
+  useEffect(() => {
     if (session?.user) {
       fetchBookings()
     }
   }, [session])
+
+  const handlePaymentComplete = () => {
+    // Refrescar las reservas después de completar el pago
+    fetchBookings()
+  }
 
   const handleCancelBooking = async (id: string) => {
     try {
@@ -123,12 +130,14 @@ export default function DashboardPage() {
         : 'Buenas noches'
 
   // Filtrar reservas
-  const upcomingBookings = bookings.filter(
-    b => ['PENDING', 'CONFIRMED'].includes(b.status) && new Date(b.date) >= new Date()
+  const activeBookings = bookings.filter(
+    b => ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED'].includes(b.status)
   )
+  const awaitingPaymentCount = bookings.filter(b => b.status === 'AWAITING_PAYMENT').length
   const pendingCount = bookings.filter(b => b.status === 'PENDING').length
   const confirmedCount = bookings.filter(b => b.status === 'CONFIRMED').length
   const completedCount = bookings.filter(b => b.status === 'COMPLETED').length
+  const expiredCount = bookings.filter(b => b.status === 'EXPIRED').length
 
   return (
     <div className="container-custom">
@@ -173,7 +182,16 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/20">
+        <div className="grid grid-cols-4 gap-4 mt-6 pt-6 border-t border-white/20">
+          {awaitingPaymentCount > 0 && (
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1 text-2xl font-bold text-orange-300">
+                <CreditCard className="w-5 h-5" />
+                {awaitingPaymentCount}
+              </div>
+              <p className="text-xs text-white/70 mt-1">Por pagar</p>
+            </div>
+          )}
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 text-2xl font-bold">
               <Hourglass className="w-5 h-5" />
@@ -265,10 +283,11 @@ export default function DashboardPage() {
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mx-auto"></div>
             <p className="text-gray-500 mt-4">Cargando reservas...</p>
           </div>
-        ) : upcomingBookings.length > 0 ? (
+        ) : bookings.length > 0 ? (
           <BookingList
-            bookings={upcomingBookings.slice(0, 3)}
+            bookings={bookings.slice(0, 5)}
             onCancelBooking={handleCancelBooking}
+            onPaymentComplete={handlePaymentComplete}
           />
         ) : (
           <div className="bg-white rounded-xl border border-gray-100 p-8 text-center">
@@ -285,10 +304,10 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {upcomingBookings.length > 3 && (
+        {bookings.length > 5 && (
           <div className="text-center mt-4">
             <button className="text-sm text-primary font-medium hover:underline">
-              Ver todas las reservas ({upcomingBookings.length})
+              Ver todas las reservas ({bookings.length})
             </button>
           </div>
         )}
