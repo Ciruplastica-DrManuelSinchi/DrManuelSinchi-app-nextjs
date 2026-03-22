@@ -130,14 +130,10 @@ export default function DashboardPage() {
         : 'Buenas noches'
 
   // Filtrar reservas
-  const activeBookings = bookings.filter(
-    b => ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED'].includes(b.status)
-  )
   const awaitingPaymentCount = bookings.filter(b => b.status === 'AWAITING_PAYMENT').length
   const pendingCount = bookings.filter(b => b.status === 'PENDING').length
   const confirmedCount = bookings.filter(b => b.status === 'CONFIRMED').length
   const completedCount = bookings.filter(b => b.status === 'COMPLETED').length
-  const expiredCount = bookings.filter(b => b.status === 'EXPIRED').length
 
   return (
     <div className="container-custom">

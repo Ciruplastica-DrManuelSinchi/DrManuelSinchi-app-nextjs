@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Search,
@@ -60,7 +60,7 @@ export default function AdminProceduresPage() {
   const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null)
 
   // Cargar datos
-  const fetchProcedures = async () => {
+  const fetchProcedures = useCallback(async () => {
     try {
       setLoading(true)
       const params = new URLSearchParams()
@@ -80,11 +80,11 @@ export default function AdminProceduresPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [search, categoryFilter, statusFilter])
 
   useEffect(() => {
     fetchProcedures()
-  }, [search, categoryFilter, statusFilter])
+  }, [fetchProcedures])
 
   // Abrir modal para crear
   const handleCreate = () => {

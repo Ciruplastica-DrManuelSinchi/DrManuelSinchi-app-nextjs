@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Plus,
@@ -82,7 +82,7 @@ export default function AdminCasesPage() {
   }
 
   // Cargar casos
-  const fetchCases = async () => {
+  const fetchCases = useCallback(async () => {
     try {
       setLoading(true)
       const params = new URLSearchParams()
@@ -100,7 +100,7 @@ export default function AdminCasesPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [filterCategory, filterStatus])
 
   useEffect(() => {
     fetchCategories()
@@ -108,7 +108,7 @@ export default function AdminCasesPage() {
 
   useEffect(() => {
     fetchCases()
-  }, [filterCategory, filterStatus])
+  }, [fetchCases])
 
   // Abrir modal para crear
   const handleCreate = () => {
