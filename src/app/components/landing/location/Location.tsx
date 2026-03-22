@@ -1,36 +1,46 @@
 'use client'
 
-import { MapPin, Phone, Mail, Clock, Navigation } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Navigation, LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
-const contactInfo = [
+interface ContactItem {
+    icon: LucideIcon
+    labelKey: string
+    textKey: string
+    subtextKey?: string
+    href?: string
+}
+
+const contactItems: ContactItem[] = [
     {
         icon: MapPin,
-        label: 'Dirección',
-        text: 'Calle Scipión Llona 180, Consultorio 503',
-        subtext: 'Miraflores, Lima - Perú',
+        labelKey: 'address',
+        textKey: 'addressLine1',
+        subtextKey: 'addressLine2',
     },
     {
         icon: Phone,
-        label: 'Teléfono',
-        text: '961 360 074',
+        labelKey: 'phone',
+        textKey: 'phoneNumber',
         href: 'tel:+51961360074',
     },
     {
         icon: Mail,
-        label: 'Email',
-        text: 'consultas@ciruplastica.pe',
+        labelKey: 'email',
+        textKey: 'emailAddress',
         href: 'mailto:consultas@ciruplastica.pe',
     },
     {
         icon: Clock,
-        label: 'Horario',
-        text: 'Lunes - Sábado',
-        subtext: '9:00am - 7:00pm',
+        labelKey: 'schedule',
+        textKey: 'scheduleText',
+        subtextKey: 'scheduleHours',
     },
 ]
 
 export default function Location() {
+    const t = useTranslations('location')
     const googleMapsUrl = 'https://www.google.com/maps/place/Dr.+Manuel+Sinchi+-+Cirupl%C3%A1stica/@-12.107718742990034,-77.03253448893925,17z'
 
     return (
@@ -44,15 +54,14 @@ export default function Location() {
                     className="text-center mb-12"
                 >
                     <span className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                        Ubicación
+                        {t('badge')}
                     </span>
                     <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-dark mb-4">
-                        Visítanos en{' '}
-                        <span className="text-primary">Miraflores</span>
+                        {t('title')}{' '}
+                        <span className="text-primary">{t('titleHighlight')}</span>
                     </h2>
                     <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                        Nuestro consultorio está ubicado en una zona céntrica y accesible de Miraflores,
-                        con estacionamiento disponible en el edificio.
+                        {t('description')}
                     </p>
                 </motion.div>
 
@@ -65,9 +74,9 @@ export default function Location() {
                         transition={{ duration: 0.5 }}
                         className="flex flex-col gap-4"
                     >
-                        {contactInfo.map((item, index) => (
+                        {contactItems.map((item, index) => (
                             <motion.div
-                                key={item.label}
+                                key={item.labelKey}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -83,12 +92,12 @@ export default function Location() {
                                             <item.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
                                         </div>
                                         <div>
-                                            <p className="text-sm text-gray-500 mb-1">{item.label}</p>
+                                            <p className="text-sm text-gray-500 mb-1">{t(`contact.${item.labelKey}`)}</p>
                                             <p className="font-semibold text-dark group-hover:text-primary transition-colors">
-                                                {item.text}
+                                                {t(`contact.${item.textKey}`)}
                                             </p>
-                                            {item.subtext && (
-                                                <p className="text-gray-600 text-sm">{item.subtext}</p>
+                                            {item.subtextKey && (
+                                                <p className="text-gray-600 text-sm">{t(`contact.${item.subtextKey}`)}</p>
                                             )}
                                         </div>
                                     </a>
@@ -98,10 +107,10 @@ export default function Location() {
                                             <item.icon className="w-6 h-6 text-primary" />
                                         </div>
                                         <div>
-                                            <p className="text-sm text-gray-500 mb-1">{item.label}</p>
-                                            <p className="font-semibold text-dark">{item.text}</p>
-                                            {item.subtext && (
-                                                <p className="text-gray-600 text-sm">{item.subtext}</p>
+                                            <p className="text-sm text-gray-500 mb-1">{t(`contact.${item.labelKey}`)}</p>
+                                            <p className="font-semibold text-dark">{t(`contact.${item.textKey}`)}</p>
+                                            {item.subtextKey && (
+                                                <p className="text-gray-600 text-sm">{t(`contact.${item.subtextKey}`)}</p>
                                             )}
                                         </div>
                                     </div>
@@ -123,7 +132,7 @@ export default function Location() {
                             className="flex items-center justify-center gap-2 bg-primary text-white rounded-xl py-4 px-6 font-semibold shadow-lg hover:bg-primary-600 transition-colors mt-2"
                         >
                             <Navigation className="w-5 h-5" />
-                            Cómo Llegar
+                            {t('directions')}
                         </motion.a>
                     </motion.div>
 

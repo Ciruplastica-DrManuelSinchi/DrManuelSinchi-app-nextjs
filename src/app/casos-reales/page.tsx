@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight, Sparkles, ArrowRight, Camera, Loader2 } from 'lucide-react'
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
@@ -23,21 +24,30 @@ interface Case {
     procedureSlug: string
 }
 
-// Categorías estáticas para filtros
-const categories = [
-    { id: 'todos' as CaseCategory, label: 'Todos' },
-    { id: 'facial' as CaseCategory, label: 'Cirugía Facial' },
-    { id: 'corporal' as CaseCategory, label: 'Cirugía Corporal' },
-    { id: 'estetica' as CaseCategory, label: 'Medicina Estética' },
-    { id: 'reconstructiva' as CaseCategory, label: 'Reconstructiva' },
-]
+// Keys de categorías para filtros
+const categoryKeys = ['all', 'facial', 'body', 'aesthetic', 'reconstructive'] as const
+type FilterKey = typeof categoryKeys[number]
+
+// Mapeo de keys de traducción a keys de API
+const filterToApiCategory: Record<FilterKey, CaseCategory> = {
+    all: 'todos',
+    facial: 'facial',
+    body: 'corporal',
+    aesthetic: 'estetica',
+    reconstructive: 'reconstructiva',
+}
 
 export default function CasosReales() {
+    const t = useTranslations('realCasesPage')
+
     const [cases, setCases] = useState<Case[]>([])
     const [loading, setLoading] = useState(true)
-    const [activeCategory, setActiveCategory] = useState<CaseCategory>('todos')
+    const [activeFilter, setActiveFilter] = useState<FilterKey>('all')
     const [selectedCase, setSelectedCase] = useState<Case | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+    // Derivar la categoría de API del filtro actual
+    const activeCategory = filterToApiCategory[activeFilter]
 
     // Cargar casos desde la API
     useEffect(() => {
@@ -99,10 +109,10 @@ export default function CasosReales() {
                     {/* Breadcrumbs */}
                     <nav className="flex items-center gap-2 text-sm text-white/60 mb-8">
                         <Link href="/" className="hover:text-white transition-colors">
-                            Inicio
+                            {t('breadcrumbs.home')}
                         </Link>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-accent">Casos Reales</span>
+                        <span className="text-accent">{t('title')}</span>
                     </nav>
 
                     <div className="max-w-3xl">
@@ -112,7 +122,7 @@ export default function CasosReales() {
                             className="badge-accent mb-6"
                         >
                             <Camera className="w-4 h-4 mr-2" />
-                            Resultados Verificables
+                            {t('badge')}
                         </motion.span>
 
                         <motion.h1
@@ -121,7 +131,7 @@ export default function CasosReales() {
                             transition={{ delay: 0.1 }}
                             className="text-white mb-6"
                         >
-                            Casos Reales
+                            {t('title')}
                         </motion.h1>
 
                         <motion.p
@@ -130,8 +140,7 @@ export default function CasosReales() {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-white/80 leading-relaxed"
                         >
-                            Resultados reales de pacientes del Dr. Manuel Sinchi.
-                            Cada caso demuestra nuestro compromiso con la excelencia y resultados naturales.
+                            {t('description')}
                         </motion.p>
                     </div>
 
@@ -143,16 +152,16 @@ export default function CasosReales() {
                         className="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl"
                     >
                         {[
-                            { value: '5000+', label: 'Procedimientos realizados' },
-                            { value: '98%', label: 'Pacientes satisfechos' },
-                            { value: '15+', label: 'Años de experiencia' },
+                            { value: '5000+', labelKey: 'procedures' },
+                            { value: '98%', labelKey: 'satisfaction' },
+                            { value: '15+', labelKey: 'experience' },
                         ].map((stat, index) => (
                             <div key={index} className="text-center md:text-left">
                                 <div className="text-2xl md:text-4xl font-display font-bold text-accent">
                                     {stat.value}
                                 </div>
                                 <div className="text-xs md:text-sm text-white/60 mt-1">
-                                    {stat.label}
+                                    {t(`stats.${stat.labelKey}`)}
                                 </div>
                             </div>
                         ))}
@@ -177,24 +186,25 @@ export default function CasosReales() {
                         viewport={{ once: true }}
                         className="flex flex-wrap justify-center gap-3 mb-12"
                     >
-                        {categories.map((cat) => {
-                            const count = cat.id === 'todos' ? cases.length : cases.filter(c => c.category === cat.id).length
+                        {categoryKeys.map((filterKey) => {
+                            const apiCategory = filterToApiCategory[filterKey]
+                            const count = apiCategory === 'todos' ? cases.length : cases.filter(c => c.category === apiCategory).length
                             return (
                                 <button
-                                    key={cat.id}
-                                    onClick={() => setActiveCategory(cat.id)}
+                                    key={filterKey}
+                                    onClick={() => setActiveFilter(filterKey)}
                                     className={`
                                         px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300
-                                        ${activeCategory === cat.id
+                                        ${activeFilter === filterKey
                                             ? 'bg-primary text-white shadow-medium'
                                             : 'bg-white text-gray-600 hover:bg-primary/5 hover:text-primary shadow-soft'
                                         }
                                     `}
                                 >
-                                    {cat.label}
+                                    {t(`filters.${filterKey}`)}
                                     <span className={`
                                         ml-2 text-xs px-2 py-0.5 rounded-full
-                                        ${activeCategory === cat.id
+                                        ${activeFilter === filterKey
                                             ? 'bg-white/20 text-white'
                                             : 'bg-gray-100 text-gray-500'
                                         }
@@ -240,7 +250,7 @@ export default function CasosReales() {
 
                                         {/* Click indicator */}
                                         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                            Ver detalle
+                                            {t('viewDetail')}
                                         </div>
 
                                         {/* Info */}
@@ -265,7 +275,7 @@ export default function CasosReales() {
                     {filteredCases.length === 0 && (
                         <div className="text-center py-16">
                             <Sparkles className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                            <p className="text-gray-500">No hay casos disponibles en esta categoría.</p>
+                            <p className="text-gray-500">{t('emptyState')}</p>
                         </div>
                     )}
                         </>
@@ -281,25 +291,24 @@ export default function CasosReales() {
 
                         <div className="relative z-10 max-w-2xl mx-auto">
                             <h2 className="text-white text-2xl md:text-3xl lg:text-4xl mb-4">
-                                ¿Listo para tu transformación?
+                                {t('cta.title')}
                             </h2>
                             <p className="text-white/80 mb-8">
-                                Agenda una consulta de valoración y descubre cómo podemos ayudarte
-                                a alcanzar los resultados que deseas.
+                                {t('cta.description')}
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link href="/contacto" className="btn-primary">
-                                    Agendar Consulta
+                                    {t('cta.scheduleButton')}
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
                                 <a
-                                    href="https://wa.me/51961360074?text=Hola, vi los casos reales y me gustaría agendar una consulta."
+                                    href={`https://wa.me/51961360074?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-secondary"
                                 >
-                                    Consultar por WhatsApp
+                                    {t('cta.whatsappButton')}
                                 </a>
                             </div>
                         </div>

@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import { Calendar, ArrowRight } from 'lucide-react'
+import { getTranslations, getLocale } from 'next-intl/server'
+import { Link } from '@/i18n/routing'
 
 async function getLatestPosts() {
   const posts = await prisma.blogPost.findMany({
@@ -17,9 +18,13 @@ async function getLatestPosts() {
   return posts
 }
 
-function formatDate(date: Date | null) {
+function formatDate(date: Date | null, locale: string) {
   if (!date) return ''
-  return new Date(date).toLocaleDateString('es-PE', {
+  const localeMap: Record<string, string> = {
+    es: 'es-PE',
+    en: 'en-US'
+  }
+  return new Date(date).toLocaleDateString(localeMap[locale] || 'es-PE', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -28,6 +33,8 @@ function formatDate(date: Date | null) {
 
 export default async function BlogSection() {
   const posts = await getLatestPosts()
+  const t = await getTranslations('blog')
+  const locale = await getLocale()
 
   if (posts.length === 0) {
     return null
@@ -38,13 +45,13 @@ export default async function BlogSection() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-            Blog
+            {t('badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-            Artículos y Consejos
+            {t('articlesAndTips')}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Información útil sobre cirugía plástica, medicina estética y cuidados para tu bienestar
+            {t('usefulInfo')}
           </p>
         </div>
 
@@ -96,10 +103,10 @@ export default async function BlogSection() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="flex items-center gap-1 text-gray-500">
                       <Calendar className="w-4 h-4" />
-                      {formatDate(post.publishedAt)}
+                      {formatDate(post.publishedAt, locale)}
                     </span>
                     <span className="flex items-center gap-1 text-primary font-medium group-hover:gap-2 transition-all">
-                      Leer más
+                      {t('readMore')}
                       <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -116,7 +123,7 @@ export default async function BlogSection() {
             href="/blog"
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition-colors"
           >
-            Ver todos los artículos
+            {t('viewAllArticles')}
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

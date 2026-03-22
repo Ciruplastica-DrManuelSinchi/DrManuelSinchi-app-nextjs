@@ -1,0 +1,964 @@
+{
+  "common": {
+    "buttons": {
+      "schedule": "Book Appointment",
+      "whatsapp": "Contact via WhatsApp",
+      "viewMore": "View more",
+      "seeAll": "See all",
+      "learnMore": "Learn more",
+      "login": "Log In",
+      "logout": "Log Out",
+      "close": "Close",
+      "readyTransformation": "Ready for your transformation?",
+      "scheduleAppointment": "Book your appointment"
+    },
+    "labels": {
+      "duration": "Duration",
+      "recovery": "Recovery",
+      "anesthesia": "Anesthesia",
+      "before": "Before",
+      "after": "After",
+      "popular": "Popular"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Invalid email"
+    }
+  },
+  "navigation": {
+    "doctor": "The Doctor",
+    "procedures": "Procedures",
+    "results": "Results",
+    "phone": "961 360 074",
+    "categories": {
+      "facialSurgery": "Facial Surgery",
+      "bodySurgery": "Body Surgery",
+      "aestheticMedicine": "Aesthetic Medicine",
+      "reconstructive": "Reconstructive"
+    },
+    "procedureNames": {
+      "blepharoplasty": "Blepharoplasty",
+      "liftingFoxEyes": "Lifting / Fox-eyes",
+      "rhinoplasty": "Rhinoplasty",
+      "facialFillers": "Facial Fillers",
+      "otoplasty": "Otoplasty",
+      "moleRemoval": "Mole Removal",
+      "mentoplasty": "Mentoplasty",
+      "chinLipo": "Chin Liposuction",
+      "bichectomy": "Bichectomy",
+      "cheekAugmentation": "Cheek Augmentation",
+      "jawContouring": "Jaw Contouring",
+      "facialSlimming": "Facial Slimming",
+      "profiloplasty": "Profiloplasty",
+      "breastAugmentation": "Breast Augmentation",
+      "mastopexy": "Mastopexy",
+      "breastReduction": "Breast Reduction",
+      "liposculpture": "Liposculpture",
+      "abdominoplasty": "Abdominoplasty",
+      "lipoabdominoplasty": "Lipoabdominoplasty",
+      "gluteoplasty": "Gluteoplasty",
+      "mommyMakeover": "Mommy Makeover",
+      "gynecomastia": "Gynecomastia",
+      "genderSurgery": "Gender Surgery",
+      "breastReconstruction": "Breast Reconstruction",
+      "hyaluronicAcid": "Hyaluronic Acid",
+      "botox": "Botox",
+      "biostimulators": "Biostimulators",
+      "radiofrequencyUltrasound": "Radiofrequency / Ultrasound",
+      "postoperativeTreatments": "Postoperative Treatments",
+      "facialLaser": "Facial Laser",
+      "prpFacial": "Facial PRP",
+      "vitaminC": "Intravenous Vitamin C",
+      "lipFillers": "Lip Fillers",
+      "tumorsCarcinomas": "Tumors and Carcinomas",
+      "scars": "Scars",
+      "woundsUlcers": "Wounds and Ulcers",
+      "burns": "Burns",
+      "biopolymerRemoval": "Biopolymer Removal"
+    }
+  },
+  "footer": {
+    "description": "Specialists in plastic surgery and aesthetic medicine in Lima, Peru.",
+    "descriptionLong": "Specialists in plastic surgery, aesthetic medicine and reconstructive surgery in Lima, Peru. Over 15 years transforming lives with natural results.",
+    "procedures": "Procedures",
+    "links": "Links",
+    "contact": "Contact",
+    "contactUs": "Contact Us",
+    "rights": "All rights reserved",
+    "schedule": "Mon - Sat: 9:00am - 7:00pm",
+    "linkLabels": {
+      "facialSurgery": "Facial Surgery",
+      "bodySurgery": "Body Surgery",
+      "aestheticMedicine": "Aesthetic Medicine",
+      "reconstructiveSurgery": "Reconstructive Surgery",
+      "drManuelSinchi": "Dr. Manuel Sinchi",
+      "realCases": "Real Cases",
+      "videos": "Videos",
+      "faq": "Frequently Asked Questions",
+      "contactPage": "Contact"
+    }
+  },
+  "hero": {
+    "badge": "Excellence in Plastic Surgery in Lima",
+    "title": "Your Beauty,",
+    "titleHighlight": "Our Specialty",
+    "subtitle": "Plastic Surgery & Aesthetic Medicine",
+    "discover": "Discover",
+    "description": "Over 15 years of experience transforming lives. Dr. Manuel Sinchi and his team offer the most advanced procedures in plastic surgery, aesthetic medicine and reconstructive surgery.",
+    "stats": {
+      "experience": "Years of experience",
+      "surgeries": "Successful surgeries",
+      "satisfaction": "Satisfaction"
+    }
+  },
+  "trustBar": {
+    "yearsExperience": "Years of experience",
+    "successfulSurgeries": "Successful surgeries",
+    "satisfiedPatients": "Satisfied patients",
+    "satisfactionRate": "Satisfaction rate",
+    "authorizedClinics": "Authorized clinics",
+    "certifications": "International certifications"
+  },
+  "doctorSection": {
+    "badge": "Meet the Specialist",
+    "title": "Dr. Manuel Sinchi",
+    "subtitle": "Board Certified Plastic Surgeon",
+    "description": "With over 15 years of experience, Dr. Sinchi has established himself as one of the most recognized plastic surgeons in Lima. His approach combines cutting-edge surgical techniques with a deep commitment to each patient's well-being.",
+    "quote": "Combining art, science and technology to achieve natural results that enhance your unique beauty.",
+    "credentials": {
+      "title": "Certified",
+      "items": {
+        "cmp": "CMP 58101",
+        "rne": "National Registry",
+        "member": "Member of the Peruvian Society of Plastic Surgery",
+        "certified": "Certified in advanced ultrasonic techniques"
+      }
+    },
+    "cta": "Learn more about Dr. Sinchi"
+  },
+  "procedures": {
+    "badge": "Our Procedures",
+    "title": "Transform your image",
+    "titleHighlight": "with experts",
+    "description": "Discover our wide range of procedures designed to enhance your natural beauty with safe and lasting results.",
+    "categories": {
+      "all": "All",
+      "facial": "Facial",
+      "body": "Body",
+      "aesthetic": "Aesthetic",
+      "reconstructive": "Reconstructive"
+    },
+    "viewAll": "View all procedures"
+  },
+  "proceduresSection": {
+    "badge": "Specialties",
+    "title": "Our Procedures",
+    "subtitle": "Personalized treatments with cutting-edge techniques",
+    "viewAll": "View all procedures",
+    "items": {
+      "rhinoplasty": "Rhinoplasty",
+      "rhinoplastyDesc": "Nose surgery to improve shape and function",
+      "blepharoplasty": "Blepharoplasty",
+      "blepharoplastyDesc": "Eye contour rejuvenation",
+      "facelift": "Facelift",
+      "faceliftDesc": "Facial lifting for rejuvenation",
+      "bichectomy": "Bichectomy",
+      "bichectomyDesc": "Facial slimming",
+      "liposculpture": "Liposculpture",
+      "liposculptureDesc": "Sculpt your figure by removing localized fat",
+      "abdominoplasty": "Abdominoplasty",
+      "abdominoplastyDesc": "Flat and toned abdomen",
+      "mammoplasty": "Mammoplasty",
+      "mammoplastyDesc": "Breast augmentation or reduction",
+      "gluteoplasty": "Gluteoplasty",
+      "gluteoplastyDesc": "Buttock augmentation and lifting",
+      "botox": "Botox",
+      "botoxDesc": "Eliminate expression lines",
+      "hyaluronicAcid": "Hyaluronic Acid",
+      "hyaluronicAcidDesc": "Facial filler for more volume",
+      "lipFillers": "Lip Fillers",
+      "lipFillersDesc": "Fuller and more defined lips",
+      "prp": "PRP",
+      "prpDesc": "Rejuvenating platelet-rich plasma",
+      "tumors": "Tumors and Carcinomas",
+      "tumorsDesc": "Oncological resection with aesthetic reconstruction",
+      "scars": "Scars",
+      "scarsDesc": "Scar treatment and correction",
+      "burns": "Burns",
+      "burnsDesc": "Burn reconstruction",
+      "biopolymers": "Biopolymer Removal",
+      "biopolymersDesc": "Safe removal of unauthorized substances"
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title": "What our",
+    "titleHighlight": "patients say",
+    "description": "Learn about the experiences of those who trusted us for their transformation.",
+    "fullTitle": "What our patients say",
+    "realStories": "Real stories of transformation and trust",
+    "verifiedIn": "Verified reviews on"
+  },
+  "videos": {
+    "badge": "Videos",
+    "title": "Learn more about",
+    "titleHighlight": "our procedures",
+    "description": "Dr. Sinchi explains each procedure in detail.",
+    "informativeVideos": "Informative Videos",
+    "learnAboutProcedures": "Learn more about our procedures",
+    "viewAll": "View all videos"
+  },
+  "faq": {
+    "badge": "Frequently Asked Questions",
+    "title": "We answer",
+    "titleHighlight": "your questions",
+    "description": "We answer the most common questions from our patients before their consultation.",
+    "viewAll": "View all questions",
+    "items": {
+      "recovery": {
+        "question": "How long does recovery take?",
+        "answer": "Recovery time varies depending on the procedure. Generally, facial procedures require 1-2 weeks, while body surgeries may need 2-4 weeks before resuming normal activities."
+      },
+      "permanent": {
+        "question": "Are the results permanent?",
+        "answer": "Most surgical procedures offer lasting results. However, factors such as natural aging, weight changes, and lifestyle can affect long-term results."
+      },
+      "anesthesia": {
+        "question": "What type of anesthesia is used?",
+        "answer": "Depending on the procedure, we use local anesthesia, sedation, or general anesthesia. Dr. Sinchi will evaluate your particular case and recommend the safest and most comfortable option."
+      },
+      "financing": {
+        "question": "Do you offer financing?",
+        "answer": "Yes, we have flexible financing options so you can proceed with your procedure. Contact our team to learn about available plans."
+      },
+      "finalResults": {
+        "question": "When can I see the final results?",
+        "answer": "Initial results are visible within the first few weeks, but the final result is appreciated 3-6 months after the procedure, once swelling has completely subsided."
+      }
+    }
+  },
+  "location": {
+    "badge": "Location",
+    "title": "Visit us in",
+    "titleHighlight": "Miraflores",
+    "description": "Our office is located in a central and accessible area of Miraflores, with parking available in the building.",
+    "directions": "Get Directions",
+    "contact": {
+      "address": "Address",
+      "addressLine1": "Calle Scipión Llona 180, Office 503",
+      "addressLine2": "Miraflores, Lima - Peru",
+      "phone": "Phone",
+      "phoneNumber": "961 360 074",
+      "email": "Email",
+      "emailAddress": "consultas@ciruplastica.pe",
+      "schedule": "Hours",
+      "scheduleText": "Monday - Saturday",
+      "scheduleHours": "9:00am - 7:00pm"
+    }
+  },
+  "contactCta": {
+    "badge": "Free Consultation",
+    "title": "Ready to take the",
+    "titleHighlight": "first step",
+    "description": "Schedule your personalized consultation with Dr. Sinchi and discover the ideal options to achieve your goals.",
+    "scheduleNow": "Book consultation now",
+    "whatsapp": "Contact via WhatsApp",
+    "whatsappDirect": "Direct WhatsApp",
+    "urgency": {
+      "lastAppointments": "Last 3 appointments this week",
+      "peopleViewing": "{count} people viewing now"
+    },
+    "trust": {
+      "responseTime": "Response in less than 2 hours",
+      "availableNow": "Available now"
+    }
+  },
+  "blog": {
+    "badge": "Blog",
+    "title": "Latest",
+    "titleHighlight": "posts",
+    "description": "Stay informed with our articles about plastic surgery and aesthetic medicine.",
+    "readMore": "Read more",
+    "viewAll": "View all posts",
+    "articlesAndTips": "Articles and Tips",
+    "usefulInfo": "Useful information about plastic surgery, aesthetic medicine and wellness care",
+    "viewAllArticles": "View all articles"
+  },
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "submit": "Log In",
+      "submitting": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up",
+      "rememberMe": "Remember me",
+      "orContinueWith": "or continue with",
+      "continueWithGoogle": "Continue with Google",
+      "emailVerified": "Email verified successfully. You can now log in.",
+      "invalidToken": "The verification link is invalid or has expired",
+      "errorOccurred": "An error occurred",
+      "loginError": "Login error"
+    },
+    "register": {
+      "title": "Create Account",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email address",
+      "phone": "Phone",
+      "phoneOptional": "(optional)",
+      "password": "Password",
+      "passwordPlaceholder": "Minimum 8 characters",
+      "passwordHint": "Must include uppercase, lowercase and number",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "submit": "Create account",
+      "submitting": "Creating account...",
+      "hasAccount": "Already have an account?",
+      "login": "Log in",
+      "orRegisterWith": "or register with",
+      "continueWithGoogle": "Continue with Google",
+      "acceptTerms": "I accept the",
+      "termsAndConditions": "terms and conditions",
+      "and": "and the",
+      "privacyPolicy": "privacy policy",
+      "mustAcceptTerms": "You must accept the terms and conditions",
+      "successTitle": "Registration successful!",
+      "successMessage": "We have sent a verification link to",
+      "successInstructions": "Check your inbox to activate your account.",
+      "goToLogin": "Go to login",
+      "registerError": "Registration error",
+      "connectionError": "Connection error"
+    },
+    "forgotPassword": {
+      "title": "Reset Password",
+      "description": "Enter your email and we'll send you a link to reset your password.",
+      "email": "Email",
+      "submit": "Send link",
+      "submitting": "Sending...",
+      "backToLogin": "Back to login",
+      "successTitle": "Check your email",
+      "successMessage": "If an account exists with",
+      "successInstructions": "you will receive a link to reset your password.",
+      "processingError": "Error processing request",
+      "connectionError": "Connection error"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "newPassword": "New password",
+      "passwordPlaceholder": "Minimum 8 characters",
+      "passwordHint": "Must include uppercase, lowercase and number",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "submit": "Reset password",
+      "submitting": "Updating...",
+      "invalidLink": "Invalid link",
+      "linkExpired": "The reset link is invalid or has expired.",
+      "requestNewLink": "Request new link",
+      "successTitle": "Password updated",
+      "successMessage": "Your password has been reset successfully.",
+      "redirecting": "Redirecting to login...",
+      "passwordsNotMatch": "Passwords do not match",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "resetError": "Error resetting password",
+      "connectionError": "Connection error"
+    },
+    "validation": {
+      "nameMinLength": "Name must be at least 2 characters",
+      "invalidEmail": "Invalid email",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "passwordUppercase": "Must contain at least one uppercase letter",
+      "passwordLowercase": "Must contain at least one lowercase letter",
+      "passwordNumber": "Must contain at least one number",
+      "passwordsNotMatch": "Passwords do not match"
+    }
+  },
+  "userMenu": {
+    "myAccount": "My account",
+    "dashboard": "Dashboard",
+    "adminPanel": "Admin panel",
+    "logout": "Log out"
+  },
+  "metadata": {
+    "title": "Ciruplástica | Plastic Surgery in Lima - Dr. Manuel Sinchi",
+    "description": "Specialists in Plastic Surgery, Aesthetic Medicine and Reconstructive Surgery in Lima, Peru. Dr. Manuel Sinchi, over 15 years of experience.",
+    "keywords": "plastic surgery Lima, rhinoplasty Lima, liposculpture Lima, breast augmentation Lima, Dr. Manuel Sinchi"
+  },
+  "whatsappButton": {
+    "defaultMessage": "Hello Dr. Sinchi, I would like to schedule a consultation.",
+    "haveQuestions": "Have questions?",
+    "contactUs": "Write us on WhatsApp and we will respond shortly.",
+    "writeUs": "Write us on WhatsApp"
+  },
+  "beforeAfterSection": {
+    "badge": "Real Results",
+    "title": "Before and After Cases",
+    "description": "Slide to compare the results of our patients",
+    "viewAll": "View all cases"
+  },
+  "procedurePage": {
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "hero": {
+      "scheduleAppointment": "Book Appointment",
+      "contactWhatsapp": "Contact via WhatsApp"
+    },
+    "info": {
+      "badge": "Procedure"
+    },
+    "beforeAfter": {
+      "badge": "Real Results",
+      "title": "Before and After Cases",
+      "description": "Verifiable results from real patients of Dr. Sinchi",
+      "viewMore": "View more real cases"
+    },
+    "benefits": {
+      "title": "Why choose this procedure?",
+      "description": "We combine advanced technique with personalized care"
+    },
+    "process": {
+      "badge": "Your Experience",
+      "title": "Process and Recovery",
+      "description": "We accompany you every step of the way",
+      "step": "Step"
+    },
+    "videosSection": {
+      "badge": "Educational Content",
+      "title": "Informative Videos",
+      "description": "Dr. Sinchi explains everything you need to know",
+      "viewAll": "View all videos",
+      "comingSoon": "Coming Soon",
+      "preparingContent": "We are preparing educational content about this procedure.",
+      "viewChannel": "View Channel"
+    },
+    "faqSection": {
+      "badge": "FAQ",
+      "title": "Frequently Asked Questions",
+      "description": "We answer the most common questions about this procedure. If you have any additional questions, do not hesitate to contact us.",
+      "moreQuestions": "Have more questions?",
+      "scheduleConsultation": "Schedule a consultation with Dr. Sinchi."
+    },
+    "cta": {
+      "callNow": "Call Now",
+      "whatsapp": "WhatsApp"
+    }
+  },
+  "categoryPages": {
+    "common": {
+      "breadcrumbs": {
+        "home": "Home"
+      },
+      "filters": {
+        "all": "All"
+      },
+      "viewMore": "View more information",
+      "popular": "Popular",
+      "cta": {
+        "title": "Schedule your consultation",
+        "description": "Receive a personalized evaluation and discover the best procedure to achieve your aesthetic goals.",
+        "scheduleButton": "Book Appointment",
+        "whatsappButton": "Contact via WhatsApp"
+      },
+      "stats": {
+        "yearsExperience": "Years of experience",
+        "satisfaction": "Satisfaction"
+      }
+    },
+    "facial": {
+      "title": "Facial Plastic Surgery",
+      "badge": "Specialized Procedures",
+      "description": "Procedures designed to enhance your natural beauty and correct imperfections with advanced techniques and harmonious results.",
+      "stats": {
+        "surgeries": "Facial surgeries"
+      },
+      "filters": {
+        "nose": "Nose",
+        "eyes": "Eyes",
+        "face": "Face",
+        "contour": "Contour"
+      },
+      "procedures": {
+        "blepharoplasty": {
+          "name": "Blepharoplasty",
+          "description": "Eyelid rejuvenation by removing excess skin and bags.",
+          "duration": "1-2 hours",
+          "recovery": "5-7 days"
+        },
+        "lifting": {
+          "name": "Lifting / Fox-eyes",
+          "description": "Brow lift, Fox-eyes, frontal, facial and cervical lifting.",
+          "duration": "1-4 hours",
+          "recovery": "7-21 days"
+        },
+        "rhinoplasty": {
+          "name": "Rhinoplasty",
+          "description": "Aesthetic and functional correction of the nose to achieve facial harmony.",
+          "duration": "2-3 hours",
+          "recovery": "7-10 days"
+        },
+        "facialFillers": {
+          "name": "Facial Fillers",
+          "description": "Restore volume with autologous fat, hyaluronic acid or implants.",
+          "duration": "30-90 min",
+          "recovery": "3-14 days"
+        },
+        "otoplasty": {
+          "name": "Otoplasty",
+          "description": "Correction of prominent ears, reduction or reconstruction.",
+          "duration": "1-2 hours",
+          "recovery": "7 days"
+        },
+        "moleRemoval": {
+          "name": "Mole Removal",
+          "description": "Safe removal of moles and skin lesions with pathological analysis.",
+          "duration": "15-30 min",
+          "recovery": "5-7 days"
+        },
+        "mentoplasty": {
+          "name": "Mentoplasty",
+          "description": "Chin augmentation or reduction to balance the facial profile.",
+          "duration": "1-2 hours",
+          "recovery": "7-10 days"
+        },
+        "chinLipo": {
+          "name": "Chin Liposuction",
+          "description": "Removal of submental fat to define the neck contour.",
+          "duration": "1 hour",
+          "recovery": "5-7 days"
+        },
+        "bichectomy": {
+          "name": "Bichectomy",
+          "description": "Removal of Bichat fat pads to slim the cheeks.",
+          "duration": "45 min",
+          "recovery": "3-5 days"
+        },
+        "cheekAugmentation": {
+          "name": "Cheek Augmentation",
+          "description": "Enhance your cheekbones with autologous fat or silicone implants.",
+          "duration": "45-90 min",
+          "recovery": "7-14 days"
+        },
+        "jawContouring": {
+          "name": "Jaw Contouring",
+          "description": "Define your jawline with fat or implants.",
+          "duration": "1-2 hours",
+          "recovery": "10-14 days"
+        },
+        "facialSlimming": {
+          "name": "Facial Slimming",
+          "description": "Combination of bichectomy, chin liposuction, jaw contouring and mentoplasty.",
+          "duration": "2-3 hours",
+          "recovery": "14-21 days"
+        },
+        "profiloplasty": {
+          "name": "Profiloplasty",
+          "description": "Harmonize your profile combining rhinoplasty with mentoplasty.",
+          "duration": "2-4 hours",
+          "recovery": "14-21 days"
+        }
+      }
+    },
+    "body": {
+      "title": "Body Plastic Surgery",
+      "badge": "Specialized Procedures",
+      "description": "Shape and define your figure with safe procedures and natural results from certified specialists.",
+      "stats": {
+        "surgeries": "Body surgeries"
+      },
+      "filters": {
+        "breast": "Breast",
+        "abdomen": "Abdomen",
+        "contour": "Contour"
+      },
+      "procedures": {
+        "breastAugmentation": {
+          "name": "Breast Augmentation",
+          "description": "Increase volume and improve the shape of your breasts with state-of-the-art implants.",
+          "duration": "1-2 hours",
+          "recovery": "7-14 days"
+        },
+        "mastopexy": {
+          "name": "Mastopexy",
+          "description": "Breast lift to correct sagging and restore firmness.",
+          "duration": "2-3 hours",
+          "recovery": "14-21 days"
+        },
+        "breastReduction": {
+          "name": "Breast Reduction",
+          "description": "Reduce breast size to relieve discomfort and improve proportion.",
+          "duration": "2-4 hours",
+          "recovery": "14-21 days"
+        },
+        "liposculpture": {
+          "name": "Liposculpture",
+          "description": "Remove localized fat and shape your figure with high-definition techniques.",
+          "duration": "2-4 hours",
+          "recovery": "7-14 days"
+        },
+        "abdominoplasty": {
+          "name": "Abdominoplasty",
+          "description": "Remove excess abdominal skin and fat for a flat, toned abdomen.",
+          "duration": "2-4 hours",
+          "recovery": "14-21 days"
+        },
+        "lipoabdominoplasty": {
+          "name": "Lipoabdominoplasty",
+          "description": "Combines liposuction with abdominoplasty for comprehensive results.",
+          "duration": "3-5 hours",
+          "recovery": "14-21 days"
+        },
+        "gluteoplasty": {
+          "name": "Gluteoplasty",
+          "description": "Augment and shape your buttocks with your own fat or implants.",
+          "duration": "2-3 hours",
+          "recovery": "14-21 days"
+        },
+        "mommyMakeover": {
+          "name": "Mommy Makeover",
+          "description": "Restore your figure after pregnancy with multiple combined procedures.",
+          "duration": "4-6 hours",
+          "recovery": "21-30 days"
+        },
+        "gynecomastia": {
+          "name": "Gynecomastia",
+          "description": "Correction of excess breast tissue in men.",
+          "duration": "1-2 hours",
+          "recovery": "7-14 days"
+        },
+        "genderSurgery": {
+          "name": "Gender Surgery",
+          "description": "Gender-affirming procedures with comprehensive and specialized care.",
+          "duration": "Variable",
+          "recovery": "Variable"
+        },
+        "breastReconstruction": {
+          "name": "Breast Reconstruction",
+          "description": "Breast reconstruction post mastectomy or trauma.",
+          "duration": "2-4 hours",
+          "recovery": "14-21 days"
+        }
+      }
+    },
+    "aesthetic": {
+      "title": "Aesthetic Medicine",
+      "badge": "Non-Invasive Treatments",
+      "description": "Rejuvenate and beautify your face with state-of-the-art non-invasive treatments, no surgery and immediate results.",
+      "stats": {
+        "treatments": "Treatments performed"
+      },
+      "filters": {
+        "injectables": "Injectables",
+        "technology": "Technology",
+        "regenerative": "Regenerative"
+      },
+      "procedures": {
+        "hyaluronicAcid": {
+          "name": "Hyaluronic Acid",
+          "description": "Restore facial volume and hydration with state-of-the-art fillers.",
+          "duration": "30-60 min",
+          "recovery": "1-3 days"
+        },
+        "botox": {
+          "name": "Botox",
+          "description": "Eliminate expression wrinkles and prevent new facial lines.",
+          "duration": "15-30 min",
+          "recovery": "No recovery"
+        },
+        "biostimulators": {
+          "name": "Biostimulators",
+          "description": "Stimulate natural collagen production to rejuvenate your skin.",
+          "duration": "30-60 min",
+          "recovery": "1-3 days"
+        },
+        "radiofrequency": {
+          "name": "Radiofrequency / Ultrasound",
+          "description": "Non-surgical skin tightening treatments for face and body.",
+          "duration": "45-90 min",
+          "recovery": "No recovery"
+        },
+        "postoperative": {
+          "name": "Postoperative Treatments",
+          "description": "Speed up your recovery and optimize your surgery results.",
+          "duration": "Variable",
+          "recovery": "Variable"
+        },
+        "facialLaser": {
+          "name": "Facial Laser",
+          "description": "Improve texture, spots and scars with advanced laser technology.",
+          "duration": "30-60 min",
+          "recovery": "3-7 days"
+        },
+        "prp": {
+          "name": "Platelet Rich Plasma",
+          "description": "Regenerate your skin with growth factors from your own blood.",
+          "duration": "45-60 min",
+          "recovery": "1-2 days"
+        },
+        "vitaminC": {
+          "name": "Intravenous Vitamin C",
+          "description": "Powerful antioxidant that brightens and revitalizes your skin from within.",
+          "duration": "45-60 min",
+          "recovery": "No recovery"
+        },
+        "lipFillers": {
+          "name": "Lip Fillers",
+          "description": "Increase volume and define your lip contour naturally.",
+          "duration": "15-30 min",
+          "recovery": "1-3 days"
+        }
+      }
+    },
+    "reconstructive": {
+      "title": "Reconstructive Surgery",
+      "badge": "Restoring Function and Aesthetics",
+      "description": "Specialized procedures to restore form and function of tissues affected by trauma, disease, burns, or previous surgeries.",
+      "stats": {
+        "surgeries": "Reconstructive cases",
+        "success": "Treatment success"
+      },
+      "intro": {
+        "title": "More than aesthetics, quality of life",
+        "description": "Reconstructive surgery goes beyond appearance. Our goal is to restore function, relieve pain, and restore confidence to patients who have suffered trauma, illness, or conditions affecting their physical and emotional well-being."
+      },
+      "servicesSection": {
+        "badge": "Our Services",
+        "title": "Reconstructive Procedures",
+        "subtitle": "Specialized solutions for each condition"
+      },
+      "whyChooseUs": {
+        "badge": "Why choose us?",
+        "title": "Experience in complex cases",
+        "description": "Reconstructive surgery requires a high level of specialization and experience. Dr. Sinchi combines knowledge in plastic and reconstructive surgery to offer comprehensive solutions.",
+        "reasons": [
+          "Specialized training in reconstructive surgery",
+          "Experience in reference hospitals",
+          "Multidisciplinary approach with other specialists",
+          "Advanced reconstruction techniques",
+          "Close follow-up throughout recovery"
+        ]
+      },
+      "filters": {
+        "oncologic": "Oncologic",
+        "trauma": "Trauma",
+        "corrections": "Corrections"
+      },
+      "procedures": {
+        "tumors": {
+          "name": "Tumors and Carcinomas",
+          "description": "Oncologic resection with immediate aesthetic reconstruction.",
+          "duration": "1-4 hours",
+          "recovery": "7-21 days"
+        },
+        "scars": {
+          "name": "Scars",
+          "description": "Treatment and correction of scars to improve their appearance.",
+          "duration": "30 min - 2 hours",
+          "recovery": "7-14 days"
+        },
+        "wounds": {
+          "name": "Wounds and Ulcers",
+          "description": "Specialized treatment of chronic wounds and ulcers.",
+          "duration": "Variable",
+          "recovery": "Variable"
+        },
+        "burns": {
+          "name": "Burns",
+          "description": "Reconstruction and treatment of burn sequelae.",
+          "duration": "1-4 hours",
+          "recovery": "14-30 days"
+        },
+        "biopolymerRemoval": {
+          "name": "Biopolymer Removal",
+          "description": "Safe removal of unauthorized substances from the body.",
+          "duration": "2-4 hours",
+          "recovery": "14-21 days"
+        }
+      }
+    }
+  },
+  "doctorPage": {
+    "name": "Dr. Manuel Sinchi",
+    "title": "Plastic and Reconstructive Surgeon",
+    "quote": "Combining art, science and technology to achieve natural results that enhance your unique beauty.",
+    "badges": {
+      "certified": "Certified",
+      "certifiedBy": "Medical College of Peru"
+    },
+    "buttons": {
+      "scheduleAppointment": "Schedule Appointment",
+      "viewTrajectory": "View trajectory",
+      "scheduleWhatsApp": "Schedule via WhatsApp",
+      "viewProcedures": "View procedures"
+    },
+    "stats": {
+      "experience": "Years of experience",
+      "procedures": "Procedures performed",
+      "commitment": "Commitment to your safety"
+    },
+    "sections": {
+      "aboutTitle": "About the Doctor",
+      "specialtiesTitle": "Specialties",
+      "specialtiesSubtitle": "Dr. Sinchi's areas of expertise",
+      "trajectoryTitle": "Professional Trajectory",
+      "trajectorySubtitle": "Academic training and experience",
+      "educationTitle": "Academic Education",
+      "experienceTitle": "Professional Experience",
+      "internationalTitle": "International Training",
+      "internationalSubtitle": "Experience and training at world-class centers of excellence",
+      "membershipsTitle": "Memberships and Certifications",
+      "membershipsSubtitle": "Professional affiliations that guarantee excellence",
+      "valuesTitle": "Work Philosophy",
+      "valuesSubtitle": "The principles that guide every procedure"
+    },
+    "fullBio": "Dr. Manuel Sinchi is a distinguished plastic surgeon trained at the best medical institutions in Peru and abroad. His approach combines advanced surgical techniques with deep respect for each patient's natural anatomy, always seeking harmonious results that enhance individual beauty.",
+    "cvIntroduction": "With over a decade dedicated to plastic surgery, reconstructive surgery and aesthetic medicine, Dr. Manuel Sinchi has built a solid professional career backed by excellent training both in Peru and at prestigious international centers. His commitment to constant updating and adoption of cutting-edge techniques allows him to offer his patients the highest standards of quality and safety.",
+    "specialties": {
+      "plasticSurgery": {
+        "name": "Plastic Surgery",
+        "description": "Facial and body aesthetic procedures with cutting-edge techniques."
+      },
+      "aestheticMedicine": {
+        "name": "Aesthetic Medicine",
+        "description": "Non-invasive treatments for rejuvenation and beautification."
+      },
+      "reconstructiveSurgery": {
+        "name": "Reconstructive Surgery",
+        "description": "Reconstruction of tissues affected by accidents, burns or diseases."
+      }
+    },
+    "education": {
+      "degree": {
+        "year": "2010",
+        "title": "Medical Doctor",
+        "institution": "Universidad de San Martín de Porres"
+      },
+      "masters": {
+        "year": "2013-2014",
+        "title": "Master's in Occupational Health",
+        "institution": "Universidad Científica del Sur"
+      },
+      "residency": {
+        "year": "2014-2017",
+        "title": "Plastic Surgery Residency",
+        "institution": "Hospital Edgardo Rebagliati Martins"
+      },
+      "specialty": {
+        "year": "2017",
+        "title": "Specialty in Plastic and Reconstructive Surgery",
+        "institution": "Universidad Peruana Cayetano Heredia"
+      }
+    },
+    "experience": {
+      "current": {
+        "year": "2018 - Present",
+        "position": "Plastic Surgeon",
+        "institution": "Hospital Nacional Hipólito Unanue"
+      },
+      "previous1": {
+        "year": "2017",
+        "position": "Plastic Surgeon",
+        "institution": "Hospital de Alta Complejidad de La Libertad \"Virgen de la Puerta\""
+      },
+      "previous2": {
+        "year": "2014-2017",
+        "position": "Plastic Surgery Resident Physician",
+        "institution": "Hospital Edgardo Rebagliati Martins"
+      }
+    },
+    "internationalTraining": {
+      "sweden": { "country": "Sweden", "institution": "Uppsala University Hospital" },
+      "usa": { "country": "United States", "institution": "Specialized training" },
+      "argentina": { "country": "Argentina", "institution": "Complementary training" },
+      "uruguay": { "country": "Uruguay", "institution": "Advanced training" },
+      "mexico": { "country": "Mexico", "institution": "Technical update" },
+      "bolivia": { "country": "Bolivia", "institution": "Professional exchange" }
+    },
+    "values": {
+      "safety": {
+        "title": "Safety first",
+        "description": "Rigorous protocols and proven techniques to ensure your well-being."
+      },
+      "natural": {
+        "title": "Natural results",
+        "description": "Enhancing your unique beauty while respecting your anatomy and proportions."
+      },
+      "personalized": {
+        "title": "Personalized care",
+        "description": "Every patient is unique. We listen to your needs and design a plan tailored to you."
+      },
+      "updated": {
+        "title": "Constant updating",
+        "description": "Continuous training in the most advanced techniques worldwide."
+      }
+    },
+    "cta": {
+      "title": "Ready to take the first step?",
+      "description": "Schedule a personalized consultation with Dr. Manuel Sinchi and discover how we can help you achieve your goals.",
+      "location": "Lima, Peru",
+      "confidential": "Confidential consultation"
+    }
+  },
+  "realCasesPage": {
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "badge": "Verifiable Results",
+    "title": "Real Cases",
+    "description": "Real results from Dr. Manuel Sinchi's patients. Each case demonstrates our commitment to excellence and natural results.",
+    "stats": {
+      "procedures": "Procedures performed",
+      "satisfaction": "Satisfied patients",
+      "experience": "Years of experience"
+    },
+    "filters": {
+      "all": "All",
+      "facial": "Facial Surgery",
+      "body": "Body Surgery",
+      "aesthetic": "Aesthetic Medicine",
+      "reconstructive": "Reconstructive"
+    },
+    "viewDetail": "View detail",
+    "emptyState": "No cases available in this category.",
+    "cta": {
+      "title": "Ready for your transformation?",
+      "description": "Schedule an evaluation consultation and discover how we can help you achieve the results you desire.",
+      "scheduleButton": "Schedule Consultation",
+      "whatsappButton": "Ask via WhatsApp",
+      "whatsappMessage": "Hello, I saw the real cases and I would like to schedule a consultation."
+    }
+  },
+  "bookingPage": {
+    "meta": {
+      "title": "Book Appointment | Ciruplástica - Dr. Manuel Sinchi",
+      "description": "Schedule your evaluation consultation with Dr. Manuel Sinchi. Plastic surgery, aesthetic medicine and reconstructive surgery in Lima, Peru."
+    },
+    "hero": {
+      "title": "Book Your Consultation",
+      "description": "Take the first step towards the change you desire. Schedule your personalized evaluation with Dr. Sinchi."
+    },
+    "form": {
+      "title": "Your appointment information"
+    },
+    "sidebar": {
+      "whatIncludesTitle": "What does the consultation include?",
+      "includes": {
+        "evaluation": "Personalized evaluation with Dr. Sinchi",
+        "plan": "Customized treatment plan",
+        "questions": "All your questions answered"
+      },
+      "securePaymentTitle": "100% Secure Payment",
+      "securePaymentDescription": "We accept credit/debit cards and Yape. Your information is protected.",
+      "securePaymentBadge": "Processed by Culqi - PCI DSS Certified",
+      "scheduleTitle": "Office hours",
+      "schedule": {
+        "weekdays": "Monday - Friday",
+        "saturday": "Saturdays",
+        "sunday": "Sundays",
+        "closed": "Closed"
+      }
+    }
+  }
+}

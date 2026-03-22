@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 interface Category {
     id: string
@@ -23,28 +24,28 @@ const defaultCategories: Category[] = [
 
 const procedures = {
     facial: [
-        { name: 'Rinoplastia', desc: 'Cirugía de nariz para mejorar forma y función', slug: 'rinoplastia', image: '/images/procedures/rinoplastia.jpg' },
-        { name: 'Blefaroplastia', desc: 'Rejuvenecimiento del contorno de ojos', slug: 'blefaroplastia', image: '/images/procedures/blefaroplastia.jpg' },
-        { name: 'Lifting Facial', desc: 'Estiramiento facial para rejuvenecer', slug: 'lifting-facial', image: '/images/procedures/lifting-facial.jpg' },
-        { name: 'Bichectomía', desc: 'Afinamiento del rostro', slug: 'bichectomia', image: '/images/procedures/bichectomia.jpg' },
+        { nameKey: 'rhinoplasty', descKey: 'rhinoplastyDesc', slug: 'rinoplastia', image: '/images/procedures/rinoplastia.jpg' },
+        { nameKey: 'blepharoplasty', descKey: 'blepharoplastyDesc', slug: 'blefaroplastia', image: '/images/procedures/blefaroplastia.jpg' },
+        { nameKey: 'facelift', descKey: 'faceliftDesc', slug: 'lifting-facial', image: '/images/procedures/lifting-facial.jpg' },
+        { nameKey: 'bichectomy', descKey: 'bichectomyDesc', slug: 'bichectomia', image: '/images/procedures/bichectomia.jpg' },
     ],
     corporal: [
-        { name: 'Lipoescultura', desc: 'Moldea tu figura eliminando grasa localizada', slug: 'lipo-escultura', image: '/images/procedures/lipoescultura.jpg' },
-        { name: 'Abdominoplastia', desc: 'Abdomen plano y tonificado', slug: 'abdominoplastia', image: '/images/procedures/abdominoplastia.jpg' },
-        { name: 'Mamoplastia', desc: 'Aumento o reducción mamaria', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia-aumento.jpg' },
-        { name: 'Gluteoplastia', desc: 'Aumento y levantamiento de glúteos', slug: 'gluteoplastia', image: '/images/procedures/gluteoplastia.jpg' },
+        { nameKey: 'liposculpture', descKey: 'liposculptureDesc', slug: 'lipo-escultura', image: '/images/procedures/lipoescultura.jpg' },
+        { nameKey: 'abdominoplasty', descKey: 'abdominoplastyDesc', slug: 'abdominoplastia', image: '/images/procedures/abdominoplastia.jpg' },
+        { nameKey: 'mammoplasty', descKey: 'mammoplastyDesc', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia-aumento.jpg' },
+        { nameKey: 'gluteoplasty', descKey: 'gluteoplastyDesc', slug: 'gluteoplastia', image: '/images/procedures/gluteoplastia.jpg' },
     ],
     estetica: [
-        { name: 'Botox', desc: 'Elimina arrugas de expresión', slug: 'botox', image: '/images/procedures/botox.jpg' },
-        { name: 'Ácido Hialurónico', desc: 'Relleno facial para mayor volumen', slug: 'acido-hialuronico', image: '/images/procedures/acido-hialuronico.jpg' },
-        { name: 'Relleno de Labios', desc: 'Labios más voluminosos y definidos', slug: 'rellenos-labios', image: '/images/procedures/relleno-labios.jpg' },
-        { name: 'PRP', desc: 'Plasma rico en plaquetas rejuvenecedor', slug: 'plasma-rico-plaquetas', image: '/images/procedures/prp.jpg' },
+        { nameKey: 'botox', descKey: 'botoxDesc', slug: 'botox', image: '/images/procedures/botox.jpg' },
+        { nameKey: 'hyaluronicAcid', descKey: 'hyaluronicAcidDesc', slug: 'acido-hialuronico', image: '/images/procedures/acido-hialuronico.jpg' },
+        { nameKey: 'lipFillers', descKey: 'lipFillersDesc', slug: 'rellenos-labios', image: '/images/procedures/relleno-labios.jpg' },
+        { nameKey: 'prp', descKey: 'prpDesc', slug: 'plasma-rico-plaquetas', image: '/images/procedures/prp.jpg' },
     ],
     reconstructiva: [
-        { name: 'Tumores y Carcinomas', desc: 'Resección oncológica con reconstrucción estética', slug: 'tumores-carcinomas', image: '/images/procedures/tumores-y-carcinomas.jpg' },
-        { name: 'Cicatrices', desc: 'Tratamiento y corrección de cicatrices', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg' },
-        { name: 'Quemaduras', desc: 'Reconstrucción por quemaduras', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg' },
-        { name: 'Retiro de Biopolímeros', desc: 'Extracción segura de sustancias no autorizadas', slug: 'retiro-biopolimeros', image: '/images/procedures/retiro-de-biopolimeros.jpg' },
+        { nameKey: 'tumors', descKey: 'tumorsDesc', slug: 'tumores-carcinomas', image: '/images/procedures/tumores-y-carcinomas.jpg' },
+        { nameKey: 'scars', descKey: 'scarsDesc', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg' },
+        { nameKey: 'burns', descKey: 'burnsDesc', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg' },
+        { nameKey: 'biopolymers', descKey: 'biopolymersDesc', slug: 'retiro-biopolimeros', image: '/images/procedures/retiro-de-biopolimeros.jpg' },
     ],
 }
 
@@ -61,10 +62,14 @@ function ProcedureCard3D({
     proc,
     categoryPath,
     index,
+    t,
+    tCommon,
 }: {
-    proc: { name: string; desc: string; slug: string; image: string }
+    proc: { nameKey: string; descKey: string; slug: string; image: string }
     categoryPath: string
     index: number
+    t: (key: string) => string
+    tCommon: (key: string) => string
 }) {
     const x = useMotionValue(0)
     const y = useMotionValue(0)
@@ -118,7 +123,7 @@ function ProcedureCard3D({
                 <div className="relative aspect-procedure overflow-hidden bg-primary-100">
                     <Image
                         src={proc.image}
-                        alt={proc.name}
+                        alt={t(`items.${proc.nameKey}`)}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -132,13 +137,13 @@ function ProcedureCard3D({
                     style={{ transform: 'translateZ(30px)' }}
                 >
                     <h3 className="font-semibold text-dark mb-2 group-hover:text-primary transition-colors duration-300">
-                        {proc.name}
+                        {t(`items.${proc.nameKey}`)}
                     </h3>
                     <p className="text-sm text-gray-500 mb-4 line-clamp-2">
-                        {proc.desc}
+                        {t(`items.${proc.descKey}`)}
                     </p>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all duration-300">
-                        Conocer más
+                        {tCommon('buttons.learnMore')}
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </span>
                 </div>
@@ -153,6 +158,10 @@ function ProcedureCard3D({
 }
 
 export default function Procedures() {
+    const t = useTranslations('proceduresSection')
+    const tCommon = useTranslations('common')
+    const tNav = useTranslations('navigation.categories')
+
     const [categories, setCategories] = useState<Category[]>(defaultCategories)
     const [activeCategory, setActiveCategory] = useState('facial')
 
@@ -181,6 +190,17 @@ export default function Procedures() {
         return category?.urlPath || categoryPathsMap[activeCategory] || activeCategory
     }
 
+    // Obtener nombre de categoría traducido
+    const getCategoryName = (slug: string) => {
+        const keyMap: Record<string, string> = {
+            facial: 'facialSurgery',
+            corporal: 'bodySurgery',
+            estetica: 'aestheticMedicine',
+            reconstructiva: 'reconstructive',
+        }
+        return tNav(keyMap[slug] || slug)
+    }
+
     return (
         <section className="section bg-light-gradient">
             <div className="container-custom">
@@ -191,10 +211,10 @@ export default function Procedures() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="badge-primary mb-4">Especialidades</span>
-                    <h2 className="section-title">Nuestros Procedimientos</h2>
+                    <span className="badge-primary mb-4">{t('badge')}</span>
+                    <h2 className="section-title">{t('title')}</h2>
                     <p className="section-subtitle">
-                        Tratamientos personalizados con técnicas de vanguardia
+                        {t('subtitle')}
                     </p>
                 </motion.div>
 
@@ -224,7 +244,7 @@ export default function Procedures() {
                                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                 />
                             )}
-                            <span className="relative z-10">{category.name}</span>
+                            <span className="relative z-10">{getCategoryName(category.slug)}</span>
                         </motion.button>
                     ))}
                 </motion.div>
@@ -252,6 +272,8 @@ export default function Procedures() {
                                     proc={proc}
                                     categoryPath={getActiveCategoryPath()}
                                     index={index}
+                                    t={t}
+                                    tCommon={tCommon}
                                 />
                             </div>
                         ))}
@@ -272,7 +294,7 @@ export default function Procedures() {
                         href={`/${getActiveCategoryPath()}`}
                         className="group inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
                     >
-                        Ver todos los procedimientos
+                        {t('viewAll')}
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                 </motion.div>

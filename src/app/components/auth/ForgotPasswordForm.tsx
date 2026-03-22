@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail, Loader2, AlertCircle, ArrowLeft } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 export default function ForgotPasswordForm() {
+  const t = useTranslations('auth.forgotPassword')
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -26,13 +28,13 @@ export default function ForgotPasswordForm() {
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Error al procesar la solicitud')
+        setError(data.error || t('processingError'))
         return
       }
 
       setSuccess(true)
     } catch {
-      setError('Error de conexión')
+      setError(t('connectionError'))
     } finally {
       setIsLoading(false)
     }
@@ -49,17 +51,17 @@ export default function ForgotPasswordForm() {
           <Mail className="w-8 h-8 text-primary" />
         </div>
         <h2 className="text-xl font-semibold text-dark mb-2">
-          Revisa tu email
+          {t('successTitle')}
         </h2>
         <p className="text-gray-600 mb-6">
-          Si existe una cuenta con <strong>{email}</strong>, recibirás un enlace para restablecer tu contraseña.
+          {t('successMessage')} <strong>{email}</strong>, {t('successInstructions')}
         </p>
         <Link
           href="/login"
           className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver a iniciar sesión
+          {t('backToLogin')}
         </Link>
       </motion.div>
     )
@@ -68,7 +70,7 @@ export default function ForgotPasswordForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <p className="text-gray-600 text-sm text-center mb-4">
-        Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña.
+        {t('description')}
       </p>
 
       {/* Error */}
@@ -86,7 +88,7 @@ export default function ForgotPasswordForm() {
       {/* Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Email
+          {t('email')}
         </label>
         <div className="relative">
           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -113,10 +115,10 @@ export default function ForgotPasswordForm() {
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
             <Loader2 className="w-5 h-5 animate-spin" />
-            Enviando...
+            {t('submitting')}
           </span>
         ) : (
-          'Enviar enlace'
+          t('submit')
         )}
       </motion.button>
 
@@ -127,7 +129,7 @@ export default function ForgotPasswordForm() {
           className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver a iniciar sesión
+          {t('backToLogin')}
         </Link>
       </p>
     </form>

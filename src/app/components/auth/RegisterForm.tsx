@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import { User, Mail, Phone, Lock, Eye, EyeOff, Loader2, AlertCircle, CheckCircle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 interface FormErrors {
   name?: string
@@ -15,6 +16,9 @@ interface FormErrors {
 }
 
 export default function RegisterForm() {
+  const t = useTranslations('auth.register')
+  const tValidation = useTranslations('auth.validation')
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,25 +38,25 @@ export default function RegisterForm() {
     const newErrors: FormErrors = {}
 
     if (formData.name.length < 2) {
-      newErrors.name = 'El nombre debe tener al menos 2 caracteres'
+      newErrors.name = tValidation('nameMinLength')
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Email inválido'
+      newErrors.email = tValidation('invalidEmail')
     }
 
     if (formData.password.length < 8) {
-      newErrors.password = 'La contraseña debe tener al menos 8 caracteres'
+      newErrors.password = tValidation('passwordMinLength')
     } else if (!/[A-Z]/.test(formData.password)) {
-      newErrors.password = 'Debe contener al menos una mayúscula'
+      newErrors.password = tValidation('passwordUppercase')
     } else if (!/[a-z]/.test(formData.password)) {
-      newErrors.password = 'Debe contener al menos una minúscula'
+      newErrors.password = tValidation('passwordLowercase')
     } else if (!/[0-9]/.test(formData.password)) {
-      newErrors.password = 'Debe contener al menos un número'
+      newErrors.password = tValidation('passwordNumber')
     }
 
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Las contraseñas no coinciden'
+      newErrors.confirmPassword = tValidation('passwordsNotMatch')
     }
 
     setErrors(newErrors)
@@ -63,7 +67,7 @@ export default function RegisterForm() {
     e.preventDefault()
 
     if (!formData.acceptTerms) {
-      setFormError('Debes aceptar los términos y condiciones')
+      setFormError(t('mustAcceptTerms'))
       return
     }
 
@@ -89,13 +93,13 @@ export default function RegisterForm() {
       const data = await response.json()
 
       if (!response.ok) {
-        setFormError(data.error || 'Error al registrar')
+        setFormError(data.error || t('registerError'))
         return
       }
 
       setSuccess(true)
     } catch {
-      setFormError('Error de conexión')
+      setFormError(t('connectionError'))
     } finally {
       setIsLoading(false)
     }
@@ -112,17 +116,17 @@ export default function RegisterForm() {
           <CheckCircle className="w-8 h-8 text-green-600" />
         </div>
         <h2 className="text-xl font-semibold text-dark mb-2">
-          ¡Registro exitoso!
+          {t('successTitle')}
         </h2>
         <p className="text-gray-600 mb-6">
-          Hemos enviado un enlace de verificación a <strong>{formData.email}</strong>.
-          Revisa tu bandeja de entrada para activar tu cuenta.
+          {t('successMessage')} <strong>{formData.email}</strong>.
+          {' '}{t('successInstructions')}
         </p>
         <Link
           href="/login"
           className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors"
         >
-          Ir a iniciar sesión
+          {t('goToLogin')}
         </Link>
       </motion.div>
     )
@@ -145,7 +149,7 @@ export default function RegisterForm() {
       {/* Name */}
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Nombre completo
+          {t('name')}
         </label>
         <div className="relative">
           <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -157,7 +161,7 @@ export default function RegisterForm() {
             className={`w-full pl-12 pr-4 py-3 bg-white border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all ${
               errors.name ? 'border-red-300' : 'border-gray-200'
             }`}
-            placeholder="Tu nombre"
+            placeholder={t('namePlaceholder')}
             required
           />
         </div>
@@ -169,7 +173,7 @@ export default function RegisterForm() {
       {/* Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Email
+          {t('email')}
         </label>
         <div className="relative">
           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -193,7 +197,7 @@ export default function RegisterForm() {
       {/* Phone */}
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Teléfono <span className="text-gray-400">(opcional)</span>
+          {t('phone')} <span className="text-gray-400">{t('phoneOptional')}</span>
         </label>
         <div className="relative">
           <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -211,7 +215,7 @@ export default function RegisterForm() {
       {/* Password */}
       <div>
         <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Contraseña
+          {t('password')}
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -223,7 +227,7 @@ export default function RegisterForm() {
             className={`w-full pl-12 pr-12 py-3 bg-white border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all ${
               errors.password ? 'border-red-300' : 'border-gray-200'
             }`}
-            placeholder="Mínimo 8 caracteres"
+            placeholder={t('passwordPlaceholder')}
             required
           />
           <button
@@ -238,14 +242,14 @@ export default function RegisterForm() {
           <p className="mt-1 text-sm text-red-600">{errors.password}</p>
         )}
         <p className="mt-1 text-xs text-gray-500">
-          Debe incluir mayúscula, minúscula y número
+          {t('passwordHint')}
         </p>
       </div>
 
       {/* Confirm Password */}
       <div>
         <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Confirmar contraseña
+          {t('confirmPassword')}
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -257,7 +261,7 @@ export default function RegisterForm() {
             className={`w-full pl-12 pr-12 py-3 bg-white border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all ${
               errors.confirmPassword ? 'border-red-300' : 'border-gray-200'
             }`}
-            placeholder="Repite tu contraseña"
+            placeholder={t('confirmPasswordPlaceholder')}
             required
           />
           <button
@@ -283,13 +287,13 @@ export default function RegisterForm() {
           className="w-4 h-4 mt-0.5 text-primary border-gray-300 rounded focus:ring-primary"
         />
         <label htmlFor="acceptTerms" className="text-sm text-gray-600">
-          Acepto los{' '}
+          {t('acceptTerms')}{' '}
           <Link href="/terminos" className="text-primary hover:underline">
-            términos y condiciones
+            {t('termsAndConditions')}
           </Link>{' '}
-          y la{' '}
+          {t('and')}{' '}
           <Link href="/privacidad" className="text-primary hover:underline">
-            política de privacidad
+            {t('privacyPolicy')}
           </Link>
         </label>
       </div>
@@ -305,10 +309,10 @@ export default function RegisterForm() {
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
             <Loader2 className="w-5 h-5 animate-spin" />
-            Creando cuenta...
+            {t('submitting')}
           </span>
         ) : (
-          'Crear cuenta'
+          t('submit')
         )}
       </motion.button>
 
@@ -318,7 +322,7 @@ export default function RegisterForm() {
           <div className="w-full border-t border-gray-200" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-4 bg-white text-gray-500">o registrarse con</span>
+          <span className="px-4 bg-white text-gray-500">{t('orRegisterWith')}</span>
         </div>
       </div>
 
@@ -348,17 +352,17 @@ export default function RegisterForm() {
             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
           />
         </svg>
-        Continuar con Google
+        {t('continueWithGoogle')}
       </motion.button>
 
       {/* Login Link */}
       <p className="text-center text-sm text-gray-600">
-        ¿Ya tienes cuenta?{' '}
+        {t('hasAccount')}{' '}
         <Link
           href="/login"
           className="text-primary font-semibold hover:text-primary-dark transition-colors"
         >
-          Inicia sesión
+          {t('login')}
         </Link>
       </p>
     </form>

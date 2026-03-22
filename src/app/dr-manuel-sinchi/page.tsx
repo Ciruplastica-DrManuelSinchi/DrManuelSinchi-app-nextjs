@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { motion } from 'framer-motion'
 import {
     Award,
@@ -19,16 +20,44 @@ import {
     Calendar,
     Building,
 } from 'lucide-react'
-import { doctorData } from '@/data/doctor'
 import WorldMap from '@/app/components/ui/world-map/WorldMap'
 
 const specialtyIcons = {
-    sparkles: Sparkles,
-    heart: Heart,
-    'hand-helping': HandHelping,
+    plasticSurgery: Sparkles,
+    aestheticMedicine: Heart,
+    reconstructiveSurgery: HandHelping,
+}
+
+const specialtyKeys = ['plasticSurgery', 'aestheticMedicine', 'reconstructiveSurgery'] as const
+const educationKeys = ['degree', 'masters', 'residency', 'specialty'] as const
+const experienceKeys = ['current', 'previous1', 'previous2'] as const
+const valueKeys = ['safety', 'natural', 'personalized', 'updated'] as const
+
+const internationalTraining = [
+    { key: 'sweden', flag: '🇸🇪', highlight: true },
+    { key: 'usa', flag: '🇺🇸', highlight: false },
+    { key: 'argentina', flag: '🇦🇷', highlight: false },
+    { key: 'uruguay', flag: '🇺🇾', highlight: false },
+    { key: 'mexico', flag: '🇲🇽', highlight: false },
+    { key: 'bolivia', flag: '🇧🇴', highlight: false },
+]
+
+const memberships = [
+    { name: 'Colegio Médico del Perú', acronym: 'CMP' },
+    { name: 'Sociedad Peruana de Cirugía Plástica', acronym: 'SPCP' },
+    { name: 'Sociedad Peruana de Cirugía Plástica, Reconstructiva y Estética', acronym: 'SPCPRE' },
+    { name: 'International Commission on Occupational Health', acronym: 'ICOH' },
+]
+
+const credentials = {
+    cmp: '58101',
+    rne: '32231',
+    rna: '3049',
 }
 
 export default function DoctorPage() {
+    const t = useTranslations('doctorPage')
+
     return (
         <main className="min-h-screen">
             {/* Hero Section */}
@@ -49,42 +78,43 @@ export default function DoctorPage() {
                         >
                             <div className="flex flex-wrap gap-2 mb-6">
                                 <span className="bg-accent/20 text-accent-light px-3 py-1 rounded-full text-sm font-medium">
-                                    CMP {doctorData.credentials.cmp}
+                                    CMP {credentials.cmp}
                                 </span>
                                 <span className="bg-white/10 text-white/90 px-3 py-1 rounded-full text-sm">
-                                    RNE {doctorData.credentials.rne}
+                                    RNE {credentials.rne}
                                 </span>
                                 <span className="bg-white/10 text-white/90 px-3 py-1 rounded-full text-sm">
-                                    RNA {doctorData.credentials.rna}
+                                    RNA {credentials.rna}
                                 </span>
                             </div>
 
                             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">
-                                {doctorData.name}
+                                {t('name')}
                             </h1>
 
                             <p className="text-accent-light text-xl font-medium mb-6">
-                                {doctorData.title}
+                                {t('title')}
                             </p>
 
                             <blockquote className="text-xl text-white/80 italic mb-8 border-l-4 border-accent pl-6">
-                                &ldquo;{doctorData.quote}&rdquo;
+                                &ldquo;{t('quote')}&rdquo;
                             </blockquote>
 
                             <div className="flex flex-wrap gap-4">
-                                <Link
-                                    href="https://wa.me/51999999999"
+                                <a
+                                    href="https://wa.me/51961360074"
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="btn-accent inline-flex items-center gap-2"
                                 >
                                     <Phone className="w-5 h-5" />
-                                    Agendar Cita
-                                </Link>
+                                    {t('buttons.scheduleAppointment')}
+                                </a>
                                 <a
                                     href="#trayectoria"
                                     className="btn-outline-white inline-flex items-center gap-2"
                                 >
-                                    Ver trayectoria
+                                    {t('buttons.viewTrajectory')}
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
                             </div>
@@ -101,8 +131,8 @@ export default function DoctorPage() {
                                 <div className="absolute inset-0 bg-accent/20 rounded-3xl rotate-3" />
                                 <div className="relative h-full rounded-2xl overflow-hidden shadow-strong">
                                     <Image
-                                        src={doctorData.images.portrait}
-                                        alt={doctorData.name}
+                                        src="/images/dr-sinchi-portrait.jpg"
+                                        alt={t('name')}
                                         fill
                                         className="object-cover"
                                         priority
@@ -119,8 +149,8 @@ export default function DoctorPage() {
                                     <div className="flex items-center gap-3">
                                         <Award className="w-10 h-10 text-accent" />
                                         <div>
-                                            <div className="font-semibold">Certificado</div>
-                                            <div className="text-sm text-gray-500">Colegio Médico del Perú</div>
+                                            <div className="font-semibold">{t('badges.certified')}</div>
+                                            <div className="text-sm text-gray-500">{t('badges.certifiedBy')}</div>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -134,9 +164,13 @@ export default function DoctorPage() {
             <section className="py-12 bg-white border-b">
                 <div className="container-custom">
                     <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
-                        {doctorData.stats.map((stat, index) => (
+                        {[
+                            { value: '+15', labelKey: 'experience' },
+                            { value: '+5,000', labelKey: 'procedures' },
+                            { value: '100%', labelKey: 'commitment' },
+                        ].map((stat, index) => (
                             <motion.div
-                                key={stat.label}
+                                key={stat.labelKey}
                                 className="text-center"
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +180,7 @@ export default function DoctorPage() {
                                 <div className="font-display text-4xl md:text-5xl text-primary mb-2">
                                     {stat.value}
                                 </div>
-                                <div className="text-gray-600">{stat.label}</div>
+                                <div className="text-gray-600">{t(`stats.${stat.labelKey}`)}</div>
                             </motion.div>
                         ))}
                     </div>
@@ -164,7 +198,7 @@ export default function DoctorPage() {
                             transition={{ duration: 0.6 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="section-title">Sobre el Doctor</h2>
+                            <h2 className="section-title">{t('sections.aboutTitle')}</h2>
                         </motion.div>
 
                         <motion.p
@@ -174,7 +208,7 @@ export default function DoctorPage() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             viewport={{ once: true }}
                         >
-                            {doctorData.fullBio}
+                            {t('fullBio')}
                         </motion.p>
                     </div>
                 </div>
@@ -190,18 +224,18 @@ export default function DoctorPage() {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="section-title">Especialidades</h2>
+                        <h2 className="section-title">{t('sections.specialtiesTitle')}</h2>
                         <p className="section-subtitle">
-                            Áreas de expertise del Dr. Sinchi
+                            {t('sections.specialtiesSubtitle')}
                         </p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {doctorData.specialties.map((specialty, index) => {
-                            const Icon = specialtyIcons[specialty.icon as keyof typeof specialtyIcons]
+                        {specialtyKeys.map((key, index) => {
+                            const Icon = specialtyIcons[key]
                             return (
                                 <motion.div
-                                    key={specialty.name}
+                                    key={key}
                                     className="bg-light rounded-2xl p-8 text-center hover:shadow-medium transition-shadow"
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -212,10 +246,10 @@ export default function DoctorPage() {
                                         <Icon className="w-8 h-8 text-primary" />
                                     </div>
                                     <h3 className="font-display text-xl text-dark mb-3">
-                                        {specialty.name}
+                                        {t(`specialties.${key}.name`)}
                                     </h3>
                                     <p className="text-gray-600">
-                                        {specialty.description}
+                                        {t(`specialties.${key}.description`)}
                                     </p>
                                 </motion.div>
                             )
@@ -234,9 +268,9 @@ export default function DoctorPage() {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="section-title">Trayectoria Profesional</h2>
+                        <h2 className="section-title">{t('sections.trajectoryTitle')}</h2>
                         <p className="section-subtitle">
-                            Formación académica y experiencia
+                            {t('sections.trajectorySubtitle')}
                         </p>
                     </motion.div>
 
@@ -249,7 +283,7 @@ export default function DoctorPage() {
                         viewport={{ once: true }}
                     >
                         <p className="text-lg text-gray-600 leading-relaxed text-center bg-white/50 p-6 rounded-2xl border border-primary-100">
-                            {doctorData.cvIntroduction}
+                            {t('cvIntroduction')}
                         </p>
                     </motion.div>
 
@@ -258,13 +292,13 @@ export default function DoctorPage() {
                         <div className="mb-12">
                             <div className="flex items-center gap-3 mb-6">
                                 <GraduationCap className="w-6 h-6 text-primary" />
-                                <h3 className="font-display text-2xl text-dark">Formación Académica</h3>
+                                <h3 className="font-display text-2xl text-dark">{t('sections.educationTitle')}</h3>
                             </div>
 
                             <div className="space-y-6">
-                                {doctorData.education.map((item, index) => (
+                                {educationKeys.map((key, index) => (
                                     <motion.div
-                                        key={item.title}
+                                        key={key}
                                         className="flex gap-4"
                                         initial={{ opacity: 0, x: -20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
@@ -274,15 +308,15 @@ export default function DoctorPage() {
                                         <div className="flex-shrink-0 w-24 text-right">
                                             <span className="inline-flex items-center gap-1 text-sm font-medium text-primary bg-primary-100 px-2 py-1 rounded">
                                                 <Calendar className="w-3 h-3" />
-                                                {item.year}
+                                                {t(`education.${key}.year`)}
                                             </span>
                                         </div>
                                         <div className="flex-shrink-0 w-px bg-primary-200 relative">
                                             <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full" />
                                         </div>
                                         <div className="pb-6">
-                                            <h4 className="font-semibold text-dark">{item.title}</h4>
-                                            <p className="text-gray-600">{item.institution}</p>
+                                            <h4 className="font-semibold text-dark">{t(`education.${key}.title`)}</h4>
+                                            <p className="text-gray-600">{t(`education.${key}.institution`)}</p>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -293,13 +327,13 @@ export default function DoctorPage() {
                         <div>
                             <div className="flex items-center gap-3 mb-6">
                                 <Building className="w-6 h-6 text-primary" />
-                                <h3 className="font-display text-2xl text-dark">Experiencia Profesional</h3>
+                                <h3 className="font-display text-2xl text-dark">{t('sections.experienceTitle')}</h3>
                             </div>
 
                             <div className="space-y-6">
-                                {doctorData.experience.map((item, index) => (
+                                {experienceKeys.map((key, index) => (
                                     <motion.div
-                                        key={item.institution}
+                                        key={key}
                                         className="flex gap-4"
                                         initial={{ opacity: 0, x: -20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
@@ -308,15 +342,15 @@ export default function DoctorPage() {
                                     >
                                         <div className="flex-shrink-0 w-32 text-right">
                                             <span className="text-sm font-medium text-accent-700 bg-accent-100 px-2 py-1 rounded">
-                                                {item.year}
+                                                {t(`experience.${key}.year`)}
                                             </span>
                                         </div>
                                         <div className="flex-shrink-0 w-px bg-accent-200 relative">
                                             <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-accent rounded-full" />
                                         </div>
                                         <div className="pb-6">
-                                            <h4 className="font-semibold text-dark">{item.position}</h4>
-                                            <p className="text-gray-600">{item.institution}</p>
+                                            <h4 className="font-semibold text-dark">{t(`experience.${key}.position`)}</h4>
+                                            <p className="text-gray-600">{t(`experience.${key}.institution`)}</p>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -339,9 +373,9 @@ export default function DoctorPage() {
                         <div className="flex items-center justify-center gap-3 mb-4">
                             <Globe className="w-8 h-8 text-primary" />
                         </div>
-                        <h2 className="section-title">Formación Internacional</h2>
+                        <h2 className="section-title">{t('sections.internationalTitle')}</h2>
                         <p className="section-subtitle">
-                            Experiencia y capacitación en centros de excelencia mundial
+                            {t('sections.internationalSubtitle')}
                         </p>
                     </motion.div>
 
@@ -358,9 +392,9 @@ export default function DoctorPage() {
 
                     {/* Lista de países */}
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                        {doctorData.internationalTraining.map((training, index) => (
+                        {internationalTraining.map((training, index) => (
                             <motion.div
-                                key={training.country}
+                                key={training.key}
                                 className={`text-center p-6 rounded-xl ${training.highlight
                                         ? 'bg-primary text-white'
                                         : 'bg-light hover:bg-primary-50 transition-colors'
@@ -372,10 +406,10 @@ export default function DoctorPage() {
                             >
                                 <div className="text-4xl mb-3">{training.flag}</div>
                                 <h4 className={`font-semibold mb-1 ${training.highlight ? 'text-white' : 'text-dark'}`}>
-                                    {training.country}
+                                    {t(`internationalTraining.${training.key}.country`)}
                                 </h4>
                                 <p className={`text-xs ${training.highlight ? 'text-white/80' : 'text-gray-500'}`}>
-                                    {training.institution}
+                                    {t(`internationalTraining.${training.key}.institution`)}
                                 </p>
                             </motion.div>
                         ))}
@@ -393,14 +427,14 @@ export default function DoctorPage() {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="section-title">Membresías y Certificaciones</h2>
+                        <h2 className="section-title">{t('sections.membershipsTitle')}</h2>
                         <p className="section-subtitle">
-                            Afiliaciones profesionales que garantizan excelencia
+                            {t('sections.membershipsSubtitle')}
                         </p>
                     </motion.div>
 
                     <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-                        {doctorData.memberships.map((membership, index) => (
+                        {memberships.map((membership, index) => (
                             <motion.div
                                 key={membership.acronym}
                                 className="bg-white px-6 py-4 rounded-xl shadow-card flex items-center gap-3"
@@ -431,16 +465,16 @@ export default function DoctorPage() {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="section-title">Filosofía de Trabajo</h2>
+                        <h2 className="section-title">{t('sections.valuesTitle')}</h2>
                         <p className="section-subtitle">
-                            Los principios que guían cada procedimiento
+                            {t('sections.valuesSubtitle')}
                         </p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {doctorData.values.map((value, index) => (
+                        {valueKeys.map((key, index) => (
                             <motion.div
-                                key={value.title}
+                                key={key}
                                 className="bg-light rounded-2xl p-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -450,8 +484,8 @@ export default function DoctorPage() {
                                 <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mb-4">
                                     <Star className="w-6 h-6 text-accent" />
                                 </div>
-                                <h3 className="font-semibold text-dark mb-2">{value.title}</h3>
-                                <p className="text-gray-600 text-sm">{value.description}</p>
+                                <h3 className="font-semibold text-dark mb-2">{t(`values.${key}.title`)}</h3>
+                                <p className="text-gray-600 text-sm">{t(`values.${key}.description`)}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -468,27 +502,27 @@ export default function DoctorPage() {
                         viewport={{ once: true }}
                     >
                         <h2 className="font-display text-3xl md:text-4xl mb-4">
-                            ¿Listo para dar el primer paso?
+                            {t('cta.title')}
                         </h2>
                         <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                            Agenda una consulta personalizada con el Dr. Manuel Sinchi y descubre
-                            cómo podemos ayudarte a alcanzar tus objetivos.
+                            {t('cta.description')}
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Link
-                                href="https://wa.me/51999999999"
+                            <a
+                                href="https://wa.me/51961360074"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="btn-accent inline-flex items-center gap-2"
                             >
                                 <Phone className="w-5 h-5" />
-                                Agendar por WhatsApp
-                            </Link>
+                                {t('buttons.scheduleWhatsApp')}
+                            </a>
                             <Link
                                 href="/#procedimientos"
                                 className="btn-outline-white inline-flex items-center gap-2"
                             >
-                                Ver procedimientos
+                                {t('buttons.viewProcedures')}
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
@@ -496,11 +530,11 @@ export default function DoctorPage() {
                         <div className="flex items-center justify-center gap-6 mt-8 text-white/60 text-sm">
                             <span className="flex items-center gap-2">
                                 <MapPin className="w-4 h-4" />
-                                Lima, Perú
+                                {t('cta.location')}
                             </span>
                             <span className="flex items-center gap-2">
                                 <Shield className="w-4 h-4" />
-                                Consulta confidencial
+                                {t('cta.confidential')}
                             </span>
                         </div>
                     </motion.div>

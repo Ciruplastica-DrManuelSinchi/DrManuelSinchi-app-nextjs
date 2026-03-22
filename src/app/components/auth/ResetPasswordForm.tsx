@@ -2,11 +2,13 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Lock, Eye, EyeOff, Loader2, AlertCircle, CheckCircle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 export default function ResetPasswordForm() {
+  const t = useTranslations('auth.resetPassword')
   const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
@@ -28,16 +30,16 @@ export default function ResetPasswordForm() {
           <AlertCircle className="w-8 h-8 text-red-600" />
         </div>
         <h2 className="text-xl font-semibold text-dark mb-2">
-          Enlace inválido
+          {t('invalidLink')}
         </h2>
         <p className="text-gray-600 mb-6">
-          El enlace de restablecimiento es inválido o ha expirado.
+          {t('linkExpired')}
         </p>
         <Link
           href="/forgot-password"
           className="text-primary font-semibold hover:text-primary-dark transition-colors"
         >
-          Solicitar nuevo enlace
+          {t('requestNewLink')}
         </Link>
       </div>
     )
@@ -48,12 +50,12 @@ export default function ResetPasswordForm() {
     setError('')
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Las contraseñas no coinciden')
+      setError(t('passwordsNotMatch'))
       return
     }
 
     if (formData.password.length < 8) {
-      setError('La contraseña debe tener al menos 8 caracteres')
+      setError(t('passwordTooShort'))
       return
     }
 
@@ -72,7 +74,7 @@ export default function ResetPasswordForm() {
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Error al restablecer la contraseña')
+        setError(data.error || t('resetError'))
         return
       }
 
@@ -81,7 +83,7 @@ export default function ResetPasswordForm() {
         router.push('/login')
       }, 3000)
     } catch {
-      setError('Error de conexión')
+      setError(t('connectionError'))
     } finally {
       setIsLoading(false)
     }
@@ -98,13 +100,13 @@ export default function ResetPasswordForm() {
           <CheckCircle className="w-8 h-8 text-green-600" />
         </div>
         <h2 className="text-xl font-semibold text-dark mb-2">
-          Contraseña actualizada
+          {t('successTitle')}
         </h2>
         <p className="text-gray-600 mb-4">
-          Tu contraseña ha sido restablecida correctamente.
+          {t('successMessage')}
         </p>
         <p className="text-sm text-gray-500">
-          Redirigiendo a inicio de sesión...
+          {t('redirecting')}
         </p>
       </motion.div>
     )
@@ -127,7 +129,7 @@ export default function ResetPasswordForm() {
       {/* Password */}
       <div>
         <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Nueva contraseña
+          {t('newPassword')}
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -137,7 +139,7 @@ export default function ResetPasswordForm() {
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             className="w-full pl-12 pr-12 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-            placeholder="Mínimo 8 caracteres"
+            placeholder={t('passwordPlaceholder')}
             required
           />
           <button
@@ -149,14 +151,14 @@ export default function ResetPasswordForm() {
           </button>
         </div>
         <p className="mt-1 text-xs text-gray-500">
-          Debe incluir mayúscula, minúscula y número
+          {t('passwordHint')}
         </p>
       </div>
 
       {/* Confirm Password */}
       <div>
         <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Confirmar contraseña
+          {t('confirmPassword')}
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -166,7 +168,7 @@ export default function ResetPasswordForm() {
             value={formData.confirmPassword}
             onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
             className="w-full pl-12 pr-12 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-            placeholder="Repite tu contraseña"
+            placeholder={t('confirmPasswordPlaceholder')}
             required
           />
           <button
@@ -190,10 +192,10 @@ export default function ResetPasswordForm() {
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
             <Loader2 className="w-5 h-5 animate-spin" />
-            Actualizando...
+            {t('submitting')}
           </span>
         ) : (
-          'Restablecer contraseña'
+          t('submit')
         )}
       </motion.button>
     </form>

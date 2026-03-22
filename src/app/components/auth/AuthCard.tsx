@@ -23,17 +23,7 @@ export default function AuthCard({
       transition={{ duration: 0.5 }}
       className="w-full max-w-md mx-auto"
     >
-      {/* Logo */}
-      <div className="text-center mb-8">
-        <Link href="/" className="inline-block">
-          <motion.span
-            className="font-display text-3xl font-bold text-primary tracking-wider"
-            whileHover={{ scale: 1.02 }}
-          >
-            CIRUPLÁSTICA
-          </motion.span>
-        </Link>
-      </div>
+
 
       {/* Card */}
       <div className="glass-light rounded-3xl shadow-elevation-3 p-8 md:p-10">

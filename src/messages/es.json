@@ -1,0 +1,964 @@
+{
+  "common": {
+    "buttons": {
+      "schedule": "Agendar Cita",
+      "whatsapp": "Consultar por WhatsApp",
+      "viewMore": "Ver más",
+      "seeAll": "Ver todos",
+      "learnMore": "Conocer más",
+      "login": "Iniciar Sesión",
+      "logout": "Cerrar Sesión",
+      "close": "Cerrar",
+      "readyTransformation": "¿Listo para tu transformación?",
+      "scheduleAppointment": "Agenda tu cita"
+    },
+    "labels": {
+      "duration": "Duración",
+      "recovery": "Recuperación",
+      "anesthesia": "Anestesia",
+      "before": "Antes",
+      "after": "Después",
+      "popular": "Popular"
+    },
+    "validation": {
+      "required": "Este campo es requerido",
+      "invalidEmail": "Email inválido"
+    }
+  },
+  "navigation": {
+    "doctor": "El Doctor",
+    "procedures": "Procedimientos",
+    "results": "Resultados",
+    "phone": "961 360 074",
+    "categories": {
+      "facialSurgery": "Cirugía Facial",
+      "bodySurgery": "Cirugía Corporal",
+      "aestheticMedicine": "Medicina Estética",
+      "reconstructive": "Reconstructiva"
+    },
+    "procedureNames": {
+      "blepharoplasty": "Blefaroplastia",
+      "liftingFoxEyes": "Lifting / Fox-eyes",
+      "rhinoplasty": "Rinoplastia",
+      "facialFillers": "Rellenos Faciales",
+      "otoplasty": "Otoplastia",
+      "moleRemoval": "Extracción de Lunares",
+      "mentoplasty": "Mentoplastia",
+      "chinLipo": "Lipo de Papada",
+      "bichectomy": "Bichectomía",
+      "cheekAugmentation": "Aumento de Pómulos",
+      "jawContouring": "Marcación Mandibular",
+      "facialSlimming": "Afinamiento Facial",
+      "profiloplasty": "Perfiloplastia",
+      "breastAugmentation": "Aumento de Mamas",
+      "mastopexy": "Mastopexia",
+      "breastReduction": "Reducción de Mamas",
+      "liposculpture": "Lipoescultura",
+      "abdominoplasty": "Abdominoplastia",
+      "lipoabdominoplasty": "Lipoabdominoplastia",
+      "gluteoplasty": "Gluteoplastia",
+      "mommyMakeover": "Mommy Makeover",
+      "gynecomastia": "Ginecomastia",
+      "genderSurgery": "Cirugía de Género",
+      "breastReconstruction": "Reconstrucción de Mama",
+      "hyaluronicAcid": "Ácido Hialurónico",
+      "botox": "Botox",
+      "biostimulators": "Bioestimuladores",
+      "radiofrequencyUltrasound": "Radiofrecuencia / Ultrasonido",
+      "postoperativeTreatments": "Tratamientos Postoperatorios",
+      "facialLaser": "Láser Facial",
+      "prpFacial": "PRP Facial",
+      "vitaminC": "Vitamina C Endovenosa",
+      "lipFillers": "Relleno de Labios",
+      "tumorsCarcinomas": "Tumores y Carcinomas",
+      "scars": "Cicatrices",
+      "woundsUlcers": "Heridas y Úlceras",
+      "burns": "Quemaduras",
+      "biopolymerRemoval": "Retiro de Biopolímeros"
+    }
+  },
+  "footer": {
+    "description": "Especialistas en cirugía plástica y medicina estética en Lima, Perú.",
+    "descriptionLong": "Especialistas en cirugía plástica, medicina estética y cirugía reconstructiva en Lima, Perú. Más de 15 años transformando vidas con resultados naturales.",
+    "procedures": "Procedimientos",
+    "links": "Enlaces",
+    "contact": "Contacto",
+    "contactUs": "Contáctanos",
+    "rights": "Todos los derechos reservados",
+    "schedule": "Lun - Sáb: 9:00am - 7:00pm",
+    "linkLabels": {
+      "facialSurgery": "Cirugía Facial",
+      "bodySurgery": "Cirugía Corporal",
+      "aestheticMedicine": "Medicina Estética",
+      "reconstructiveSurgery": "Cirugía Reconstructiva",
+      "drManuelSinchi": "Dr. Manuel Sinchi",
+      "realCases": "Casos Reales",
+      "videos": "Videos",
+      "faq": "Preguntas Frecuentes",
+      "contactPage": "Contacto"
+    }
+  },
+  "hero": {
+    "badge": "Cirugía Plástica de Excelencia en Lima",
+    "title": "Tu Belleza,",
+    "titleHighlight": "Nuestra Especialidad",
+    "subtitle": "Cirugía Plástica & Medicina Estética",
+    "discover": "Descubrir",
+    "description": "Más de 15 años de experiencia transformando vidas. El Dr. Manuel Sinchi y su equipo ofrecen los procedimientos más avanzados en cirugía plástica, medicina estética y cirugía reconstructiva.",
+    "stats": {
+      "experience": "Años de experiencia",
+      "surgeries": "Cirugías exitosas",
+      "satisfaction": "Satisfacción"
+    }
+  },
+  "trustBar": {
+    "yearsExperience": "Años de experiencia",
+    "successfulSurgeries": "Cirugías exitosas",
+    "satisfiedPatients": "Pacientes satisfechos",
+    "satisfactionRate": "Tasa de satisfacción",
+    "authorizedClinics": "Clínicas autorizadas",
+    "certifications": "Certificaciones internacionales"
+  },
+  "doctorSection": {
+    "badge": "Conoce al Especialista",
+    "title": "Dr. Manuel Sinchi",
+    "subtitle": "Cirujano Plástico Certificado",
+    "description": "Con más de 15 años de experiencia, el Dr. Sinchi se ha consolidado como uno de los cirujanos plásticos más reconocidos de Lima. Su enfoque combina técnicas quirúrgicas de vanguardia con un profundo compromiso por el bienestar de cada paciente.",
+    "quote": "Combinando arte, ciencia y tecnología para lograr resultados naturales que realcen tu belleza única.",
+    "credentials": {
+      "title": "Certificado",
+      "items": {
+        "cmp": "CMP 58101",
+        "rne": "Registro Nacional",
+        "member": "Miembro de la Sociedad Peruana de Cirugía Plástica",
+        "certified": "Certificado en técnicas ultrasónicas avanzadas"
+      }
+    },
+    "cta": "Conocer más sobre el Dr. Sinchi"
+  },
+  "procedures": {
+    "badge": "Nuestros Procedimientos",
+    "title": "Transforma tu imagen",
+    "titleHighlight": "con expertos",
+    "description": "Descubre nuestra amplia gama de procedimientos diseñados para realzar tu belleza natural con resultados seguros y duraderos.",
+    "categories": {
+      "all": "Todos",
+      "facial": "Facial",
+      "body": "Corporal",
+      "aesthetic": "Estética",
+      "reconstructive": "Reconstructiva"
+    },
+    "viewAll": "Ver todos los procedimientos"
+  },
+  "proceduresSection": {
+    "badge": "Especialidades",
+    "title": "Nuestros Procedimientos",
+    "subtitle": "Tratamientos personalizados con técnicas de vanguardia",
+    "viewAll": "Ver todos los procedimientos",
+    "items": {
+      "rhinoplasty": "Rinoplastia",
+      "rhinoplastyDesc": "Cirugía de nariz para mejorar forma y función",
+      "blepharoplasty": "Blefaroplastia",
+      "blepharoplastyDesc": "Rejuvenecimiento del contorno de ojos",
+      "facelift": "Lifting Facial",
+      "faceliftDesc": "Estiramiento facial para rejuvenecer",
+      "bichectomy": "Bichectomía",
+      "bichectomyDesc": "Afinamiento del rostro",
+      "liposculpture": "Lipoescultura",
+      "liposculptureDesc": "Moldea tu figura eliminando grasa localizada",
+      "abdominoplasty": "Abdominoplastia",
+      "abdominoplastyDesc": "Abdomen plano y tonificado",
+      "mammoplasty": "Mamoplastia",
+      "mammoplastyDesc": "Aumento o reducción mamaria",
+      "gluteoplasty": "Gluteoplastia",
+      "gluteoplastyDesc": "Aumento y levantamiento de glúteos",
+      "botox": "Botox",
+      "botoxDesc": "Elimina arrugas de expresión",
+      "hyaluronicAcid": "Ácido Hialurónico",
+      "hyaluronicAcidDesc": "Relleno facial para mayor volumen",
+      "lipFillers": "Relleno de Labios",
+      "lipFillersDesc": "Labios más voluminosos y definidos",
+      "prp": "PRP",
+      "prpDesc": "Plasma rico en plaquetas rejuvenecedor",
+      "tumors": "Tumores y Carcinomas",
+      "tumorsDesc": "Resección oncológica con reconstrucción estética",
+      "scars": "Cicatrices",
+      "scarsDesc": "Tratamiento y corrección de cicatrices",
+      "burns": "Quemaduras",
+      "burnsDesc": "Reconstrucción por quemaduras",
+      "biopolymers": "Retiro de Biopolímeros",
+      "biopolymersDesc": "Extracción segura de sustancias no autorizadas"
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonios",
+    "title": "Lo que dicen",
+    "titleHighlight": "nuestros pacientes",
+    "description": "Conoce las experiencias de quienes confiaron en nosotros para su transformación.",
+    "fullTitle": "Lo que dicen nuestros pacientes",
+    "realStories": "Historias reales de transformación y confianza",
+    "verifiedIn": "Reseñas verificadas en"
+  },
+  "videos": {
+    "badge": "Videos",
+    "title": "Conoce más sobre",
+    "titleHighlight": "nuestros procedimientos",
+    "description": "El Dr. Sinchi te explica cada procedimiento en detalle.",
+    "informativeVideos": "Videos Informativos",
+    "learnAboutProcedures": "Conoce más sobre nuestros procedimientos",
+    "viewAll": "Ver todos los videos"
+  },
+  "faq": {
+    "badge": "Preguntas Frecuentes",
+    "title": "Resolvemos",
+    "titleHighlight": "tus dudas",
+    "description": "Resolvemos las dudas más comunes de nuestros pacientes antes de su consulta.",
+    "viewAll": "Ver todas las preguntas",
+    "items": {
+      "recovery": {
+        "question": "¿Cuánto tiempo dura la recuperación?",
+        "answer": "El tiempo de recuperación varía según el procedimiento. En general, los procedimientos faciales requieren entre 1-2 semanas, mientras que las cirugías corporales pueden necesitar 2-4 semanas antes de retomar actividades normales."
+      },
+      "permanent": {
+        "question": "¿Los resultados son permanentes?",
+        "answer": "La mayoría de los procedimientos quirúrgicos ofrecen resultados duraderos. Sin embargo, factores como el envejecimiento natural, cambios de peso y estilo de vida pueden afectar los resultados a largo plazo."
+      },
+      "anesthesia": {
+        "question": "¿Qué tipo de anestesia se utiliza?",
+        "answer": "Dependiendo del procedimiento, utilizamos anestesia local, sedación o anestesia general. El Dr. Sinchi evaluará su caso particular y le recomendará la opción más segura y cómoda."
+      },
+      "financing": {
+        "question": "¿Ofrecen financiamiento?",
+        "answer": "Sí, contamos con opciones de financiamiento flexible para que pueda realizar su procedimiento. Consulte con nuestro equipo para conocer los planes disponibles."
+      },
+      "finalResults": {
+        "question": "¿Cuándo puedo ver los resultados finales?",
+        "answer": "Los resultados iniciales son visibles desde las primeras semanas, pero el resultado final se aprecia entre 3-6 meses después del procedimiento, una vez que la inflamación ha disminuido completamente."
+      }
+    }
+  },
+  "location": {
+    "badge": "Ubicación",
+    "title": "Visítanos en",
+    "titleHighlight": "Miraflores",
+    "description": "Nuestro consultorio está ubicado en una zona céntrica y accesible de Miraflores, con estacionamiento disponible en el edificio.",
+    "directions": "Cómo Llegar",
+    "contact": {
+      "address": "Dirección",
+      "addressLine1": "Calle Scipión Llona 180, Consultorio 503",
+      "addressLine2": "Miraflores, Lima - Perú",
+      "phone": "Teléfono",
+      "phoneNumber": "961 360 074",
+      "email": "Email",
+      "emailAddress": "consultas@ciruplastica.pe",
+      "schedule": "Horario",
+      "scheduleText": "Lunes - Sábado",
+      "scheduleHours": "9:00am - 7:00pm"
+    }
+  },
+  "contactCta": {
+    "badge": "Consulta de Valoración Gratuita",
+    "title": "¿Listo para dar el",
+    "titleHighlight": "primer paso",
+    "description": "Agenda tu consulta personalizada con el Dr. Sinchi y descubre las opciones ideales para alcanzar tus objetivos.",
+    "scheduleNow": "Agendar consulta ahora",
+    "whatsapp": "Consultar por WhatsApp",
+    "whatsappDirect": "WhatsApp Directo",
+    "urgency": {
+      "lastAppointments": "Últimas 3 citas esta semana",
+      "peopleViewing": "{count} personas viendo ahora"
+    },
+    "trust": {
+      "responseTime": "Respuesta en menos de 2 horas",
+      "availableNow": "Disponible ahora"
+    }
+  },
+  "blog": {
+    "badge": "Blog",
+    "title": "Últimas",
+    "titleHighlight": "publicaciones",
+    "description": "Mantente informado con nuestros artículos sobre cirugía plástica y medicina estética.",
+    "readMore": "Leer más",
+    "viewAll": "Ver todas las publicaciones",
+    "articlesAndTips": "Artículos y Consejos",
+    "usefulInfo": "Información útil sobre cirugía plástica, medicina estética y cuidados para tu bienestar",
+    "viewAllArticles": "Ver todos los artículos"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar Sesión",
+      "email": "Email",
+      "password": "Contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submit": "Iniciar Sesión",
+      "submitting": "Iniciando sesión...",
+      "noAccount": "¿No tienes cuenta?",
+      "register": "Regístrate",
+      "rememberMe": "Recordarme",
+      "orContinueWith": "o continuar con",
+      "continueWithGoogle": "Continuar con Google",
+      "emailVerified": "Email verificado correctamente. Ya puedes iniciar sesión.",
+      "invalidToken": "El enlace de verificación es inválido o ha expirado",
+      "errorOccurred": "Ha ocurrido un error",
+      "loginError": "Error al iniciar sesión"
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "phoneOptional": "(opcional)",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Mínimo 8 caracteres",
+      "passwordHint": "Debe incluir mayúscula, minúscula y número",
+      "confirmPassword": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repite tu contraseña",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta...",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "login": "Inicia sesión",
+      "orRegisterWith": "o registrarse con",
+      "continueWithGoogle": "Continuar con Google",
+      "acceptTerms": "Acepto los",
+      "termsAndConditions": "términos y condiciones",
+      "and": "y la",
+      "privacyPolicy": "política de privacidad",
+      "mustAcceptTerms": "Debes aceptar los términos y condiciones",
+      "successTitle": "¡Registro exitoso!",
+      "successMessage": "Hemos enviado un enlace de verificación a",
+      "successInstructions": "Revisa tu bandeja de entrada para activar tu cuenta.",
+      "goToLogin": "Ir a iniciar sesión",
+      "registerError": "Error al registrar",
+      "connectionError": "Error de conexión"
+    },
+    "forgotPassword": {
+      "title": "Recuperar Contraseña",
+      "description": "Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña.",
+      "email": "Email",
+      "submit": "Enviar enlace",
+      "submitting": "Enviando...",
+      "backToLogin": "Volver a iniciar sesión",
+      "successTitle": "Revisa tu email",
+      "successMessage": "Si existe una cuenta con",
+      "successInstructions": "recibirás un enlace para restablecer tu contraseña.",
+      "processingError": "Error al procesar la solicitud",
+      "connectionError": "Error de conexión"
+    },
+    "resetPassword": {
+      "title": "Restablecer Contraseña",
+      "newPassword": "Nueva contraseña",
+      "passwordPlaceholder": "Mínimo 8 caracteres",
+      "passwordHint": "Debe incluir mayúscula, minúscula y número",
+      "confirmPassword": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repite tu contraseña",
+      "submit": "Restablecer contraseña",
+      "submitting": "Actualizando...",
+      "invalidLink": "Enlace inválido",
+      "linkExpired": "El enlace de restablecimiento es inválido o ha expirado.",
+      "requestNewLink": "Solicitar nuevo enlace",
+      "successTitle": "Contraseña actualizada",
+      "successMessage": "Tu contraseña ha sido restablecida correctamente.",
+      "redirecting": "Redirigiendo a inicio de sesión...",
+      "passwordsNotMatch": "Las contraseñas no coinciden",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "resetError": "Error al restablecer la contraseña",
+      "connectionError": "Error de conexión"
+    },
+    "validation": {
+      "nameMinLength": "El nombre debe tener al menos 2 caracteres",
+      "invalidEmail": "Email inválido",
+      "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+      "passwordUppercase": "Debe contener al menos una mayúscula",
+      "passwordLowercase": "Debe contener al menos una minúscula",
+      "passwordNumber": "Debe contener al menos un número",
+      "passwordsNotMatch": "Las contraseñas no coinciden"
+    }
+  },
+  "userMenu": {
+    "myAccount": "Mi cuenta",
+    "dashboard": "Panel de control",
+    "adminPanel": "Panel de administración",
+    "logout": "Cerrar sesión"
+  },
+  "metadata": {
+    "title": "Ciruplástica | Cirugía Plástica en Lima - Dr. Manuel Sinchi",
+    "description": "Especialistas en Cirugía Plástica, Medicina Estética y Cirugía Reconstructiva en Lima, Perú. Dr. Manuel Sinchi, más de 15 años de experiencia.",
+    "keywords": "cirugía plástica Lima, rinoplastia Lima, lipoescultura Lima, aumento de mamas Lima, Dr. Manuel Sinchi"
+  },
+  "whatsappButton": {
+    "defaultMessage": "Hola Dr. Sinchi, me gustaría agendar una consulta de valoración.",
+    "haveQuestions": "¿Tienes dudas?",
+    "contactUs": "Escríbenos por WhatsApp y te responderemos a la brevedad.",
+    "writeUs": "Escríbenos por WhatsApp"
+  },
+  "beforeAfterSection": {
+    "badge": "Resultados Reales",
+    "title": "Casos Antes y Después",
+    "description": "Desliza para comparar los resultados de nuestros pacientes",
+    "viewAll": "Ver todos los casos"
+  },
+  "procedurePage": {
+    "breadcrumbs": {
+      "home": "Inicio"
+    },
+    "hero": {
+      "scheduleAppointment": "Agendar Cita",
+      "contactWhatsapp": "Consultar por WhatsApp"
+    },
+    "info": {
+      "badge": "Procedimiento"
+    },
+    "beforeAfter": {
+      "badge": "Resultados Reales",
+      "title": "Casos Antes y Después",
+      "description": "Resultados verificables de pacientes reales del Dr. Sinchi",
+      "viewMore": "Ver más casos reales"
+    },
+    "benefits": {
+      "title": "¿Por qué elegir este procedimiento?",
+      "description": "Combinamos técnica avanzada con atención personalizada"
+    },
+    "process": {
+      "badge": "Tu Experiencia",
+      "title": "Proceso y Recuperación",
+      "description": "Te acompañamos en cada paso del camino",
+      "step": "Paso"
+    },
+    "videosSection": {
+      "badge": "Contenido Educativo",
+      "title": "Videos Informativos",
+      "description": "El Dr. Sinchi explica todo lo que necesitas saber",
+      "viewAll": "Ver todos los videos",
+      "comingSoon": "Próximamente",
+      "preparingContent": "Estamos preparando contenido educativo sobre este procedimiento.",
+      "viewChannel": "Ver Canal"
+    },
+    "faqSection": {
+      "badge": "FAQ",
+      "title": "Preguntas Frecuentes",
+      "description": "Resolvemos las dudas más comunes sobre este procedimiento. Si tienes alguna pregunta adicional, no dudes en contactarnos.",
+      "moreQuestions": "¿Tienes más preguntas?",
+      "scheduleConsultation": "Agenda una consulta de valoración con el Dr. Sinchi."
+    },
+    "cta": {
+      "callNow": "Llamar Ahora",
+      "whatsapp": "WhatsApp"
+    }
+  },
+  "categoryPages": {
+    "common": {
+      "breadcrumbs": {
+        "home": "Inicio"
+      },
+      "filters": {
+        "all": "Todos"
+      },
+      "viewMore": "Ver más información",
+      "popular": "Popular",
+      "cta": {
+        "title": "Agenda tu consulta de valoración",
+        "description": "Recibe una evaluación personalizada y conoce cuál es el mejor procedimiento para lograr tus objetivos estéticos.",
+        "scheduleButton": "Agendar Cita",
+        "whatsappButton": "Consulta por WhatsApp"
+      },
+      "stats": {
+        "yearsExperience": "Años de experiencia",
+        "satisfaction": "Satisfacción"
+      }
+    },
+    "facial": {
+      "title": "Cirugía Plástica Facial",
+      "badge": "Procedimientos Especializados",
+      "description": "Procedimientos diseñados para realzar tu belleza natural y corregir imperfecciones con técnicas avanzadas y resultados armónicos.",
+      "stats": {
+        "surgeries": "Cirugías faciales"
+      },
+      "filters": {
+        "nose": "Nariz",
+        "eyes": "Ojos",
+        "face": "Rostro",
+        "contour": "Contorno"
+      },
+      "procedures": {
+        "blepharoplasty": {
+          "name": "Blefaroplastia",
+          "description": "Rejuvenecimiento de párpados eliminando exceso de piel y bolsas.",
+          "duration": "1-2 horas",
+          "recovery": "5-7 días"
+        },
+        "lifting": {
+          "name": "Lifting / Fox-eyes",
+          "description": "Lifting de cejas, Fox-eyes, lifting frontal, facial y cervical.",
+          "duration": "1-4 horas",
+          "recovery": "7-21 días"
+        },
+        "rhinoplasty": {
+          "name": "Rinoplastia",
+          "description": "Corrección estética y funcional de la nariz para lograr armonía facial.",
+          "duration": "2-3 horas",
+          "recovery": "7-10 días"
+        },
+        "facialFillers": {
+          "name": "Rellenos Faciales",
+          "description": "Restaura volumen con grasa autóloga, ácido hialurónico o implantes.",
+          "duration": "30-90 min",
+          "recovery": "3-14 días"
+        },
+        "otoplasty": {
+          "name": "Otoplastia",
+          "description": "Corrección de orejas prominentes, reducción o reconstrucción.",
+          "duration": "1-2 horas",
+          "recovery": "7 días"
+        },
+        "moleRemoval": {
+          "name": "Extracción de Lunares",
+          "description": "Remoción segura de lunares y lesiones cutáneas con análisis patológico.",
+          "duration": "15-30 min",
+          "recovery": "5-7 días"
+        },
+        "mentoplasty": {
+          "name": "Mentoplastia",
+          "description": "Aumento o reducción del mentón para equilibrar el perfil facial.",
+          "duration": "1-2 horas",
+          "recovery": "7-10 días"
+        },
+        "chinLipo": {
+          "name": "Liposucción de Papada",
+          "description": "Eliminación de grasa submentoniana para definir el contorno del cuello.",
+          "duration": "1 hora",
+          "recovery": "5-7 días"
+        },
+        "bichectomy": {
+          "name": "Bichectomía",
+          "description": "Extracción de bolsas de Bichat para afinar las mejillas.",
+          "duration": "45 min",
+          "recovery": "3-5 días"
+        },
+        "cheekAugmentation": {
+          "name": "Aumento de Pómulos",
+          "description": "Realza tus pómulos con grasa autóloga o implantes de silicona.",
+          "duration": "45-90 min",
+          "recovery": "7-14 días"
+        },
+        "jawContouring": {
+          "name": "Marcación Mandibular",
+          "description": "Define tu línea mandibular con grasa o implantes.",
+          "duration": "1-2 horas",
+          "recovery": "10-14 días"
+        },
+        "facialSlimming": {
+          "name": "Afinamiento Facial",
+          "description": "Combinación de bichectomía, lipo de papada, marcación y mentoplastia.",
+          "duration": "2-3 horas",
+          "recovery": "14-21 días"
+        },
+        "profiloplasty": {
+          "name": "Perfiloplastia",
+          "description": "Armoniza tu perfil combinando rinoplastia con mentoplastia.",
+          "duration": "2-4 horas",
+          "recovery": "14-21 días"
+        }
+      }
+    },
+    "body": {
+      "title": "Cirugía Plástica Corporal",
+      "badge": "Procedimientos Especializados",
+      "description": "Moldea y define tu figura con procedimientos seguros y resultados naturales de la mano de especialistas certificados.",
+      "stats": {
+        "surgeries": "Cirugías corporales"
+      },
+      "filters": {
+        "breast": "Mamas",
+        "abdomen": "Abdomen",
+        "contour": "Contorno"
+      },
+      "procedures": {
+        "breastAugmentation": {
+          "name": "Aumento de Mamas",
+          "description": "Aumenta el volumen y mejora la forma de tus senos con implantes de última generación.",
+          "duration": "1-2 horas",
+          "recovery": "7-14 días"
+        },
+        "mastopexy": {
+          "name": "Mastopexia",
+          "description": "Levantamiento de senos para corregir la flacidez y recuperar la firmeza.",
+          "duration": "2-3 horas",
+          "recovery": "14-21 días"
+        },
+        "breastReduction": {
+          "name": "Reducción de Mamas",
+          "description": "Reduce el tamaño de los senos para aliviar molestias y mejorar la proporción.",
+          "duration": "2-4 horas",
+          "recovery": "14-21 días"
+        },
+        "liposculpture": {
+          "name": "Lipoescultura",
+          "description": "Elimina grasa localizada y moldea tu figura con técnicas de alta definición.",
+          "duration": "2-4 horas",
+          "recovery": "7-14 días"
+        },
+        "abdominoplasty": {
+          "name": "Abdominoplastia",
+          "description": "Elimina el exceso de piel y grasa abdominal para un abdomen plano y tonificado.",
+          "duration": "2-4 horas",
+          "recovery": "14-21 días"
+        },
+        "lipoabdominoplasty": {
+          "name": "Lipoabdominoplastia",
+          "description": "Combina liposucción con abdominoplastia para resultados integrales.",
+          "duration": "3-5 horas",
+          "recovery": "14-21 días"
+        },
+        "gluteoplasty": {
+          "name": "Gluteoplastia",
+          "description": "Aumenta y moldea tus glúteos con grasa propia o implantes.",
+          "duration": "2-3 horas",
+          "recovery": "14-21 días"
+        },
+        "mommyMakeover": {
+          "name": "Mommy Makeover",
+          "description": "Recupera tu figura después del embarazo con múltiples procedimientos combinados.",
+          "duration": "4-6 horas",
+          "recovery": "21-30 días"
+        },
+        "gynecomastia": {
+          "name": "Ginecomastia",
+          "description": "Corrección del exceso de tejido mamario en hombres.",
+          "duration": "1-2 horas",
+          "recovery": "7-14 días"
+        },
+        "genderSurgery": {
+          "name": "Cirugía de Género",
+          "description": "Procedimientos de afirmación de género con atención integral y especializada.",
+          "duration": "Variable",
+          "recovery": "Variable"
+        },
+        "breastReconstruction": {
+          "name": "Reconstrucción de Mama",
+          "description": "Reconstrucción mamaria post mastectomía o trauma.",
+          "duration": "2-4 horas",
+          "recovery": "14-21 días"
+        }
+      }
+    },
+    "aesthetic": {
+      "title": "Medicina Estética",
+      "badge": "Tratamientos No Invasivos",
+      "description": "Rejuvenece y embellece tu rostro con tratamientos no invasivos de última generación, sin cirugía y con resultados inmediatos.",
+      "stats": {
+        "treatments": "Tratamientos realizados"
+      },
+      "filters": {
+        "injectables": "Inyectables",
+        "technology": "Tecnología",
+        "regenerative": "Regenerativo"
+      },
+      "procedures": {
+        "hyaluronicAcid": {
+          "name": "Ácido Hialurónico",
+          "description": "Restaura volumen y hidratación facial con rellenos de última generación.",
+          "duration": "30-60 min",
+          "recovery": "1-3 días"
+        },
+        "botox": {
+          "name": "Botox",
+          "description": "Elimina arrugas de expresión y previene nuevas líneas faciales.",
+          "duration": "15-30 min",
+          "recovery": "Sin recuperación"
+        },
+        "biostimulators": {
+          "name": "Bioestimuladores",
+          "description": "Estimula la producción natural de colágeno para rejuvenecer tu piel.",
+          "duration": "30-60 min",
+          "recovery": "1-3 días"
+        },
+        "radiofrequency": {
+          "name": "Radiofrecuencia / Ultrasonido",
+          "description": "Tratamientos de tensado cutáneo sin cirugía para rostro y cuerpo.",
+          "duration": "45-90 min",
+          "recovery": "Sin recuperación"
+        },
+        "postoperative": {
+          "name": "Tratamientos Postoperatorios",
+          "description": "Acelera tu recuperación y optimiza los resultados de tu cirugía.",
+          "duration": "Variable",
+          "recovery": "Variable"
+        },
+        "facialLaser": {
+          "name": "Láser Facial",
+          "description": "Mejora la textura, manchas y cicatrices con tecnología láser avanzada.",
+          "duration": "30-60 min",
+          "recovery": "3-7 días"
+        },
+        "prp": {
+          "name": "Plasma Rico en Plaquetas",
+          "description": "Regenera tu piel con factores de crecimiento de tu propia sangre.",
+          "duration": "45-60 min",
+          "recovery": "1-2 días"
+        },
+        "vitaminC": {
+          "name": "Vitamina C Endovenosa",
+          "description": "Potente antioxidante que ilumina y revitaliza tu piel desde adentro.",
+          "duration": "45-60 min",
+          "recovery": "Sin recuperación"
+        },
+        "lipFillers": {
+          "name": "Relleno de Labios",
+          "description": "Aumenta el volumen y define el contorno de tus labios naturalmente.",
+          "duration": "15-30 min",
+          "recovery": "1-3 días"
+        }
+      }
+    },
+    "reconstructive": {
+      "title": "Cirugía Reconstructiva",
+      "badge": "Restaurando Función y Estética",
+      "description": "Procedimientos especializados para restaurar la forma y función de tejidos afectados por traumatismos, enfermedades, quemaduras o cirugías previas.",
+      "stats": {
+        "surgeries": "Casos reconstructivos",
+        "success": "Éxito en tratamientos"
+      },
+      "intro": {
+        "title": "Más que estética, calidad de vida",
+        "description": "La cirugía reconstructiva va más allá de la apariencia. Nuestro objetivo es restaurar la función, aliviar el dolor y devolver la confianza a pacientes que han sufrido traumatismos, enfermedades o condiciones que afectan su bienestar físico y emocional."
+      },
+      "servicesSection": {
+        "badge": "Nuestros Servicios",
+        "title": "Procedimientos Reconstructivos",
+        "subtitle": "Soluciones especializadas para cada condición"
+      },
+      "whyChooseUs": {
+        "badge": "¿Por qué elegirnos?",
+        "title": "Experiencia en casos complejos",
+        "description": "La cirugía reconstructiva requiere un alto nivel de especialización y experiencia. El Dr. Sinchi combina conocimientos en cirugía plástica y reconstructiva para ofrecer soluciones integrales.",
+        "reasons": [
+          "Formación especializada en cirugía reconstructiva",
+          "Experiencia en hospitales de referencia",
+          "Enfoque multidisciplinario con otros especialistas",
+          "Técnicas avanzadas de reconstrucción",
+          "Seguimiento cercano durante toda la recuperación"
+        ]
+      },
+      "filters": {
+        "oncologic": "Oncológico",
+        "trauma": "Trauma",
+        "corrections": "Correcciones"
+      },
+      "procedures": {
+        "tumors": {
+          "name": "Tumores y Carcinomas",
+          "description": "Resección oncológica con reconstrucción estética inmediata.",
+          "duration": "1-4 horas",
+          "recovery": "7-21 días"
+        },
+        "scars": {
+          "name": "Cicatrices",
+          "description": "Tratamiento y corrección de cicatrices para mejorar su apariencia.",
+          "duration": "30 min - 2 horas",
+          "recovery": "7-14 días"
+        },
+        "wounds": {
+          "name": "Heridas y Úlceras",
+          "description": "Tratamiento especializado de heridas crónicas y úlceras.",
+          "duration": "Variable",
+          "recovery": "Variable"
+        },
+        "burns": {
+          "name": "Quemaduras",
+          "description": "Reconstrucción y tratamiento de secuelas por quemaduras.",
+          "duration": "1-4 horas",
+          "recovery": "14-30 días"
+        },
+        "biopolymerRemoval": {
+          "name": "Retiro de Biopolímeros",
+          "description": "Extracción segura de sustancias no autorizadas del cuerpo.",
+          "duration": "2-4 horas",
+          "recovery": "14-21 días"
+        }
+      }
+    }
+  },
+  "doctorPage": {
+    "name": "Dr. Manuel Sinchi",
+    "title": "Cirujano Plástico y Reconstructivo",
+    "quote": "Combinando arte, ciencia y tecnología para lograr resultados naturales que realcen tu belleza única.",
+    "badges": {
+      "certified": "Certificado",
+      "certifiedBy": "Colegio Médico del Perú"
+    },
+    "buttons": {
+      "scheduleAppointment": "Agendar Cita",
+      "viewTrajectory": "Ver trayectoria",
+      "scheduleWhatsApp": "Agendar por WhatsApp",
+      "viewProcedures": "Ver procedimientos"
+    },
+    "stats": {
+      "experience": "Años de experiencia",
+      "procedures": "Procedimientos realizados",
+      "commitment": "Compromiso con tu seguridad"
+    },
+    "sections": {
+      "aboutTitle": "Sobre el Doctor",
+      "specialtiesTitle": "Especialidades",
+      "specialtiesSubtitle": "Áreas de expertise del Dr. Sinchi",
+      "trajectoryTitle": "Trayectoria Profesional",
+      "trajectorySubtitle": "Formación académica y experiencia",
+      "educationTitle": "Formación Académica",
+      "experienceTitle": "Experiencia Profesional",
+      "internationalTitle": "Formación Internacional",
+      "internationalSubtitle": "Experiencia y capacitación en centros de excelencia mundial",
+      "membershipsTitle": "Membresías y Certificaciones",
+      "membershipsSubtitle": "Afiliaciones profesionales que garantizan excelencia",
+      "valuesTitle": "Filosofía de Trabajo",
+      "valuesSubtitle": "Los principios que guían cada procedimiento"
+    },
+    "fullBio": "El Dr. Manuel Sinchi es un destacado cirujano plástico con formación en las mejores instituciones médicas de Perú y el extranjero. Su enfoque combina técnicas quirúrgicas avanzadas con un profundo respeto por la anatomía natural de cada paciente, buscando siempre resultados armoniosos que realcen la belleza individual.",
+    "cvIntroduction": "Con más de una década dedicada a la cirugía plástica, reconstructiva y medicina estética, el Dr. Manuel Sinchi ha construido una sólida trayectoria profesional respaldada por formación de excelencia tanto en Perú como en prestigiosos centros internacionales. Su compromiso con la actualización constante y la adopción de técnicas de vanguardia le permite ofrecer a sus pacientes los más altos estándares de calidad y seguridad.",
+    "specialties": {
+      "plasticSurgery": {
+        "name": "Cirugía Plástica",
+        "description": "Procedimientos estéticos faciales y corporales con técnicas de vanguardia."
+      },
+      "aestheticMedicine": {
+        "name": "Medicina Estética",
+        "description": "Tratamientos no invasivos para rejuvenecimiento y embellecimiento."
+      },
+      "reconstructiveSurgery": {
+        "name": "Cirugía Reconstructiva",
+        "description": "Reconstrucción de tejidos afectados por accidentes, quemaduras o enfermedades."
+      }
+    },
+    "education": {
+      "degree": {
+        "year": "2010",
+        "title": "Médico Cirujano",
+        "institution": "Universidad de San Martín de Porres"
+      },
+      "masters": {
+        "year": "2013-2014",
+        "title": "Maestría en Salud Ocupacional",
+        "institution": "Universidad Científica del Sur"
+      },
+      "residency": {
+        "year": "2014-2017",
+        "title": "Residencia en Cirugía Plástica",
+        "institution": "Hospital Edgardo Rebagliati Martins"
+      },
+      "specialty": {
+        "year": "2017",
+        "title": "Especialidad en Cirugía Plástica y Reconstructiva",
+        "institution": "Universidad Peruana Cayetano Heredia"
+      }
+    },
+    "experience": {
+      "current": {
+        "year": "2018 - Presente",
+        "position": "Cirujano Plástico",
+        "institution": "Hospital Nacional Hipólito Unanue"
+      },
+      "previous1": {
+        "year": "2017",
+        "position": "Cirujano Plástico",
+        "institution": "Hospital de Alta Complejidad de La Libertad \"Virgen de la Puerta\""
+      },
+      "previous2": {
+        "year": "2014-2017",
+        "position": "Médico Residente de Cirugía Plástica",
+        "institution": "Hospital Edgardo Rebagliati Martins"
+      }
+    },
+    "internationalTraining": {
+      "sweden": { "country": "Suecia", "institution": "Hospital Universitario de Uppsala" },
+      "usa": { "country": "Estados Unidos", "institution": "Entrenamiento especializado" },
+      "argentina": { "country": "Argentina", "institution": "Formación complementaria" },
+      "uruguay": { "country": "Uruguay", "institution": "Capacitación avanzada" },
+      "mexico": { "country": "México", "institution": "Actualización técnica" },
+      "bolivia": { "country": "Bolivia", "institution": "Intercambio profesional" }
+    },
+    "values": {
+      "safety": {
+        "title": "Seguridad ante todo",
+        "description": "Protocolos rigurosos y técnicas probadas para garantizar tu bienestar."
+      },
+      "natural": {
+        "title": "Resultados naturales",
+        "description": "Realzar tu belleza única respetando tu anatomía y proporciones."
+      },
+      "personalized": {
+        "title": "Atención personalizada",
+        "description": "Cada paciente es único. Escuchamos tus necesidades y diseñamos un plan a tu medida."
+      },
+      "updated": {
+        "title": "Actualización constante",
+        "description": "Formación continua en las técnicas más avanzadas a nivel mundial."
+      }
+    },
+    "cta": {
+      "title": "¿Listo para dar el primer paso?",
+      "description": "Agenda una consulta personalizada con el Dr. Manuel Sinchi y descubre cómo podemos ayudarte a alcanzar tus objetivos.",
+      "location": "Lima, Perú",
+      "confidential": "Consulta confidencial"
+    }
+  },
+  "realCasesPage": {
+    "breadcrumbs": {
+      "home": "Inicio"
+    },
+    "badge": "Resultados Verificables",
+    "title": "Casos Reales",
+    "description": "Resultados reales de pacientes del Dr. Manuel Sinchi. Cada caso demuestra nuestro compromiso con la excelencia y resultados naturales.",
+    "stats": {
+      "procedures": "Procedimientos realizados",
+      "satisfaction": "Pacientes satisfechos",
+      "experience": "Años de experiencia"
+    },
+    "filters": {
+      "all": "Todos",
+      "facial": "Cirugía Facial",
+      "body": "Cirugía Corporal",
+      "aesthetic": "Medicina Estética",
+      "reconstructive": "Reconstructiva"
+    },
+    "viewDetail": "Ver detalle",
+    "emptyState": "No hay casos disponibles en esta categoría.",
+    "cta": {
+      "title": "¿Listo para tu transformación?",
+      "description": "Agenda una consulta de valoración y descubre cómo podemos ayudarte a alcanzar los resultados que deseas.",
+      "scheduleButton": "Agendar Consulta",
+      "whatsappButton": "Consultar por WhatsApp",
+      "whatsappMessage": "Hola, vi los casos reales y me gustaría agendar una consulta."
+    }
+  },
+  "bookingPage": {
+    "meta": {
+      "title": "Reservar Cita | Ciruplástica - Dr. Manuel Sinchi",
+      "description": "Agenda tu consulta de evaluación con el Dr. Manuel Sinchi. Cirugía plástica, medicina estética y cirugía reconstructiva en Lima, Perú."
+    },
+    "hero": {
+      "title": "Reserva tu Consulta",
+      "description": "Da el primer paso hacia el cambio que deseas. Agenda tu evaluación personalizada con el Dr. Sinchi."
+    },
+    "form": {
+      "title": "Información de tu cita"
+    },
+    "sidebar": {
+      "whatIncludesTitle": "¿Qué incluye la consulta?",
+      "includes": {
+        "evaluation": "Evaluación personalizada con el Dr. Sinchi",
+        "plan": "Plan de tratamiento a medida",
+        "questions": "Resolución de todas tus dudas"
+      },
+      "securePaymentTitle": "Pago 100% Seguro",
+      "securePaymentDescription": "Aceptamos tarjetas de crédito/débito y Yape. Tu información está protegida.",
+      "securePaymentBadge": "Procesado por Culqi - Certificado PCI DSS",
+      "scheduleTitle": "Horarios de atención",
+      "schedule": {
+        "weekdays": "Lunes - Viernes",
+        "saturday": "Sábados",
+        "sunday": "Domingos",
+        "closed": "Cerrado"
+      }
+    }
+  }
+}

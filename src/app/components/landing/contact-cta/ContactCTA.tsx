@@ -1,12 +1,20 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { Calendar, MessageCircle, Flame, Users, Clock, Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 export default function ContactCTA() {
-    const whatsappLink = 'https://api.whatsapp.com/send?phone=51961360074&text=Deseo%20más%20información%20sobre%20los%20procedimientos'
+    const t = useTranslations('contactCta')
+    const tCommon = useTranslations('common')
+    const locale = useLocale()
+
+    const whatsappMessage = locale === 'en'
+        ? 'I would like more information about the procedures'
+        : 'Deseo más información sobre los procedimientos'
+    const whatsappLink = `https://api.whatsapp.com/send?phone=51961360074&text=${encodeURIComponent(whatsappMessage)}`
 
     // Simulación de personas viendo (en producción sería data real)
     const [viewingNow, setViewingNow] = useState(14)
@@ -82,12 +90,12 @@ export default function ContactCTA() {
                         transition={{ duration: 2, repeat: Infinity }}
                     >
                         <Flame className="w-4 h-4 text-red-500" />
-                        <span>Últimas 3 citas esta semana</span>
+                        <span>{t('urgency.lastAppointments')}</span>
                     </motion.div>
 
                     <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-dark px-4 py-2 rounded-full text-sm font-medium shadow-lg">
                         <Users className="w-4 h-4 text-primary" />
-                        <span>{viewingNow} personas viendo ahora</span>
+                        <span>{t('urgency.peopleViewing', { count: viewingNow })}</span>
                     </div>
                 </motion.div>
 
@@ -107,13 +115,13 @@ export default function ContactCTA() {
                         className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6"
                     >
                         <Sparkles className="w-4 h-4" />
-                        Consulta de Valoración Gratuita
+                        {t('badge')}
                     </motion.span>
 
                     <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-dark mb-4">
-                        ¿Listo para dar el{' '}
+                        {t('title')}{' '}
                         <span className="relative">
-                            primer paso
+                            {t('titleHighlight')}
                             <svg
                                 className="absolute -bottom-2 left-0 w-full"
                                 viewBox="0 0 200 12"
@@ -135,8 +143,7 @@ export default function ContactCTA() {
                     </h2>
 
                     <p className="text-dark/80 text-lg mb-10 max-w-2xl mx-auto">
-                        Agenda tu consulta personalizada con el Dr. Sinchi y descubre
-                        las opciones ideales para alcanzar tus objetivos.
+                        {t('description')}
                     </p>
 
                     {/* CTA Buttons */}
@@ -150,7 +157,7 @@ export default function ContactCTA() {
                                 className="btn-dark btn-shine text-base px-8 py-4 shadow-elevation-3"
                             >
                                 <Calendar className="w-5 h-5" />
-                                Agendar Cita
+                                {tCommon('buttons.schedule')}
                             </Link>
                         </motion.div>
 
@@ -165,7 +172,7 @@ export default function ContactCTA() {
                             {/* Pulse effect */}
                             <span className="absolute inset-0 bg-green-500/10 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
                             <MessageCircle className="w-5 h-5 relative z-10 text-green-600" />
-                            <span className="relative z-10">WhatsApp Directo</span>
+                            <span className="relative z-10">{t('whatsappDirect')}</span>
                         </motion.a>
                     </div>
 
@@ -179,11 +186,11 @@ export default function ContactCTA() {
                     >
                         <div className="flex items-center gap-2">
                             <Clock className="w-4 h-4" />
-                            <span>Respuesta en menos de 2 horas</span>
+                            <span>{t('trust.responseTime')}</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                            <span>Disponible ahora</span>
+                            <span>{t('trust.availableNow')}</span>
                         </div>
                     </motion.div>
                 </motion.div>

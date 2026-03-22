@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import { Mail, Lock, Eye, EyeOff, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 export default function LoginForm() {
+  const t = useTranslations('auth.login')
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
@@ -42,7 +44,7 @@ export default function LoginForm() {
         router.refresh()
       }
     } catch {
-      setFormError('Error al iniciar sesión')
+      setFormError(t('loginError'))
     } finally {
       setIsLoading(false)
     }
@@ -58,7 +60,7 @@ export default function LoginForm() {
           className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm"
         >
           <CheckCircle className="w-5 h-5 flex-shrink-0" />
-          <span>Email verificado correctamente. Ya puedes iniciar sesión.</span>
+          <span>{t('emailVerified')}</span>
         </motion.div>
       )}
 
@@ -72,8 +74,8 @@ export default function LoginForm() {
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <span>
             {error === 'invalid_token'
-              ? 'El enlace de verificación es inválido o ha expirado'
-              : 'Ha ocurrido un error'}
+              ? t('invalidToken')
+              : t('errorOccurred')}
           </span>
         </motion.div>
       )}
@@ -93,7 +95,7 @@ export default function LoginForm() {
       {/* Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Email
+          {t('email')}
         </label>
         <div className="relative">
           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -113,13 +115,13 @@ export default function LoginForm() {
       <div>
         <div className="flex items-center justify-between mb-1.5">
           <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            Contraseña
+            {t('password')}
           </label>
           <Link
             href="/forgot-password"
             className="text-sm text-primary hover:text-primary-dark transition-colors"
           >
-            ¿Olvidaste tu contraseña?
+            {t('forgotPassword')}
           </Link>
         </div>
         <div className="relative">
@@ -153,7 +155,7 @@ export default function LoginForm() {
           className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
         />
         <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-600">
-          Recordarme
+          {t('rememberMe')}
         </label>
       </div>
 
@@ -168,10 +170,10 @@ export default function LoginForm() {
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
             <Loader2 className="w-5 h-5 animate-spin" />
-            Iniciando sesión...
+            {t('submitting')}
           </span>
         ) : (
-          'Iniciar Sesión'
+          t('submit')
         )}
       </motion.button>
 
@@ -181,7 +183,7 @@ export default function LoginForm() {
           <div className="w-full border-t border-gray-200" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-4 bg-white text-gray-500">o continuar con</span>
+          <span className="px-4 bg-white text-gray-500">{t('orContinueWith')}</span>
         </div>
       </div>
 
@@ -211,17 +213,17 @@ export default function LoginForm() {
             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
           />
         </svg>
-        Continuar con Google
+        {t('continueWithGoogle')}
       </motion.button>
 
       {/* Register Link */}
       <p className="text-center text-sm text-gray-600">
-        ¿No tienes cuenta?{' '}
+        {t('noAccount')}{' '}
         <Link
           href="/register"
           className="text-primary font-semibold hover:text-primary-dark transition-colors"
         >
-          Regístrate
+          {t('register')}
         </Link>
       </p>
     </form>

@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     ChevronRight,
@@ -12,152 +13,56 @@ import {
     ArrowRight
 } from 'lucide-react'
 
-type Category = 'todos' | 'abdomen' | 'mamas' | 'gluteos' | 'contorno'
+type Category = 'all' | 'breast' | 'abdomen' | 'contour'
 
 interface Procedure {
-    id: number
+    id: string
     slug: string
-    name: string
-    shortDescription: string
-    duration: string
-    recovery: string
     category: Category[]
     image: string
     popular?: boolean
 }
 
 const procedures: Procedure[] = [
-    {
-        id: 1,
-        slug: 'mamoplastia-aumento',
-        name: 'Mamoplastia de Aumento',
-        shortDescription: 'Aumenta el volumen y mejora la forma de tus senos con implantes de alta calidad.',
-        duration: '1-2 horas',
-        recovery: '7-14 días',
-        category: ['mamas'],
-        image: '/images/procedures/mamoplastia-aumento.jpg',
-        popular: true,
-    },
-    {
-        id: 2,
-        slug: 'mastopexia',
-        name: 'Mastopexia',
-        shortDescription: 'Levantamiento de senos para corregir la caída y recuperar firmeza y juventud.',
-        duration: '2-3 horas',
-        recovery: '14-21 días',
-        category: ['mamas'],
-        image: '/images/procedures/mastopexia.jpg',
-        popular: true,
-    },
-    {
-        id: 3,
-        slug: 'mamoplastia-reduccion',
-        name: 'Mamoplastia de Reducción',
-        shortDescription: 'Reduce el tamaño de tus senos aliviando molestias físicas y mejorando tu proporción.',
-        duration: '2-3 horas',
-        recovery: '14-21 días',
-        category: ['mamas'],
-        image: '/images/procedures/mamoplastia-reduccion.jpg',
-    },
-    {
-        id: 4,
-        slug: 'reconstruccion-mama',
-        name: 'Reconstrucción de Mama',
-        shortDescription: 'Restaura la forma del seno después de mastectomía con tejidos propios o implantes.',
-        duration: '2-6 horas',
-        recovery: '4-8 semanas',
-        category: ['mamas'],
-        image: '/images/procedures/reconstruccion-mama.jpg',
-    },
-    {
-        id: 5,
-        slug: 'lipo-escultura',
-        name: 'Lipoescultura',
-        shortDescription: 'Moldea tu cuerpo eliminando grasa localizada y definiendo tu silueta de forma armónica.',
-        duration: '2-4 horas',
-        recovery: '7-14 días',
-        category: ['contorno'],
-        image: '/images/procedures/lipoescultura.jpg',
-        popular: true,
-    },
-    {
-        id: 6,
-        slug: 'abdominoplastia',
-        name: 'Abdominoplastia',
-        shortDescription: 'Abdomen plano y tonificado eliminando exceso de piel y grasa, reparando músculos.',
-        duration: '2-4 horas',
-        recovery: '14-21 días',
-        category: ['abdomen'],
-        image: '/images/procedures/abdominoplastia.jpg',
-        popular: true,
-    },
-    {
-        id: 7,
-        slug: 'lipoabdominoplastia',
-        name: 'Lipoabdominoplastia',
-        shortDescription: 'Combina lipo HD con abdominoplastia. Incluye Renuvion J-Plasma y BodyTite.',
-        duration: '3-5 horas',
-        recovery: '3-4 semanas',
-        category: ['abdomen', 'contorno'],
-        image: '/images/procedures/lipoabdominoplastia.jpg',
-    },
-    {
-        id: 8,
-        slug: 'gluteoplastia',
-        name: 'Gluteoplastia',
-        shortDescription: 'Aumenta y moldea tus glúteos con grasa (BBL) o implantes de silicona.',
-        duration: '2-3 horas',
-        recovery: '14-21 días',
-        category: ['gluteos'],
-        image: '/images/procedures/gluteoplastia.jpg',
-        popular: true,
-    },
-    {
-        id: 9,
-        slug: 'mommy-makeover',
-        name: 'Mommy Makeover',
-        shortDescription: 'Recupera tu figura post-embarazo con cirugía de mamas, abdomen y contorno.',
-        duration: '4-6 horas',
-        recovery: '4-6 semanas',
-        category: ['mamas', 'abdomen', 'contorno'],
-        image: '/images/procedures/mommy-makeover.jpg',
-    },
-    {
-        id: 10,
-        slug: 'ginecomastia',
-        name: 'Ginecomastia',
-        shortDescription: 'Reducción del tejido mamario masculino para un pecho más plano y definido.',
-        duration: '1-2 horas',
-        recovery: '7-14 días',
-        category: ['contorno'],
-        image: '/images/procedures/ginecomastia.jpg',
-    },
-    {
-        id: 11,
-        slug: 'cirugia-genero',
-        name: 'Cirugía de Género',
-        shortDescription: 'Top Surgery (masculinización de tórax) y mamoplastia para personas trans.',
-        duration: '2-4 horas',
-        recovery: '2-6 semanas',
-        category: ['mamas', 'contorno'],
-        image: '/images/procedures/cirugia-genero.jpg',
-    },
-]
-
-const categories = [
-    { id: 'todos' as Category, label: 'Todos', count: procedures.length },
-    { id: 'abdomen' as Category, label: 'Abdomen', count: procedures.filter(p => p.category.includes('abdomen')).length },
-    { id: 'mamas' as Category, label: 'Mamas', count: procedures.filter(p => p.category.includes('mamas')).length },
-    { id: 'gluteos' as Category, label: 'Glúteos', count: procedures.filter(p => p.category.includes('gluteos')).length },
-    { id: 'contorno' as Category, label: 'Contorno', count: procedures.filter(p => p.category.includes('contorno')).length },
+    { id: 'breastAugmentation', slug: 'mamoplastia-aumento', category: ['breast'], image: '/images/procedures/mamoplastia-aumento.jpg', popular: true },
+    { id: 'mastopexy', slug: 'mastopexia', category: ['breast'], image: '/images/procedures/mastopexia.jpg', popular: true },
+    { id: 'breastReduction', slug: 'mamoplastia-reduccion', category: ['breast'], image: '/images/procedures/mamoplastia-reduccion.jpg' },
+    { id: 'breastReconstruction', slug: 'reconstruccion-mama', category: ['breast'], image: '/images/procedures/reconstruccion-mama.jpg' },
+    { id: 'liposculpture', slug: 'lipo-escultura', category: ['contour'], image: '/images/procedures/lipoescultura.jpg', popular: true },
+    { id: 'abdominoplasty', slug: 'abdominoplastia', category: ['abdomen'], image: '/images/procedures/abdominoplastia.jpg', popular: true },
+    { id: 'lipoabdominoplasty', slug: 'lipoabdominoplastia', category: ['abdomen', 'contour'], image: '/images/procedures/lipoabdominoplastia.jpg' },
+    { id: 'gluteoplasty', slug: 'gluteoplastia', category: ['contour'], image: '/images/procedures/gluteoplastia.jpg', popular: true },
+    { id: 'mommyMakeover', slug: 'mommy-makeover', category: ['breast', 'abdomen', 'contour'], image: '/images/procedures/mommy-makeover.jpg' },
+    { id: 'gynecomastia', slug: 'ginecomastia', category: ['contour'], image: '/images/procedures/ginecomastia.jpg' },
+    { id: 'genderSurgery', slug: 'cirugia-genero', category: ['breast', 'contour'], image: '/images/procedures/cirugia-genero.jpg' },
 ]
 
 export default function CirugiaPlasticaCorporal() {
-    const [activeCategory, setActiveCategory] = useState<Category>('todos')
+    const t = useTranslations('categoryPages.body')
+    const tCommon = useTranslations('categoryPages.common')
 
-    const filteredProcedures = activeCategory === 'todos'
+    const [activeCategory, setActiveCategory] = useState<Category>('all')
+
+    const categories: { id: Category; labelKey: string }[] = [
+        { id: 'all', labelKey: 'all' },
+        { id: 'breast', labelKey: 'breast' },
+        { id: 'abdomen', labelKey: 'abdomen' },
+        { id: 'contour', labelKey: 'contour' },
+    ]
+
+    const filteredProcedures = activeCategory === 'all'
         ? procedures
         : procedures.filter(p => p.category.includes(activeCategory))
+
+    const getCategoryLabel = (cat: { id: Category; labelKey: string }) => {
+        if (cat.id === 'all') return tCommon('filters.all')
+        return t(`filters.${cat.labelKey}`)
+    }
+
+    const getCategoryCount = (catId: Category) => {
+        if (catId === 'all') return procedures.length
+        return procedures.filter(p => p.category.includes(catId)).length
+    }
 
     return (
         <main className="min-h-screen">
@@ -169,10 +74,10 @@ export default function CirugiaPlasticaCorporal() {
                     {/* Breadcrumbs */}
                     <nav className="flex items-center gap-2 text-sm text-white/60 mb-8">
                         <Link href="/" className="hover:text-white transition-colors">
-                            Inicio
+                            {tCommon('breadcrumbs.home')}
                         </Link>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-accent">Cirugía Plástica Corporal</span>
+                        <span className="text-accent">{t('title')}</span>
                     </nav>
 
                     <div className="max-w-3xl">
@@ -182,7 +87,7 @@ export default function CirugiaPlasticaCorporal() {
                             className="badge-accent mb-6"
                         >
                             <Sparkles className="w-4 h-4 mr-2" />
-                            Procedimientos Especializados
+                            {t('badge')}
                         </motion.span>
 
                         <motion.h1
@@ -191,7 +96,7 @@ export default function CirugiaPlasticaCorporal() {
                             transition={{ delay: 0.1 }}
                             className="text-white mb-6"
                         >
-                            Cirugía Plástica Corporal
+                            {t('title')}
                         </motion.h1>
 
                         <motion.p
@@ -200,8 +105,7 @@ export default function CirugiaPlasticaCorporal() {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-white/80 leading-relaxed"
                         >
-                            Transforma tu cuerpo con procedimientos diseñados para esculpir,
-                            moldear y realzar tu figura de forma segura y con resultados naturales.
+                            {t('description')}
                         </motion.p>
                     </div>
 
@@ -213,9 +117,9 @@ export default function CirugiaPlasticaCorporal() {
                         className="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl"
                     >
                         {[
-                            { value: '15+', label: 'Años de experiencia' },
-                            { value: '3000+', label: 'Cirugías corporales' },
-                            { value: '98%', label: 'Satisfacción' },
+                            { value: '15+', label: tCommon('stats.yearsExperience') },
+                            { value: '3000+', label: t('stats.surgeries') },
+                            { value: '98%', label: tCommon('stats.satisfaction') },
                         ].map((stat, index) => (
                             <div key={index} className="text-center md:text-left">
                                 <div className="text-2xl md:text-4xl font-display font-bold text-accent">
@@ -252,7 +156,7 @@ export default function CirugiaPlasticaCorporal() {
                                     }
                                 `}
                             >
-                                {cat.label}
+                                {getCategoryLabel(cat)}
                                 <span className={`
                                     ml-2 text-xs px-2 py-0.5 rounded-full
                                     ${activeCategory === cat.id
@@ -260,7 +164,7 @@ export default function CirugiaPlasticaCorporal() {
                                         : 'bg-gray-100 text-gray-500'
                                     }
                                 `}>
-                                    {cat.count}
+                                    {getCategoryCount(cat.id)}
                                 </span>
                             </button>
                         ))}
@@ -289,7 +193,7 @@ export default function CirugiaPlasticaCorporal() {
                                             <div className="relative aspect-procedure overflow-hidden rounded-t-2xl">
                                                 <Image
                                                     src={procedure.image}
-                                                    alt={procedure.name}
+                                                    alt={t(`procedures.${procedure.id}.name`)}
                                                     fill
                                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
@@ -298,14 +202,14 @@ export default function CirugiaPlasticaCorporal() {
                                                 {/* Popular Badge */}
                                                 {procedure.popular && (
                                                     <span className="absolute top-4 left-4 bg-accent text-dark text-xs font-semibold px-3 py-1 rounded-full">
-                                                        Popular
+                                                        {tCommon('popular')}
                                                     </span>
                                                 )}
 
                                                 {/* Title on Image */}
                                                 <div className="absolute bottom-4 left-4 right-4">
                                                     <h3 className="text-white text-xl font-display font-semibold">
-                                                        {procedure.name}
+                                                        {t(`procedures.${procedure.id}.name`)}
                                                     </h3>
                                                 </div>
                                             </div>
@@ -313,24 +217,24 @@ export default function CirugiaPlasticaCorporal() {
                                             {/* Content */}
                                             <div className="p-6">
                                                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                                                    {procedure.shortDescription}
+                                                    {t(`procedures.${procedure.id}.description`)}
                                                 </p>
 
                                                 {/* Info Pills */}
                                                 <div className="flex flex-wrap gap-3 mb-4">
                                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                                         <Clock className="w-4 h-4 text-primary" />
-                                                        {procedure.duration}
+                                                        {t(`procedures.${procedure.id}.duration`)}
                                                     </div>
                                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                                         <Shield className="w-4 h-4 text-primary" />
-                                                        {procedure.recovery}
+                                                        {t(`procedures.${procedure.id}.recovery`)}
                                                     </div>
                                                 </div>
 
                                                 {/* CTA */}
                                                 <div className="flex items-center text-primary font-semibold text-sm group-hover:gap-3 gap-2 transition-all">
-                                                    Ver más información
+                                                    {tCommon('viewMore')}
                                                     <ArrowRight className="w-4 h-4" />
                                                 </div>
                                             </div>
@@ -351,16 +255,15 @@ export default function CirugiaPlasticaCorporal() {
 
                         <div className="relative z-10 max-w-2xl mx-auto">
                             <h2 className="text-white text-2xl md:text-3xl lg:text-4xl mb-4">
-                                Agenda tu consulta de valoración
+                                {tCommon('cta.title')}
                             </h2>
                             <p className="text-white/80 mb-8">
-                                Recibe una evaluación personalizada y conoce cuál es el mejor
-                                procedimiento para lograr tus objetivos estéticos.
+                                {tCommon('cta.description')}
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link href="/contacto" className="btn-primary">
-                                    Agendar Cita
+                                    {tCommon('cta.scheduleButton')}
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
                                 <a
@@ -369,7 +272,7 @@ export default function CirugiaPlasticaCorporal() {
                                     rel="noopener noreferrer"
                                     className="btn-secondary"
                                 >
-                                    Consulta por WhatsApp
+                                    {tCommon('cta.whatsappButton')}
                                 </a>
                             </div>
                         </div>

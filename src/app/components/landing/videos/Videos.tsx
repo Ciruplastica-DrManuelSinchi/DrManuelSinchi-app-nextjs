@@ -1,8 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 const videos = [
     {
@@ -23,14 +24,16 @@ const videos = [
 ]
 
 export default function Videos() {
+    const t = useTranslations('videos')
+
     return (
         <section className="section bg-light">
             <div className="container-custom">
                 {/* Header */}
                 <div className="section-header">
-                    <h2 className="section-title">Videos Informativos</h2>
+                    <h2 className="section-title">{t('informativeVideos')}</h2>
                     <p className="section-subtitle">
-                        Conoce más sobre nuestros procedimientos
+                        {t('learnAboutProcedures')}
                     </p>
                 </div>
 
@@ -69,7 +72,7 @@ export default function Videos() {
                 {/* Link ver más */}
                 <div className="text-center mt-12">
                     <Link href="/videos" className="link text-primary">
-                        Ver todos los videos
+                        {t('viewAll')}
                         <ArrowRight className="w-4 h-4" />
                     </Link>
                 </div>

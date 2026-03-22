@@ -1,8 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
 
 const cases = [
@@ -30,6 +31,8 @@ const cases = [
 ]
 
 export default function BeforeAfter() {
+    const t = useTranslations('beforeAfterSection')
+
     return (
         <section className="section bg-white">
             <div className="container-custom">
@@ -40,10 +43,10 @@ export default function BeforeAfter() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="badge-accent mb-4">Resultados Reales</span>
-                    <h2 className="section-title">Casos Antes y Después</h2>
+                    <span className="badge-accent mb-4">{t('badge')}</span>
+                    <h2 className="section-title">{t('title')}</h2>
                     <p className="section-subtitle">
-                        Desliza para comparar los resultados de nuestros pacientes
+                        {t('description')}
                     </p>
                 </motion.div>
 
@@ -95,7 +98,7 @@ export default function BeforeAfter() {
                         href="/casos-reales"
                         className="group inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:bg-primary-dark transition-all hover:gap-3"
                     >
-                        Ver todos los casos
+                        {t('viewAll')}
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                 </motion.div>

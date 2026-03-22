@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
-import ClientLayout from '@/app/components/layout/ClientLayout'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, getLocale } from 'next-intl/server'
 
 // Fuentes optimizadas con next/font
 const playfair = Playfair_Display({
@@ -19,79 +20,12 @@ const montserrat = Montserrat({
   display: 'swap',
 })
 
-// Metadata SEO
+// Metadata base
 export const metadata: Metadata = {
   metadataBase: new URL('https://ciruplastica.pe'),
-  title: {
-    default: 'Ciruplástica | Cirugía Plástica en Lima - Dr. Manuel Sinchi',
-    template: '%s | Ciruplástica - Dr. Manuel Sinchi',
-  },
-  description:
-    'Especialistas en Cirugía Plástica, Medicina Estética y Cirugía Reconstructiva en Lima, Perú. Más de 15 años de experiencia. Consulta gratuita.',
-  keywords: [
-    'cirugía plástica Lima',
-    'cirujano plástico Perú',
-    'rinoplastia Lima',
-    'lipoescultura Lima',
-    'medicina estética',
-    'Dr. Manuel Sinchi',
-    'cirugía reconstructiva',
-    'botox Lima',
-    'aumento de mamas',
-    'blefaroplastia',
-  ],
-  authors: [{ name: 'Dr. Manuel Sinchi' }],
-  creator: 'Ciruplástica',
-  publisher: 'Ciruplástica',
-
-  // Open Graph
-  openGraph: {
-    type: 'website',
-    locale: 'es_PE',
-    url: 'https://ciruplastica.pe',
-    siteName: 'Ciruplástica',
-    title: 'Ciruplástica | Cirugía Plástica en Lima - Dr. Manuel Sinchi',
-    description:
-      'Especialistas en Cirugía Plástica, Medicina Estética y Cirugía Reconstructiva en Lima, Perú.',
-    images: [
-      {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Ciruplástica - Cirugía Plástica en Lima',
-      },
-    ],
-  },
-
-  // Twitter
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Ciruplástica | Cirugía Plástica en Lima',
-    description:
-      'Especialistas en Cirugía Plástica y Medicina Estética en Lima, Perú.',
-    images: ['/images/og-image.jpg'],
-  },
-
-  // Robots
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-
-  // Verificación
   verification: {
     google: 'tu-codigo-de-verificacion-google',
   },
-
-  // Otros
-  category: 'health',
 }
 
 // Viewport
@@ -101,13 +35,17 @@ export const viewport = {
   initialScale: 1,
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Get locale and messages for i18n support across all pages
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="es" className={`${playfair.variable} ${montserrat.variable}`}>
+    <html lang={locale} className={`${playfair.variable} ${montserrat.variable}`}>
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -120,9 +58,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="font-body antialiased">
-        <Providers>
-          <ClientLayout>{children}</ClientLayout>
-        </Providers>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Providers>
+            {children}
+          </Providers>
+        </NextIntlClientProvider>
 
         {/* Schema.org JSON-LD para SEO */}
         <script

@@ -21,7 +21,11 @@
       "Bash(ls:*)",
       "Bash(npx prisma migrate dev:*)",
       "Bash(npx next build:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(curl:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }

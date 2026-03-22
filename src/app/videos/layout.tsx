@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import ClientLayout from '@/app/components/layout/ClientLayout'
 
 export const metadata: Metadata = {
     title: 'Videos Educativos | Cirugía Plástica y Medicina Estética',
@@ -15,5 +16,5 @@ export default function VideosLayout({
 }: {
     children: React.ReactNode
 }) {
-    return children
+    return <ClientLayout>{children}</ClientLayout>
 }

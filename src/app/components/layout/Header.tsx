@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { Menu, X, ChevronDown, Phone, MessageCircle, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import UserMenu from '@/app/components/auth/UserMenu'
+import LanguageSelector from './LanguageSelector'
 
 interface NavChild {
     name: string
@@ -26,89 +28,92 @@ interface NavItem {
     categories?: NavCategory[]
 }
 
-const navigation: NavItem[] = [
-    { name: 'El Doctor', href: '/dr-manuel-sinchi' },
-    {
-        name: 'Procedimientos',
-        href: '#',
-        megaMenu: true,
-        categories: [
-            {
-                category: 'Cirugía Facial',
-                href: '/cirugia-plastica-facial',
-                items: [
-                    { name: 'Blefaroplastia', href: '/cirugia-plastica-facial/blefaroplastia' },
-                    { name: 'Lifting / Fox-eyes', href: '/cirugia-plastica-facial/lifting-facial' },
-                    { name: 'Rinoplastia', href: '/cirugia-plastica-facial/rinoplastia' },
-                    { name: 'Rellenos Faciales', href: '/cirugia-plastica-facial/rellenos-faciales' },
-                    { name: 'Otoplastia', href: '/cirugia-plastica-facial/otoplastia' },
-                    { name: 'Extracción de Lunares', href: '/cirugia-plastica-facial/extraccion-lunares' },
-                    { name: 'Mentoplastia', href: '/cirugia-plastica-facial/mentoplastia' },
-                    { name: 'Lipo de Papada', href: '/cirugia-plastica-facial/lipo-papada' },
-                    { name: 'Bichectomía', href: '/cirugia-plastica-facial/bichectomia' },
-                    { name: 'Aumento de Pómulos', href: '/cirugia-plastica-facial/aumento-pomulos' },
-                    { name: 'Marcación Mandibular', href: '/cirugia-plastica-facial/marcacion-mandibular' },
-                    { name: 'Afinamiento Facial', href: '/cirugia-plastica-facial/afinamiento-facial' },
-                    { name: 'Perfiloplastia', href: '/cirugia-plastica-facial/perfiloplastia' },
-                ],
-            },
-            {
-                category: 'Cirugía Corporal',
-                href: '/cirugia-plastica-corporal',
-                items: [
-                    { name: 'Aumento de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
-                    { name: 'Mastopexia', href: '/cirugia-plastica-corporal/mastopexia' },
-                    { name: 'Reducción de Mamas', href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
-                    { name: 'Lipoescultura', href: '/cirugia-plastica-corporal/lipo-escultura' },
-                    { name: 'Abdominoplastia', href: '/cirugia-plastica-corporal/abdominoplastia' },
-                    { name: 'Lipoabdominoplastia', href: '/cirugia-plastica-corporal/lipoabdominoplastia' },
-                    { name: 'Gluteoplastia', href: '/cirugia-plastica-corporal/gluteoplastia' },
-                    { name: 'Mommy Makeover', href: '/cirugia-plastica-corporal/mommy-makeover' },
-                    { name: 'Ginecomastia', href: '/cirugia-plastica-corporal/ginecomastia' },
-                    { name: 'Cirugía de Género', href: '/cirugia-plastica-corporal/cirugia-genero' },
-                    { name: 'Reconstrucción de Mama', href: '/cirugia-plastica-corporal/reconstruccion-mama' },
-                ],
-            },
-            {
-                category: 'Medicina Estética',
-                href: '/medicina-estetica',
-                items: [
-                    { name: 'Ácido Hialurónico', href: '/medicina-estetica/acido-hialuronico' },
-                    { name: 'Botox', href: '/medicina-estetica/botox' },
-                    { name: 'Bioestimuladores', href: '/medicina-estetica/bioestimuladores' },
-                    { name: 'Radiofrecuencia / Ultrasonido', href: '/medicina-estetica/radiofrecuencia-ultrasonido' },
-                    { name: 'Tratamientos Postoperatorios', href: '/medicina-estetica/tratamientos-postoperatorios' },
-                    { name: 'Láser Facial', href: '/medicina-estetica/laser-facial' },
-                    { name: 'PRP Facial', href: '/medicina-estetica/plasma-rico-plaquetas' },
-                    { name: 'Vitamina C Endovenosa', href: '/medicina-estetica/vitamina-c-endovenosa' },
-                    { name: 'Relleno de Labios', href: '/medicina-estetica/rellenos-labios' },
-                ],
-            },
-            {
-                category: 'Reconstructiva',
-                href: '/cirugia-reconstructiva',
-                items: [
-                    { name: 'Tumores y Carcinomas', href: '/cirugia-reconstructiva/tumores-carcinomas' },
-                    { name: 'Cicatrices', href: '/cirugia-reconstructiva/cicatrices' },
-                    { name: 'Heridas y Úlceras', href: '/cirugia-reconstructiva/heridas-ulceras' },
-                    { name: 'Quemaduras', href: '/cirugia-reconstructiva/quemaduras' },
-                    { name: 'Retiro de Biopolímeros', href: '/cirugia-reconstructiva/retiro-biopolimeros' },
-                ],
-            },
-        ],
-    },
-    { name: 'Resultados', href: '/casos-reales' },
-]
-
 export default function Header() {
+    const t = useTranslations('navigation')
+    const tCommon = useTranslations('common')
+
+    const navigation: NavItem[] = [
+        { name: t('doctor'), href: '/dr-manuel-sinchi' },
+        {
+            name: t('procedures'),
+            href: '#',
+            megaMenu: true,
+            categories: [
+                {
+                    category: t('categories.facialSurgery'),
+                    href: '/cirugia-plastica-facial',
+                    items: [
+                        { name: t('procedureNames.blepharoplasty'), href: '/cirugia-plastica-facial/blefaroplastia' },
+                        { name: t('procedureNames.liftingFoxEyes'), href: '/cirugia-plastica-facial/lifting-facial' },
+                        { name: t('procedureNames.rhinoplasty'), href: '/cirugia-plastica-facial/rinoplastia' },
+                        { name: t('procedureNames.facialFillers'), href: '/cirugia-plastica-facial/rellenos-faciales' },
+                        { name: t('procedureNames.otoplasty'), href: '/cirugia-plastica-facial/otoplastia' },
+                        { name: t('procedureNames.moleRemoval'), href: '/cirugia-plastica-facial/extraccion-lunares' },
+                        { name: t('procedureNames.mentoplasty'), href: '/cirugia-plastica-facial/mentoplastia' },
+                        { name: t('procedureNames.chinLipo'), href: '/cirugia-plastica-facial/lipo-papada' },
+                        { name: t('procedureNames.bichectomy'), href: '/cirugia-plastica-facial/bichectomia' },
+                        { name: t('procedureNames.cheekAugmentation'), href: '/cirugia-plastica-facial/aumento-pomulos' },
+                        { name: t('procedureNames.jawContouring'), href: '/cirugia-plastica-facial/marcacion-mandibular' },
+                        { name: t('procedureNames.facialSlimming'), href: '/cirugia-plastica-facial/afinamiento-facial' },
+                        { name: t('procedureNames.profiloplasty'), href: '/cirugia-plastica-facial/perfiloplastia' },
+                    ],
+                },
+                {
+                    category: t('categories.bodySurgery'),
+                    href: '/cirugia-plastica-corporal',
+                    items: [
+                        { name: t('procedureNames.breastAugmentation'), href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
+                        { name: t('procedureNames.mastopexy'), href: '/cirugia-plastica-corporal/mastopexia' },
+                        { name: t('procedureNames.breastReduction'), href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
+                        { name: t('procedureNames.liposculpture'), href: '/cirugia-plastica-corporal/lipo-escultura' },
+                        { name: t('procedureNames.abdominoplasty'), href: '/cirugia-plastica-corporal/abdominoplastia' },
+                        { name: t('procedureNames.lipoabdominoplasty'), href: '/cirugia-plastica-corporal/lipoabdominoplastia' },
+                        { name: t('procedureNames.gluteoplasty'), href: '/cirugia-plastica-corporal/gluteoplasty' },
+                        { name: t('procedureNames.mommyMakeover'), href: '/cirugia-plastica-corporal/mommy-makeover' },
+                        { name: t('procedureNames.gynecomastia'), href: '/cirugia-plastica-corporal/ginecomastia' },
+                        { name: t('procedureNames.genderSurgery'), href: '/cirugia-plastica-corporal/cirugia-genero' },
+                        { name: t('procedureNames.breastReconstruction'), href: '/cirugia-plastica-corporal/reconstruccion-mama' },
+                    ],
+                },
+                {
+                    category: t('categories.aestheticMedicine'),
+                    href: '/medicina-estetica',
+                    items: [
+                        { name: t('procedureNames.hyaluronicAcid'), href: '/medicina-estetica/acido-hialuronico' },
+                        { name: t('procedureNames.botox'), href: '/medicina-estetica/botox' },
+                        { name: t('procedureNames.biostimulators'), href: '/medicina-estetica/bioestimuladores' },
+                        { name: t('procedureNames.radiofrequencyUltrasound'), href: '/medicina-estetica/radiofrecuencia-ultrasonido' },
+                        { name: t('procedureNames.postoperativeTreatments'), href: '/medicina-estetica/tratamientos-postoperatorios' },
+                        { name: t('procedureNames.facialLaser'), href: '/medicina-estetica/laser-facial' },
+                        { name: t('procedureNames.prpFacial'), href: '/medicina-estetica/plasma-rico-plaquetas' },
+                        { name: t('procedureNames.vitaminC'), href: '/medicina-estetica/vitamina-c-endovenosa' },
+                        { name: t('procedureNames.lipFillers'), href: '/medicina-estetica/rellenos-labios' },
+                    ],
+                },
+                {
+                    category: t('categories.reconstructive'),
+                    href: '/cirugia-reconstructiva',
+                    items: [
+                        { name: t('procedureNames.tumorsCarcinomas'), href: '/cirugia-reconstructiva/tumores-carcinomas' },
+                        { name: t('procedureNames.scars'), href: '/cirugia-reconstructiva/cicatrices' },
+                        { name: t('procedureNames.woundsUlcers'), href: '/cirugia-reconstructiva/heridas-ulceras' },
+                        { name: t('procedureNames.burns'), href: '/cirugia-reconstructiva/quemaduras' },
+                        { name: t('procedureNames.biopolymerRemoval'), href: '/cirugia-reconstructiva/retiro-biopolimeros' },
+                    ],
+                },
+            ],
+        },
+        { name: t('results'), href: '/casos-reales' },
+    ]
+
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [openDropdown, setOpenDropdown] = useState<string | null>(null)
     const [mounted, setMounted] = useState(false)
     const pathname = usePathname()
 
-    // Detectar si estamos en la landing page
-    const isHomePage = pathname === '/'
+    // Detectar si estamos en la landing page (considerando el locale)
+    const isHomePage = pathname === '/' || pathname === '/es' || pathname === '/en' || pathname.match(/^\/(es|en)$/)
 
     // Progress bar de scroll
     const { scrollYProgress } = useScroll()
@@ -251,7 +256,7 @@ export default function Header() {
                                                                 href={cat.href}
                                                                 className="inline-flex items-center gap-1 text-accent hover:text-primary text-xs font-medium mt-3 transition-colors group"
                                                             >
-                                                                Ver todos
+                                                                {tCommon('buttons.seeAll')}
                                                                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                                                             </Link>
                                                         </div>
@@ -282,7 +287,7 @@ export default function Header() {
                                 >
                                     <Phone className="w-4 h-4" />
                                 </motion.span>
-                                961 360 074
+                                {t('phone')}
                             </a>
                             <Link
                                 href="/reservar"
@@ -293,45 +298,50 @@ export default function Header() {
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     <MessageCircle className="w-4 h-4" />
-                                    Agendar Cita
+                                    {tCommon('buttons.schedule')}
                                 </motion.span>
                             </Link>
+                            {/* Language Selector */}
+                            <LanguageSelector isScrolled={isScrolled} />
                             {/* User Menu */}
                             <UserMenu isScrolled={isScrolled} />
                         </div>
 
                         {/* Botón menú móvil */}
-                        <motion.button
-                            className={`lg:hidden p-2 relative transition-colors duration-500 ${
-                                isScrolled ? 'text-primary' : 'text-white'
-                            }`}
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            <AnimatePresence mode="wait">
-                                {isMobileMenuOpen ? (
-                                    <motion.div
-                                        key="close"
-                                        initial={{ rotate: -90, opacity: 0 }}
-                                        animate={{ rotate: 0, opacity: 1 }}
-                                        exit={{ rotate: 90, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        <X className="w-6 h-6" />
-                                    </motion.div>
-                                ) : (
-                                    <motion.div
-                                        key="menu"
-                                        initial={{ rotate: 90, opacity: 0 }}
-                                        animate={{ rotate: 0, opacity: 1 }}
-                                        exit={{ rotate: -90, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        <Menu className="w-6 h-6" />
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.button>
+                        <div className="lg:hidden flex items-center gap-2">
+                            <LanguageSelector isScrolled={isScrolled} />
+                            <motion.button
+                                className={`p-2 relative transition-colors duration-500 ${
+                                    isScrolled ? 'text-primary' : 'text-white'
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                whileTap={{ scale: 0.9 }}
+                            >
+                                <AnimatePresence mode="wait">
+                                    {isMobileMenuOpen ? (
+                                        <motion.div
+                                            key="close"
+                                            initial={{ rotate: -90, opacity: 0 }}
+                                            animate={{ rotate: 0, opacity: 1 }}
+                                            exit={{ rotate: 90, opacity: 0 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <X className="w-6 h-6" />
+                                        </motion.div>
+                                    ) : (
+                                        <motion.div
+                                            key="menu"
+                                            initial={{ rotate: 90, opacity: 0 }}
+                                            animate={{ rotate: 0, opacity: 1 }}
+                                            exit={{ rotate: -90, opacity: 0 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <Menu className="w-6 h-6" />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.button>
+                        </div>
                     </div>
                 </div>
 
@@ -388,7 +398,7 @@ export default function Header() {
                                                             className="inline-flex items-center gap-1 text-accent text-[10px] font-medium mt-1.5"
                                                             onClick={() => setIsMobileMenuOpen(false)}
                                                         >
-                                                            Ver todos <ArrowRight className="w-2.5 h-2.5" />
+                                                            {tCommon('buttons.seeAll')} <ArrowRight className="w-2.5 h-2.5" />
                                                         </Link>
                                                     </div>
                                                 ))}
@@ -410,7 +420,7 @@ export default function Header() {
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         <MessageCircle className="w-5 h-5" />
-                                        Agendar Cita
+                                        {tCommon('buttons.schedule')}
                                     </Link>
                                     <a
                                         href={whatsappLink}
@@ -419,7 +429,7 @@ export default function Header() {
                                         className="flex items-center justify-center gap-2 text-primary font-medium py-2"
                                     >
                                         <Phone className="w-4 h-4" />
-                                        961 360 074
+                                        {t('phone')}
                                     </a>
                                 </motion.div>
                             </nav>

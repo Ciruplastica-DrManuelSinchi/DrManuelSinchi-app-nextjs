@@ -1,11 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { FloatingParticles, OrbitalGradients } from '@/app/components/shared/AnimatedShapes'
 
 export default function Hero() {
+    const t = useTranslations('hero')
+    const tCommon = useTranslations('common')
+
     return (
         <section className="relative h-screen w-full overflow-hidden">
             {/* Background Video with Ken Burns Effect */}
@@ -86,7 +90,7 @@ export default function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                    Cirugía Plástica & Medicina Estética
+                    {t('subtitle')}
                 </motion.p>
 
                 {/* CTA Button */}
@@ -99,10 +103,10 @@ export default function Hero() {
                         href="/reservar"
                         className="group relative inline-flex items-center justify-center px-8 py-4 text-sm sm:text-base font-body font-medium tracking-widest text-accent uppercase border border-accent/60 bg-transparent transition-all duration-500 hover:bg-accent hover:text-primary hover:border-accent overflow-hidden"
                     >
-                        <span className="relative z-10">Agendar Cita</span>
+                        <span className="relative z-10">{tCommon('buttons.schedule')}</span>
                         <span className="absolute inset-0 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                         <span className="absolute inset-0 z-10 flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                            Agendar Cita
+                            {tCommon('buttons.schedule')}
                         </span>
                     </Link>
                 </motion.div>
@@ -122,7 +126,7 @@ export default function Hero() {
                 }}
             >
                 <span className="text-white/50 text-xs tracking-[0.2em] uppercase mb-2 font-body">
-                    Descubrir
+                    {t('discover')}
                 </span>
                 <motion.div
                     animate={{ y: [0, 8, 0] }}

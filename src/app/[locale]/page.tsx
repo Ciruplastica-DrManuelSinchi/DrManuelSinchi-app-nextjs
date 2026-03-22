@@ -11,11 +11,14 @@ import FAQ from '@/app/components/landing/faq/FAQ'
 import Location from '@/app/components/landing/location/Location'
 import ContactCTA from '@/app/components/landing/contact-cta/ContactCTA'
 import AdminRedirect from '@/app/components/auth/AdminRedirect'
-import { defaultLocale } from '@/i18n/config'
 
-// Root page serves the default locale (Spanish)
-export default async function Home() {
-  setRequestLocale(defaultLocale)
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
 
   return (
     <main>

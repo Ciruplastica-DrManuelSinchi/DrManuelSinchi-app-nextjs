@@ -1,4 +1,6 @@
-import { OrbitalGradients } from '@/app/components/shared/AnimatedShapes'
+import Header from '@/app/components/layout/Header'
+import Footer from '@/app/components/layout/Footer'
+import { AuthGradientBackground } from '@/app/components/shared/AnimatedShapes'
 
 export default function AuthLayout({
   children,
@@ -6,19 +8,28 @@ export default function AuthLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen relative flex items-center justify-center px-4 py-12">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-primary/5" />
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <Header />
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        <OrbitalGradients />
-      </div>
+      {/* Main Content */}
+      <main className="flex-1 relative flex items-center justify-center px-4 py-12 pt-32">
+        {/* Background gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-pink-50/50 to-purple-100/30" />
 
-      {/* Content */}
-      <div className="relative z-10 w-full">
-        {children}
-      </div>
+        {/* Animated blurred gradient orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <AuthGradientBackground />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full">
+          {children}
+        </div>
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

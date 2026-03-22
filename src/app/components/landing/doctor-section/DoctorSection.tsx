@@ -1,9 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowRight, Award, Calendar, Users, Shield, CheckCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { doctorData } from '@/data/doctor'
 
 const iconMap = {
@@ -13,6 +14,8 @@ const iconMap = {
 }
 
 export default function DoctorSection() {
+    const t = useTranslations('doctorSection')
+
     return (
         <section className="section bg-white overflow-hidden">
             <div className="container-custom">
@@ -34,7 +37,7 @@ export default function DoctorSection() {
                             <div className="relative h-full rounded-2xl overflow-hidden shadow-strong">
                                 <Image
                                     src={doctorData.images.full}
-                                    alt={`${doctorData.name} - ${doctorData.title}`}
+                                    alt={`${t('title')} - ${t('subtitle')}`}
                                     fill
                                     className="object-cover"
                                 />
@@ -56,8 +59,8 @@ export default function DoctorSection() {
                                         <Award className="w-6 h-6 text-accent-600" />
                                     </div>
                                     <div>
-                                        <div className="text-xs text-gray-500 uppercase tracking-wider">Certificado</div>
-                                        <div className="font-semibold text-dark">CMP {doctorData.credentials.cmp}</div>
+                                        <div className="text-xs text-gray-500 uppercase tracking-wider">{t('credentials.title')}</div>
+                                        <div className="font-semibold text-dark">{t('credentials.items.cmp')}</div>
                                     </div>
                                 </div>
                             </motion.div>
@@ -70,7 +73,7 @@ export default function DoctorSection() {
                                 transition={{ duration: 0.5, delay: 0.5 }}
                                 viewport={{ once: true }}
                             >
-                                <div className="text-xs opacity-80">Registro Nacional</div>
+                                <div className="text-xs opacity-80">{t('credentials.items.rne')}</div>
                                 <div className="font-semibold text-sm">RNE {doctorData.credentials.rne}</div>
                             </motion.div>
                         </div>
@@ -86,17 +89,17 @@ export default function DoctorSection() {
                         {/* Encabezado */}
                         <div className="mb-6">
                             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-dark mb-2">
-                                {doctorData.name}
+                                {t('title')}
                             </h2>
                             <p className="text-primary font-medium text-lg">
-                                {doctorData.title}
+                                {t('subtitle')}
                             </p>
                         </div>
 
                         {/* Cita */}
                         <blockquote className="relative pl-6 border-l-4 border-accent mb-8">
                             <p className="text-gray-600 italic text-lg leading-relaxed">
-                                &ldquo;{doctorData.quote}&rdquo;
+                                &ldquo;{t('quote')}&rdquo;
                             </p>
                         </blockquote>
 
@@ -145,7 +148,7 @@ export default function DoctorSection() {
 
                         {/* Descripción corta */}
                         <p className="text-gray-600 leading-relaxed mb-8">
-                            {doctorData.shortBio}
+                            {t('description')}
                         </p>
 
                         {/* CTA */}
@@ -153,7 +156,7 @@ export default function DoctorSection() {
                             href="/dr-manuel-sinchi"
                             className="btn-primary inline-flex group"
                         >
-                            Conocer más sobre el Dr. Sinchi
+                            {t('cta')}
                             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Link>
                     </motion.div>

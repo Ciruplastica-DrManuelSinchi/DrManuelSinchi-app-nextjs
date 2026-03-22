@@ -2,13 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { Building2, Users, Award, Clock, LucideIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useCountUp } from '@/hooks/useCountUp'
 
 interface TrustItem {
     icon: LucideIcon
     value: number
     suffix: string
-    title: string
+    titleKey: string
 }
 
 const trustItems: TrustItem[] = [
@@ -16,29 +17,29 @@ const trustItems: TrustItem[] = [
         icon: Clock,
         value: 15,
         suffix: '+',
-        title: 'Años de experiencia',
+        titleKey: 'yearsExperience',
     },
     {
         icon: Users,
         value: 5000,
         suffix: '+',
-        title: 'Pacientes satisfechos',
+        titleKey: 'satisfiedPatients',
     },
     {
         icon: Award,
         value: 100,
         suffix: '%',
-        title: 'Tasa de satisfacción',
+        titleKey: 'satisfactionRate',
     },
     {
         icon: Building2,
         value: 3,
         suffix: '',
-        title: 'Clínicas autorizadas',
+        titleKey: 'authorizedClinics',
     },
 ]
 
-function TrustItem({ item, index }: { item: TrustItem; index: number }) {
+function TrustItemComponent({ item, index, t }: { item: TrustItem; index: number; t: (key: string) => string }) {
     const { count, ref } = useCountUp(item.value, {
         duration: 2000,
         delay: index * 200,
@@ -81,13 +82,15 @@ function TrustItem({ item, index }: { item: TrustItem; index: number }) {
 
             {/* Title */}
             <div className="text-sm text-gray-500 group-hover:text-gray-700 transition-colors">
-                {item.title}
+                {t(item.titleKey)}
             </div>
         </motion.div>
     )
 }
 
 export default function TrustBar() {
+    const t = useTranslations('trustBar')
+
     return (
         <section className="bg-white py-12 md:py-16 border-y border-gray-100 relative overflow-hidden">
             {/* Decorative background */}
@@ -96,7 +99,7 @@ export default function TrustBar() {
             <div className="container-custom relative z-10">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
                     {trustItems.map((item, index) => (
-                        <TrustItem key={item.title} item={item} index={index} />
+                        <TrustItemComponent key={item.titleKey} item={item} index={index} t={t} />
                     ))}
                 </div>
             </div>

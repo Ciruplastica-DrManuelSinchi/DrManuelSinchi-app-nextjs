@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import styles from './Testimonials.module.css'
 
 type TestimonialSource = 'google' | 'whatsapp' | 'facebook' | 'instagram'
@@ -142,6 +143,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 }
 
 export default function Testimonials() {
+    const t = useTranslations('testimonials')
     const duplicatedTestimonials = [...testimonials, ...testimonials]
 
     return (
@@ -155,10 +157,10 @@ export default function Testimonials() {
                     viewport={{ once: true }}
                 >
                     <h2 className={styles.title}>
-                        Lo que dicen nuestros pacientes
+                        {t('fullTitle')}
                     </h2>
                     <p className={styles.subtitle}>
-                        Historias reales de transformación y confianza
+                        {t('realStories')}
                     </p>
                 </motion.div>
             </div>
@@ -206,7 +208,7 @@ export default function Testimonials() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
                 >
-                    <span className={styles.trustedText}>Reseñas verificadas en</span>
+                    <span className={styles.trustedText}>{t('verifiedIn')}</span>
                     <div className={styles.sourcesLogos}>
                         <div className={styles.sourceLogo}>
                             {sourceConfig.google.icon}

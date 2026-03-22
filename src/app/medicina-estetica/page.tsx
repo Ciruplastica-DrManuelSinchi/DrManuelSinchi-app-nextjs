@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
     ChevronRight,
@@ -12,120 +13,54 @@ import {
     ArrowRight
 } from 'lucide-react'
 
-type Category = 'todos' | 'arrugas' | 'volumen' | 'rejuvenecimiento' | 'piel'
+type Category = 'all' | 'injectables' | 'technology' | 'regenerative'
 
 interface Treatment {
-    id: number
+    id: string
     slug: string
-    name: string
-    shortDescription: string
-    duration: string
-    recovery: string
     category: Category[]
     image: string
     popular?: boolean
 }
 
 const treatments: Treatment[] = [
-    {
-        id: 1,
-        slug: 'botox',
-        name: 'Botox',
-        shortDescription: 'Suaviza arrugas de expresión y previene nuevas líneas para un rostro más joven y descansado.',
-        duration: '15-30 min',
-        recovery: 'Inmediata',
-        category: ['arrugas'],
-        image: '/images/procedures/botox.jpg',
-        popular: true,
-    },
-    {
-        id: 2,
-        slug: 'acido-hialuronico',
-        name: 'Ácido Hialurónico',
-        shortDescription: 'Rellena arrugas, restaura volumen y mejora la hidratación profunda de la piel.',
-        duration: '30-45 min',
-        recovery: 'Inmediata',
-        category: ['volumen', 'arrugas'],
-        image: '/images/procedures/acido-hialuronico.jpg',
-        popular: true,
-    },
-    {
-        id: 3,
-        slug: 'bioestimuladores',
-        name: 'Bioestimuladores',
-        shortDescription: 'Activan la producción natural de colágeno para rejuvenecer tu piel desde adentro.',
-        duration: '30-45 min',
-        recovery: 'Inmediata',
-        category: ['rejuvenecimiento'],
-        image: '/images/procedures/bioestimuladores.jpg',
-        popular: true,
-    },
-    {
-        id: 4,
-        slug: 'radiofrecuencia-ultrasonido',
-        name: 'Radiofrecuencia y Ultrasonido',
-        shortDescription: 'Tecnología avanzada para tensar la piel, reducir flacidez y estimular colágeno sin cirugía.',
-        duration: '45-90 min',
-        recovery: 'Inmediata',
-        category: ['rejuvenecimiento'],
-        image: '/images/procedures/radiofrecuencia-ultrasonido.jpg',
-    },
-    {
-        id: 5,
-        slug: 'tratamientos-postoperatorios',
-        name: 'Tratamientos Postoperatorios',
-        shortDescription: 'Drenaje linfático, masajes y tecnología para una recuperación óptima tras cirugía.',
-        duration: '45-60 min',
-        recovery: 'Inmediata',
-        category: ['piel'],
-        image: '/images/procedures/tratamientos-postoperatorios.jpg',
-    },
-    {
-        id: 6,
-        slug: 'laser-facial',
-        name: 'Láser Facial',
-        shortDescription: 'Rejuvenece tu piel, elimina manchas, mejora textura y reduce poros con tecnología láser.',
-        duration: '30-60 min',
-        recovery: '3-7 días',
-        category: ['rejuvenecimiento', 'piel'],
-        image: '/images/procedures/laser-facial.jpg',
-    },
-    {
-        id: 7,
-        slug: 'plasma-rico-plaquetas',
-        name: 'Plasma Rico en Plaquetas',
-        shortDescription: 'Terapia regenerativa que rejuvenece la piel usando los factores de crecimiento de tu sangre.',
-        duration: '45-60 min',
-        recovery: '24-48 horas',
-        category: ['rejuvenecimiento'],
-        image: '/images/procedures/prp.jpg',
-    },
-    {
-        id: 8,
-        slug: 'vitamina-c-endovenosa',
-        name: 'Vitamina C Endovenosa',
-        shortDescription: 'Potente antioxidante intravenoso que ilumina la piel y fortalece el sistema inmunológico.',
-        duration: '30-60 min',
-        recovery: 'Inmediata',
-        category: ['rejuvenecimiento', 'piel'],
-        image: '/images/procedures/vitamina-c.jpg',
-    },
-]
-
-const categories = [
-    { id: 'todos' as Category, label: 'Todos', count: treatments.length },
-    { id: 'arrugas' as Category, label: 'Arrugas', count: treatments.filter(t => t.category.includes('arrugas')).length },
-    { id: 'volumen' as Category, label: 'Volumen', count: treatments.filter(t => t.category.includes('volumen')).length },
-    { id: 'rejuvenecimiento' as Category, label: 'Rejuvenecimiento', count: treatments.filter(t => t.category.includes('rejuvenecimiento')).length },
-    { id: 'piel' as Category, label: 'Piel', count: treatments.filter(t => t.category.includes('piel')).length },
+    { id: 'botox', slug: 'botox', category: ['injectables'], image: '/images/procedures/botox.jpg', popular: true },
+    { id: 'hyaluronicAcid', slug: 'acido-hialuronico', category: ['injectables'], image: '/images/procedures/acido-hialuronico.jpg', popular: true },
+    { id: 'biostimulators', slug: 'bioestimuladores', category: ['regenerative'], image: '/images/procedures/bioestimuladores.jpg', popular: true },
+    { id: 'radiofrequency', slug: 'radiofrecuencia-ultrasonido', category: ['technology'], image: '/images/procedures/radiofrecuencia-ultrasonido.jpg' },
+    { id: 'postoperative', slug: 'tratamientos-postoperatorios', category: ['regenerative'], image: '/images/procedures/tratamientos-postoperatorios.jpg' },
+    { id: 'facialLaser', slug: 'laser-facial', category: ['technology'], image: '/images/procedures/laser-facial.jpg' },
+    { id: 'prp', slug: 'plasma-rico-plaquetas', category: ['regenerative'], image: '/images/procedures/prp.jpg' },
+    { id: 'vitaminC', slug: 'vitamina-c-endovenosa', category: ['regenerative'], image: '/images/procedures/vitamina-c.jpg' },
+    { id: 'lipFillers', slug: 'rellenos-labios', category: ['injectables'], image: '/images/procedures/rellenos-labios.jpg' },
 ]
 
 export default function MedicinaEstetica() {
-    const [activeCategory, setActiveCategory] = useState<Category>('todos')
+    const t = useTranslations('categoryPages.aesthetic')
+    const tCommon = useTranslations('categoryPages.common')
 
-    const filteredTreatments = activeCategory === 'todos'
+    const [activeCategory, setActiveCategory] = useState<Category>('all')
+
+    const categories: { id: Category; labelKey: string }[] = [
+        { id: 'all', labelKey: 'all' },
+        { id: 'injectables', labelKey: 'injectables' },
+        { id: 'technology', labelKey: 'technology' },
+        { id: 'regenerative', labelKey: 'regenerative' },
+    ]
+
+    const filteredTreatments = activeCategory === 'all'
         ? treatments
         : treatments.filter(t => t.category.includes(activeCategory))
+
+    const getCategoryLabel = (cat: { id: Category; labelKey: string }) => {
+        if (cat.id === 'all') return tCommon('filters.all')
+        return t(`filters.${cat.labelKey}`)
+    }
+
+    const getCategoryCount = (catId: Category) => {
+        if (catId === 'all') return treatments.length
+        return treatments.filter(t => t.category.includes(catId)).length
+    }
 
     return (
         <main className="min-h-screen">
@@ -137,10 +72,10 @@ export default function MedicinaEstetica() {
                     {/* Breadcrumbs */}
                     <nav className="flex items-center gap-2 text-sm text-white/60 mb-8">
                         <Link href="/" className="hover:text-white transition-colors">
-                            Inicio
+                            {tCommon('breadcrumbs.home')}
                         </Link>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-accent">Medicina Estética</span>
+                        <span className="text-accent">{t('title')}</span>
                     </nav>
 
                     <div className="max-w-3xl">
@@ -150,7 +85,7 @@ export default function MedicinaEstetica() {
                             className="badge-accent mb-6"
                         >
                             <Sparkles className="w-4 h-4 mr-2" />
-                            Tratamientos No Invasivos
+                            {t('badge')}
                         </motion.span>
 
                         <motion.h1
@@ -159,7 +94,7 @@ export default function MedicinaEstetica() {
                             transition={{ delay: 0.1 }}
                             className="text-white mb-6"
                         >
-                            Medicina Estética
+                            {t('title')}
                         </motion.h1>
 
                         <motion.p
@@ -168,8 +103,7 @@ export default function MedicinaEstetica() {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-white/80 leading-relaxed"
                         >
-                            Rejuvenece y embellece tu rostro con tratamientos no quirúrgicos.
-                            Resultados naturales sin tiempo de recuperación.
+                            {t('description')}
                         </motion.p>
                     </div>
 
@@ -181,9 +115,9 @@ export default function MedicinaEstetica() {
                         className="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl"
                     >
                         {[
-                            { value: '15+', label: 'Años de experiencia' },
-                            { value: '5000+', label: 'Tratamientos realizados' },
-                            { value: '99%', label: 'Satisfacción' },
+                            { value: '15+', label: tCommon('stats.yearsExperience') },
+                            { value: '5000+', label: t('stats.treatments') },
+                            { value: '99%', label: tCommon('stats.satisfaction') },
                         ].map((stat, index) => (
                             <div key={index} className="text-center md:text-left">
                                 <div className="text-2xl md:text-4xl font-display font-bold text-accent">
@@ -220,7 +154,7 @@ export default function MedicinaEstetica() {
                                     }
                                 `}
                             >
-                                {cat.label}
+                                {getCategoryLabel(cat)}
                                 <span className={`
                                     ml-2 text-xs px-2 py-0.5 rounded-full
                                     ${activeCategory === cat.id
@@ -228,7 +162,7 @@ export default function MedicinaEstetica() {
                                         : 'bg-gray-100 text-gray-500'
                                     }
                                 `}>
-                                    {cat.count}
+                                    {getCategoryCount(cat.id)}
                                 </span>
                             </button>
                         ))}
@@ -257,7 +191,7 @@ export default function MedicinaEstetica() {
                                             <div className="relative aspect-procedure overflow-hidden rounded-t-2xl">
                                                 <Image
                                                     src={treatment.image}
-                                                    alt={treatment.name}
+                                                    alt={t(`procedures.${treatment.id}.name`)}
                                                     fill
                                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
@@ -266,14 +200,14 @@ export default function MedicinaEstetica() {
                                                 {/* Popular Badge */}
                                                 {treatment.popular && (
                                                     <span className="absolute top-4 left-4 bg-accent text-dark text-xs font-semibold px-3 py-1 rounded-full">
-                                                        Popular
+                                                        {tCommon('popular')}
                                                     </span>
                                                 )}
 
                                                 {/* Title on Image */}
                                                 <div className="absolute bottom-4 left-4 right-4">
                                                     <h3 className="text-white text-xl font-display font-semibold">
-                                                        {treatment.name}
+                                                        {t(`procedures.${treatment.id}.name`)}
                                                     </h3>
                                                 </div>
                                             </div>
@@ -281,24 +215,24 @@ export default function MedicinaEstetica() {
                                             {/* Content */}
                                             <div className="p-6">
                                                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                                                    {treatment.shortDescription}
+                                                    {t(`procedures.${treatment.id}.description`)}
                                                 </p>
 
                                                 {/* Info Pills */}
                                                 <div className="flex flex-wrap gap-3 mb-4">
                                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                                         <Clock className="w-4 h-4 text-primary" />
-                                                        {treatment.duration}
+                                                        {t(`procedures.${treatment.id}.duration`)}
                                                     </div>
                                                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                                                         <Shield className="w-4 h-4 text-primary" />
-                                                        {treatment.recovery}
+                                                        {t(`procedures.${treatment.id}.recovery`)}
                                                     </div>
                                                 </div>
 
                                                 {/* CTA */}
                                                 <div className="flex items-center text-primary font-semibold text-sm group-hover:gap-3 gap-2 transition-all">
-                                                    Ver más información
+                                                    {tCommon('viewMore')}
                                                     <ArrowRight className="w-4 h-4" />
                                                 </div>
                                             </div>
@@ -319,16 +253,15 @@ export default function MedicinaEstetica() {
 
                         <div className="relative z-10 max-w-2xl mx-auto">
                             <h2 className="text-white text-2xl md:text-3xl lg:text-4xl mb-4">
-                                Agenda tu consulta de valoración
+                                {tCommon('cta.title')}
                             </h2>
                             <p className="text-white/80 mb-8">
-                                Recibe una evaluación personalizada y conoce cuál es el mejor
-                                tratamiento para lograr tus objetivos estéticos.
+                                {tCommon('cta.description')}
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link href="/contacto" className="btn-primary">
-                                    Agendar Cita
+                                    {tCommon('cta.scheduleButton')}
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
                                 <a
@@ -337,7 +270,7 @@ export default function MedicinaEstetica() {
                                     rel="noopener noreferrer"
                                     className="btn-secondary"
                                 >
-                                    Consulta por WhatsApp
+                                    {tCommon('cta.whatsappButton')}
                                 </a>
                             </div>
                         </div>

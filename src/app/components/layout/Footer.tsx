@@ -1,47 +1,53 @@
-import Link from 'next/link'
+'use client'
+
 import Image from 'next/image'
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube, Linkedin, ChevronRight } from 'lucide-react'
-
-const footerLinks = {
-    procedures: [
-        { name: 'Cirugía Facial', href: '/cirugia-plastica-facial' },
-        { name: 'Cirugía Corporal', href: '/cirugia-plastica-corporal' },
-        { name: 'Medicina Estética', href: '/medicina-estetica' },
-        { name: 'Cirugía Reconstructiva', href: '/cirugia-reconstructiva' },
-    ],
-    links: [
-        { name: 'Dr. Manuel Sinchi', href: '/dr-manuel-sinchi' },
-        { name: 'Casos Reales', href: '/casos-reales' },
-        { name: 'Videos', href: '/videos' },
-        { name: 'Preguntas Frecuentes', href: '/preguntas-frecuentes' },
-        { name: 'Contacto', href: '/contacto' },
-    ],
-    social: [
-        { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/Ciruplastica.pe' },
-        { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/ciruplastica.pe' },
-        { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@DrManuelSinchi-Ciruplastica' },
-    ],
-}
-
-const contactInfo = [
-    { icon: MapPin, text: 'Calle Scipión Llona 180, Consultorio 503, Miraflores (5to piso)', href: 'https://maps.google.com/?q=Calle+Scipion+Llona+180+Miraflores+Lima' },
-    { icon: Phone, text: '961 360 074', href: 'tel:+51961360074' },
-    { icon: Mail, text: 'consultas@ciruplastica.pe', href: 'mailto:consultas@ciruplastica.pe' },
-    { icon: Clock, text: 'Lun - Sáb: 9:00am - 7:00pm', href: null },
-]
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube, ChevronRight } from 'lucide-react'
 
 export default function Footer() {
+    const t = useTranslations('footer')
+    const tCommon = useTranslations('common')
+
+    const footerLinks = {
+        procedures: [
+            { name: t('linkLabels.facialSurgery'), href: '/cirugia-plastica-facial' },
+            { name: t('linkLabels.bodySurgery'), href: '/cirugia-plastica-corporal' },
+            { name: t('linkLabels.aestheticMedicine'), href: '/medicina-estetica' },
+            { name: t('linkLabels.reconstructiveSurgery'), href: '/cirugia-reconstructiva' },
+        ],
+        links: [
+            { name: t('linkLabels.drManuelSinchi'), href: '/dr-manuel-sinchi' },
+            { name: t('linkLabels.realCases'), href: '/casos-reales' },
+            { name: t('linkLabels.videos'), href: '/videos' },
+            { name: t('linkLabels.faq'), href: '/preguntas-frecuentes' },
+            { name: t('linkLabels.contactPage'), href: '/contacto' },
+        ],
+        social: [
+            { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/Ciruplastica.pe' },
+            { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/ciruplastica.pe' },
+            { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@DrManuelSinchi-Ciruplastica' },
+        ],
+    }
+
+    const contactInfo = [
+        { icon: MapPin, text: 'Calle Scipión Llona 180, Consultorio 503, Miraflores (5to piso)', href: 'https://maps.google.com/?q=Calle+Scipion+Llona+180+Miraflores+Lima' },
+        { icon: Phone, text: '961 360 074', href: 'tel:+51961360074' },
+        { icon: Mail, text: 'consultas@ciruplastica.pe', href: 'mailto:consultas@ciruplastica.pe' },
+        { icon: Clock, text: t('schedule'), href: null },
+    ]
+
     return (
         <footer className="bg-dark text-white">
             {/* CTA Móvil - Solo visible en móvil */}
             <div className="md:hidden bg-gradient-to-r from-primary to-primary-dark py-6 px-4">
                 <div className="text-center">
-                    <p className="text-white/80 text-sm mb-3">¿Listo para tu transformación?</p>
+                    <p className="text-white/80 text-sm mb-3">{tCommon('buttons.readyTransformation')}</p>
                     <a
                         href="https://wa.me/51961360074?text=Hola,%20quiero%20agendar%20una%20consulta"
                         className="inline-flex items-center gap-2 bg-accent text-dark font-semibold px-6 py-3 rounded-full hover:bg-accent-dark transition-colors"
                     >
-                        Agenda tu cita
+                        {tCommon('buttons.scheduleAppointment')}
                         <ChevronRight className="w-4 h-4" />
                     </a>
                 </div>
@@ -62,7 +68,7 @@ export default function Footer() {
                             />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
-                            Especialistas en cirugía plástica y medicina estética en Lima, Perú.
+                            {t('description')}
                         </p>
                     </div>
 
@@ -84,7 +90,7 @@ export default function Footer() {
 
                     {/* Contacto rápido */}
                     <div className="bg-white/5 rounded-2xl p-5 mb-8">
-                        <h4 className="font-semibold text-center mb-4 text-accent">Contáctanos</h4>
+                        <h4 className="font-semibold text-center mb-4 text-accent">{t('contactUs')}</h4>
                         <div className="space-y-3">
                             {contactInfo.map((item) => (
                                 <div key={item.text} className="flex items-start gap-3 text-sm">
@@ -104,7 +110,7 @@ export default function Footer() {
                     {/* Links en dos columnas */}
                     <div className="grid grid-cols-2 gap-6 mb-8">
                         <div>
-                            <h4 className="font-semibold text-sm text-accent mb-3">Procedimientos</h4>
+                            <h4 className="font-semibold text-sm text-accent mb-3">{t('procedures')}</h4>
                             <ul className="space-y-2">
                                 {footerLinks.procedures.map((link) => (
                                     <li key={link.name}>
@@ -119,7 +125,7 @@ export default function Footer() {
                             </ul>
                         </div>
                         <div>
-                            <h4 className="font-semibold text-sm text-accent mb-3">Enlaces</h4>
+                            <h4 className="font-semibold text-sm text-accent mb-3">{t('links')}</h4>
                             <ul className="space-y-2">
                                 {footerLinks.links.map((link) => (
                                     <li key={link.name}>
@@ -150,8 +156,7 @@ export default function Footer() {
                             />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                            Especialistas en cirugía plástica, medicina estética y cirugía reconstructiva
-                            en Lima, Perú. Más de 15 años transformando vidas con resultados naturales.
+                            {t('descriptionLong')}
                         </p>
                         {/* Redes sociales Desktop */}
                         <div className="flex items-center gap-3">
@@ -172,7 +177,7 @@ export default function Footer() {
 
                     {/* Columna 2 - Procedimientos */}
                     <div>
-                        <h4 className="font-semibold mb-6">Procedimientos</h4>
+                        <h4 className="font-semibold mb-6">{t('procedures')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.procedures.map((link) => (
                                 <li key={link.name}>
@@ -190,7 +195,7 @@ export default function Footer() {
 
                     {/* Columna 3 - Enlaces */}
                     <div>
-                        <h4 className="font-semibold mb-6">Enlaces</h4>
+                        <h4 className="font-semibold mb-6">{t('links')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.links.map((link) => (
                                 <li key={link.name}>
@@ -208,7 +213,7 @@ export default function Footer() {
 
                     {/* Columna 4 - Contacto */}
                     <div>
-                        <h4 className="font-semibold mb-6">Contacto</h4>
+                        <h4 className="font-semibold mb-6">{t('contact')}</h4>
                         <ul className="space-y-4">
                             {contactInfo.map((item) => (
                                 <li key={item.text} className="flex items-start gap-3 text-sm">
@@ -231,7 +236,7 @@ export default function Footer() {
             <div className="border-t border-white/10">
                 <div className="container-custom py-5 flex flex-col md:flex-row justify-between items-center gap-3">
                     <p className="text-gray-500 text-xs md:text-sm text-center md:text-left">
-                        © {new Date().getFullYear()} Ciruplástica. Todos los derechos reservados.
+                        © {new Date().getFullYear()} Ciruplástica. {t('rights')}.
                     </p>
                     <p className="text-gray-600 text-xs">
                         Dr. Manuel Sinchi - CMP 64517 | RNE 36807

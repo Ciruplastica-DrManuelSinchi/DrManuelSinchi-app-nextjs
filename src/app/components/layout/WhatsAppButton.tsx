@@ -3,13 +3,15 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export default function WhatsAppButton() {
+    const t = useTranslations('whatsappButton')
     const [isVisible, setIsVisible] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
 
     const phoneNumber = '51961360074'
-    const defaultMessage = 'Hola Dr. Sinchi, me gustaría agendar una consulta de valoración.'
+    const defaultMessage = t('defaultMessage')
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`
 
     // Mostrar el botón después de un pequeño delay
@@ -49,9 +51,9 @@ export default function WhatsAppButton() {
                                     <X className="w-3 h-3 text-gray-500" />
                                 </button>
                                 <p className="text-sm text-gray-700">
-                                    <span className="font-semibold text-primary">¿Tienes dudas?</span>
+                                    <span className="font-semibold text-primary">{t('haveQuestions')}</span>
                                     <br />
-                                    Escríbenos por WhatsApp y te responderemos a la brevedad.
+                                    {t('contactUs')}
                                 </p>
                                 {/* Flecha del tooltip */}
                                 <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white transform rotate-45 shadow-lg" />
@@ -91,7 +93,7 @@ export default function WhatsAppButton() {
 
                         {/* Label on hover (desktop) */}
                         <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none hidden md:block">
-                            Escríbenos por WhatsApp
+                            {t('writeUs')}
                             <div className="absolute left-full top-1/2 -translate-y-1/2 border-8 border-transparent border-l-gray-900" />
                         </div>
                     </motion.a>
