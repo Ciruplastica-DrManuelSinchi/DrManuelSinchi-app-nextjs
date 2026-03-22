@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { cancelCalendarEvent, updateCalendarEvent } from '@/lib/google-calendar'
 
+// Forzar renderizado dinámico para esta ruta
+export const dynamic = 'force-dynamic'
+
 // GET /api/admin/bookings/[id] - Obtener detalle de reserva
 export async function GET(
   request: NextRequest,

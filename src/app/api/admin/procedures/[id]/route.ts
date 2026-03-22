@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
+// Forzar renderizado dinámico para esta ruta
+export const dynamic = 'force-dynamic'
+
 // GET /api/admin/procedures/[id] - Obtener procedimiento
 export async function GET(
   request: NextRequest,

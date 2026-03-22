@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 
+// Forzar renderizado dinámico para esta ruta
+export const dynamic = 'force-dynamic'
+
 const createCategorySchema = z.object({
   name: z.string().min(1, 'El nombre es requerido'),
   slug: z.string().min(1, 'El slug es requerido').regex(/^[a-z0-9-]+$/, 'El slug solo puede contener letras minúsculas, números y guiones'),
