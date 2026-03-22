@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
-import { cancelCalendarEvent, updateCalendarEvent } from '@/lib/google-calendar'
 
 // Forzar renderizado dinámico para esta ruta
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 // GET /api/admin/bookings/[id] - Obtener detalle de reserva
 export async function GET(
@@ -115,8 +115,10 @@ export async function PATCH(
       },
     })
 
-    // Sincronizar con Google Calendar
+    // Sincronizar con Google Calendar (import dinámico)
     if (existingBooking.calendarEventId) {
+      const { cancelCalendarEvent, updateCalendarEvent } = await import('@/lib/google-calendar')
+
       // Si se canceló la reserva, cancelar el evento del calendario
       if (status === 'CANCELLED') {
         await cancelCalendarEvent(existingBooking.calendarEventId)
@@ -171,8 +173,9 @@ export async function DELETE(
       )
     }
 
-    // Cancelar evento en Google Calendar si existe
+    // Cancelar evento en Google Calendar si existe (import dinámico)
     if (existingBooking.calendarEventId) {
+      const { cancelCalendarEvent } = await import('@/lib/google-calendar')
       await cancelCalendarEvent(existingBooking.calendarEventId)
     }
 
