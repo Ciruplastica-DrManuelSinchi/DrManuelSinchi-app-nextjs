@@ -25,10 +25,10 @@ function calculateReadingTime(content: string): number {
 // GET /api/blog/posts/[id] - Obtener post por ID o slug
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = await params
+    const { id } = params
     const { searchParams } = new URL(request.url)
     const bySlug = searchParams.get('bySlug') === 'true'
     const incrementViews = searchParams.get('views') === 'true'
@@ -72,7 +72,7 @@ export async function GET(
 // PUT /api/blog/posts/[id] - Actualizar post (admin)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
@@ -81,7 +81,7 @@ export async function PUT(
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
     }
 
-    const { id } = await params
+    const { id } = params
     const body = await request.json()
     const result = updatePostSchema.safeParse(body)
 
@@ -140,7 +140,7 @@ export async function PUT(
 // DELETE /api/blog/posts/[id] - Eliminar post (admin)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
@@ -149,7 +149,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
     }
 
-    const { id } = await params
+    const { id } = params
 
     const post = await prisma.blogPost.findUnique({ where: { id } })
     if (!post) {

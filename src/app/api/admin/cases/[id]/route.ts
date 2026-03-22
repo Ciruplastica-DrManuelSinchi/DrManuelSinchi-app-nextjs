@@ -8,11 +8,11 @@ export const dynamic = 'force-dynamic'
 // GET /api/admin/cases/[id] - Obtener caso
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -45,11 +45,11 @@ export async function GET(
 // PATCH /api/admin/cases/[id] - Actualizar caso
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -130,11 +130,11 @@ export async function PATCH(
 // DELETE /api/admin/cases/[id] - Eliminar caso
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })

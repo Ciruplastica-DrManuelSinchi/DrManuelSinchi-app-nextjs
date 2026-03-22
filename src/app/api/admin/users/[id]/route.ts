@@ -8,11 +8,11 @@ export const dynamic = 'force-dynamic'
 // GET /api/admin/users/[id] - Obtener un usuario específico
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json(
@@ -60,11 +60,11 @@ export async function GET(
 // PATCH /api/admin/users/[id] - Actualizar usuario
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json(
@@ -142,11 +142,11 @@ export async function PATCH(
 // DELETE /api/admin/users/[id] - Eliminar usuario
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json(

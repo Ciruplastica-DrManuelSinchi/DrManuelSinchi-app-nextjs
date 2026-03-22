@@ -8,11 +8,11 @@ export const dynamic = 'force-dynamic'
 // GET /api/admin/categories/[id] - Obtener categoría
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -47,11 +47,11 @@ export async function GET(
 // PATCH /api/admin/categories/[id] - Actualizar categoría
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -113,11 +113,11 @@ export async function PATCH(
 // DELETE /api/admin/categories/[id] - Eliminar categoría
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })

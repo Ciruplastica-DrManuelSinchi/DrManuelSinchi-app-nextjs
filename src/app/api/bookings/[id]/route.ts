@@ -6,11 +6,11 @@ import { cancelCalendarEvent } from '@/lib/google-calendar'
 // GET /api/bookings/[id] - Obtener detalle de una reserva
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -46,11 +46,11 @@ export async function GET(
 // PATCH /api/bookings/[id] - Actualizar reserva (solo mensaje o cancelar)
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -119,11 +119,11 @@ export async function PATCH(
 // DELETE /api/bookings/[id] - Cancelar reserva
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })

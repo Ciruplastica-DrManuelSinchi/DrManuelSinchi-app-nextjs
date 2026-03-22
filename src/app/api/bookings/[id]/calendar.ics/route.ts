@@ -6,11 +6,11 @@ import { generateICSFile } from '@/lib/google-calendar'
 // GET /api/bookings/[id]/calendar.ics - Descargar archivo ICS
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await auth()
-    const { id } = await params
+    const { id } = params
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
