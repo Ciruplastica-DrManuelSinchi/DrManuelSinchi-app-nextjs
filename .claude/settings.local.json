@@ -26,7 +26,12 @@
       "Bash(netstat:*)",
       "Bash(taskkill:*)",
       "Bash(npm run dev:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: Move @prisma/client to dependencies and add prisma generate\n\n- Move @prisma/client from devDependencies to dependencies \\(required for Vercel\\)\n- Add prisma generate to build script\n- Add postinstall script for prisma generate\n\nThis fixes the \"Failed to collect page data\" error on Vercel\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(find:*)",
+      "Bash(dir /s /b \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\cirugia-plastica-facial\\\\*.tsx\" \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\cirugia-plastica-corporal\\\\*.tsx\" \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\medicina-estetica\\\\*.tsx\" \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\cirugia-reconstructiva\\\\*.tsx\")",
+      "Bash(powershell -Command \"Get-Content ''C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\messages\\\\en.json'' | Select-Object -Last 30\")",
+      "Bash(powershell -Command \"\\(Get-Content ''C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\messages\\\\es.json'' -Raw\\).Length\")"
     ]
   }
 }

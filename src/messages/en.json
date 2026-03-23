@@ -286,6 +286,11 @@
   },
   "auth": {
     "login": {
+      "metaTitle": "Log In | Ciruplástica",
+      "metaDescription": "Log in to your Ciruplástica account",
+      "pageTitle": "Welcome back",
+      "pageSubtitle": "Sign in to your account",
+      "loading": "Loading...",
       "title": "Log In",
       "email": "Email",
       "password": "Password",
@@ -303,6 +308,10 @@
       "loginError": "Login error"
     },
     "register": {
+      "metaTitle": "Create Account | Ciruplástica",
+      "metaDescription": "Sign up for Ciruplástica and schedule your consultation",
+      "pageTitle": "Create your account",
+      "pageSubtitle": "Join Ciruplástica",
       "title": "Create Account",
       "name": "Full name",
       "namePlaceholder": "Your name",
@@ -930,6 +939,128 @@
       "whatsappMessage": "Hello, I saw the real cases and I would like to schedule a consultation."
     }
   },
+  "videosPage": {
+    "hero": {
+      "badge": "YouTube Channel",
+      "titlePrefix": "Videos",
+      "titleHighlight": "Educational",
+      "description": "Learn about plastic surgery and aesthetic medicine with professional and educational content from Dr. Manuel Sinchi.",
+      "subscribeButton": "Subscribe to Channel"
+    },
+    "categories": {
+      "all": "All",
+      "facial": "Facial Surgery",
+      "corporal": "Body Surgery",
+      "estetica": "Aesthetic Medicine"
+    },
+    "grid": {
+      "title": "Explore Our Videos",
+      "videosAvailable": "{count} videos available",
+      "filterButton": "Filter by category",
+      "emptyState": "No videos in this category.",
+      "views": "views",
+      "featuredBadge": "Featured Video"
+    },
+    "cta": {
+      "title": "Do you like our content?",
+      "description": "Subscribe to our YouTube channel and activate notifications so you don't miss any new videos.",
+      "subscribeButton": "Subscribe Now",
+      "scheduleButton": "Book a Consultation"
+    }
+  },
+  "booking": {
+    "steps": {
+      "data": "Info",
+      "appointment": "Appointment",
+      "payment": "Payment"
+    },
+    "step1": {
+      "title": "Personal Information",
+      "subtitle": "Required information for your appointment",
+      "birthDate": "Date of birth *",
+      "docType": "Doc type. *",
+      "docNumber": "Document number *",
+      "address": "Address *",
+      "addressPlaceholder": "Main St. 123, District",
+      "city": "City *",
+      "selectCity": "Select your city",
+      "otherCity": "Other city",
+      "occupation": "Occupation",
+      "occupationOptional": "(optional)",
+      "occupationPlaceholder": "E.g: Engineer, Student, Homemaker...",
+      "continue": "Continue"
+    },
+    "step2": {
+      "title": "Appointment Details",
+      "subtitle": "Select procedure, date and time",
+      "procedure": "Procedure of interest *",
+      "selectProcedure": "Select a procedure",
+      "dateSelected": "Date and time selected",
+      "weight": "Weight (kg)",
+      "height": "Height (cm)",
+      "referralSource": "How did you hear about us?",
+      "selectOption": "Select an option",
+      "message": "Additional message",
+      "messageOptional": "(optional)",
+      "messagePlaceholder": "Tell us more about what you're looking for...",
+      "consultationCost": "Consultation cost",
+      "personalizedEvaluation": "Personalized evaluation",
+      "bookingSlot": "Booking slot...",
+      "continueToPayment": "Continue to Payment"
+    },
+    "existingBooking": {
+      "title": "You have a pending booking",
+      "description": "You have a booking pending payment that you must complete or cancel before creating another.",
+      "date": "Date",
+      "time": "Time",
+      "timeLeft": "Time left to pay: {minutes} minutes",
+      "continuePayment": "Continue with payment",
+      "cancelNew": "Cancel and create new",
+      "backToForm": "Back to form"
+    },
+    "loginPrompt": {
+      "title": "Sign in to continue",
+      "description": "To confirm your booking you need to sign in or create an account.",
+      "savedData": "Your booking data will be saved.",
+      "signIn": "Sign In",
+      "createAccount": "Create Account",
+      "backToForm": "Back to form"
+    },
+    "success": {
+      "title": "Booking Registered!",
+      "yourAppointmentFor": "Your appointment for",
+      "hasBeenRegistered": "has been registered.",
+      "date": "Date",
+      "at": "at",
+      "verificationNotice": "Your payment will be verified and we will contact you to confirm your appointment within 24 hours.",
+      "viewBookings": "View my bookings",
+      "makeAnother": "Make another booking"
+    },
+    "errors": {
+      "birthDate": "Please enter your date of birth",
+      "documentNumber": "Please enter your document number",
+      "address": "Please enter your address",
+      "city": "Please select your city",
+      "procedure": "Please select a procedure",
+      "dateTime": "Please select date and time",
+      "paymentExpired": "Your booking time has expired. Please select a new time slot.",
+      "connectionError": "Connection error",
+      "noBooking": "No booking to complete",
+      "cancelError": "Error cancelling booking",
+      "createError": "Error creating booking",
+      "paymentError": "Error processing payment"
+    },
+    "documentTypes": {
+      "CE": "Alien ID Card",
+      "PASSPORT": "Passport"
+    },
+    "referralSources": {
+      "friendRecommendation": "Friend/family recommendation",
+      "doctorRecommendation": "Another doctor's recommendation",
+      "streetAdvertising": "Street advertising",
+      "other": "Other"
+    }
+  },
   "bookingPage": {
     "meta": {
       "title": "Book Appointment | Ciruplástica - Dr. Manuel Sinchi",
@@ -960,5 +1091,22 @@
         "closed": "Closed"
       }
     }
+  },
+  "caseModal": {
+    "categoryLabels": {
+      "facial": "Facial Surgery",
+      "corporal": "Body Surgery",
+      "estetica": "Aesthetic Medicine",
+      "reconstructiva": "Reconstructive"
+    },
+    "caseCounter": "Case {current} of {total}",
+    "viewProcedure": "View procedure",
+    "whatsappConsult": "Ask via WhatsApp",
+    "whatsappMessage": "Hello, I saw the case of {procedure} and I would like to schedule a consultation."
+  },
+  "beforeAfterSlider": {
+    "before": "Before",
+    "after": "After",
+    "slideToCompare": "Slide to compare"
   }
 }

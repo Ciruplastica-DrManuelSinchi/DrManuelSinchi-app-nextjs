@@ -201,6 +201,115 @@ const rinoplastiaData: ProcedureData = {
         title: 'Da el primer paso hacia la nariz que siempre soñaste',
         description: 'Agenda tu consulta de valoración y recibe un plan personalizado sin compromiso.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Ultrasonic Technique Available',
+            title: 'Rhinoplasty',
+            description: 'Transform your nose with natural and harmonious results. Ultrasonic technique for faster recovery and more precise results.',
+            duration: '2-3 hours',
+            recovery: '7-10 days recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Rhinoplasty?',
+            content: [
+                'Rhinoplasty is a surgery that allows modifying the shape, size, and proportions of the nose to achieve a harmonious balance with the rest of the face. It can correct both aesthetic and functional aspects.',
+                'At our clinic we use the <strong class="text-primary">ultrasonic technique (Piezo)</strong>, a revolutionary advance that allows sculpting the nasal bone with high-precision piezoelectric instruments, without the need for traditional hammer and chisel.',
+            ],
+            highlights: {
+                title: 'Advantages of the Ultrasonic Technique',
+                items: [
+                    'Less swelling and bruising',
+                    'Faster recovery',
+                    'Greater precision in sculpting',
+                    'More predictable results',
+                    'Less tissue trauma',
+                    'Lower risk of irregularities',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Ultrasonic Technique',
+                description: 'Less trauma, greater precision, and faster recovery.',
+            },
+            {
+                title: 'Natural Results',
+                description: 'Facial harmony respecting your unique features.',
+            },
+            {
+                title: 'Maximum Safety',
+                description: 'Certified protocols and state-of-the-art equipment.',
+            },
+            {
+                title: 'Personalized Care',
+                description: 'Complete follow-up before, during, and after.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Complete facial evaluation, expectation analysis, and personalized planning.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Medical exams, instructions, and preparation for surgery.',
+                duration: '1-2 weeks before',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Surgery with ultrasonic technique under general anesthesia or sedation.',
+                duration: '2-3 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Use of nasal splint, edema control, and close follow-up.',
+                duration: '7-10 days',
+            },
+            {
+                title: 'Final Result',
+                description: 'Progressive reduction of swelling until the definitive result is seen.',
+                duration: '6-12 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Am I a candidate for rhinoplasty?',
+                answer: 'Ideal candidates are people over 18 years with complete facial development, good general health, realistic expectations, and who wish to improve the appearance or function of their nose. During the consultation we will evaluate your particular case.',
+            },
+            {
+                question: 'What is the difference between rhinoplasty, septorhinoplasty, and secondary rhinoplasty?',
+                answer: 'Rhinoplasty is aesthetic nose surgery. Septorhinoplasty combines aesthetic correction with nasal septum correction (functional improvement). Secondary rhinoplasty is a revision of a previous nasal surgery.',
+            },
+            {
+                question: 'What is the minimum age for rhinoplasty?',
+                answer: 'It is recommended to wait until facial development is complete: approximately 16-17 years in women and 17-18 years in men. However, each case is evaluated individually.',
+            },
+            {
+                question: 'What is ultrasonic rhinoplasty and why is it better?',
+                answer: 'It is an advanced technique that uses piezoelectric instruments to sculpt the nasal bone with extreme precision. Advantages: fewer bruises, less swelling, faster recovery, and more predictable results.',
+            },
+            {
+                question: 'How long does recovery take?',
+                answer: 'The splint is removed at 7-10 days. You can resume light activities in 2 weeks. Intense exercise is allowed after 4-6 weeks. Residual swelling gradually disappears in 6-12 months.',
+            },
+            {
+                question: 'Is rhinoplasty painful?',
+                answer: 'Surgery is performed under anesthesia, so you will not feel pain during the procedure. Post-operatively, discomfort is manageable with medication and tends to be minimal with the ultrasonic technique.',
+            },
+            {
+                question: 'Are there visible scars?',
+                answer: 'In closed rhinoplasty, incisions are internal and leave no visible scars. In the open technique, there is a small incision on the columella that becomes practically imperceptible.',
+            },
+        ],
+        cta: {
+            title: 'Take the first step toward the nose you have always dreamed of',
+            description: 'Schedule your assessment consultation and receive a personalized plan with no commitment.',
+        },
+    },
 }
 
 // ============================================

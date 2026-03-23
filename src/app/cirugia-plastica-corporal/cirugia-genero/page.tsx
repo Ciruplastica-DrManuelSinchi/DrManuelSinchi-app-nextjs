@@ -161,6 +161,106 @@ const cirugiaGeneroData: ProcedureData = {
         title: 'Da el siguiente paso en tu transición',
         description: 'Agenda una consulta confidencial para hablar sobre tus objetivos.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Gender Affirming Surgery',
+            title: 'Gender Affirming Surgery',
+            description: 'Chest surgery procedures for transgender and non-binary individuals. We offer mastectomy/chest masculinization (Top Surgery) and breast augmentation with a respectful and professional approach.',
+            duration: '2-4 hours',
+            recovery: '2-6 weeks recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Gender Affirming Surgery?',
+            content: [
+                'Gender affirming surgery includes procedures designed to align physical characteristics with a person\'s gender identity. We provide a safe, respectful, and judgment-free environment.',
+                'We perform: <strong class="text-primary">Mastectomy / Chest Masculinization (Top Surgery)</strong> for trans men and non-binary individuals, and <strong class="text-primary">Breast Augmentation</strong> for trans women who wish to develop a feminine chest.',
+            ],
+            highlights: {
+                title: 'Available Procedures',
+                items: [
+                    'Mastectomy (Top Surgery)',
+                    'Chest masculinization',
+                    'Breast augmentation',
+                    'Pectoral liposuction',
+                    'Gynecomastia correction',
+                    'Nipple reconstruction',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Respectful Environment',
+                description: 'Judgment-free care with sensitized professionals.',
+            },
+            {
+                title: 'Trans Experience',
+                description: 'Specific knowledge of the needs of trans patients.',
+            },
+            {
+                title: 'Holistic Wellbeing',
+                description: 'Contributes to mental health and overall wellbeing.',
+            },
+            {
+                title: 'Natural Results',
+                description: 'Techniques that achieve a natural appearance aligned with your gender.',
+            },
+        ],
+        process: [
+            {
+                title: 'Initial Consultation',
+                description: 'Conversation about your goals, history, and expectations.',
+                duration: '60 min',
+            },
+            {
+                title: 'Medical Evaluation',
+                description: 'Pre-operative tests and coordination if hormonal therapy is involved.',
+                duration: 'Variable',
+            },
+            {
+                title: 'Surgery',
+                description: 'Procedure using specialized techniques tailored to each case.',
+                duration: '2-4 hours',
+            },
+            {
+                title: 'Recovery',
+                description: 'Close follow-up with attention to your specific needs.',
+                duration: '2-6 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Do I need a letter from a mental health professional?',
+                answer: 'According to WPATH standards, prior evaluation is recommended for some surgeries. We discuss this during the consultation based on your specific situation.',
+            },
+            {
+                question: 'Do I need to be on hormone therapy for surgery?',
+                answer: 'It is not strictly necessary for Top Surgery. For breast augmentation in trans women, prior hormone therapy may improve results.',
+            },
+            {
+                question: 'What does Top Surgery (mastectomy) involve?',
+                answer: 'It involves removing breast tissue and repositioning the nipples to create a masculine chest. The exact technique depends on the initial breast size.',
+            },
+            {
+                question: 'Are there visible scars after Top Surgery?',
+                answer: 'The location and size of scars depend on the technique used. We use techniques that minimize scarring based on your anatomy.',
+            },
+            {
+                question: 'Are implants for trans women different?',
+                answer: 'We use the same high-quality implants. The difference lies in the surgical technique, which takes into account the specific characteristics of the chest.',
+            },
+            {
+                question: 'Do you offer other gender affirming procedures?',
+                answer: 'We currently offer chest surgeries. For other procedures, we can refer you to specialized colleagues.',
+            },
+        ],
+        cta: {
+            title: 'Take the next step in your transition',
+            description: 'Schedule a confidential consultation to talk about your goals.',
+        },
+    },
 }
 
 // ============================================

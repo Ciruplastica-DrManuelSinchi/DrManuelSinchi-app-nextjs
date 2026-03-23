@@ -13,6 +13,20 @@ import {
 } from 'lucide-react'
 import { isBlockedDate, getMonthName } from '@/lib/holidays'
 
+// Format a local Date to "YYYY-MM-DD" without UTC conversion
+function toLocalDateString(date: Date): string {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+// Parse "YYYY-MM-DD" as a local date (not UTC midnight)
+function parseLocalDate(dateStr: string): Date {
+  const [year, month, day] = dateStr.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
 interface SlotStatus {
   timeSlot: string
   type: 'booked' | 'awaiting_payment'
@@ -38,7 +52,7 @@ export default function CalendlyStyleCalendar({
 }: CalendlyStyleCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(
-    selectedDate ? new Date(selectedDate) : null
+    selectedDate ? parseLocalDate(selectedDate) : null
   )
   const [isLoadingSlots, setIsLoadingSlots] = useState(false)
   const [occupiedSlots, setOccupiedSlots] = useState<SlotStatus[]>([])
@@ -47,7 +61,7 @@ export default function CalendlyStyleCalendar({
   // Sincronizar con props externas
   useEffect(() => {
     if (selectedDate) {
-      setInternalSelectedDate(new Date(selectedDate))
+      setInternalSelectedDate(parseLocalDate(selectedDate))
     }
   }, [selectedDate])
 
@@ -107,7 +121,7 @@ export default function CalendlyStyleCalendar({
     setError('')
 
     try {
-      const dateStr = date.toISOString().split('T')[0]
+      const dateStr = toLocalDateString(date)
       const response = await fetch(`/api/bookings/availability?date=${dateStr}`)
 
       if (!response.ok) {
@@ -227,7 +241,7 @@ export default function CalendlyStyleCalendar({
     }
 
     if (internalSelectedDate) {
-      const dateStr = internalSelectedDate.toISOString().split('T')[0]
+      const dateStr = toLocalDateString(internalSelectedDate)
       onSelectDateTime(dateStr, timeSlot)
     }
   }

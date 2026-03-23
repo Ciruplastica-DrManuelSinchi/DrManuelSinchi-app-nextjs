@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface BeforeAfterSliderProps {
     beforeImage: string
@@ -15,10 +16,13 @@ interface BeforeAfterSliderProps {
 export default function BeforeAfterSlider({
     beforeImage,
     afterImage,
-    beforeLabel = 'Antes',
-    afterLabel = 'Después',
+    beforeLabel,
+    afterLabel,
     className = '',
 }: BeforeAfterSliderProps) {
+    const t = useTranslations('beforeAfterSlider')
+    const finalBeforeLabel = beforeLabel ?? t('before')
+    const finalAfterLabel = afterLabel ?? t('after')
     const containerRef = useRef<HTMLDivElement>(null)
     const [isDragging, setIsDragging] = useState(false)
 
@@ -90,7 +94,7 @@ export default function BeforeAfterSlider({
             {/* Before Image (Background - Full) */}
             <Image
                 src={beforeImage}
-                alt={beforeLabel}
+                alt={finalBeforeLabel}
                 fill
                 className="object-cover pointer-events-none"
                 draggable={false}
@@ -104,7 +108,7 @@ export default function BeforeAfterSlider({
             >
                 <Image
                     src={afterImage}
-                    alt={afterLabel}
+                    alt={finalAfterLabel}
                     fill
                     className="object-cover pointer-events-none"
                     draggable={false}
@@ -179,7 +183,7 @@ export default function BeforeAfterSlider({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
             >
-                {beforeLabel}
+                {finalBeforeLabel}
             </motion.span>
             <motion.span
                 className="absolute bottom-4 right-4 bg-accent text-dark text-sm font-semibold px-4 py-2 rounded-full z-10"
@@ -187,7 +191,7 @@ export default function BeforeAfterSlider({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
             >
-                {afterLabel}
+                {finalAfterLabel}
             </motion.span>
 
             {/* Instrucción inicial */}
@@ -211,7 +215,7 @@ export default function BeforeAfterSlider({
                             d="M8 9l4-4 4 4m0 6l-4 4-4-4"
                         />
                     </svg>
-                    Desliza para comparar
+                    {t('slideToCompare')}
                 </div>
             </motion.div>
         </div>

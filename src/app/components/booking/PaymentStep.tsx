@@ -14,6 +14,12 @@ import {
   AlertTriangle,
 } from 'lucide-react'
 
+// Parse "YYYY-MM-DD" as a local date (not UTC midnight)
+function parseLocalDate(dateStr: string): Date {
+  const [year, month, day] = dateStr.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
 interface PaymentStepProps {
   procedureName: string
   amount: number
@@ -259,7 +265,7 @@ export default function PaymentStep({
 
   // WhatsApp ahora es para consultas, no para pagos
   const handleWhatsAppContact = () => {
-    const formattedDate = new Date(date).toLocaleDateString('es-PE', {
+    const formattedDate = parseLocalDate(date).toLocaleDateString('es-PE', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -314,7 +320,7 @@ Mi consulta es:`
         <div className="text-sm text-gray-600 space-y-1">
           <p>
             <span className="font-medium">Fecha:</span>{' '}
-            {new Date(date).toLocaleDateString('es-PE', {
+            {parseLocalDate(date).toLocaleDateString('es-PE', {
               weekday: 'long',
               day: 'numeric',
               month: 'long',

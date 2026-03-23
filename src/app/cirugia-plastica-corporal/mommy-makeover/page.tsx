@@ -162,6 +162,106 @@ const mommyMakeoverData: ProcedureData = {
         title: 'Recupera tu cuerpo después de la maternidad',
         description: 'Agenda tu consulta para diseñar tu plan de Mommy Makeover personalizado.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Post-Maternity Transformation',
+            title: 'Mommy Makeover',
+            description: 'Restore your figure after pregnancy with a comprehensive surgical plan. We combine breast, abdomen, and body contouring surgery in one or two stages for transformative results.',
+            duration: '4-6 hours',
+            recovery: '4-6 weeks recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is a Mommy Makeover?',
+            content: [
+                'The Mommy Makeover is a set of procedures designed to restore a woman\'s body after pregnancy and breastfeeding. It is personalized according to each patient\'s needs to address the specific changes their body experienced.',
+                'It typically includes procedures such as: <strong class="text-primary">Mammoplasty</strong> (breast augmentation, reduction, or lift), <strong class="text-primary">Lipoabdominoplasty</strong> for the abdomen, <strong class="text-primary">Liposuction</strong> of flanks and back, and <strong class="text-primary">Gluteoplasty</strong> if desired.',
+            ],
+            highlights: {
+                title: 'Common Procedures',
+                items: [
+                    'Mastopexy (breast lift)',
+                    'Breast augmentation',
+                    'Lipoabdominoplasty',
+                    'Diastasis repair',
+                    'Flank liposuction',
+                    'Gluteoplasty (optional)',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Complete Restoration',
+                description: 'Addresses all pregnancy changes in a comprehensive plan.',
+            },
+            {
+                title: 'One Recovery',
+                description: 'Multiple procedures with a single recovery period.',
+            },
+            {
+                title: 'Renewed Self-Esteem',
+                description: 'Regain confidence in your post-maternity body.',
+            },
+            {
+                title: 'Personalized Plan',
+                description: 'Designed specifically for your needs.',
+            },
+        ],
+        process: [
+            {
+                title: 'Comprehensive Evaluation',
+                description: 'Analysis of breasts, abdomen, and areas of concern.',
+                duration: '60 min',
+            },
+            {
+                title: 'Personalized Plan',
+                description: 'Design of the set of procedures according to your goals.',
+                duration: 'During consultation',
+            },
+            {
+                title: 'Combined Surgery',
+                description: 'Execution of all planned procedures.',
+                duration: '4-6 hours',
+            },
+            {
+                title: 'Recovery',
+                description: 'Close follow-up, use of compression garments, and specific care.',
+                duration: '4-6 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How long after childbirth can I have a Mommy Makeover?',
+                answer: 'We recommend waiting at least 6 months after delivery and 3-6 months after finishing breastfeeding. Ideally when weight has stabilized.',
+            },
+            {
+                question: 'Can I have more children afterward?',
+                answer: 'Yes, it is possible. However, a new pregnancy will affect the results. The ideal is to perform the procedure when you have completed your family.',
+            },
+            {
+                question: 'Is it safe to combine so many procedures?',
+                answer: 'Yes, when performed by an experienced team with appropriate safety protocols. We evaluate each case individually.',
+            },
+            {
+                question: 'How long will I be out of activities?',
+                answer: 'Strict rest for 1-2 weeks. Light activities at 2-3 weeks. Normal activities at 4-6 weeks. Intense exercise at 2-3 months.',
+            },
+            {
+                question: 'Are the results permanent?',
+                answer: 'Yes, as long as you maintain a stable weight and have no more pregnancies. Breast implants may require revision in the long term.',
+            },
+            {
+                question: 'Can we do it in stages?',
+                answer: 'Yes, some patients prefer to divide the procedures into 2 surgeries separated by a few months. We evaluate this according to each case.',
+            },
+        ],
+        cta: {
+            title: 'Restore your body after motherhood',
+            description: 'Schedule your consultation to design your personalized Mommy Makeover plan.',
+        },
+    },
 }
 
 // ============================================

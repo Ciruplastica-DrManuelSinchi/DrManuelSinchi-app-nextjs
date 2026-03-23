@@ -161,6 +161,106 @@ const aumentoPomulosData: ProcedureData = {
         title: 'Define tu rostro con pómulos armoniosos',
         description: 'Agenda tu consulta para evaluar la mejor técnica de aumento de pómulos para ti.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Facial Contouring',
+            title: 'Cheek Augmentation',
+            description: 'Enhance your cheekbones to achieve a more defined and harmonious face. We offer techniques with autologous fat or silicone implants for natural and long-lasting results.',
+            duration: '45-90 min',
+            recovery: '7-14 days',
+            anesthesia: 'Local with sedation',
+        },
+        info: {
+            title: 'What is Cheek Augmentation?',
+            content: [
+                'Cheek augmentation is a procedure that adds volume to the malar region to create a more defined, youthful, and harmonious face. Well-projected cheekbones are a sign of youth and beauty in all cultures.',
+                'We offer two main techniques: <strong class="text-primary">Fat transfer (autologous fat)</strong> which uses your own fat for a natural result, and <strong class="text-primary">Silicone implants</strong> for a more defined and permanent projection.',
+            ],
+            highlights: {
+                title: 'Available Techniques',
+                items: [
+                    'Augmentation with autologous fat',
+                    'Malar silicone implants',
+                    'Combination of techniques',
+                    'Asymmetry correction',
+                    'Mid-face rejuvenation',
+                    'Facial contour definition',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Defined Face',
+                description: 'Prominent cheekbones that enhance your facial structure.',
+            },
+            {
+                title: 'Youthful Appearance',
+                description: 'Restores volume lost through aging.',
+            },
+            {
+                title: 'Permanent Results',
+                description: 'Both stabilized fat and implants are long-lasting.',
+            },
+            {
+                title: 'Facial Harmony',
+                description: 'Improves the balance and proportions of the face.',
+            },
+        ],
+        process: [
+            {
+                title: 'Facial Evaluation',
+                description: 'Analysis of your bone structure and definition of the volume needed.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Planning',
+                description: 'Selection of technique (fat or implants) and design of the result.',
+                duration: 'At consultation',
+            },
+            {
+                title: 'Procedure',
+                description: 'Outpatient surgery with local anesthesia and sedation.',
+                duration: '45-90 min',
+            },
+            {
+                title: 'Recovery',
+                description: 'Swelling that resolves in 1-2 weeks. Definitive results in 2-3 months.',
+                duration: '7-14 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is better: fat or implants?',
+                answer: 'It depends on each case. Fat gives softer, more natural results, while implants offer greater projection and definition. We evaluate this during the consultation.',
+            },
+            {
+                question: 'Are cheek implants noticeable?',
+                answer: 'No, when properly placed they look and feel completely natural. They are placed on the bone, beneath the soft tissues.',
+            },
+            {
+                question: 'How long does fat last in the cheeks?',
+                answer: 'Approximately 60-70% of the grafted fat is maintained permanently. That is why sometimes a little more than needed is injected.',
+            },
+            {
+                question: 'Are there visible scars?',
+                answer: 'No, incisions are made inside the mouth (for implants) or are minimal punctures (for fat), with no visible scars.',
+            },
+            {
+                question: 'Can I combine this with other procedures?',
+                answer: 'Yes, it is frequently combined with rhinoplasty, mentoplasty, facelift, or blepharoplasty for comprehensive rejuvenation.',
+            },
+            {
+                question: 'When will I see the final result?',
+                answer: 'The initial result is visible once swelling subsides (2-3 weeks). The definitive result is seen at 2-3 months with fat, or 1-2 months with implants.',
+            },
+        ],
+        cta: {
+            title: 'Define your face with harmonious cheekbones',
+            description: 'Schedule your consultation to evaluate the best cheek augmentation technique for you.',
+        },
+    },
 }
 
 // ============================================

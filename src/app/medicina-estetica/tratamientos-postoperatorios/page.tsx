@@ -161,6 +161,106 @@ const tratamientosPostopData: ProcedureData = {
         title: 'Optimiza tu recuperación postoperatoria',
         description: 'Agenda tus sesiones de tratamiento postoperatorio para mejores resultados.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Optimal Recovery',
+            title: 'Post-Operative Treatments',
+            description: 'Accelerate your recovery and optimize the results of your surgery with our specialized treatments: massages, lymphatic drainage, ultrasound and carboxytherapy.',
+            duration: '45-60 min',
+            recovery: 'Immediate',
+            anesthesia: 'None required',
+        },
+        info: {
+            title: 'Why Are Post-Operative Treatments Important?',
+            content: [
+                'Post-operative treatments are essential for optimal recovery after plastic surgeries. They help reduce inflammation, prevent fibrosis, improve circulation and accelerate healing.',
+                'We offer a comprehensive program that includes: <strong class="text-primary">Manual lymphatic drainage</strong>, <strong class="text-primary">Therapeutic ultrasound</strong>, <strong class="text-primary">Post-surgical massages</strong> and <strong class="text-primary">Carboxytherapy</strong> for superior results.',
+            ],
+            highlights: {
+                title: 'Available Treatments',
+                items: [
+                    'Manual lymphatic drainage',
+                    'Post-surgical massages',
+                    'Therapeutic ultrasound',
+                    'Carboxytherapy',
+                    'Pressotherapy',
+                    'Vacuum therapy',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Reduces Inflammation',
+                description: 'Eliminates fluids and decongests the tissues.',
+            },
+            {
+                title: 'Prevents Fibrosis',
+                description: 'Avoids the formation of fibrous tissue and nodules.',
+            },
+            {
+                title: 'Improves Circulation',
+                description: 'Accelerates tissue recovery.',
+            },
+            {
+                title: 'Carboxytherapy',
+                description: 'CO2 that improves oxygenation and reduces bruising.',
+            },
+        ],
+        process: [
+            {
+                title: 'Post-Surgery Evaluation',
+                description: 'Review of tissue condition and treatment plan.',
+                duration: '15 min',
+            },
+            {
+                title: 'Lymphatic Drainage',
+                description: 'Specialized massage to eliminate fluids.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Complementary Therapies',
+                description: 'Ultrasound, carboxytherapy as needed per case.',
+                duration: '15-30 min',
+            },
+            {
+                title: 'Follow-Up Plan',
+                description: 'Scheduled sessions until complete recovery.',
+                duration: '2-8 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'When should I start the treatments?',
+                answer: 'Generally we start between 24-72 hours post-surgery, depending on the procedure performed. Your surgeon will indicate the ideal time.',
+            },
+            {
+                question: 'How many sessions do I need?',
+                answer: 'Typically 10-20 sessions, 2-3 times per week initially, then spaced out. It depends on the type of surgery and your progress.',
+            },
+            {
+                question: 'Is it painful?',
+                answer: 'The first drainages may be uncomfortable because the tissues are sensitive. We work with the appropriate pressure for each stage.',
+            },
+            {
+                question: 'What is fibrosis and how is it prevented?',
+                answer: 'Fibrosis is the formation of hard scar tissue under the skin. It is prevented with massages, ultrasound and early tissue mobilization.',
+            },
+            {
+                question: 'What does carboxytherapy do?',
+                answer: 'It injects subcutaneous CO2 that improves oxygenation, reduces bruising, stimulates circulation and helps eliminate residual fat.',
+            },
+            {
+                question: 'Can I do drainage at home?',
+                answer: 'You can do gentle self-massages, but professional lymphatic drainage is much more effective. We teach you complementary techniques for home.',
+            },
+        ],
+        cta: {
+            title: 'Optimize your post-operative recovery',
+            description: 'Schedule your post-operative treatment sessions for better results.',
+        },
+    },
 }
 
 // ============================================

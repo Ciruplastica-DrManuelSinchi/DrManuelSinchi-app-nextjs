@@ -16,9 +16,9 @@ const protectedRoutes = ['/dashboard', '/profile', '/admin']
 // Rutas solo para admin
 const adminRoutes = ['/admin']
 
-// Rutas que existen a nivel raíz (no bajo [locale])
-// Estas rutas no necesitan reescritura de locale
-const rootLevelRoutes = [
+// Rutas públicas del sitio (landing page y contenido público)
+// Los administradores logueados serán redirigidos a /admin si intentan acceder
+const publicLandingRoutes = [
   '/cirugia-plastica-facial',
   '/cirugia-plastica-corporal',
   '/cirugia-reconstructiva',
@@ -32,6 +32,12 @@ const rootLevelRoutes = [
   '/reservar',
   '/terminos',
   '/privacidad',
+]
+
+// Rutas que existen a nivel raíz (no bajo [locale])
+// Estas rutas no necesitan reescritura de locale
+const rootLevelRoutes = [
+  ...publicLandingRoutes,
   // Auth routes
   '/login',
   '/register',
@@ -53,6 +59,12 @@ function removeLocaleFromPathname(pathname: string): string {
 function isRootLevelRoute(pathname: string): boolean {
   const cleanPath = removeLocaleFromPathname(pathname)
   return rootLevelRoutes.some(route => cleanPath.startsWith(route))
+}
+
+// Verificar si es una ruta pública del landing (contenido público)
+function isPublicLandingRoute(pathname: string): boolean {
+  const cleanPath = removeLocaleFromPathname(pathname)
+  return publicLandingRoutes.some(route => cleanPath.startsWith(route))
 }
 
 export async function middleware(request: NextRequest) {
@@ -109,6 +121,12 @@ export async function middleware(request: NextRequest) {
     const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route))
     const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route))
     const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route))
+    const isPublicRoute = isPublicLandingRoute(pathname)
+
+    // Si es admin y está en una ruta pública del landing, redirigir a /admin
+    if (isPublicRoute && isAuthenticated && token.role === 'ADMIN') {
+      return NextResponse.redirect(new URL('/admin', request.url))
+    }
 
     // Si está en ruta de auth y ya está logueado, redirigir según rol
     if (isAuthRoute && isAuthenticated) {
@@ -163,9 +181,10 @@ export async function middleware(request: NextRequest) {
   const isAuthRoute = authRoutes.some((route) => pathnameWithoutLocale.startsWith(route))
   const isProtectedRoute = protectedRoutes.some((route) => pathnameWithoutLocale.startsWith(route))
   const isAdminRoute = adminRoutes.some((route) => pathnameWithoutLocale.startsWith(route))
+  const isPublicRoute = isPublicLandingRoute(pathnameWithoutLocale)
 
-  // Si es admin y está en la página principal, redirigir a /admin
-  if (pathnameWithoutLocale === '/' && isAuthenticated && token.role === 'ADMIN') {
+  // Si es admin y está en la página principal o cualquier ruta pública, redirigir a /admin
+  if ((pathnameWithoutLocale === '/' || isPublicRoute) && isAuthenticated && token.role === 'ADMIN') {
     return NextResponse.redirect(new URL('/admin', request.url))
   }
 

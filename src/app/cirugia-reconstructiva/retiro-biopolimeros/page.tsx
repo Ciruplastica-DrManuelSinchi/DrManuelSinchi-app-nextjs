@@ -162,6 +162,106 @@ const retiroBiopolimerosData: ProcedureData = {
         title: 'No vivas más con las complicaciones de los biopolímeros',
         description: 'Agenda tu evaluación para conocer tus opciones de tratamiento.',
     },
+
+    en: {
+        categoryLabel: 'Reconstructive Surgery',
+        hero: {
+            badge: 'Specialized Extraction',
+            title: 'Biopolymer Removal',
+            description: 'Safe removal of biopolymers, liquid silicone, and other illegally injected materials. Treatment of complications and reconstruction of affected tissues.',
+            duration: '2-6 hours',
+            recovery: '2-6 weeks',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What Are Biopolymers?',
+            content: [
+                'Biopolymers are substances such as liquid silicone, PMMA, oils, and other materials that were injected (usually illegally) to add volume to the buttocks, face, breasts, or other areas. These materials can cause serious complications.',
+                'Biopolymer removal is a complex procedure that requires <strong class="text-primary">expertise in reconstructive surgery</strong>. We extract as much of the material as possible and treat the damaged tissues, although complete removal is not always achievable.',
+            ],
+            highlights: {
+                title: 'Materials We Remove',
+                items: [
+                    'Industrial liquid silicone',
+                    'Biopolymers (PMMA)',
+                    'Mineral oils',
+                    'Paraffin',
+                    'Methacrylate',
+                    'Other foreign bodies',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Maximum Extraction',
+                description: 'Techniques to remove as much material as possible.',
+            },
+            {
+                title: 'Complication Management',
+                description: 'Treatment of infections, fistulas, and granulomas.',
+            },
+            {
+                title: 'Reconstruction',
+                description: 'Restoration of affected tissues whenever possible.',
+            },
+            {
+                title: 'Symptom Relief',
+                description: 'Reduction of pain, inflammation, and discomfort.',
+            },
+        ],
+        process: [
+            {
+                title: 'Comprehensive Evaluation',
+                description: 'Medical history, laboratory tests, and imaging (ultrasound/MRI).',
+                duration: '60 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Optimization of health conditions and treatment of active infections.',
+                duration: 'Variable',
+            },
+            {
+                title: 'Surgery',
+                description: 'Extraction of the material and reconstruction of the affected tissues.',
+                duration: '2-6 hours',
+            },
+            {
+                title: 'Recovery',
+                description: 'Drains, antibiotics, wound care, and close follow-up.',
+                duration: '2-6 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Can all of the biopolymer be removed?',
+                answer: 'Unfortunately, complete removal is rarely possible because the material infiltrates surrounding tissues. The goal is to extract as much as possible and treat the complications.',
+            },
+            {
+                question: 'What are the symptoms of complications?',
+                answer: 'Pain, hardening, skin discoloration, material migration, fistulas (draining openings), fever, and in severe cases, systemic involvement.',
+            },
+            {
+                question: 'Is this a high-risk surgery?',
+                answer: 'It is a complex surgery with significant risks: bleeding, infection, damage to surrounding structures, and the need for multiple surgeries. For this reason, it must be performed by specialists.',
+            },
+            {
+                question: 'How many surgeries are needed?',
+                answer: 'It depends on the amount of material and its location. Some cases can be resolved in a single surgery, while others require 2-3 or more interventions.',
+            },
+            {
+                question: 'Does insurance cover this procedure?',
+                answer: 'When complications are present, it is generally considered a medical rather than cosmetic procedure. Each case must be evaluated with the insurance provider.',
+            },
+            {
+                question: 'Can I get implants afterward?',
+                answer: 'In some cases, reconstruction with implants or fat transfer is possible once the tissues have fully healed. Each case is evaluated individually.',
+            },
+        ],
+        cta: {
+            title: 'Don\'t live with biopolymer complications any longer',
+            description: 'Schedule your evaluation to learn about your treatment options.',
+        },
+    },
 }
 
 // ============================================

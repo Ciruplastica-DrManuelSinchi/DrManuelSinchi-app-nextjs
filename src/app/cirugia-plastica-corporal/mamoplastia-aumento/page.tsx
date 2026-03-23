@@ -196,6 +196,115 @@ const mamoplastiaAumentoData: ProcedureData = {
         title: 'Realza tu figura con confianza',
         description: 'Agenda tu consulta de valoración y descubre cómo lograr los senos que siempre deseaste.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Breast Augmentation',
+            title: 'Breast Augmentation',
+            description: 'Increase the volume and improve the shape of your breasts with high-quality implants. Natural results that enhance your femininity and confidence.',
+            duration: '1-2 hours',
+            recovery: '7-14 days recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Breast Augmentation?',
+            content: [
+                'Breast augmentation is a surgery that increases the size and improves the shape of the breasts using breast implants. It is one of the most performed cosmetic procedures in the world.',
+                'We use <strong class="text-primary">state-of-the-art</strong> cohesive silicone gel implants, available in different shapes (round or anatomical), sizes, and profiles to achieve a personalized and natural result.',
+            ],
+            highlights: {
+                title: 'Implant Options',
+                items: [
+                    'Round or anatomical implants',
+                    'Cohesive silicone gel',
+                    'Different sizes and profiles',
+                    'Smooth or textured surface',
+                    'Certified premium brands',
+                    'Lifetime warranty',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Premium Implants',
+                description: 'Certified brands with lifetime warranty.',
+            },
+            {
+                title: 'Natural Results',
+                description: 'Personalized selection for harmony with your body.',
+            },
+            {
+                title: 'Maximum Safety',
+                description: 'Advanced techniques and certified protocols.',
+            },
+            {
+                title: 'Elevated Self-Esteem',
+                description: 'Improve your confidence and personal wellbeing.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Breast evaluation, implant trial, and ideal size selection.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Lab tests, mammogram if applicable, and preparation.',
+                duration: '1-2 weeks prior',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Implant placement under general anesthesia at a certified clinic.',
+                duration: '1-2 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Same-day or next-day discharge. Use of special bra.',
+                duration: '1-2 days',
+            },
+            {
+                title: 'Follow-up and Result',
+                description: 'Periodic check-ups until the final result with settled implants.',
+                duration: '3-6 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How do I choose the correct implant size?',
+                answer: 'During the consultation we perform trials with different implant sizes using a special bra. We consider your anatomy, body proportions, lifestyle, and expectations to recommend the ideal size.',
+            },
+            {
+                question: 'Are implants safe?',
+                answer: 'Yes, current cohesive silicone gel implants are very safe and have been extensively studied. We use premium brands with FDA certification and lifetime warranty.',
+            },
+            {
+                question: 'Where is the implant placed?',
+                answer: 'The implant can be placed behind the mammary gland (subglandular) or behind the pectoral muscle (submuscular). The choice depends on your anatomy and will be discussed during the consultation.',
+            },
+            {
+                question: 'Where is the incision made?',
+                answer: 'Options include: inframammary fold (under the breast), periareolar (around the areola), or axillary. The most common is the inframammary fold due to its versatility and hidden scar.',
+            },
+            {
+                question: 'How long do implants last?',
+                answer: 'Modern implants have no expiration date. However, periodic evaluation and possible replacement after 10-15 years or if there are changes in the breasts is recommended.',
+            },
+            {
+                question: 'Can I breastfeed after surgery?',
+                answer: 'In most cases yes. Current techniques preserve the mammary ducts. However, individual factors may affect breastfeeding.',
+            },
+            {
+                question: 'When can I return to exercise?',
+                answer: 'Walks from the first week. Light cardiovascular exercise at 3-4 weeks. Chest exercises and high intensity after 6-8 weeks.',
+            },
+        ],
+        cta: {
+            title: 'Enhance your figure with confidence',
+            description: 'Schedule your assessment consultation and discover how to achieve the breasts you have always desired.',
+        },
+    },
 }
 
 // ============================================

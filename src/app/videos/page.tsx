@@ -13,6 +13,7 @@ import {
     ChevronRight,
     Sparkles
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 // Tipos
 interface Video {
@@ -24,14 +25,6 @@ interface Video {
     views: string
     featured?: boolean
 }
-
-// Categorías de videos
-const categories = [
-    { id: 'todos', name: 'Todos', icon: Sparkles },
-    { id: 'facial', name: 'Cirugía Facial', icon: null },
-    { id: 'corporal', name: 'Cirugía Corporal', icon: null },
-    { id: 'estetica', name: 'Medicina Estética', icon: null },
-]
 
 // Videos reales del canal (sin duplicados)
 const videos: Video[] = [
@@ -285,6 +278,9 @@ const videos: Video[] = [
 
 // Componente de Video Card
 function VideoCard({ video, index, onPlay }: { video: Video; index: number; onPlay: (video: Video) => void }) {
+    const t = useTranslations('videosPage')
+    const tCategories = useTranslations('videosPage.categories')
+
     return (
         <motion.article
             initial={{ opacity: 0, y: 30 }}
@@ -318,10 +314,9 @@ function VideoCard({ video, index, onPlay }: { video: Video; index: number; onPl
                     </motion.div>
                 </div>
 
-
                 {/* Category badge */}
                 <div className="absolute top-3 left-3 px-3 py-1 bg-white/95 rounded-full text-xs font-medium text-primary capitalize">
-                    {video.category}
+                    {tCategories(video.category as 'all' | 'facial' | 'corporal' | 'estetica')}
                 </div>
             </div>
 
@@ -336,7 +331,7 @@ function VideoCard({ video, index, onPlay }: { video: Video; index: number; onPl
                 <div className="flex items-center gap-4 text-xs text-gray-400">
                     <span className="flex items-center gap-1">
                         <Eye className="w-3.5 h-3.5" />
-                        {video.views} vistas
+                        {video.views} {t('grid.views')}
                     </span>
                 </div>
             </div>
@@ -346,6 +341,8 @@ function VideoCard({ video, index, onPlay }: { video: Video; index: number; onPl
 
 // Componente de Video Featured
 function FeaturedVideo({ video, onPlay }: { video: Video; onPlay: (video: Video) => void }) {
+    const t = useTranslations('videosPage')
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -382,7 +379,7 @@ function FeaturedVideo({ video, onPlay }: { video: Video; onPlay: (video: Video)
                 <div className="p-8 lg:p-12 flex flex-col justify-center text-white">
                     <span className="inline-flex items-center gap-2 text-accent text-sm font-medium mb-4">
                         <Sparkles className="w-4 h-4" />
-                        Video Destacado
+                        {t('grid.featuredBadge')}
                     </span>
                     <h2 className="font-display text-2xl lg:text-3xl font-bold mb-4 leading-tight">
                         {video.title}
@@ -393,7 +390,7 @@ function FeaturedVideo({ video, onPlay }: { video: Video; onPlay: (video: Video)
                     <div className="flex items-center gap-6 text-sm text-white/60">
                         <span className="flex items-center gap-2">
                             <Eye className="w-4 h-4" />
-                            {video.views} vistas
+                            {video.views} {t('grid.views')}
                         </span>
                     </div>
                 </div>
@@ -441,9 +438,17 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
 }
 
 export default function VideosPage() {
+    const t = useTranslations('videosPage')
     const [activeCategory, setActiveCategory] = useState('todos')
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null)
     const [showFilters, setShowFilters] = useState(false)
+
+    const categories = [
+        { id: 'todos', name: t('categories.all'), icon: Sparkles },
+        { id: 'facial', name: t('categories.facial'), icon: null },
+        { id: 'corporal', name: t('categories.corporal'), icon: null },
+        { id: 'estetica', name: t('categories.estetica'), icon: null },
+    ]
 
     // Filtrar videos
     const filteredVideos = activeCategory === 'todos'
@@ -472,13 +477,13 @@ export default function VideosPage() {
                     >
                         <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-accent text-sm font-medium mb-6">
                             <Youtube className="w-4 h-4" />
-                            Canal de YouTube
+                            {t('hero.badge')}
                         </span>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight">
-                            Videos <span className="text-accent">Educativos</span>
+                            {t('hero.titlePrefix')} <span className="text-accent">{t('hero.titleHighlight')}</span>
                         </h1>
                         <p className="text-lg md:text-xl text-white/80 mb-8">
-                            Aprende sobre cirugía plástica y medicina estética con contenido profesional y educativo del Dr. Manuel Sinchi.
+                            {t('hero.description')}
                         </p>
                         <a
                             href="https://www.youtube.com/@DrManuelSinchi-Ciruplastica?sub_confirmation=1"
@@ -487,7 +492,7 @@ export default function VideosPage() {
                             className="inline-flex items-center gap-2 bg-accent text-dark px-6 py-3 rounded-full font-semibold hover:bg-accent-dark transition-colors"
                         >
                             <Youtube className="w-5 h-5" />
-                            Suscríbete al Canal
+                            {t('hero.subscribeButton')}
                         </a>
                     </motion.div>
                 </div>
@@ -514,10 +519,10 @@ export default function VideosPage() {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
                         <div>
                             <h2 className="text-2xl md:text-3xl font-display font-bold text-dark mb-2">
-                                Explora Nuestros Videos
+                                {t('grid.title')}
                             </h2>
                             <p className="text-gray-500">
-                                {filteredVideos.length} videos disponibles
+                                {t('grid.videosAvailable', { count: filteredVideos.length })}
                             </p>
                         </div>
 
@@ -527,7 +532,7 @@ export default function VideosPage() {
                             className="md:hidden flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm text-sm font-medium text-gray-700"
                         >
                             <Filter className="w-4 h-4" />
-                            Filtrar por categoría
+                            {t('grid.filterButton')}
                         </button>
 
                         {/* Desktop Category Tabs */}
@@ -603,7 +608,7 @@ export default function VideosPage() {
                     {/* Empty state */}
                     {filteredVideos.length === 0 && (
                         <div className="text-center py-20">
-                            <p className="text-gray-500">No hay videos en esta categoría.</p>
+                            <p className="text-gray-500">{t('grid.emptyState')}</p>
                         </div>
                     )}
                 </div>
@@ -627,10 +632,10 @@ export default function VideosPage() {
                                 <span className="text-white/70 text-lg">@DrManuelSinchi-Ciruplastica</span>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-                                ¿Te gusta nuestro contenido?
+                                {t('cta.title')}
                             </h2>
                             <p className="text-white/70 text-lg max-w-xl">
-                                Suscríbete a nuestro canal de YouTube y activa las notificaciones para no perderte ningún video nuevo.
+                                {t('cta.description')}
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-4">
@@ -641,13 +646,13 @@ export default function VideosPage() {
                                 className="inline-flex items-center justify-center gap-2 bg-accent text-dark px-8 py-4 rounded-full font-bold hover:bg-accent-dark transition-colors"
                             >
                                 <Youtube className="w-5 h-5" />
-                                Suscribirme Ahora
+                                {t('cta.subscribeButton')}
                             </a>
                             <Link
                                 href="/contacto"
                                 className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors"
                             >
-                                Agenda una Consulta
+                                {t('cta.scheduleButton')}
                                 <ChevronRight className="w-4 h-4" />
                             </Link>
                         </div>

@@ -195,6 +195,111 @@ const bichectomiaData: ProcedureData = {
         title: 'Define tu rostro con la bichectomía',
         description: 'Agenda tu consulta de valoración y descubre cómo resaltar tus pómulos naturalmente.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Facial Definition',
+            title: 'Bichectomy',
+            description: 'Define your face by removing the Bichat fat pads. A quick procedure that slims your cheeks and naturally highlights your cheekbones.',
+            duration: '45 minutes',
+            recovery: '3-5 days recovery',
+            anesthesia: 'Local anesthesia',
+        },
+        info: {
+            title: 'What is Bichectomy?',
+            content: [
+                'Bichectomy is a surgical procedure that involves the removal of the Bichat fat pads, clusters of fat located in the cheeks. This procedure slims the face and defines the cheekbones, creating a more angular and stylized appearance.',
+                'It is a <strong class="text-primary">minimally invasive</strong> surgery performed through small incisions inside the mouth, leaving no visible scars. The procedure is quick and recovery is very short.',
+            ],
+            highlights: {
+                title: 'Benefits of Bichectomy',
+                items: [
+                    'More defined and angular face',
+                    'More prominent cheekbones',
+                    'No visible scars',
+                    'Outpatient procedure',
+                    'Quick recovery',
+                    'Permanent results',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Minimally Invasive',
+                description: 'Quick procedure with no visible external scars.',
+            },
+            {
+                title: 'Express Recovery',
+                description: 'Resume your activities in just 3-5 days.',
+            },
+            {
+                title: 'Permanent Results',
+                description: 'The removed fat does not return.',
+            },
+            {
+                title: 'Natural Appearance',
+                description: 'Defines your face without looking operated on.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Facial evaluation, proportion analysis, and results simulation.',
+                duration: '30 min',
+            },
+            {
+                title: 'Surgery Day',
+                description: 'Outpatient procedure with local anesthesia in the office.',
+                duration: '45 min',
+            },
+            {
+                title: 'Immediate Recovery',
+                description: 'You can go home the same day with care instructions.',
+                duration: 'Same day',
+            },
+            {
+                title: 'Post-operative Care',
+                description: 'Soft diet, rinses, and swelling control.',
+                duration: '3-5 days',
+            },
+            {
+                title: 'Final Result',
+                description: 'Complete facial definition once swelling disappears.',
+                duration: '1-2 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Am I a candidate for bichectomy?',
+                answer: 'Ideal candidates are people with a round face due to prominent Bichat fat pads, not due to being overweight. During the consultation we will evaluate whether this procedure is suitable for you or if other options would be more beneficial.',
+            },
+            {
+                question: 'Is bichectomy permanent?',
+                answer: 'Yes, the results are permanent. The Bichat fat pads do not regenerate once removed. The final result is fully appreciated after 1-2 months when all swelling disappears.',
+            },
+            {
+                question: 'Are there scars?',
+                answer: 'There are no visible scars. The incisions are made inside the mouth, on the inner part of the cheeks. They heal completely in 7-10 days.',
+            },
+            {
+                question: 'What care should I take afterwards?',
+                answer: 'You should follow a soft diet for 5-7 days, use oral antiseptic rinses, avoid hot foods, and not smoke. Swelling is normal during the first few days.',
+            },
+            {
+                question: 'Can I combine bichectomy with other procedures?',
+                answer: 'Yes, it is very common to combine it with chin liposuction, mentoplasty, or facial fillers for more harmonious and complete results.',
+            },
+            {
+                question: 'At what age can it be done?',
+                answer: 'It is recommended after 18-20 years of age when the face has finished developing. There is no upper age limit if the patient is in good health.',
+            },
+        ],
+        cta: {
+            title: 'Define your face with bichectomy',
+            description: 'Schedule your assessment consultation and discover how to naturally highlight your cheekbones.',
+        },
+    },
 }
 
 // ============================================

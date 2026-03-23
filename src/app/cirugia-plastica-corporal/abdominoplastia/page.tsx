@@ -194,6 +194,111 @@ const abdominoplastiaData: ProcedureData = {
         title: 'Recupera el abdomen que siempre soñaste',
         description: 'Agenda tu consulta de valoración y descubre cómo la abdominoplastia puede transformar tu figura.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Flat and Toned Abdomen',
+            title: 'Abdominoplasty',
+            description: 'Regain a flat, firm abdomen by removing excess skin and fat, and repairing the abdominal muscles for a more defined silhouette.',
+            duration: '2-4 hours',
+            recovery: '14-21 days recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Abdominoplasty?',
+            content: [
+                'Abdominoplasty, also known as a "tummy tuck," is a surgery that removes excess skin and fat from the abdomen, and repairs weakened or separated abdominal muscles (rectus diastasis).',
+                'It is especially beneficial for people who have experienced significant weight changes, women after pregnancy, or those with abdominal laxity that does not respond to diet or exercise. The result is a <strong class="text-primary">flatter, firmer, and more defined abdomen</strong>.',
+            ],
+            highlights: {
+                title: 'Types of Abdominoplasty',
+                items: [
+                    'Full abdominoplasty (classic)',
+                    'Mini abdominoplasty',
+                    'Extended abdominoplasty',
+                    'Abdominoplasty with liposuction',
+                    'Circumferential abdominoplasty',
+                    'Rectus diastasis repair',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Flat Abdomen',
+                description: 'Removes excess skin and fat for a defined abdomen.',
+            },
+            {
+                title: 'Repaired Muscles',
+                description: 'Corrects muscle separation (rectus diastasis).',
+            },
+            {
+                title: 'Long-Lasting Results',
+                description: 'With stable weight, results are permanent.',
+            },
+            {
+                title: 'Improved Posture',
+                description: 'Muscle repair improves support and posture.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Complete abdominal evaluation, analysis of skin, fat, and muscles.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Lab tests, cardiological evaluation, and physical preparation.',
+                duration: '2 weeks prior',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Surgery under general anesthesia at a certified clinic.',
+                duration: '2-4 hours',
+            },
+            {
+                title: 'Hospital Recovery',
+                description: 'Post-operative monitoring, pain management, and early mobilization.',
+                duration: '1-2 nights',
+            },
+            {
+                title: 'Home Recovery',
+                description: 'Use of compression garment, wound care, and close follow-up.',
+                duration: '3-6 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Am I a candidate for abdominoplasty?',
+                answer: 'Ideal candidates are people with excess abdominal skin, localized fat that does not respond to diet/exercise, or weakened abdominal muscles. It is important to have a stable weight and not plan future pregnancies.',
+            },
+            {
+                question: 'What is the difference between abdominoplasty and liposuction?',
+                answer: 'Liposuction only removes fat, while abdominoplasty also removes excess skin and repairs muscles. They are frequently combined for better results.',
+            },
+            {
+                question: 'Is the scar very visible?',
+                answer: 'The scar is located along the bikini line, designed to be covered by underwear. Over time and with proper care, it becomes less noticeable.',
+            },
+            {
+                question: 'How long do I need to wear the compression garment?',
+                answer: 'It is recommended to wear a compression garment 24 hours a day during the first 4-6 weeks, then progressively until completing 2-3 months.',
+            },
+            {
+                question: 'Can I have children after abdominoplasty?',
+                answer: 'Yes, it is possible to get pregnant afterward. However, pregnancy may affect the results. That is why we recommend undergoing surgery when no more pregnancies are planned.',
+            },
+            {
+                question: 'When can I return to exercise?',
+                answer: 'Light walks from the first week. Light cardiovascular exercise at 4-6 weeks. Abdominal and high-intensity exercises after 8-12 weeks.',
+            },
+        ],
+        cta: {
+            title: 'Reclaim the abdomen you have always dreamed of',
+            description: 'Schedule your assessment consultation and discover how abdominoplasty can transform your figure.',
+        },
+    },
 }
 
 // ============================================

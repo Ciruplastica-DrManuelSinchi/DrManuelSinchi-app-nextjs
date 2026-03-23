@@ -192,6 +192,111 @@ const mastopexiaData: ProcedureData = {
         title: 'Recupera la firmeza de tus senos',
         description: 'Agenda tu consulta de valoración y descubre cómo la mastopexia puede rejuvenecer tu busto.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Breast Lift',
+            title: 'Mastopexy',
+            description: 'Restore the firmness and youth of your breasts with a breast lift. Correct sagging and return the natural projection to your bust.',
+            duration: '2-3 hours',
+            recovery: '14-21 days recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Mastopexy?',
+            content: [
+                'Mastopexy, or breast lift, is a surgery that corrects breast ptosis (sagging), elevating and reshaping the breasts to restore a more youthful and firm position.',
+                'During the procedure, excess skin is removed, the nipple and areola are repositioned, and the breast tissue is reshaped. It can be combined with <strong class="text-primary">implants</strong> if increased volume is desired (mastopexy with augmentation).',
+            ],
+            highlights: {
+                title: 'Types of Mastopexy',
+                items: [
+                    'Periareolar mastopexy (minimal)',
+                    'Vertical mastopexy (lollipop)',
+                    'Anchor mastopexy (severe ptosis)',
+                    'Mastopexy with augmentation',
+                    'Mastopexy with reduction',
+                    'Asymmetry correction',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Lifted Breasts',
+                description: 'Corrects sagging and restores youthful projection.',
+            },
+            {
+                title: 'Improved Shape',
+                description: 'Rounder, firmer, and more proportionate breasts.',
+            },
+            {
+                title: 'Long-Lasting Results',
+                description: 'With proper care, long-lasting results.',
+            },
+            {
+                title: 'Self-Confidence',
+                description: 'Regain confidence in your appearance.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Evaluation of the degree of ptosis, discussion of technique and expectations.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Lab tests, mammogram, and physical preparation.',
+                duration: '1-2 weeks prior',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Lifting and reshaping under general anesthesia.',
+                duration: '2-3 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Same-day or next-day discharge. Use of special bra.',
+                duration: '1-2 days',
+            },
+            {
+                title: 'Follow-up and Result',
+                description: 'Scar care, check-ups, and final result.',
+                duration: '3-6 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Do I need implants with mastopexy?',
+                answer: 'Not necessarily. If you are satisfied with your current volume, only the lift is performed. If you want more volume or projection, implants can be added (mastopexy with augmentation).',
+            },
+            {
+                question: 'At what age is mastopexy recommended?',
+                answer: 'There is no specific age. It is recommended when breast sagging affects aesthetics or self-esteem. It is preferable to perform it when no more pregnancies are planned.',
+            },
+            {
+                question: 'Are the scars very visible?',
+                answer: 'Scars depend on the degree of ptosis. They may be around the areola, vertical toward the fold, or anchor-shaped. Over time and with proper care they fade significantly.',
+            },
+            {
+                question: 'Will I be able to breastfeed afterward?',
+                answer: 'In most cases yes. Modern techniques preserve the mammary ducts. However, individual factors may affect breastfeeding.',
+            },
+            {
+                question: 'How long do the results last?',
+                answer: 'Results are long-lasting but not permanent. Gravity, weight changes, and natural aging will affect the breasts over time. Wearing a bra and maintaining stable weight helps prolong results.',
+            },
+            {
+                question: 'What is the difference between mastopexy and augmentation?',
+                answer: 'Mastopexy lifts and reshapes the breasts without adding volume. Augmentation increases size with implants. They can be combined to lift and augment simultaneously.',
+            },
+        ],
+        cta: {
+            title: 'Restore the firmness of your breasts',
+            description: 'Schedule your assessment consultation and discover how mastopexy can rejuvenate your bust.',
+        },
+    },
 }
 
 // ============================================

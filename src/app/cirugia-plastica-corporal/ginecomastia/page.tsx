@@ -181,6 +181,111 @@ const ginecomastiaData: ProcedureData = {
         title: 'Recupera la confianza en tu cuerpo',
         description: 'Agenda tu consulta de valoración y descubre cómo la cirugía de ginecomastia puede transformar tu pecho.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Male Surgery',
+            title: 'Gynecomastia',
+            description: 'Reduce excess male breast tissue to achieve a flatter, firmer, and more masculine chest. Regain your confidence and comfort.',
+            duration: '1-2 hours',
+            recovery: '7-14 days recovery',
+            anesthesia: 'General anesthesia or sedation',
+        },
+        info: {
+            title: 'What is Gynecomastia?',
+            content: [
+                'Gynecomastia is the excessive development of breast tissue in men, which can cause physical and emotional discomfort. Gynecomastia surgery reduces this tissue to create a flatter, more masculine chest.',
+                'The procedure may include <strong class="text-primary">liposuction, glandular tissue excision, or both techniques</strong>, depending on whether the excess is primarily fatty, glandular, or mixed.',
+            ],
+            highlights: {
+                title: 'Types of Gynecomastia',
+                items: [
+                    'Glandular gynecomastia',
+                    'Fatty gynecomastia (pseudogynecomastia)',
+                    'Mixed gynecomastia',
+                    'Unilateral gynecomastia',
+                    'Gynecomastia with excess skin',
+                    'Post weight-loss gynecomastia',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Masculine Chest',
+                description: 'Flat and defined contour without breast tissue.',
+            },
+            {
+                title: 'Minimal Scarring',
+                description: 'Small, well-placed incisions.',
+            },
+            {
+                title: 'Permanent Result',
+                description: 'Removed glandular tissue does not return.',
+            },
+            {
+                title: 'Greater Confidence',
+                description: 'Freedom to wear any clothing without embarrassment.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Breast tissue evaluation, hormonal analysis if necessary, and planning.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Lab tests and preparation for surgery.',
+                duration: '1-2 weeks prior',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Liposuction and/or glandular excision depending on the case.',
+                duration: '1-2 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Same-day discharge. Use of compression vest.',
+                duration: '1 day',
+            },
+            {
+                title: 'Follow-up and Result',
+                description: 'Periodic check-ups, compression use, and final result.',
+                duration: '1-3 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What causes gynecomastia?',
+                answer: 'It can be caused by hormonal imbalances, use of certain medications, medical conditions, obesity, or be idiopathic (no known cause). During the consultation we evaluate possible causes.',
+            },
+            {
+                question: 'Can gynecomastia go away on its own?',
+                answer: 'In adolescents it may resolve naturally over time. In adults, if it persists for more than 1-2 years, it generally does not disappear without surgery.',
+            },
+            {
+                question: 'Where are the scars located?',
+                answer: 'Liposuction incisions are 3-4mm and remain hidden. If glandular excision is required, the incision is made at the edge of the areola where it is less visible.',
+            },
+            {
+                question: 'Can gynecomastia return after surgery?',
+                answer: 'It is very rare. If the glandular tissue is completely removed, it should not return. However, significant weight gain can cause fat accumulation.',
+            },
+            {
+                question: 'How long do I need to wear the compression vest?',
+                answer: 'Continuous 24-hour use is recommended during the first 3-4 weeks, then progressively until completing 6-8 weeks.',
+            },
+            {
+                question: 'When can I return to the gym?',
+                answer: 'Walks from the first week. Light cardiovascular exercise at 2-3 weeks. Chest and weight exercises after 4-6 weeks.',
+            },
+        ],
+        cta: {
+            title: 'Regain confidence in your body',
+            description: 'Schedule your assessment consultation and discover how gynecomastia surgery can transform your chest.',
+        },
+    },
 }
 
 // ============================================

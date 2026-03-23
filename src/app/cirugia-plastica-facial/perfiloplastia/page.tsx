@@ -161,6 +161,106 @@ const perfiloplastiaData: ProcedureData = {
         title: 'Transforma tu perfil de manera integral',
         description: 'Agenda tu consulta para diseñar tu plan de perfiloplastia personalizado.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Profile Harmonization',
+            title: 'Profiloplasty',
+            description: 'Harmonize your facial profile by combining rhinoplasty with mentoplasty and/or facial slimming. Achieve a balanced and attractive profile in a single intervention.',
+            duration: '2-4 hours',
+            recovery: '14-21 days',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Profiloplasty?',
+            content: [
+                'Profiloplasty is a combined procedure designed to harmonize the complete facial profile. It involves simultaneously intervening on the nose and chin (and other structures if necessary) to achieve ideal proportions.',
+                'The most common combinations are: <strong class="text-primary">Rhinoplasty + Mentoplasty</strong> to correct the lateral profile, and <strong class="text-primary">Rhinoplasty + Facial Slimming</strong> for a more complete transformation including jawline, double chin, and cheeks.',
+            ],
+            highlights: {
+                title: 'Available Combinations',
+                items: [
+                    'Rhinoplasty + Mentoplasty',
+                    'Rhinoplasty + Facial slimming',
+                    'Rhinoplasty + Mandibular contouring',
+                    'Convex profile correction',
+                    'Concave profile correction',
+                    'Complete harmonization',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Harmonious Profile',
+                description: 'Nose, chin, and jaw in perfect balance.',
+            },
+            {
+                title: 'Single Procedure',
+                description: 'Multiple improvements in a single surgery.',
+            },
+            {
+                title: 'Comprehensive Results',
+                description: 'Complete transformation of the facial profile.',
+            },
+            {
+                title: 'Shorter Recovery',
+                description: 'A single recovery period for all improvements.',
+            },
+        ],
+        process: [
+            {
+                title: 'Profile Analysis',
+                description: 'Photographic and cephalometric evaluation of your facial profile.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Plan Design',
+                description: 'Planning of the necessary procedures and results simulation.',
+                duration: 'At consultation',
+            },
+            {
+                title: 'Combined Surgery',
+                description: 'Rhinoplasty, mentoplasty, and other procedures performed according to the plan.',
+                duration: '2-4 hours',
+            },
+            {
+                title: 'Recovery',
+                description: 'Use of nasal splint and/or chin strap. Swelling subsides over weeks.',
+                duration: '14-21 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Why combine rhinoplasty and mentoplasty?',
+                answer: 'The nose and chin are related. Sometimes a nose appears large because the chin is small. By correcting both, a more harmonious profile is achieved.',
+            },
+            {
+                question: 'Is it riskier to have several procedures together?',
+                answer: 'Not necessarily. Combining procedures with an experienced team is safe and reduces the total number of anesthesias and recoveries.',
+            },
+            {
+                question: 'How is it determined which procedures I need?',
+                answer: 'Through photographic profile analysis, facial measurements, and your personal goals. We design a personalized plan during the consultation.',
+            },
+            {
+                question: 'How long does it take to see the final result?',
+                answer: 'Major swelling subsides in 2-3 weeks. The nasal result continues to refine for up to 12 months, but looks very good from month 3 onwards.',
+            },
+            {
+                question: 'Can I include other procedures?',
+                answer: 'Yes, bichectomy, chin liposuction, cheek augmentation, and others are frequently included according to the patient\'s needs.',
+            },
+            {
+                question: 'Are the results permanent?',
+                answer: 'Yes, both changes to the nose and to the chin/jaw are permanent.',
+            },
+        ],
+        cta: {
+            title: 'Transform your profile comprehensively',
+            description: 'Schedule your consultation to design your personalized profiloplasty plan.',
+        },
+    },
 }
 
 // ============================================

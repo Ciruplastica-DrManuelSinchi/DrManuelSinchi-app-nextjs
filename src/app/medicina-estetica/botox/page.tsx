@@ -174,6 +174,106 @@ const botoxData: ProcedureData = {
         title: 'Luce más joven sin cirugía',
         description: 'Agenda tu cita y descubre cómo el Botox puede rejuvenecer tu rostro de forma natural.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Anti-Wrinkle Treatment',
+            title: 'Botox',
+            description: 'Smooth expression wrinkles and prevent the formation of new lines. The most popular treatment for a younger, more rested face.',
+            duration: '15-30 min',
+            recovery: 'Immediate',
+            anesthesia: 'None required',
+        },
+        info: {
+            title: 'What is Botox?',
+            content: [
+                'Botox (botulinum toxin type A) is an injectable treatment that temporarily relaxes the facial muscles responsible for expression wrinkles. It is the most performed non-surgical aesthetic procedure in the world.',
+                'It works by blocking the nerve signals that cause muscle contractions, <strong class="text-primary">smoothing existing wrinkles and preventing the formation of new ones</strong>. The results are natural and do not alter your ability to express yourself.',
+            ],
+            highlights: {
+                title: 'Treatment Areas',
+                items: [
+                    'Forehead (horizontal lines)',
+                    'Frown lines ("11" lines)',
+                    'Crow\'s feet',
+                    'Bunny lines (nose)',
+                    'Eyebrow lift',
+                    'Excessive sweating (hyperhidrosis)',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Fast and Painless',
+                description: '15-30 minute procedure with no recovery time.',
+            },
+            {
+                title: 'Visible Results',
+                description: 'Noticeable effects in 3-7 days that last 4-6 months.',
+            },
+            {
+                title: 'Safe and Proven',
+                description: 'Over 20 years of proven medical and aesthetic use.',
+            },
+            {
+                title: 'Natural',
+                description: 'Smooths wrinkles without losing facial expression.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Facial evaluation, wrinkle analysis and treatment planning.',
+                duration: '20-30 min',
+            },
+            {
+                title: 'Botox Application',
+                description: 'Precise injections with ultra-fine needles. Virtually painless.',
+                duration: '15-30 min',
+            },
+            {
+                title: 'Post-Treatment',
+                description: 'You can resume activities immediately with minimal care.',
+                duration: 'Immediate',
+            },
+            {
+                title: 'Results',
+                description: 'Visible effect in 3-7 days, optimal result at 2 weeks.',
+                duration: '3-14 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'At what age is it recommended to start Botox?',
+                answer: 'There is no specific age. It can be used preventively from age 25-30 or when the first expression lines start to appear. It is also used correctively at any age.',
+            },
+            {
+                question: 'Does Botox hurt?',
+                answer: 'The injections are performed with very fine needles and cause minimal discomfort, similar to a small pinprick. Most patients tolerate it perfectly without anesthesia.',
+            },
+            {
+                question: 'How long do the effects last?',
+                answer: 'Results typically last between 4-6 months. With regular applications, some patients notice that the effects progressively last longer.',
+            },
+            {
+                question: 'Will I look frozen?',
+                answer: 'Not if applied correctly. The goal is to soften wrinkles while maintaining your natural expression. We use personalized techniques and doses for subtle results.',
+            },
+            {
+                question: 'Can I go about my normal life afterward?',
+                answer: 'Yes, you can resume your activities immediately. It is only recommended not to lie down or do intense exercise for 4 hours, and not to massage the treated area.',
+            },
+            {
+                question: 'Does Botox prevent wrinkles?',
+                answer: 'Yes, Botox not only treats existing wrinkles but also prevents the formation of new ones by reducing the repetitive muscle movements that cause them.',
+            },
+        ],
+        cta: {
+            title: 'Look younger without surgery',
+            description: 'Schedule your appointment and discover how Botox can rejuvenate your face naturally.',
+        },
+    },
 }
 
 // ============================================

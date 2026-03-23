@@ -286,6 +286,11 @@
   },
   "auth": {
     "login": {
+      "metaTitle": "Iniciar Sesión | Ciruplástica",
+      "metaDescription": "Inicia sesión en tu cuenta de Ciruplástica",
+      "pageTitle": "Bienvenido de vuelta",
+      "pageSubtitle": "Ingresa a tu cuenta",
+      "loading": "Cargando...",
       "title": "Iniciar Sesión",
       "email": "Email",
       "password": "Contraseña",
@@ -303,6 +308,10 @@
       "loginError": "Error al iniciar sesión"
     },
     "register": {
+      "metaTitle": "Crear Cuenta | Ciruplástica",
+      "metaDescription": "Regístrate en Ciruplástica y agenda tu consulta",
+      "pageTitle": "Crea tu cuenta",
+      "pageSubtitle": "Únete a Ciruplástica",
       "title": "Crear Cuenta",
       "name": "Nombre completo",
       "namePlaceholder": "Tu nombre",
@@ -930,6 +939,128 @@
       "whatsappMessage": "Hola, vi los casos reales y me gustaría agendar una consulta."
     }
   },
+  "videosPage": {
+    "hero": {
+      "badge": "Canal de YouTube",
+      "titlePrefix": "Videos",
+      "titleHighlight": "Educativos",
+      "description": "Aprende sobre cirugía plástica y medicina estética con contenido profesional y educativo del Dr. Manuel Sinchi.",
+      "subscribeButton": "Suscríbete al Canal"
+    },
+    "categories": {
+      "all": "Todos",
+      "facial": "Cirugía Facial",
+      "corporal": "Cirugía Corporal",
+      "estetica": "Medicina Estética"
+    },
+    "grid": {
+      "title": "Explora Nuestros Videos",
+      "videosAvailable": "{count} videos disponibles",
+      "filterButton": "Filtrar por categoría",
+      "emptyState": "No hay videos en esta categoría.",
+      "views": "vistas",
+      "featuredBadge": "Video Destacado"
+    },
+    "cta": {
+      "title": "¿Te gusta nuestro contenido?",
+      "description": "Suscríbete a nuestro canal de YouTube y activa las notificaciones para no perderte ningún video nuevo.",
+      "subscribeButton": "Suscribirme Ahora",
+      "scheduleButton": "Agenda una Consulta"
+    }
+  },
+  "booking": {
+    "steps": {
+      "data": "Datos",
+      "appointment": "Cita",
+      "payment": "Pago"
+    },
+    "step1": {
+      "title": "Datos Personales",
+      "subtitle": "Información requerida para tu cita",
+      "birthDate": "Fecha de nacimiento *",
+      "docType": "Tipo doc. *",
+      "docNumber": "Número de documento *",
+      "address": "Dirección *",
+      "addressPlaceholder": "Av. Principal 123, Distrito",
+      "city": "Ciudad *",
+      "selectCity": "Selecciona tu ciudad",
+      "otherCity": "Otra ciudad",
+      "occupation": "Ocupación",
+      "occupationOptional": "(opcional)",
+      "occupationPlaceholder": "Ej: Ingeniero, Estudiante, Ama de casa...",
+      "continue": "Continuar"
+    },
+    "step2": {
+      "title": "Datos de la Cita",
+      "subtitle": "Selecciona procedimiento, fecha y hora",
+      "procedure": "Procedimiento de interés *",
+      "selectProcedure": "Selecciona un procedimiento",
+      "dateSelected": "Fecha y hora seleccionada",
+      "weight": "Peso (kg)",
+      "height": "Talla (cm)",
+      "referralSource": "¿Cómo se enteró de nosotros?",
+      "selectOption": "Selecciona una opción",
+      "message": "Mensaje adicional",
+      "messageOptional": "(opcional)",
+      "messagePlaceholder": "Cuéntanos más sobre lo que buscas...",
+      "consultationCost": "Costo de la consulta",
+      "personalizedEvaluation": "Evaluación personalizada",
+      "bookingSlot": "Reservando horario...",
+      "continueToPayment": "Continuar al Pago"
+    },
+    "existingBooking": {
+      "title": "Ya tienes una reserva pendiente",
+      "description": "Tienes una reserva pendiente de pago que debes completar o cancelar antes de crear otra.",
+      "date": "Fecha",
+      "time": "Hora",
+      "timeLeft": "Tiempo restante para pagar: {minutes} minutos",
+      "continuePayment": "Continuar con el pago",
+      "cancelNew": "Cancelar y crear nueva",
+      "backToForm": "Volver al formulario"
+    },
+    "loginPrompt": {
+      "title": "Inicia sesión para continuar",
+      "description": "Para confirmar tu reserva necesitas iniciar sesión o crear una cuenta.",
+      "savedData": "Tus datos de reserva se guardarán.",
+      "signIn": "Iniciar Sesión",
+      "createAccount": "Crear Cuenta",
+      "backToForm": "Volver al formulario"
+    },
+    "success": {
+      "title": "¡Reserva Registrada!",
+      "yourAppointmentFor": "Tu cita para",
+      "hasBeenRegistered": "ha sido registrada.",
+      "date": "Fecha",
+      "at": "a las",
+      "verificationNotice": "Tu pago será verificado y te contactaremos para confirmar tu cita en menos de 24 horas.",
+      "viewBookings": "Ver mis reservas",
+      "makeAnother": "Hacer otra reserva"
+    },
+    "errors": {
+      "birthDate": "Por favor ingresa tu fecha de nacimiento",
+      "documentNumber": "Por favor ingresa tu número de documento",
+      "address": "Por favor ingresa tu dirección",
+      "city": "Por favor selecciona tu ciudad",
+      "procedure": "Por favor selecciona un procedimiento",
+      "dateTime": "Por favor selecciona fecha y hora",
+      "paymentExpired": "Tu tiempo de reserva ha expirado. Por favor, selecciona un nuevo horario.",
+      "connectionError": "Error de conexión",
+      "noBooking": "No hay reserva para completar",
+      "cancelError": "Error al cancelar reserva",
+      "createError": "Error al crear reserva",
+      "paymentError": "Error al procesar el pago"
+    },
+    "documentTypes": {
+      "CE": "Carnet de Extranjería",
+      "PASSPORT": "Pasaporte"
+    },
+    "referralSources": {
+      "friendRecommendation": "Recomendación de un amigo/familiar",
+      "doctorRecommendation": "Recomendación de otro doctor",
+      "streetAdvertising": "Publicidad en la calle",
+      "other": "Otro"
+    }
+  },
   "bookingPage": {
     "meta": {
       "title": "Reservar Cita | Ciruplástica - Dr. Manuel Sinchi",
@@ -960,5 +1091,22 @@
         "closed": "Cerrado"
       }
     }
+  },
+  "caseModal": {
+    "categoryLabels": {
+      "facial": "Cirugía Facial",
+      "corporal": "Cirugía Corporal",
+      "estetica": "Medicina Estética",
+      "reconstructiva": "Reconstructiva"
+    },
+    "caseCounter": "Caso {current} de {total}",
+    "viewProcedure": "Ver procedimiento",
+    "whatsappConsult": "Consultar por WhatsApp",
+    "whatsappMessage": "Hola, vi el caso de {procedure} y me gustaría agendar una consulta."
+  },
+  "beforeAfterSlider": {
+    "before": "Antes",
+    "after": "Después",
+    "slideToCompare": "Desliza para comparar"
   }
 }

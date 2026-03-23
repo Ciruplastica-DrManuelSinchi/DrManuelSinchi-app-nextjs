@@ -162,6 +162,106 @@ const rellenosFacialesData: ProcedureData = {
         title: 'Recupera el volumen y juventud de tu rostro',
         description: 'Agenda tu consulta para evaluar cuál es la mejor opción de relleno facial para ti.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Facial Rejuvenation',
+            title: 'Facial Fillers',
+            description: 'Restore lost volume and rejuvenate your face with facial filler techniques. We offer fat transfer, hyaluronic acid, and facial implants for natural and long-lasting results.',
+            duration: '30-90 min',
+            recovery: '3-14 days',
+            anesthesia: 'Local / Sedation',
+        },
+        info: {
+            title: 'What are Facial Fillers?',
+            content: [
+                'Facial fillers are procedures designed to restore volume lost through aging, correct asymmetries, or improve facial contours. They are a versatile solution that can be applied to cheekbones, nasolabial folds, lips, chin, and other areas.',
+                'We offer three main options: <strong class="text-primary">Autologous fat transfer</strong> (using your own fat), <strong class="text-primary">Hyaluronic Acid</strong> (temporary resorbable filler), and <strong class="text-primary">Facial implants</strong> (permanent silicone solution).',
+            ],
+            highlights: {
+                title: 'Types of Fillers',
+                items: [
+                    'Autologous fat transfer',
+                    'Hyaluronic Acid (temporary)',
+                    'Silicone facial implants',
+                    'Cheek filler',
+                    'Groove filler',
+                    'Lip augmentation',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Fat Transfer',
+                description: 'Uses your own fat for natural and permanent results.',
+            },
+            {
+                title: 'Hyaluronic Acid',
+                description: 'Temporary, safe, and reversible filler if needed.',
+            },
+            {
+                title: 'Facial Implants',
+                description: 'Permanent solution for defined volume augmentation.',
+            },
+            {
+                title: 'Natural Results',
+                description: 'Techniques that respect the harmony of your face.',
+            },
+        ],
+        process: [
+            {
+                title: 'Facial Evaluation',
+                description: 'Analysis of your facial structure and definition of the treatment plan.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Filler Selection',
+                description: 'We determine whether to use fat, hyaluronic acid, or implants.',
+                duration: 'At consultation',
+            },
+            {
+                title: 'Procedure',
+                description: 'Application of filler with precise and safe techniques.',
+                duration: '30-90 min',
+            },
+            {
+                title: 'Recovery',
+                description: 'Initial swelling that resolves in days. Progressive results.',
+                duration: '3-14 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is the difference between the types of fillers?',
+                answer: 'Fat transfer uses your own fat (permanent), hyaluronic acid is temporary (6-18 months), and implants are permanent. Each has specific indications.',
+            },
+            {
+                question: 'How long does hyaluronic acid last?',
+                answer: 'Depending on the area and type of product, it lasts between 6 and 18 months. Then it is naturally reabsorbed.',
+            },
+            {
+                question: 'Is fat transfer permanent?',
+                answer: 'Yes, although an initial percentage is reabsorbed (30-50%), the surviving fat is permanent. That is why more than one session is sometimes required.',
+            },
+            {
+                question: 'Are facial implants safe?',
+                answer: 'Yes, they are medical-grade silicone. They have been used for decades with excellent results and a low complication rate.',
+            },
+            {
+                question: 'Can I combine different types of fillers?',
+                answer: 'Yes, in fact it is common to combine techniques. For example, implants in the chin and hyaluronic acid in the lips.',
+            },
+            {
+                question: 'When will I see the final results?',
+                answer: 'With hyaluronic acid, results are immediate. With fat, expect 3-6 months. With implants, results are immediate after swelling subsides.',
+            },
+        ],
+        cta: {
+            title: 'Restore the volume and youthfulness of your face',
+            description: 'Schedule your consultation to evaluate which facial filler option is best for you.',
+        },
+    },
 }
 
 // ============================================

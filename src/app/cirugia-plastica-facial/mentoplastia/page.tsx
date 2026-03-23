@@ -192,6 +192,111 @@ const mentoplastiaData: ProcedureData = {
         title: 'Logra el perfil facial que siempre deseaste',
         description: 'Agenda tu consulta de valoración y descubre cómo la mentoplastia puede equilibrar tu rostro.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Profile Harmony',
+            title: 'Mentoplasty',
+            description: 'Balance your facial profile with a proportionate chin. Augment, reduce, or project your chin to achieve perfect harmony.',
+            duration: '1-2 hours',
+            recovery: '7-10 days recovery',
+            anesthesia: 'Local anesthesia + sedation',
+        },
+        info: {
+            title: 'What is Mentoplasty?',
+            content: [
+                'Mentoplasty is a surgery that modifies the shape, size, and projection of the chin to achieve a balanced facial profile. It can be performed using silicone implants or through osteotomy (bone modification).',
+                'This procedure is especially effective for correcting <strong class="text-primary">retruded, prominent, or asymmetric chins</strong>. It is frequently combined with rhinoplasty to achieve complete facial harmony.',
+            ],
+            highlights: {
+                title: 'Types of Mentoplasty',
+                items: [
+                    'Augmentation with silicone implant',
+                    'Chin reduction',
+                    'Forward projection',
+                    'Asymmetry correction',
+                    'Osteotomy (bone modification)',
+                    'Combination with rhinoplasty (profiloplasty)',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Balanced Profile',
+                description: 'Achieve harmonious and attractive facial proportions.',
+            },
+            {
+                title: 'Improved Jawline',
+                description: 'Defines the mandibular line and facial contour.',
+            },
+            {
+                title: 'Permanent Results',
+                description: 'The change is definitive and natural.',
+            },
+            {
+                title: 'Minimal Scarring',
+                description: 'Incision hidden inside the mouth or under the chin.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Facial analysis, cephalometry, and planning with digital simulation.',
+                duration: '45 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Medical exams and selection of procedure type or implant.',
+                duration: '1 week before',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Outpatient surgery with local anesthesia and sedation.',
+                duration: '1-2 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Use of compression chin strap, soft diet, and swelling control.',
+                duration: '7-10 days',
+            },
+            {
+                title: 'Final Result',
+                description: 'Full appreciation of the new profile once swelling subsides.',
+                duration: '2-3 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is better: implant or osteotomy?',
+                answer: 'It depends on the case. Implants are ideal for moderate augmentations and have a faster recovery. Osteotomy (bone cutting) is preferable for larger changes, reductions, or when the chin needs to be moved in multiple directions.',
+            },
+            {
+                question: 'Are chin implants safe?',
+                answer: 'Yes, solid silicone implants are very safe and have been used for decades. They are biocompatible, do not break, and rarely cause problems. They integrate well with tissues.',
+            },
+            {
+                question: 'Where is the scar?',
+                answer: 'The incision can be made inside the mouth (no visible scar) or under the chin (minimal scar of 2-3 cm hidden in the natural fold).',
+            },
+            {
+                question: 'Can it be combined with rhinoplasty?',
+                answer: 'Yes, the combination of rhinoplasty and mentoplasty is known as profiloplasty and is very common. It allows for balancing the complete facial profile in a single surgery.',
+            },
+            {
+                question: 'How long is the recovery?',
+                answer: 'Most patients resume normal activities in 7-10 days. There is initial swelling that gradually decreases. The final result is appreciated in 2-3 months.',
+            },
+            {
+                question: 'Is the procedure painful?',
+                answer: 'Post-operative pain is mild to moderate and well-controlled with analgesics. There is a sensation of tension and temporary numbness of the lower lip that resolves in weeks.',
+            },
+        ],
+        cta: {
+            title: 'Achieve the facial profile you have always desired',
+            description: 'Schedule your assessment consultation and discover how mentoplasty can balance your face.',
+        },
+    },
 }
 
 // ============================================

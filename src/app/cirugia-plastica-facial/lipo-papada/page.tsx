@@ -192,6 +192,111 @@ const lipoPapadaData: ProcedureData = {
         title: 'Elimina tu papada y define tu cuello',
         description: 'Agenda tu consulta de valoración y descubre cómo rejuvenecer tu perfil de forma natural.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Neck Definition',
+            title: 'Chin Liposuction',
+            description: 'Eliminate submental fat and define your neck. A minimally invasive procedure that naturally rejuvenates your profile.',
+            duration: '1 hour',
+            recovery: '5-7 days recovery',
+            anesthesia: 'Local anesthesia + sedation',
+        },
+        info: {
+            title: 'What is Chin Liposuction?',
+            content: [
+                'Chin liposuction, also known as submental liposuction, is a procedure that removes accumulated fat under the chin. This fat, known as a "double chin," is resistant to diet and exercise.',
+                'Through practically invisible small incisions, a <strong class="text-primary">thin cannula is used to aspirate the fat</strong>, defining the cervical-facial angle and rejuvenating the profile. It is an outpatient procedure with quick recovery.',
+            ],
+            highlights: {
+                title: 'Procedure Benefits',
+                items: [
+                    'Eliminates double chin',
+                    'Defines the neck angle',
+                    'Rejuvenates the facial profile',
+                    'Outpatient procedure',
+                    'Minimal incisions',
+                    'Quick recovery',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Minimally Invasive',
+                description: '3mm incisions that leave no visible scars.',
+            },
+            {
+                title: 'Precise Results',
+                description: 'Selective fat removal with defined contouring.',
+            },
+            {
+                title: 'Fat Does Not Return',
+                description: 'The eliminated fat cells do not regenerate.',
+            },
+            {
+                title: 'Rejuvenated Profile',
+                description: 'Defined neck that makes you look younger.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Evaluation of submental fat, skin elasticity, and expectations.',
+                duration: '30 min',
+            },
+            {
+                title: 'Procedure Day',
+                description: 'Outpatient surgery with local anesthesia and sedation for your comfort.',
+                duration: '1 hour',
+            },
+            {
+                title: 'Immediate Recovery',
+                description: 'You can go home the same day. A compression chin strap is applied.',
+                duration: 'Same day',
+            },
+            {
+                title: 'Chin Strap Use',
+                description: 'Compression to reduce swelling and aid in skin retraction.',
+                duration: '5-7 days',
+            },
+            {
+                title: 'Final Result',
+                description: 'Complete neck definition once swelling disappears.',
+                duration: '1-3 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Does the double chin come back after?',
+                answer: 'No, the eliminated fat cells do not regenerate. However, if you gain significant weight, the remaining cells may increase in size. Maintaining a stable weight ensures lasting results.',
+            },
+            {
+                question: 'Are there visible scars?',
+                answer: 'The incisions are only 2-3mm, located under the chin and behind the earlobes. They are practically invisible once healed.',
+            },
+            {
+                question: 'What happens if my skin is loose?',
+                answer: 'In cases of skin with good elasticity, it retracts naturally after liposuction. If there is significant sagging, it may be necessary to combine it with a mini neck lift for better results.',
+            },
+            {
+                question: 'How long should I wear the chin strap?',
+                answer: 'It is recommended to wear the chin strap 24 hours during the first 5-7 days, and then only at night for an additional 2-3 weeks to optimize skin retraction.',
+            },
+            {
+                question: 'Can I return to work quickly?',
+                answer: 'Most patients resume work activities (non-physical) in 3-5 days. Initial swelling is moderate and decreases quickly.',
+            },
+            {
+                question: 'Can it be combined with other procedures?',
+                answer: 'Yes, it is frequently combined with bichectomy, mentoplasty, facial fillers, or neck lifting for a more complete facial rejuvenation.',
+            },
+        ],
+        cta: {
+            title: 'Eliminate your double chin and define your neck',
+            description: 'Schedule your assessment consultation and discover how to naturally rejuvenate your profile.',
+        },
+    },
 }
 
 // ============================================

@@ -173,6 +173,106 @@ const prpData: ProcedureData = {
         title: 'Rejuvenece de forma natural con PRP',
         description: 'Agenda tu consulta y descubre cómo el plasma rico en plaquetas puede mejorar tu piel.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Regenerative Therapy',
+            title: 'Platelet-Rich Plasma',
+            description: 'Rejuvenate your skin naturally using growth factors from your own blood. Stimulates collagen production and cellular regeneration.',
+            duration: '45-60 min',
+            recovery: '24-48 hours',
+            anesthesia: 'Topical anesthesia',
+        },
+        info: {
+            title: 'What is Platelet-Rich Plasma?',
+            content: [
+                'Platelet-Rich Plasma (PRP) is a regenerative treatment that uses your own blood. A small sample is drawn, processed to concentrate the platelets and their growth factors, and applied to the area to be treated.',
+                'The growth factors stimulate the <strong class="text-primary">natural production of collagen, elastin and hyaluronic acid</strong>, progressively and naturally improving the texture, firmness and radiance of the skin.',
+            ],
+            highlights: {
+                title: 'Benefits of PRP',
+                items: [
+                    'Stimulates collagen production',
+                    'Improves texture and radiance',
+                    'Reduces fine lines',
+                    'Under-eye treatment',
+                    'Hand rejuvenation',
+                    'Hair loss treatment',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: '100% Natural',
+                description: 'Uses your own blood, no external substances.',
+            },
+            {
+                title: 'Real Regeneration',
+                description: 'Stimulates natural collagen production.',
+            },
+            {
+                title: 'No Allergies',
+                description: 'Being autologous, there is no risk of rejection.',
+            },
+            {
+                title: 'Progressive Results',
+                description: 'Continuous improvement over weeks.',
+            },
+        ],
+        process: [
+            {
+                title: 'Blood Draw',
+                description: 'A small blood sample is drawn from your arm.',
+                duration: '5 min',
+            },
+            {
+                title: 'Centrifugation',
+                description: 'The blood is processed to separate and concentrate the platelet-rich plasma.',
+                duration: '15 min',
+            },
+            {
+                title: 'PRP Application',
+                description: 'The concentrated plasma is applied via microinjections or microneedling.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Recovery',
+                description: 'Mild redness for 24-48 hours. Progressive results over weeks.',
+                duration: '1-2 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How many sessions do I need?',
+                answer: 'A protocol of 3-4 sessions spaced every 3-4 weeks is recommended, followed by maintenance every 6-12 months. Results are cumulative.',
+            },
+            {
+                question: 'Is the treatment painful?',
+                answer: 'Topical anesthesia is applied before the procedure. You may feel a slight pinprick during the injections, but it is very tolerable.',
+            },
+            {
+                question: 'When will I see results?',
+                answer: 'The first effects (radiance) are visible in 2-3 weeks. Optimal collagen production results are seen 2-3 months after treatment.',
+            },
+            {
+                question: 'Can I go about my normal life afterward?',
+                answer: 'Yes, although you may have redness and mild inflammation for 24-48 hours. It is recommended to avoid makeup for 12 hours and direct sun for a few days.',
+            },
+            {
+                question: 'Is PRP effective for hair loss?',
+                answer: 'Yes, scalp PRP is very effective for stimulating hair growth and stopping hair loss. It is injected directly into the scalp.',
+            },
+            {
+                question: 'Who cannot have PRP?',
+                answer: 'It is not recommended for people with clotting disorders, active infections, cancer, or those taking anticoagulants. Each case is evaluated individually.',
+            },
+        ],
+        cta: {
+            title: 'Rejuvenate naturally with PRP',
+            description: 'Schedule your consultation and discover how platelet-rich plasma can improve your skin.',
+        },
+    },
 }
 
 // ============================================

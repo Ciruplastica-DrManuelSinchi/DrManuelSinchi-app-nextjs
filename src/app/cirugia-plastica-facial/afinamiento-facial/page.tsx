@@ -161,6 +161,106 @@ const afinamientoFacialData: ProcedureData = {
         title: 'Transforma tu rostro con el afinamiento facial',
         description: 'Agenda tu consulta para diseñar el plan de afinamiento ideal para ti.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Facial Harmonization',
+            title: 'Facial Slimming',
+            description: 'Transform your face with a comprehensive treatment that combines bichectomy, chin/jaw liposuction, mandibular contouring, and mentoplasty to achieve a more defined and slimmed facial oval.',
+            duration: '2-3 hours',
+            recovery: '14-21 days',
+            anesthesia: 'Sedation or general',
+        },
+        info: {
+            title: 'What is Facial Slimming?',
+            content: [
+                'Facial slimming is a comprehensive procedure that combines multiple techniques to achieve a thinner, more defined, and harmonious face. It is ideal for those who desire a complete transformation of the lower third of the face.',
+                'This treatment includes: <strong class="text-primary">Bichectomy</strong> (Bichat fat pad removal), <strong class="text-primary">Chin and facial liposuction</strong>, <strong class="text-primary">Mandibular contouring</strong>, and <strong class="text-primary">Mentoplasty</strong>. The combination of these techniques achieves superior results compared to each procedure separately.',
+            ],
+            highlights: {
+                title: 'Included Procedures',
+                items: [
+                    'Bilateral bichectomy',
+                    'Chin liposuction',
+                    'Facial liposuction',
+                    'Mandibular contouring',
+                    'Augmentation mentoplasty',
+                    'Facial oval definition',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Slimmed Face',
+                description: 'Reduces facial volume for a more stylized appearance.',
+            },
+            {
+                title: 'Defined Jawline',
+                description: 'Angular and well-defined mandibular line.',
+            },
+            {
+                title: 'No Double Chin',
+                description: 'Elimination of submental excess fat.',
+            },
+            {
+                title: 'Complete Harmony',
+                description: 'Comprehensive improvement of facial proportions.',
+            },
+        ],
+        process: [
+            {
+                title: 'Comprehensive Evaluation',
+                description: 'Complete facial analysis and facial slimming plan design.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Planning',
+                description: 'Selection of specific procedures based on your needs.',
+                duration: 'At consultation',
+            },
+            {
+                title: 'Combined Surgery',
+                description: 'All procedures performed in a single intervention.',
+                duration: '2-3 hours',
+            },
+            {
+                title: 'Recovery',
+                description: 'Use of chin strap, swelling gradually subsides. Final result in 3-6 months.',
+                duration: '14-21 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Is it necessary to do all procedures together?',
+                answer: 'Not necessarily. We evaluate which combination you need. However, doing them together optimizes results, reduces costs and recovery times.',
+            },
+            {
+                question: 'How long does the swelling last?',
+                answer: 'Most swelling lasts 2-3 weeks. At 4-6 weeks a good result is visible, but the definitive result takes 3-6 months.',
+            },
+            {
+                question: 'Is the result permanent?',
+                answer: 'Yes, bichectomy and liposuction permanently remove fat cells. Chin and jaw implants are also permanent.',
+            },
+            {
+                question: 'Are there visible scars?',
+                answer: 'No, all incisions are intraoral (inside the mouth) or small punctures under the chin that are practically invisible.',
+            },
+            {
+                question: 'Is the post-op painful?',
+                answer: 'There is moderate discomfort in the first few days, controllable with analgesics. Most patients describe more discomfort than pain.',
+            },
+            {
+                question: 'When can I return to work?',
+                answer: 'Generally between 7-14 days, depending on the type of work. For social activities, we recommend waiting 2-3 weeks.',
+            },
+        ],
+        cta: {
+            title: 'Transform your face with facial slimming',
+            description: 'Schedule your consultation to design the ideal slimming plan for you.',
+        },
+    },
 }
 
 // ============================================

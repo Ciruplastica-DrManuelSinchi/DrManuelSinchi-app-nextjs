@@ -172,6 +172,106 @@ const cicatricesData: ProcedureData = {
         title: 'Mejora la apariencia de tus cicatrices',
         description: 'Agenda tu consulta para evaluar tu cicatriz y conocer las opciones de tratamiento.',
     },
+
+    en: {
+        categoryLabel: 'Reconstructive Surgery',
+        hero: {
+            badge: 'Scar Revision',
+            title: 'Scar Treatment',
+            description: 'Improve the appearance of surgical, traumatic, acne, or keloid scars. Specialized techniques tailored to each type of scar.',
+            duration: '30 min - 2 hours',
+            recovery: '7-21 days',
+            anesthesia: 'Local or sedation',
+        },
+        info: {
+            title: 'What is Scar Treatment?',
+            content: [
+                'Scar treatment encompasses various surgical and non-surgical techniques to improve the appearance of scars that cause aesthetic or functional concerns. Each scar is unique and requires a personalized approach.',
+                'We assess the type of scar, its location, time of evolution, and characteristics to select the <strong class="text-primary">most effective treatment</strong>: from corticosteroid injections to surgical revision, laser therapy, and other treatments.',
+            ],
+            highlights: {
+                title: 'Types of Scars We Treat',
+                items: [
+                    'Keloid scars',
+                    'Hypertrophic scars',
+                    'Atrophic scars (acne)',
+                    'Surgical scars',
+                    'Traumatic scars',
+                    'Contracture scars',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Personalized Approach',
+                description: 'Each scar receives the specific treatment it requires.',
+            },
+            {
+                title: 'Multiple Techniques',
+                description: 'Surgical and non-surgical options depending on the case.',
+            },
+            {
+                title: 'Prevention',
+                description: 'Protocols to prevent recurrence in keloid scars.',
+            },
+            {
+                title: 'Functional Improvement',
+                description: 'We release scars that restrict movement.',
+            },
+        ],
+        process: [
+            {
+                title: 'Scar Evaluation',
+                description: 'Analysis of the scar type, age, location, and characteristics.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Treatment Plan',
+                description: 'Selection of the most suitable technique or combination of techniques.',
+                duration: 'During consultation',
+            },
+            {
+                title: 'Treatment',
+                description: 'Application of the chosen treatment: injection, surgery, or laser.',
+                duration: '30 min - 2 hours',
+            },
+            {
+                title: 'Follow-Up',
+                description: 'Periodic check-ups and complementary treatments as needed.',
+                duration: 'Months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Can a scar be completely eliminated?',
+                answer: 'It is not possible to fully eliminate a scar, but its appearance can be significantly improved. The goal is to make it less visible, flatter, and closer in color to the surrounding skin.',
+            },
+            {
+                question: 'What is a keloid scar?',
+                answer: 'It is a scar that grows beyond the boundaries of the original wound, forming thick, raised tissue. It requires specialized treatment as it tends to recur.',
+            },
+            {
+                question: 'How long should a scar be present before treating it?',
+                answer: 'We generally wait 6-12 months for the scar to mature before surgical revision. However, some treatments such as corticosteroid injections can be started earlier.',
+            },
+            {
+                question: 'What treatments are available for scars?',
+                answer: 'Options include: corticosteroid injections, surgical revision, dermabrasion, laser therapy, compression therapy, silicone patches, and combinations of these depending on the case.',
+            },
+            {
+                question: 'Can acne scars be improved?',
+                answer: 'Yes, acne scars respond well to treatments such as subcision, hyaluronic acid fillers, fractional laser, and combined techniques.',
+            },
+            {
+                question: 'How can I prevent a scar from becoming a keloid?',
+                answer: 'If you have a tendency toward keloids, we use preventive protocols: early injections, compression therapy, silicone patches, and superficial radiotherapy in selected cases.',
+            },
+        ],
+        cta: {
+            title: 'Improve the appearance of your scars',
+            description: 'Schedule your consultation to evaluate your scar and learn about your treatment options.',
+        },
+    },
 }
 
 // ============================================

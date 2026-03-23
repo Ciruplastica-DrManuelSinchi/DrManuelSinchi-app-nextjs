@@ -4,6 +4,7 @@ import { useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
 
 interface Case {
@@ -58,14 +59,16 @@ export default function CaseModal({
         }
     }, [isOpen, handleKeyDown])
 
+    const t = useTranslations('caseModal')
+
     if (!currentCase) return null
 
     // Mapeo de categorías como fallback
     const categoryLabels: Record<string, string> = {
-        facial: 'Cirugía Facial',
-        corporal: 'Cirugía Corporal',
-        estetica: 'Medicina Estética',
-        reconstructiva: 'Reconstructiva',
+        facial: t('categoryLabels.facial'),
+        corporal: t('categoryLabels.corporal'),
+        estetica: t('categoryLabels.estetica'),
+        reconstructiva: t('categoryLabels.reconstructiva'),
     }
 
     const categoryLabel = currentCase.categoryLabel || categoryLabels[currentCase.category] || currentCase.category
@@ -158,7 +161,7 @@ export default function CaseModal({
 
                                 {/* Case Counter */}
                                 <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-                                    <span>Caso {currentIndex + 1} de {cases.length}</span>
+                                    <span>{t('caseCounter', { current: currentIndex + 1, total: cases.length })}</span>
                                     <div className="flex gap-1">
                                         {cases.map((_, idx) => (
                                             <div
@@ -179,16 +182,16 @@ export default function CaseModal({
                                     className="btn-primary w-full justify-center"
                                     onClick={onClose}
                                 >
-                                    Ver procedimiento
+                                    {t('viewProcedure')}
                                     <ExternalLink className="w-4 h-4" />
                                 </Link>
                                 <a
-                                    href={`https://wa.me/51961360074?text=Hola, vi el caso de ${currentCase.procedure} y me gustaría agendar una consulta.`}
+                                    href={`https://wa.me/51961360074?text=${encodeURIComponent(t('whatsappMessage', { procedure: currentCase.procedure }))}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn-secondary w-full justify-center"
                                 >
-                                    Consultar por WhatsApp
+                                    {t('whatsappConsult')}
                                 </a>
                             </div>
                         </div>

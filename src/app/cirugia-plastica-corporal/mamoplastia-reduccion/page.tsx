@@ -192,6 +192,111 @@ const mamoplastiaReduccionData: ProcedureData = {
         title: 'Recupera tu comodidad y bienestar',
         description: 'Agenda tu consulta de valoración y descubre cómo la reducción mamaria puede mejorar tu calidad de vida.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Breast Reduction',
+            title: 'Breast Reduction',
+            description: 'Reduce the size of your breasts, relieving physical discomfort and improving your body proportion. Regain comfort and wellbeing in your daily life.',
+            duration: '2-3 hours',
+            recovery: '14-21 days recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Breast Reduction?',
+            content: [
+                'Breast reduction is a surgery that decreases the size of the breasts by removing breast tissue, fat, and skin. In addition to improving aesthetics, it relieves physical symptoms associated with very large breasts.',
+                'It is a procedure that combines volume reduction with <strong class="text-primary">lifting and reshaping</strong> of the breasts, achieving a more harmonious shape proportionate to the rest of the body.',
+            ],
+            highlights: {
+                title: 'Benefits of Reduction',
+                items: [
+                    'Relief from back and neck pain',
+                    'Eliminates bra strap marks',
+                    'Greater comfort when exercising',
+                    'Improves posture',
+                    'Makes finding suitable clothing easier',
+                    'Firmer and more proportionate breasts',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Physical Relief',
+                description: 'Eliminates back, neck, and shoulder pain.',
+            },
+            {
+                title: 'Ideal Proportion',
+                description: 'Breasts in accordance with your body structure.',
+            },
+            {
+                title: 'Long-Lasting Results',
+                description: 'Permanent change in size and shape.',
+            },
+            {
+                title: 'Greater Comfort',
+                description: 'Freedom to exercise and get dressed.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Breast evaluation, discussion of desired size, and planning.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Lab tests, mammogram, and physical preparation for surgery.',
+                duration: '2 weeks prior',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Reduction and reshaping under general anesthesia.',
+                duration: '2-3 hours',
+            },
+            {
+                title: 'Hospital Recovery',
+                description: 'Post-operative monitoring and initial care.',
+                duration: '1 night',
+            },
+            {
+                title: 'Home Recovery',
+                description: 'Use of special bra, wound care, and follow-up.',
+                duration: '3-6 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How much can the size be reduced?',
+                answer: 'The amount of reduction depends on your anatomy and goals. During the consultation we will discuss the ideal size considering your body proportions and expectations.',
+            },
+            {
+                question: 'Are the scars very noticeable?',
+                answer: 'Scars are unavoidable but are strategically placed: around the areola, vertically toward the fold, and sometimes in the fold itself. With time and proper care they become less visible.',
+            },
+            {
+                question: 'Will I be able to breastfeed afterward?',
+                answer: 'In many cases breastfeeding is possible, although there may be a reduction in milk production. We use techniques that preserve the ducts when possible.',
+            },
+            {
+                question: 'Does insurance cover this surgery?',
+                answer: 'In some cases, when physical symptoms are documented (back pain, shoulder injuries, etc.), insurance may cover part of the procedure. We help with the necessary documentation.',
+            },
+            {
+                question: 'How much weight is removed?',
+                answer: 'It varies by case. In moderate reductions, 300-500g per breast are removed. In cases of severe hypertrophy, it can be 1kg or more per side.',
+            },
+            {
+                question: 'Can the breasts grow back?',
+                answer: 'The removed tissue does not grow back. However, significant weight changes or pregnancies may affect size. That is why we recommend stable weight before surgery.',
+            },
+        ],
+        cta: {
+            title: 'Regain your comfort and wellbeing',
+            description: 'Schedule your assessment consultation and discover how breast reduction can improve your quality of life.',
+        },
+    },
 }
 
 // ============================================

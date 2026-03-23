@@ -161,6 +161,106 @@ const bioestimuladoresData: ProcedureData = {
         title: 'Estimula tu colágeno naturalmente',
         description: 'Agenda tu consulta para conocer cómo los bioestimuladores pueden rejuvenecer tu piel.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Natural Rejuvenation',
+            title: 'Biostimulators',
+            description: 'Stimulate your skin\'s natural collagen production for progressive and long-lasting rejuvenation. Natural results that improve over time.',
+            duration: '30-45 min',
+            recovery: '1-3 days',
+            anesthesia: 'Topical anesthesia',
+        },
+        info: {
+            title: 'What are Biostimulators?',
+            content: [
+                'Biostimulators are injectable substances that stimulate your own body to produce new collagen. Unlike traditional fillers that add immediate volume, biostimulators work gradually improving skin quality from within.',
+                'The most commonly used are <strong class="text-primary">Poly-L-Lactic Acid (Sculptra)</strong> and <strong class="text-primary">Calcium Hydroxyapatite (Radiesse)</strong>. Both are resorbable and safe, with results that can last up to 2 years.',
+            ],
+            highlights: {
+                title: 'Types of Biostimulators',
+                items: [
+                    'Poly-L-Lactic Acid (Sculptra)',
+                    'Calcium Hydroxyapatite (Radiesse)',
+                    'Polycaprolactone',
+                    'Facial treatment',
+                    'Body treatment',
+                    'Hand rejuvenation',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Natural Collagen',
+                description: 'Stimulates your own body to produce new collagen.',
+            },
+            {
+                title: 'Progressive Results',
+                description: 'Gradual and natural improvement, no abrupt changes.',
+            },
+            {
+                title: 'Long-Lasting',
+                description: 'Effects that can last up to 2 years.',
+            },
+            {
+                title: 'Safe and Resorbable',
+                description: 'Biocompatible products that the body naturally absorbs.',
+            },
+        ],
+        process: [
+            {
+                title: 'Skin Evaluation',
+                description: 'Analysis of your skin quality and degree of laxity.',
+                duration: '20-30 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Cleansing and application of topical anesthesia.',
+                duration: '15 min',
+            },
+            {
+                title: 'Application',
+                description: 'Injection of the biostimulator at strategic points.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Results',
+                description: 'Gradual improvement visible within weeks to months.',
+                duration: '2-6 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is the difference between biostimulators and fillers?',
+                answer: 'Fillers (such as hyaluronic acid) provide immediate volume. Biostimulators stimulate collagen production for a gradual and more natural improvement in skin quality.',
+            },
+            {
+                question: 'How many sessions do I need?',
+                answer: 'Generally 2-3 sessions spaced 4-6 weeks apart. Maintenance sessions can then be done every 12-18 months.',
+            },
+            {
+                question: 'When will I see results?',
+                answer: 'The first changes are noticeable at 4-6 weeks. The maximum result is appreciated at 3-6 months, when new collagen has formed.',
+            },
+            {
+                question: 'Is it painful?',
+                answer: 'There is minimal discomfort. We use topical anesthesia and the products contain lidocaine. Most patients tolerate it very well.',
+            },
+            {
+                question: 'What care should I take afterward?',
+                answer: 'Massages on the treated area (we will teach you how), avoid intense exercise for 24-48 hours, and use sun protection.',
+            },
+            {
+                question: 'Can I combine it with other treatments?',
+                answer: 'Yes, it complements very well with botox, hyaluronic acid and other treatments. We design a comprehensive plan according to your needs.',
+            },
+        ],
+        cta: {
+            title: 'Stimulate your collagen naturally',
+            description: 'Schedule your consultation to learn how biostimulators can rejuvenate your skin.',
+        },
+    },
 }
 
 // ============================================

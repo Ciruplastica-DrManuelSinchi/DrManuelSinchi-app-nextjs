@@ -161,6 +161,106 @@ const radiofrecuenciaData: ProcedureData = {
         title: 'Tensa tu piel sin cirugía',
         description: 'Agenda tu consulta para conocer qué tecnología es ideal para ti.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Skin Tightening Technology',
+            title: 'Radiofrequency & Facial Ultrasound',
+            description: 'Non-invasive treatments that use energy to tighten the skin, stimulate collagen and reduce laxity. Visible results without surgery or downtime.',
+            duration: '30-60 min',
+            recovery: 'No downtime',
+            anesthesia: 'None required',
+        },
+        info: {
+            title: 'How Do These Treatments Work?',
+            content: [
+                'Radiofrequency and ultrasound are technologies that use different types of energy to heat the deep layers of the skin, stimulating collagen and elastin production without damaging the surface.',
+                '<strong class="text-primary">Radiofrequency</strong> uses electromagnetic waves to heat the tissues and promote collagen retraction. <strong class="text-primary">Focused Ultrasound (HIFU)</strong> penetrates more deeply, reaching even the muscle layer (SMAS).',
+            ],
+            highlights: {
+                title: 'Available Technologies',
+                items: [
+                    'Monopolar radiofrequency',
+                    'Bipolar radiofrequency',
+                    'Focused ultrasound (HIFU)',
+                    'Full face treatment',
+                    'Neck treatment',
+                    'Double chin contouring',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Non-Invasive',
+                description: 'No needles, no incisions, no recovery time.',
+            },
+            {
+                title: 'Stimulates Collagen',
+                description: 'Progressive and natural improvement of firmness.',
+            },
+            {
+                title: 'No Downtime',
+                description: 'Return to your activities immediately.',
+            },
+            {
+                title: 'Long-Lasting Results',
+                description: 'Effects that continue improving for months.',
+            },
+        ],
+        process: [
+            {
+                title: 'Evaluation',
+                description: 'Analysis of your skin and selection of the appropriate technology.',
+                duration: '15-20 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Skin cleansing and application of conductive gel.',
+                duration: '10 min',
+            },
+            {
+                title: 'Treatment',
+                description: 'Application of energy to the areas to be treated.',
+                duration: '30-60 min',
+            },
+            {
+                title: 'Results',
+                description: 'Initial immediate improvement, optimal result in 2-3 months.',
+                duration: 'Progressive',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Which is better: radiofrequency or ultrasound?',
+                answer: 'It depends on the goal. Ultrasound (HIFU) penetrates deeper and is better for moderate to severe laxity. Radiofrequency is excellent for texture improvement and mild laxity.',
+            },
+            {
+                question: 'Is it painful?',
+                answer: 'Radiofrequency is very tolerable, you feel it as heat. Ultrasound may cause some discomfort during treatment, but it is manageable.',
+            },
+            {
+                question: 'How many sessions do I need?',
+                answer: 'For radiofrequency: 4-8 sessions. For HIFU: generally 1 annual session. It depends on your skin condition and goals.',
+            },
+            {
+                question: 'Does it replace surgical lifting?',
+                answer: 'It does not replace it, but it is an excellent option for those who do not want surgery or want to maintain previous results. Ideal for mild to moderate laxity.',
+            },
+            {
+                question: 'Are there side effects?',
+                answer: 'There may be temporary redness lasting a few hours. With HIFU there may be mild sensitivity for a few days. There are no significant side effects.',
+            },
+            {
+                question: 'At what age can I start?',
+                answer: 'It is recommended from age 30-35 as prevention, or when you begin to notice loss of firmness.',
+            },
+        ],
+        cta: {
+            title: 'Tighten your skin without surgery',
+            description: 'Schedule your consultation to find out which technology is ideal for you.',
+        },
+    },
 }
 
 // ============================================

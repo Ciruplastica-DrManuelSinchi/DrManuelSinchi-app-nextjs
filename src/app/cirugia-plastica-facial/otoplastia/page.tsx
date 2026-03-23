@@ -190,6 +190,109 @@ const otoplastiaData: ProcedureData = {
         title: 'Corrige la forma de tus orejas',
         description: 'Agenda tu consulta de valoración y descubre cómo la otoplastia puede mejorar tu apariencia y confianza.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Ear Correction',
+            title: 'Otoplasty',
+            description: 'Correct prominent, asymmetric, or malformed ears. A procedure that improves self-esteem in both children and adults.',
+            duration: '1-2 hours',
+            recovery: '7 days recovery',
+            anesthesia: 'Local anesthesia + sedation',
+        },
+        info: {
+            title: 'What is Otoplasty?',
+            content: [
+                'Otoplasty is a surgery that corrects the shape, position, and proportion of the ears. It is best known for treating "protruding" or prominent ears, but it also corrects asymmetries, large earlobes, and other malformations.',
+                'It is a very rewarding procedure that can be performed <strong class="text-primary">from 6-7 years of age</strong>, when the ears have nearly reached their adult size. In adults, surgery is performed under local anesthesia.',
+            ],
+            highlights: {
+                title: 'Corrections performed by Otoplasty',
+                items: [
+                    'Ear repositioning (prominent ears)',
+                    'Ear reduction (macrotia)',
+                    'Ear reconstruction (microtia)',
+                    'Ear malformations (cryptotia, constricted ear, etc.)',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'For All Ages',
+                description: 'Suitable for children from 6 years and adults with no age limit.',
+            },
+            {
+                title: 'Natural Results',
+                description: 'Ears with a natural and proportionate appearance.',
+            },
+            {
+                title: 'Hidden Scar',
+                description: 'The incision is made behind the ear, invisible.',
+            },
+            {
+                title: 'Improved Self-esteem',
+                description: 'Positive impact on confidence and emotional well-being.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Ear evaluation, expectation analysis, and planning.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Basic pre-surgical exams and preparation for surgery.',
+                duration: '1 week before',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Outpatient surgery with local anesthesia (adults) or general (children).',
+                duration: '1-2 hours',
+            },
+            {
+                title: 'Recovery with Headband',
+                description: 'Use of protective elastic headband and post-operative care.',
+                duration: '7 days',
+            },
+            {
+                title: 'Final Result',
+                description: 'Ears in their new position, definitive result visible.',
+                duration: '1-2 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'At what age can otoplasty be performed?',
+                answer: 'In children, it is recommended from 6-7 years of age when the ears have reached approximately 90% of their adult size. In adults, it can be performed at any age if the patient is in good health.',
+            },
+            {
+                question: 'Does otoplasty leave visible scars?',
+                answer: 'No, the incision is made in the groove behind the ear, where it is completely hidden. Even with hair pulled back, the scar is not visible.',
+            },
+            {
+                question: 'Is the surgery painful?',
+                answer: 'The procedure is performed under anesthesia, so there is no pain during surgery. Afterward, there is mild discomfort that is easily controlled with analgesics. Children usually tolerate it very well.',
+            },
+            {
+                question: 'How long should I wear the headband?',
+                answer: 'It is recommended to wear the elastic headband 24 hours during the first week, and then only for sleeping for an additional 3-4 weeks to protect the ears.',
+            },
+            {
+                question: 'Are the results permanent?',
+                answer: 'Yes, the results are permanent. Once the ears heal in their new position, they maintain that shape for life.',
+            },
+            {
+                question: 'Can my child return to school soon?',
+                answer: 'Generally, children can return to school in 7-10 days. Contact sports and physical education should be avoided for 4-6 weeks.',
+            },
+        ],
+        cta: {
+            title: 'Correct the shape of your ears',
+            description: 'Schedule your assessment consultation and discover how otoplasty can improve your appearance and confidence.',
+        },
+    },
 }
 
 // ============================================

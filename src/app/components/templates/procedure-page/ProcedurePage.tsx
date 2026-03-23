@@ -18,10 +18,10 @@ import {
     PlayCircle,
     Youtube,
 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 
-import { ProcedureData, defaultCTA } from './types'
+import { ProcedureData, defaultCTA, defaultCTAEn } from './types'
 
 interface ProcedurePageProps {
     data: ProcedureData
@@ -30,14 +30,56 @@ interface ProcedurePageProps {
 export default function ProcedurePage({ data }: ProcedurePageProps) {
     const t = useTranslations('procedurePage')
     const tCommon = useTranslations('common')
+    const locale = useLocale()
 
     //Estados
     const [openFaq, setOpenFaq] = useState<number | null>(0)
     const [activeImage, setActiveImage] = useState(0)
 
+    // Apply English overrides when locale is 'en' and data.en exists
+    const isEn = locale === 'en' && !!data.en
+    const enData = data.en
 
-    // const doctor = { ...defaultDoctor, ...data.doctor }
-    const cta = { ...defaultCTA, ...data.cta }
+    // Locale-aware content
+    const categoryLabel = isEn && enData?.categoryLabel ? enData.categoryLabel : data.categoryLabel
+    const hero = isEn && enData?.hero ? { ...data.hero, ...enData.hero } : data.hero
+    const info = isEn && enData?.info ? {
+        ...data.info,
+        title: enData.info.title || data.info.title,
+        content: enData.info.content || data.info.content,
+        highlights: data.info.highlights && enData.info.highlights ? {
+            ...data.info.highlights,
+            title: enData.info.highlights.title || data.info.highlights.title,
+            items: enData.info.highlights.items || data.info.highlights.items,
+        } : data.info.highlights,
+    } : data.info
+
+    // Benefits with locale-aware text (keeping original icons)
+    const benefits = isEn && enData?.benefits && enData.benefits.length === data.benefits.length
+        ? data.benefits.map((b, i) => ({
+            ...b,
+            title: enData.benefits![i].title,
+            description: enData.benefits![i].description,
+        }))
+        : data.benefits
+
+    // Process with locale-aware text (keeping original icons and step numbers)
+    const process = isEn && enData?.process && enData.process.length === data.process.length
+        ? data.process.map((p, i) => ({
+            ...p,
+            title: enData.process![i].title,
+            description: enData.process![i].description,
+            duration: enData.process![i].duration || p.duration,
+        }))
+        : data.process
+
+    // FAQs with locale-aware content
+    const faqs = isEn && enData?.faqs && enData.faqs.length > 0 ? enData.faqs : data.faqs
+
+    // CTA with locale-aware text
+    const ctaBase = isEn ? { ...defaultCTA, ...defaultCTAEn } : defaultCTA
+    const ctaEn = isEn && enData?.cta ? enData.cta : {}
+    const cta = { ...ctaBase, ...data.cta, ...ctaEn }
 
     const whatsappMessage = data.hero.whatsappMessage || `Hola, me interesa información sobre ${data.hero.title.toLowerCase()}`
 
@@ -55,10 +97,10 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                         </Link>
                         <ChevronRight className="w-4 h-4" />
                         <Link href={data.categoryPath} className="hover:text-white transition-colors">
-                            {data.categoryLabel}
+                            {categoryLabel}
                         </Link>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-accent">{data.hero.title}</span>
+                        <span className="text-accent">{hero.title}</span>
                     </nav>
 
                     <div className="max-w-4xl mr-auto ml-0 text-left">
@@ -69,7 +111,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                             className="badge-accent mb-6 inline-flex"
                         >
                             <Sparkles className="w-4 h-4 mr-2" />
-                            {data.hero.badge}
+                            {hero.badge}
                         </motion.span>
 
                         <motion.h1
@@ -78,7 +120,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                             transition={{ delay: 0.1 }}
                             className="text-white mb-4"
                         >
-                            {data.hero.title}
+                            {hero.title}
                         </motion.h1>
 
                         {/* Línea decorativa dorada */}
@@ -95,7 +137,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                             transition={{ delay: 0.2 }}
                             className="text-lg md:text-xl text-white/80 leading-relaxed mb-8"
                         >
-                            {data.hero.description}
+                            {hero.description}
                         </motion.p>
 
                         {/* Quick Info Pills - Hidden on mobile for cleaner UX */}
@@ -107,15 +149,15 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                         >
                             <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                                 <Clock className="w-4 h-4 text-accent" />
-                                <span className="text-white text-sm">{data.hero.duration}</span>
+                                <span className="text-white text-sm">{hero.duration}</span>
                             </div>
                             <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                                 <Timer className="w-4 h-4 text-accent" />
-                                <span className="text-white text-sm">{data.hero.recovery}</span>
+                                <span className="text-white text-sm">{hero.recovery}</span>
                             </div>
                             <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                                 <Shield className="w-4 h-4 text-accent" />
-                                <span className="text-white text-sm">{data.hero.anesthesia}</span>
+                                <span className="text-white text-sm">{hero.anesthesia}</span>
                             </div>
                         </motion.div>
 
@@ -155,23 +197,23 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                             viewport={{ once: true }}
                         >
                             <span className="badge-primary mb-4">{t('info.badge')}</span>
-                            <h2 className="mb-6">{data.info.title}</h2>
+                            <h2 className="mb-6">{info.title}</h2>
 
                             <div className="space-y-4 text-gray-600">
-                                {data.info.content.map((paragraph, index) => (
+                                {info.content.map((paragraph, index) => (
                                     <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
                                 ))}
                             </div>
 
                             {/* Highlights */}
-                            {data.info.highlights && (
+                            {info.highlights && (
                                 <div className="mt-8 p-6 bg-primary-50 rounded-2xl">
                                     <h4 className="font-semibold text-primary mb-4 flex items-center gap-2">
-                                        {data.info.highlights.icon && <data.info.highlights.icon className="w-5 h-5" />}
-                                        {data.info.highlights.title}
+                                        {info.highlights.icon && <info.highlights.icon className="w-5 h-5" />}
+                                        {info.highlights.title}
                                     </h4>
                                     <ul className="grid sm:grid-cols-2 gap-3">
-                                        {data.info.highlights.items.map((item, i) => (
+                                        {info.highlights.items.map((item, i) => (
                                             <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
                                                 <Check className="w-4 h-4 text-accent flex-shrink-0" />
                                                 {item}
@@ -191,8 +233,8 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                         >
                             <div className="relative aspect-square rounded-3xl overflow-hidden">
                                 <Image
-                                    src={data.info.image}
-                                    alt={data.info.title}
+                                    src={info.image}
+                                    alt={info.title}
                                     fill
                                     className="object-cover"
                                 />
@@ -296,7 +338,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {data.benefits.map((benefit, index) => (
+                        {benefits.map((benefit, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
@@ -326,7 +368,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                     </div>
 
                     <div className="max-w-4xl mx-auto">
-                        {data.process.map((step, index) => (
+                        {process.map((step, index) => (
                             <motion.div
                                 key={step.step}
                                 initial={{ opacity: 0, x: -20 }}
@@ -335,7 +377,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 transition={{ delay: index * 0.1 }}
                                 className="relative flex gap-6 pb-12 last:pb-0"
                             >
-                                {index < data.process.length - 1 && (
+                                {index < process.length - 1 && (
                                     <div className="absolute left-6 top-14 bottom-0 w-0.5 bg-primary/20" />
                                 )}
 
@@ -500,7 +542,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                         </div>
 
                         <div className="space-y-3">
-                            {data.faqs.map((faq, index) => (
+                            {faqs.map((faq, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 10 }}

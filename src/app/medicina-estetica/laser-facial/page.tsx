@@ -161,6 +161,106 @@ const laserFacialData: ProcedureData = {
         title: 'Renueva tu piel con tecnología láser',
         description: 'Agenda tu consulta para evaluar qué tratamiento láser es ideal para ti.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Laser Rejuvenation',
+            title: 'Facial Laser',
+            description: 'Laser technology treatments for rejuvenation, spots, scars and skin texture. Precise results with the latest available technologies.',
+            duration: '30-60 min',
+            recovery: '3-7 days',
+            anesthesia: 'Topical anesthesia',
+        },
+        info: {
+            title: 'How Does Facial Laser Work?',
+            content: [
+                'Laser treatments use high-energy light to treat various skin conditions. Depending on the type of laser, we can treat spots, wrinkles, scars, enlarged pores and improve the overall texture of the skin.',
+                'We have different technologies: <strong class="text-primary">Fractional laser</strong> for rejuvenation, <strong class="text-primary">Q-Switched laser</strong> for pigmentation, and <strong class="text-primary">IPL (Intense Pulsed Light)</strong> for spots and redness.',
+            ],
+            highlights: {
+                title: 'Available Treatments',
+                items: [
+                    'Facial rejuvenation',
+                    'Spot removal',
+                    'Scar treatment',
+                    'Pore reduction',
+                    'Texture improvement',
+                    'Redness treatment',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Advanced Technology',
+                description: 'Latest generation equipment for precise results.',
+            },
+            {
+                title: 'Eliminates Spots',
+                description: 'Effective treatment for hyperpigmentation.',
+            },
+            {
+                title: 'Improves Texture',
+                description: 'Smoother, more even and radiant skin.',
+            },
+            {
+                title: 'Stimulates Collagen',
+                description: 'Rejuvenation from the deep layers.',
+            },
+        ],
+        process: [
+            {
+                title: 'Skin Evaluation',
+                description: 'Analysis of your skin type and conditions to treat.',
+                duration: '20-30 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Cleansing and application of topical anesthesia if needed.',
+                duration: '15-20 min',
+            },
+            {
+                title: 'Laser Treatment',
+                description: 'Application of the laser with personalized parameters.',
+                duration: '30-60 min',
+            },
+            {
+                title: 'Post Care',
+                description: 'Hydration, strict sun protection and follow-up.',
+                duration: '3-7 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Is laser treatment painful?',
+                answer: 'The sensation varies depending on the type of laser. Generally it feels like small pinpricks or heat. We use topical anesthesia for greater comfort.',
+            },
+            {
+                question: 'How many sessions do I need?',
+                answer: 'For spots: 2-4 sessions. For rejuvenation: 3-6 sessions. For scars: 4-6 sessions. It depends on the specific condition.',
+            },
+            {
+                question: 'Is there any downtime?',
+                answer: 'It depends on the treatment. Mild lasers have no downtime. Ablative lasers require 5-7 days of recovery with peeling.',
+            },
+            {
+                question: 'Can I have it done if I have darker skin?',
+                answer: 'Yes, but special precautions are required. Some lasers are safer than others for darker skin tones. We evaluate this in consultation.',
+            },
+            {
+                question: 'What time of year is best?',
+                answer: 'Ideally during months with less sun exposure (fall-winter) since post-treatment sun protection is crucial.',
+            },
+            {
+                question: 'Are the results permanent?',
+                answer: 'For spots: may require maintenance if there is sun exposure. For rejuvenation: the collagen benefits are long-lasting with proper care.',
+            },
+        ],
+        cta: {
+            title: 'Renew your skin with laser technology',
+            description: 'Schedule your consultation to evaluate which laser treatment is ideal for you.',
+        },
+    },
 }
 
 // ============================================

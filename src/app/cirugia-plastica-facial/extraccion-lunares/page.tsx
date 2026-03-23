@@ -171,6 +171,106 @@ const extraccionLunaresData: ProcedureData = {
         title: 'Remueve esas lesiones que te incomodan',
         description: 'Agenda tu consulta para evaluar tus lunares y lesiones de forma segura.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Dermatological Surgery',
+            title: 'Mole Removal',
+            description: 'Safe removal of moles, warts, and skin lesions with surgical techniques that minimize scarring. Includes pathological analysis when necessary.',
+            duration: '15-30 min',
+            recovery: '5-7 days',
+            anesthesia: 'Local anesthesia',
+        },
+        info: {
+            title: 'What does Mole Removal consist of?',
+            content: [
+                'Mole removal is an outpatient procedure that allows skin lesions to be safely removed. It can be performed for aesthetic or medical reasons, especially when there is suspicion of abnormal changes.',
+                'We use techniques such as <strong class="text-primary">surgical excision, shaving, or electrocoagulation</strong>, selecting the most appropriate one based on the type, size, and location of the lesion to obtain the best aesthetic result.',
+            ],
+            highlights: {
+                title: 'Lesions we treat',
+                items: [
+                    'Moles (nevi)',
+                    'Warts',
+                    'Seborrheic keratoses',
+                    'Fibromas',
+                    'Epidermal cysts',
+                    'Suspicious lesions',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Pathological Analysis',
+                description: 'We send samples for study when necessary.',
+            },
+            {
+                title: 'Minimal Scarring',
+                description: 'Techniques that minimize residual marks.',
+            },
+            {
+                title: 'Complete Removal',
+                description: 'Total extraction of the lesion in a single session.',
+            },
+            {
+                title: 'Peace of Mind',
+                description: 'Rule out malignancy with histopathological study.',
+            },
+        ],
+        process: [
+            {
+                title: 'Lesion Evaluation',
+                description: 'Visual and dermatoscopic examination to determine the type of lesion.',
+                duration: '15-20 min',
+            },
+            {
+                title: 'Local Anesthesia',
+                description: 'Application of anesthesia for a painless procedure.',
+                duration: '5 min',
+            },
+            {
+                title: 'Extraction',
+                description: 'Removal of the lesion with the most appropriate technique.',
+                duration: '15-30 min',
+            },
+            {
+                title: 'Healing',
+                description: 'Wound care and waiting for the pathological result if applicable.',
+                duration: '5-14 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'When should I be concerned about a mole?',
+                answer: 'Use the ABCDE rule: Asymmetry, irregular Borders, varied Color, Diameter greater than 6mm, Evolution (changes). If you notice any of these signs, consult immediately.',
+            },
+            {
+                question: 'Is the extraction painful?',
+                answer: 'No, local anesthesia is applied to completely numb the area. You will only feel the small initial prick of the anesthesia.',
+            },
+            {
+                question: 'Will there be a scar?',
+                answer: 'Every extraction leaves some mark, but we use techniques that minimize scarring. The final result depends on size, location, and post-operative care.',
+            },
+            {
+                question: 'Can the mole grow back?',
+                answer: 'If it is completely removed, it should not recur. However, new moles can appear over time, especially with sun exposure.',
+            },
+            {
+                question: 'Is it always sent to pathology?',
+                answer: 'Not always. It is sent when there are suspicious characteristics, recent changes, or at the patient\'s request. Clearly benign lesions may not require it.',
+            },
+            {
+                question: 'How many moles can be removed in one session?',
+                answer: 'It depends on the size and location. Generally, several small moles can be removed in a single session. We evaluate this during the consultation.',
+            },
+        ],
+        cta: {
+            title: 'Remove those lesions that bother you',
+            description: 'Schedule your consultation to safely evaluate your moles and skin lesions.',
+        },
+    },
 }
 
 // ============================================

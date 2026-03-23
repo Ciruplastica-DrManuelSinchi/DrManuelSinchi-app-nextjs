@@ -172,6 +172,106 @@ const acidoHialuronicoData: ProcedureData = {
         title: 'Recupera el volumen y la juventud de tu rostro',
         description: 'Agenda tu consulta y descubre cómo el ácido hialurónico puede rejuvenecer tu apariencia.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Filler & Volume',
+            title: 'Hyaluronic Acid',
+            description: 'Restore lost volume, fill wrinkles and improve deep skin hydration. Natural and immediate results.',
+            duration: '30-45 min',
+            recovery: 'Immediate',
+            anesthesia: 'Topical anesthesia',
+        },
+        info: {
+            title: 'What is Hyaluronic Acid?',
+            content: [
+                'Hyaluronic acid is a substance naturally found in our body, especially in the skin, where it retains water and maintains hydration and volume. With age, its production decreases.',
+                'Hyaluronic acid fillers restore lost volume, fill wrinkles and grooves, and improve facial contours. It is <strong class="text-primary">completely biocompatible and reversible</strong>, making it one of the safest treatments available.',
+            ],
+            highlights: {
+                title: 'Hyaluronic Acid Applications',
+                items: [
+                    'Nasolabial folds',
+                    'Marionette lines',
+                    'Lip augmentation',
+                    'Cheekbone volume',
+                    'Under-eye hollows and tear troughs',
+                    'Jawline contouring',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Deep Hydration',
+                description: 'Attracts and retains water, improving skin quality.',
+            },
+            {
+                title: 'Reversible',
+                description: 'Can be dissolved if you are not satisfied with the result.',
+            },
+            {
+                title: 'Biocompatible',
+                description: 'A natural substance in the body, with very low risk of reaction.',
+            },
+            {
+                title: 'Immediate Results',
+                description: 'You see the change from the very first session.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Facial analysis, identification of areas to treat and planning.',
+                duration: '20-30 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Facial cleansing and application of topical anesthesia if needed.',
+                duration: '15 min',
+            },
+            {
+                title: 'Filler Application',
+                description: 'Precise injection of hyaluronic acid into the planned areas.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Result',
+                description: 'Results visible immediately, optimal in 1-2 weeks.',
+                duration: 'Immediate',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How long do the results last?',
+                answer: 'Depending on the area and product type, results last between 6-18 months. Lips last less (6-9 months) while cheekbones can last over a year.',
+            },
+            {
+                question: 'Is the procedure painful?',
+                answer: 'Discomfort is minimal. We use topical anesthesia and many products contain built-in lidocaine. Most patients describe it as very tolerable.',
+            },
+            {
+                question: 'What is the "Tyndall effect"?',
+                answer: 'It is a bluish effect that can occur if the product is placed too superficially, especially in thin-skin areas. With proper technique it is avoidable, and if it occurs, it is treatable.',
+            },
+            {
+                question: 'Can I dissolve the hyaluronic acid if I do not like the result?',
+                answer: 'Yes, there is an enzyme called hyaluronidase that dissolves hyaluronic acid in case of unsatisfactory results or complications. This is a major advantage over other fillers.',
+            },
+            {
+                question: 'Are there side effects?',
+                answer: 'There may be mild swelling, redness or bruising that disappears within 3-7 days. Serious complications are very rare with an experienced professional.',
+            },
+            {
+                question: 'Can I combine hyaluronic acid with Botox?',
+                answer: 'Yes, in fact it is very common. Botox treats dynamic (expression) wrinkles while hyaluronic acid restores volume. Together they achieve complete rejuvenation.',
+            },
+        ],
+        cta: {
+            title: 'Restore volume and youthfulness to your face',
+            description: 'Schedule your consultation and discover how hyaluronic acid can rejuvenate your appearance.',
+        },
+    },
 }
 
 // ============================================

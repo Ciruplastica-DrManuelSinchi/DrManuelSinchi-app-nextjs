@@ -161,6 +161,106 @@ const tumoresCarcinomasData: ProcedureData = {
         title: 'No ignores esa lesión sospechosa',
         description: 'Agenda tu evaluación para determinar el mejor tratamiento.',
     },
+
+    en: {
+        categoryLabel: 'Reconstructive Surgery',
+        hero: {
+            badge: 'Oncological Surgery',
+            title: 'Tumor & Carcinoma Removal',
+            description: 'Removal of benign tumors and non-melanoma skin carcinomas using reconstructive techniques that minimize aesthetic sequelae. Comprehensive care with an oncological and aesthetic focus.',
+            duration: '30 min - 3 hours',
+            recovery: '1-4 weeks',
+            anesthesia: 'Local / General anesthesia',
+        },
+        info: {
+            title: 'What Skin Tumors Do We Treat?',
+            content: [
+                'We treat benign cutaneous tumors (cysts, lipomas, nevi) and non-melanoma carcinomas such as basal cell carcinoma and squamous cell carcinoma. Surgery aims for complete tumor removal with adequate oncological margins.',
+                'As plastic surgeons, we add value in the <strong class="text-primary">reconstruction of the resulting defect</strong>, using techniques such as local flaps, skin grafts, and others to achieve the best possible aesthetic outcome.',
+            ],
+            highlights: {
+                title: 'Lesions We Treat',
+                items: [
+                    'Basal cell carcinoma',
+                    'Squamous cell carcinoma',
+                    'Benign tumors (lipomas, cysts)',
+                    'Atypical nevi',
+                    'Keratoacanthomas',
+                    'Post-Mohs reconstruction',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Oncological Margins',
+                description: 'Complete excision with adequate safety margins.',
+            },
+            {
+                title: 'Aesthetic Reconstruction',
+                description: 'Techniques that minimize visible scarring.',
+            },
+            {
+                title: 'Pathological Analysis',
+                description: 'All specimens are sent for histopathological examination.',
+            },
+            {
+                title: 'Comprehensive Follow-Up',
+                description: 'Long-term oncological and aesthetic monitoring.',
+            },
+        ],
+        process: [
+            {
+                title: 'Evaluation',
+                description: 'Lesion examination, dermoscopy, and surgical planning.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Surgery',
+                description: 'Excision with margins and immediate reconstruction.',
+                duration: '30 min - 3 hrs',
+            },
+            {
+                title: 'Pathology',
+                description: 'Tissue analysis to confirm complete excision.',
+                duration: '7-10 days',
+            },
+            {
+                title: 'Follow-Up',
+                description: 'Check-ups to monitor for recurrence and aesthetic outcome.',
+                duration: 'Ongoing',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How do I know if a lesion is malignant?',
+                answer: 'Warning signs include: recent growth, bleeding, color changes, irregular borders, and ulceration. When in doubt, it is always best to have it evaluated.',
+            },
+            {
+                question: 'Is the surgery outpatient?',
+                answer: 'Most cases are outpatient procedures performed under local anesthesia. Large tumors or those in complex locations may require an operating room and sedation.',
+            },
+            {
+                question: 'Will there be a scar?',
+                answer: 'There will always be some scarring, but we use plastic surgery techniques to make it as inconspicuous as possible.',
+            },
+            {
+                question: 'What is Mohs surgery?',
+                answer: 'It is a layer-by-layer excision technique with immediate margin analysis. When performed by a dermatologist, we handle the reconstruction.',
+            },
+            {
+                question: 'Can carcinoma come back?',
+                answer: 'If completely excised, local recurrence is rare. However, new tumors may appear in other areas, which is why ongoing follow-up is important.',
+            },
+            {
+                question: 'Do you work with oncologists?',
+                answer: 'Yes, we coordinate with dermatologists and oncologists when necessary for comprehensive patient management.',
+            },
+        ],
+        cta: {
+            title: 'Don\'t ignore that suspicious lesion',
+            description: 'Schedule your evaluation to determine the best course of treatment.',
+        },
+    },
 }
 
 // ============================================

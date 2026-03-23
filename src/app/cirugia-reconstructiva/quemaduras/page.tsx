@@ -172,6 +172,106 @@ const quemadurasData: ProcedureData = {
         title: 'Recupera la función y mejora las secuelas',
         description: 'Agenda tu consulta para evaluar tu caso y planificar el tratamiento más adecuado.',
     },
+
+    en: {
+        categoryLabel: 'Reconstructive Surgery',
+        hero: {
+            badge: 'Treatment & Reconstruction',
+            title: 'Burn Treatment',
+            description: 'Comprehensive treatment of acute burns and reconstruction of burn sequelae. Restore function and improve the appearance of affected areas.',
+            duration: 'Variable',
+            recovery: 'Depends on extent',
+            anesthesia: 'Depends on procedure',
+        },
+        info: {
+            title: 'How Do We Treat Burns?',
+            content: [
+                'Burn treatment covers everything from the initial management of the acute injury to the reconstruction of long-term sequelae. Burns can affect not only the skin but also the function of limbs and joints.',
+                'We offer treatment in <strong class="text-primary">all phases</strong>: acute management with specialized dressings and skin grafts, as well as late reconstruction of sequelae such as contracture scars, scar bands, and functional limitations.',
+            ],
+            highlights: {
+                title: 'Burn Treatment Services',
+                items: [
+                    'Acute burn management',
+                    'Skin grafting',
+                    'Scar band release',
+                    'Flap reconstruction',
+                    'Ectropion correction',
+                    'Functional rehabilitation',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Burn Care Expertise',
+                description: 'Training and experience in burn units.',
+            },
+            {
+                title: 'Comprehensive Approach',
+                description: 'From the acute phase through final reconstruction.',
+            },
+            {
+                title: 'Advanced Techniques',
+                description: 'Skin grafts, flaps, and dermal substitutes.',
+            },
+            {
+                title: 'Functional Recovery',
+                description: 'Priority on restoring movement and function.',
+            },
+        ],
+        process: [
+            {
+                title: 'Initial Assessment',
+                description: 'Evaluation of the extent, depth, and location of the burn.',
+                duration: '30-60 min',
+            },
+            {
+                title: 'Acute Treatment',
+                description: 'Specialized dressings, debridement, and skin grafting when necessary.',
+                duration: 'Days to weeks',
+            },
+            {
+                title: 'Healing Phase',
+                description: 'Scar management with compression therapy and rehabilitation.',
+                duration: 'Months',
+            },
+            {
+                title: 'Sequelae Reconstruction',
+                description: 'Corrective surgeries to improve function and appearance.',
+                duration: 'As needed',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What should I do if I get burned?',
+                answer: 'Cool the burn with cold (not ice-cold) running water for 10-20 minutes. Do not apply home remedies, toothpaste, or ice directly. Cover with a clean cloth and seek medical attention.',
+            },
+            {
+                question: 'When is a skin graft needed?',
+                answer: 'Grafts are necessary for deep burns (deep second-degree and third-degree) where the skin cannot regenerate on its own.',
+            },
+            {
+                question: 'What are scar bands (contractures)?',
+                answer: 'They are bands of scar tissue that form over joints and restrict movement. They require surgical release and rehabilitation.',
+            },
+            {
+                question: 'When can burn sequelae be surgically treated?',
+                answer: 'We generally wait 6-12 months after the healing process is complete before performing reconstructive surgeries, although severe functional limitations may require earlier intervention.',
+            },
+            {
+                question: 'Can burn scars be improved?',
+                answer: 'Yes, there are multiple options: compression therapy, laser treatment, corticosteroid injections, revision surgery, and tissue expansion techniques to improve appearance and function.',
+            },
+            {
+                question: 'Is rehabilitation important?',
+                answer: 'Absolutely. Physical therapy and occupational therapy are essential to maintaining range of motion, preventing contractures, and optimizing surgical outcomes.',
+            },
+        ],
+        cta: {
+            title: 'Restore function and improve burn sequelae',
+            description: 'Schedule your consultation to evaluate your case and plan the most appropriate treatment.',
+        },
+    },
 }
 
 // ============================================

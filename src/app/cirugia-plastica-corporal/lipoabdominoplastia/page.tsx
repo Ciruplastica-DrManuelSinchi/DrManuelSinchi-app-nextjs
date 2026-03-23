@@ -162,6 +162,106 @@ const lipoabdominoplastiaData: ProcedureData = {
         title: 'Logra el abdomen que siempre soñaste',
         description: 'Agenda tu consulta para conocer qué técnica de lipoabdominoplastia es ideal para ti.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Advanced Body Contouring',
+            title: 'Lipoabdominoplasty',
+            description: 'The evolution of traditional abdominoplasty. Combines high-definition liposuction with skin removal to achieve a flat, toned abdomen with muscle definition.',
+            duration: '3-5 hours',
+            recovery: '3-4 weeks recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Lipoabdominoplasty?',
+            content: [
+                'Lipoabdominoplasty is an advanced procedure that combines the best of high-definition liposuction with abdominoplasty. Unlike traditional abdominoplasty, it allows sculpting of the abdomen while removing excess skin.',
+                'We offer state-of-the-art techniques: <strong class="text-primary">HD Lipoabdominoplasty</strong> with abdominal muscle definition, <strong class="text-primary">Renuvion J-Plasma</strong> for skin retraction, and <strong class="text-primary">BodyTite</strong> with internal radiofrequency for superior results.',
+            ],
+            highlights: {
+                title: 'Available Techniques',
+                items: [
+                    'HD Lipoabdominoplasty',
+                    'Renuvion J-Plasma',
+                    'BodyTite (radiofrequency)',
+                    'Abdominal muscle definition',
+                    'Mini lipoabdominoplasty',
+                    'Diastasis repair',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Muscle Definition',
+                description: 'Visible abdominal and linea alba definition.',
+            },
+            {
+                title: 'Advanced Technology',
+                description: 'J-Plasma and BodyTite for superior skin retraction.',
+            },
+            {
+                title: 'Comprehensive Procedure',
+                description: 'Eliminates fat and skin in a single intervention.',
+            },
+            {
+                title: 'Superior Results',
+                description: 'More natural and defined abdomen than traditional technique.',
+            },
+        ],
+        process: [
+            {
+                title: 'Body Assessment',
+                description: 'Analysis of fat, skin, and abdominal musculature.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Surgical Plan',
+                description: 'Contour design and selection of technologies to be used.',
+                duration: 'During consultation',
+            },
+            {
+                title: 'Surgery',
+                description: 'HD liposuction, technology application, and skin removal.',
+                duration: '3-5 hours',
+            },
+            {
+                title: 'Recovery',
+                description: 'Use of compression garment, initial drains, post-operative massages.',
+                duration: '3-4 weeks',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is the difference from traditional abdominoplasty?',
+                answer: 'Lipoabdominoplasty adds HD liposuction for sculpting and definition. Additionally, techniques like J-Plasma improve skin retraction for superior results.',
+            },
+            {
+                question: 'What is Renuvion J-Plasma?',
+                answer: 'It is a technology that combines helium gas with radiofrequency energy to contract the skin from the inside. It significantly improves skin retraction.',
+            },
+            {
+                question: 'What about BodyTite?',
+                answer: 'BodyTite uses bipolar radiofrequency that melts fat and contracts skin simultaneously. It is excellent for areas with moderate laxity.',
+            },
+            {
+                question: 'Can the abdominals be defined?',
+                answer: 'Yes, the HD technique allows creating the natural shadows of abdominal musculature, including the "six pack" and the linea alba.',
+            },
+            {
+                question: 'How long do the results last?',
+                answer: 'The result is permanent as long as you maintain a stable weight. The eliminated fat cells do not return.',
+            },
+            {
+                question: 'When can I resume exercise?',
+                answer: 'Light walks from week 1. Moderate exercise at 4-6 weeks. Intense exercise at 2-3 months.',
+            },
+        ],
+        cta: {
+            title: 'Achieve the abdomen you have always dreamed of',
+            description: 'Schedule your consultation to learn which lipoabdominoplasty technique is ideal for you.',
+        },
+    },
 }
 
 // ============================================

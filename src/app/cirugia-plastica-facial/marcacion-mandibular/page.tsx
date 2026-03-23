@@ -161,6 +161,106 @@ const marcacionMandibularData: ProcedureData = {
         title: 'Define tu mandíbula y transforma tu rostro',
         description: 'Agenda tu consulta para evaluar la mejor técnica de marcación mandibular para ti.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Facial Definition',
+            title: 'Mandibular Contouring',
+            description: 'Define your jawline for a more angular and masculine or feminine face according to your goal. We use techniques with autologous fat or implants for precise results.',
+            duration: '60-120 min',
+            recovery: '10-14 days',
+            anesthesia: 'Local with sedation',
+        },
+        info: {
+            title: 'What is Mandibular Contouring?',
+            content: [
+                'Mandibular contouring is a procedure that defines and enhances the angle and edge of the jaw to create a more structured and attractive face. It is one of the most requested procedures by both men and women.',
+                'We offer two techniques: <strong class="text-primary">Fat transfer (autologous fat)</strong> for a subtle and natural enhancement, and <strong class="text-primary">Mandibular silicone implants</strong> for a more pronounced and angular definition.',
+            ],
+            highlights: {
+                title: 'Available Techniques',
+                items: [
+                    'Contouring with autologous fat',
+                    'Mandibular angle implants',
+                    'Mandibular border implants',
+                    'Combination fat + implants',
+                    'Asymmetry correction',
+                    'Masculine or feminine definition',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Defined Jawline',
+                description: 'Angular and structured mandibular line.',
+            },
+            {
+                title: 'Balanced Face',
+                description: 'Improves overall facial proportions.',
+            },
+            {
+                title: 'Permanent Results',
+                description: 'Both stabilized fat and implants are long-lasting.',
+            },
+            {
+                title: 'Personalized',
+                description: 'Design adapted to your gender and aesthetic goals.',
+            },
+        ],
+        process: [
+            {
+                title: 'Facial Evaluation',
+                description: 'Analysis of your mandibular structure and definition of goals.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Personalized Design',
+                description: 'Planning the type and degree of contouring desired.',
+                duration: 'At consultation',
+            },
+            {
+                title: 'Procedure',
+                description: 'Surgery with selected technique under sedation.',
+                duration: '60-120 min',
+            },
+            {
+                title: 'Recovery',
+                description: 'Swelling that subsides in 2-3 weeks. Definitive results in 2-3 months.',
+                duration: '10-14 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'How are mandibular implants placed?',
+                answer: 'Through incisions inside the mouth, with no visible scars. They are fixed on the mandibular bone to define the angle and/or border.',
+            },
+            {
+                question: 'Can fat achieve the same result as implants?',
+                answer: 'Fat gives more subtle results. For a very defined and angular contouring, implants are more effective.',
+            },
+            {
+                question: 'Is this procedure only for men?',
+                answer: 'No, many women seek a more defined jaw. The design adapts to masculine or feminine beauty standards depending on the case.',
+            },
+            {
+                question: 'Can the implants be felt or move?',
+                answer: 'No, they remain firmly attached to the bone and covered by tissue. They cannot be felt by touch nor do they move.',
+            },
+            {
+                question: 'Can I combine with other procedures?',
+                answer: 'Yes, it is frequently combined with mentoplasty, chin liposuction, and bichectomy for complete facial slimming.',
+            },
+            {
+                question: 'What are the risks?',
+                answer: 'The main risks are infection, asymmetry, and nerve damage (rare). With proper technique, complications are infrequent.',
+            },
+        ],
+        cta: {
+            title: 'Define your jawline and transform your face',
+            description: 'Schedule your consultation to evaluate the best mandibular contouring technique for you.',
+        },
+    },
 }
 
 // ============================================

@@ -200,6 +200,119 @@ const blefaroplastiaData: ProcedureData = {
         title: 'Recupera la juventud de tu mirada',
         description: 'Agenda tu consulta de valoración y descubre cómo la blefaroplastia puede rejuvenecer tu rostro.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Eye Rejuvenation',
+            title: 'Blepharoplasty',
+            description: 'Rejuvenate your gaze by eliminating excess skin and bags on the eyelids. We offer upper, lower, and combined blepharoplasty with lifting for natural results.',
+            duration: '1-2 hours',
+            recovery: '5-7 days recovery',
+            anesthesia: 'Local anesthesia + sedation',
+        },
+        info: {
+            title: 'What is Blepharoplasty?',
+            content: [
+                'Blepharoplasty is a surgery that corrects excess skin, muscle, and fat on the upper and lower eyelids. It is one of the most effective procedures to rejuvenate the gaze and eliminate the tired appearance.',
+                'We offer: <strong class="text-primary">Upper Blepharoplasty</strong> (drooping eyelids), <strong class="text-primary">Lower Blepharoplasty</strong> (bags and dark circles), and <strong class="text-primary">Blepharoplasty with Lifting</strong> (combined with facelift). The <strong class="text-primary">incisions are hidden in the natural folds</strong>, leaving virtually invisible scars.',
+            ],
+            highlights: {
+                title: 'Types of Blepharoplasty',
+                items: [
+                    'Upper blepharoplasty',
+                    'Lower blepharoplasty',
+                    'Full blepharoplasty (upper + lower)',
+                    'Blepharoplasty with brow lift',
+                    'Blepharoplasty with facelift',
+                    'Canthoplasty (almond-shaped eyes)',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Rejuvenated Gaze',
+                description: 'Takes years off your face with a fresh and rested look.',
+            },
+            {
+                title: 'Natural Appearance',
+                description: 'Subtle results that enhance your beauty without looking operated on.',
+            },
+            {
+                title: 'Safe Procedure',
+                description: 'Minimally invasive technique with quick recovery.',
+            },
+            {
+                title: 'High Satisfaction',
+                description: 'One of the procedures with the highest satisfaction rate.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Eyelid evaluation, expectation analysis, and procedure planning.',
+                duration: '30-45 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Ophthalmological and medical exams prior to surgery.',
+                duration: '1 week before',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Outpatient surgery with local anesthesia and sedation for your comfort.',
+                duration: '1-2 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Cold application, rest, and swelling control.',
+                duration: '5-7 days',
+            },
+            {
+                title: 'Final Result',
+                description: 'Residual swelling fades and the definitive result becomes apparent.',
+                duration: '2-3 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'At what age is blepharoplasty recommended?',
+                answer: 'There is no specific age. The procedure is recommended when there is excess skin or bags that affect aesthetics or vision. This generally occurs from 35-40 years of age, although it may vary depending on genetics.',
+            },
+            {
+                question: 'What is the difference between upper and lower blepharoplasty?',
+                answer: 'Upper blepharoplasty corrects the excess skin on the upper eyelid (drooping eyelid). Lower blepharoplasty treats bags and excess skin under the eye. Many patients benefit from both.',
+            },
+            {
+                question: 'Can I combine blepharoplasty with a brow lift?',
+                answer: 'Yes, it is a very common and recommended combination. Treating eyelids and brows together achieves a more complete and harmonious rejuvenation of the gaze.',
+            },
+            {
+                question: 'Does blepharoplasty leave visible scars?',
+                answer: 'The incisions are made in the natural folds of the upper eyelid and just below the lower lashes. Once healed, they are practically imperceptible.',
+            },
+            {
+                question: 'Can I have only the upper or lower eyelids operated on?',
+                answer: 'Yes, the procedure can be performed on upper eyelids only, lower eyelids only, or both depending on your needs. During the consultation we will evaluate which option is most appropriate for you.',
+            },
+            {
+                question: 'How long do the results last?',
+                answer: 'The results are long-lasting, generally between 10-15 years or more. Natural aging continues, but you will always look better than if you had not had the surgery.',
+            },
+            {
+                question: 'When can I return to work?',
+                answer: 'Most patients resume their work activities between 7-10 days after surgery. Makeup can be used after 10-14 days.',
+            },
+            {
+                question: 'Can blepharoplasty improve my vision?',
+                answer: 'Yes, when the excess skin on the upper eyelids is significant, it can obstruct the visual field. Blepharoplasty corrects this, improving both aesthetics and function.',
+            },
+        ],
+        cta: {
+            title: 'Restore the youthfulness of your gaze',
+            description: 'Schedule your assessment consultation and discover how blepharoplasty can rejuvenate your face.',
+        },
+    },
 }
 
 // ============================================

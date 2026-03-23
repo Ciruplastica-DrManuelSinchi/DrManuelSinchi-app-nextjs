@@ -172,6 +172,106 @@ const heridasUlcerasData: ProcedureData = {
         title: '¿Tienes una herida que no cicatriza?',
         description: 'Agenda tu consulta para una evaluación completa y un plan de tratamiento personalizado.',
     },
+
+    en: {
+        categoryLabel: 'Reconstructive Surgery',
+        hero: {
+            badge: 'Specialized Management',
+            title: 'Wound & Ulcer Treatment',
+            description: 'Comprehensive treatment of chronic wounds and non-healing ulcers. A multidisciplinary approach to restore tissue integrity.',
+            duration: 'Variable',
+            recovery: 'Case by case',
+            anesthesia: 'Depends on procedure',
+        },
+        info: {
+            title: 'What Are Complex Wounds and Ulcers?',
+            content: [
+                'Complex wounds are those that do not heal within the expected timeframe or that present complications such as infection, exposure of deep structures, or significant tissue loss. Chronic ulcers include pressure ulcers, vascular ulcers, and diabetic ulcers.',
+                'Management requires a <strong class="text-primary">comprehensive approach</strong> that includes controlling risk factors, treating the underlying cause, local wound management, and, when necessary, reconstructive surgical procedures.',
+            ],
+            highlights: {
+                title: 'Types of Wounds We Treat',
+                items: [
+                    'Pressure ulcers',
+                    'Diabetic ulcers',
+                    'Vascular ulcers (venous/arterial)',
+                    'Complex traumatic wounds',
+                    'Surgical wound dehiscence',
+                    'Infected wounds',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Multidisciplinary Approach',
+                description: 'We coordinate with other specialists depending on the cause.',
+            },
+            {
+                title: 'Comprehensive Treatment',
+                description: 'We address both the wound and the factors preventing its closure.',
+            },
+            {
+                title: 'Advanced Techniques',
+                description: 'Negative pressure therapy, skin grafts, and flaps.',
+            },
+            {
+                title: 'Close Follow-Up',
+                description: 'Frequent dressing changes and check-ups until full healing.',
+            },
+        ],
+        process: [
+            {
+                title: 'Initial Assessment',
+                description: 'Analysis of the wound, underlying cause, and overall patient condition.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Treatment Plan',
+                description: 'Design of a comprehensive strategy: cause control, local management, and surgery if applicable.',
+                duration: 'During consultation',
+            },
+            {
+                title: 'Active Treatment',
+                description: 'Dressing changes, negative pressure therapy, debridement, and surgical procedures.',
+                duration: 'Weeks to months',
+            },
+            {
+                title: 'Closure and Follow-Up',
+                description: 'Achieving wound closure and preventing recurrence.',
+                duration: 'Variable',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Why is my wound not healing?',
+                answer: 'Wounds may fail to heal due to multiple factors: poor circulation, uncontrolled diabetes, infection, continuous pressure, malnutrition, medications, or diseases that impair healing.',
+            },
+            {
+                question: 'What is negative pressure therapy (VAC)?',
+                answer: 'It is a system that applies controlled negative pressure to the wound using a foam dressing and suction. It stimulates the formation of new tissue, reduces edema, and controls wound exudate.',
+            },
+            {
+                question: 'When is surgery necessary?',
+                answer: 'Surgery is considered when the wound cannot close on its own, there is exposure of bone or tendons, or flaps and grafts are needed to achieve coverage.',
+            },
+            {
+                question: 'How can pressure ulcers be prevented?',
+                answer: 'Frequent repositioning, specialized mattresses, proper nutrition, skin hydration, and monitoring of pressure points in bedridden patients.',
+            },
+            {
+                question: 'How long does it take to heal a chronic wound?',
+                answer: 'It depends on the type, size, and cause. It can take from weeks to months. The key is the correct approach and patience throughout the treatment process.',
+            },
+            {
+                question: 'Do you work with other specialists?',
+                answer: 'Yes, we frequently coordinate with vascular surgery, endocrinology, infectious disease, nutrition, and other specialties based on the patient\'s needs.',
+            },
+        ],
+        cta: {
+            title: 'Do you have a wound that won\'t heal?',
+            description: 'Schedule your consultation for a complete evaluation and personalized treatment plan.',
+        },
+    },
 }
 
 // ============================================

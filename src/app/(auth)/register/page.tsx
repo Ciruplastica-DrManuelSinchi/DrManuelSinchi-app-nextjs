@@ -1,16 +1,23 @@
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 import AuthCard from '@/app/components/auth/AuthCard'
 import RegisterForm from '@/app/components/auth/RegisterForm'
 
-export const metadata = {
-  title: 'Crear Cuenta | Ciruplástica',
-  description: 'Regístrate en Ciruplástica y agenda tu consulta',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('auth.register')
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+  }
 }
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  const t = await getTranslations('auth.register')
+
   return (
     <AuthCard
-      title="Crea tu cuenta"
-      subtitle="Únete a Ciruplástica"
+      title={t('pageTitle')}
+      subtitle={t('pageSubtitle')}
     >
       <RegisterForm />
     </AuthCard>

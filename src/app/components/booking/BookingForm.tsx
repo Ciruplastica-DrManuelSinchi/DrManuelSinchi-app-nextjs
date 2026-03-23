@@ -23,8 +23,15 @@ import {
   Ruler
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import PaymentStep from './PaymentStep'
 import CalendlyStyleCalendar from './CalendlyStyleCalendar'
+
+// Parse "YYYY-MM-DD" as a local date (not UTC midnight)
+function parseLocalDate(dateStr: string): Date {
+  const [year, month, day] = dateStr.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
 
 interface Procedure {
   id: string
@@ -48,24 +55,6 @@ interface ExistingBooking {
 
 const CONSULTATION_PRICE = 50
 
-const DOCUMENT_TYPES = [
-  { value: 'DNI', label: 'DNI' },
-  { value: 'CE', label: 'Carnet de Extranjería' },
-  { value: 'PASSPORT', label: 'Pasaporte' },
-]
-
-const REFERRAL_SOURCES = [
-  'Google',
-  'Facebook',
-  'Instagram',
-  'TikTok',
-  'YouTube',
-  'Recomendación de un amigo/familiar',
-  'Recomendación de otro doctor',
-  'Publicidad en la calle',
-  'Otro',
-]
-
 const PERU_CITIES = [
   'Lima',
   'Arequipa',
@@ -81,13 +70,33 @@ const PERU_CITIES = [
   'Ica',
   'Ayacucho',
   'Cajamarca',
-  'Otra ciudad',
 ]
 
 export default function BookingForm({ procedures, preSelectedProcedure }: BookingFormProps) {
+  const t = useTranslations('booking')
   const router = useRouter()
   const { status } = useSession()
   const [step, setStep] = useState(1)
+
+  const DOCUMENT_TYPES = [
+    { value: 'DNI', label: 'DNI' },
+    { value: 'CE', label: t('documentTypes.CE') },
+    { value: 'PASSPORT', label: t('documentTypes.PASSPORT') },
+  ]
+
+  const REFERRAL_SOURCES = [
+    'Google',
+    'Facebook',
+    'Instagram',
+    'TikTok',
+    'YouTube',
+    t('referralSources.friendRecommendation'),
+    t('referralSources.doctorRecommendation'),
+    t('referralSources.streetAdvertising'),
+    t('referralSources.other'),
+  ]
+
+  const OTHER_CITY = 'Otra ciudad'
 
   // Paso 1: Datos personales
   const [personalData, setPersonalData] = useState({
@@ -159,14 +168,12 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          // Datos personales
           birthDate: personalData.birthDate || undefined,
           documentType: personalData.documentType || undefined,
           documentNumber: personalData.documentNumber || undefined,
           address: personalData.address || undefined,
           city: personalData.city || undefined,
           occupation: personalData.occupation || undefined,
-          // Datos de la cita
           procedureId: appointmentData.procedureId,
           procedureName: selectedProcedure.name,
           procedureCategory: selectedProcedure.category,
@@ -182,11 +189,10 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
       const data = await response.json()
 
       if (!response.ok) {
-        // Si hay una reserva pendiente existente, mostrar opciones
         if (data.existingBooking) {
           setExistingPendingBooking(data.existingBooking)
         } else {
-          setError(data.error || 'Error al crear reserva')
+          setError(data.error || t('errors.createError'))
         }
         return null
       }
@@ -195,12 +201,12 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
       setPaymentDeadline(new Date(data.paymentDeadline || data.booking.paymentDeadline))
       return data.booking
     } catch {
-      setError('Error de conexión')
+      setError(t('errors.connectionError'))
       return null
     } finally {
       setIsLoading(false)
     }
-  }, [selectedProcedure, personalData, appointmentData])
+  }, [selectedProcedure, personalData, appointmentData, t])
 
   // Cancelar reserva pendiente existente
   const cancelExistingBooking = async () => {
@@ -217,19 +223,17 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Error al cancelar reserva')
+        setError(data.error || t('errors.cancelError'))
         return
       }
 
-      // Limpiar y permitir crear nueva reserva
       setExistingPendingBooking(null)
-      // Intentar crear la nueva reserva automáticamente
       const booking = await createBooking()
       if (booking) {
         setStep(3)
       }
     } catch {
-      setError('Error de conexión')
+      setError(t('errors.connectionError'))
     } finally {
       setIsCancellingBooking(false)
     }
@@ -250,36 +254,34 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
     setStep(3)
   }
 
-  // Manejar selección de fecha y hora desde el calendario
   const handleDateTimeSelect = (date: string, timeSlot: string) => {
     setAppointmentData(prev => ({ ...prev, date, timeSlot }))
     setError('')
   }
 
-  // Manejar expiración del deadline de pago
   const handlePaymentExpired = useCallback(async () => {
-    setError('Tu tiempo de reserva ha expirado. Por favor, selecciona un nuevo horario.')
+    setError(t('errors.paymentExpired'))
     setBookingId(null)
     setPaymentDeadline(null)
     setStep(1)
-  }, [])
+  }, [t])
 
   // Validar paso 1
   const validateStep1 = () => {
     if (!personalData.birthDate) {
-      setError('Por favor ingresa tu fecha de nacimiento')
+      setError(t('errors.birthDate'))
       return false
     }
     if (!personalData.documentNumber) {
-      setError('Por favor ingresa tu número de documento')
+      setError(t('errors.documentNumber'))
       return false
     }
     if (!personalData.address) {
-      setError('Por favor ingresa tu dirección')
+      setError(t('errors.address'))
       return false
     }
     if (!personalData.city) {
-      setError('Por favor selecciona tu ciudad')
+      setError(t('errors.city'))
       return false
     }
     return true
@@ -288,11 +290,11 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
   // Validar paso 2
   const validateStep2 = () => {
     if (!appointmentData.procedureId) {
-      setError('Por favor selecciona un procedimiento')
+      setError(t('errors.procedure'))
       return false
     }
     if (!appointmentData.date || !appointmentData.timeSlot) {
-      setError('Por favor selecciona fecha y hora')
+      setError(t('errors.dateTime'))
       return false
     }
     return true
@@ -301,7 +303,6 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
   const handleStep1Continue = (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-
     if (!validateStep1()) return
     setStep(2)
   }
@@ -312,20 +313,17 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
 
     if (!validateStep2()) return
 
-    // Si no está autenticado, mostrar prompt de login
     if (!isAuthenticated) {
       saveFormData()
       setShowLoginPrompt(true)
       return
     }
 
-    // Crear la reserva con estado AWAITING_PAYMENT
     const booking = await createBooking()
     if (!booking) {
-      return // Error ya manejado en createBooking
+      return
     }
 
-    // Avanzar al paso de pago
     setStep(3)
   }
 
@@ -339,7 +337,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
 
   const handlePaymentComplete = async (paymentMethod: string, paymentReference?: string) => {
     if (!bookingId) {
-      setError('No hay reserva para completar')
+      setError(t('errors.noBooking'))
       return
     }
 
@@ -360,15 +358,14 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Error al procesar el pago')
+        setError(data.error || t('errors.paymentError'))
         return
       }
 
-      // Limpiar datos guardados
       sessionStorage.removeItem('pendingBooking')
       setSuccess(true)
     } catch {
-      setError('Error de conexión')
+      setError(t('errors.connectionError'))
     } finally {
       setIsLoading(false)
     }
@@ -391,18 +388,17 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           <AlertCircle className="w-10 h-10 text-amber-600" />
         </div>
         <h2 className="text-2xl font-display font-bold text-dark mb-3">
-          Ya tienes una reserva pendiente
+          {t('existingBooking.title')}
         </h2>
         <p className="text-gray-600 mb-4">
-          Tienes una reserva pendiente de pago que debes completar o cancelar antes de crear otra.
+          {t('existingBooking.description')}
         </p>
 
-        {/* Detalles de la reserva existente */}
         <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left max-w-md mx-auto">
           <h3 className="font-semibold text-dark mb-2">{existingPendingBooking.procedureName}</h3>
           <div className="text-sm text-gray-600 space-y-1">
             <p>
-              <span className="font-medium">Fecha:</span>{' '}
+              <span className="font-medium">{t('existingBooking.date')}:</span>{' '}
               {existingDate.toLocaleDateString('es-PE', {
                 weekday: 'long',
                 day: 'numeric',
@@ -411,10 +407,10 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               })}
             </p>
             <p>
-              <span className="font-medium">Hora:</span> {existingPendingBooking.timeSlot}
+              <span className="font-medium">{t('existingBooking.time')}:</span> {existingPendingBooking.timeSlot}
             </p>
             <p className={`font-medium ${minutesLeft < 5 ? 'text-red-600' : 'text-amber-600'}`}>
-              Tiempo restante para pagar: {minutesLeft} minutos
+              {t('existingBooking.timeLeft', { minutes: minutesLeft })}
             </p>
           </div>
         </div>
@@ -425,7 +421,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             className="btn-primary flex items-center justify-center gap-2"
           >
             <CreditCard className="w-4 h-4" />
-            Continuar con el pago
+            {t('existingBooking.continuePayment')}
           </button>
           <button
             onClick={cancelExistingBooking}
@@ -437,7 +433,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             ) : (
               <XCircle className="w-4 h-4" />
             )}
-            Cancelar y crear nueva
+            {t('existingBooking.cancelNew')}
           </button>
         </div>
 
@@ -445,7 +441,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           onClick={() => setExistingPendingBooking(null)}
           className="mt-4 text-sm text-gray-500 hover:text-gray-700 transition-colors"
         >
-          Volver al formulario
+          {t('existingBooking.backToForm')}
         </button>
       </motion.div>
     )
@@ -463,12 +459,12 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           <LogIn className="w-10 h-10 text-primary" />
         </div>
         <h2 className="text-2xl font-display font-bold text-dark mb-3">
-          Inicia sesión para continuar
+          {t('loginPrompt.title')}
         </h2>
         <p className="text-gray-600 mb-6">
-          Para confirmar tu reserva necesitas iniciar sesión o crear una cuenta.
+          {t('loginPrompt.description')}
           <br />
-          <span className="text-sm text-gray-500">Tus datos de reserva se guardarán.</span>
+          <span className="text-sm text-gray-500">{t('loginPrompt.savedData')}</span>
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
@@ -476,20 +472,20 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             className="btn-primary inline-flex items-center justify-center gap-2"
           >
             <LogIn className="w-4 h-4" />
-            Iniciar Sesión
+            {t('loginPrompt.signIn')}
           </Link>
           <Link
             href="/register?callbackUrl=/reservar"
             className="btn-secondary inline-flex items-center justify-center"
           >
-            Crear Cuenta
+            {t('loginPrompt.createAccount')}
           </Link>
         </div>
         <button
           onClick={() => setShowLoginPrompt(false)}
           className="mt-4 text-sm text-gray-500 hover:text-gray-700 transition-colors"
         >
-          Volver al formulario
+          {t('loginPrompt.backToForm')}
         </button>
       </motion.div>
     )
@@ -506,17 +502,17 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           <CheckCircle className="w-10 h-10 text-green-600" />
         </div>
         <h2 className="text-2xl font-display font-bold text-dark mb-3">
-          ¡Reserva Registrada!
+          {t('success.title')}
         </h2>
         <p className="text-gray-600 mb-2">
-          Tu cita para <strong>{selectedProcedure?.name}</strong> ha sido registrada.
+          {t('success.yourAppointmentFor')} <strong>{selectedProcedure?.name}</strong> {t('success.hasBeenRegistered')}
         </p>
         <p className="text-gray-600 mb-6">
-          Fecha: <strong>{new Date(appointmentData.date).toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</strong> a las <strong>{appointmentData.timeSlot}</strong>
+          {t('success.date')}: <strong>{parseLocalDate(appointmentData.date).toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</strong> {t('success.at')} <strong>{appointmentData.timeSlot}</strong>
         </p>
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <p className="text-sm text-amber-800">
-            Tu pago será verificado y te contactaremos para confirmar tu cita en menos de 24 horas.
+            {t('success.verificationNotice')}
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -524,7 +520,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             onClick={() => router.push('/dashboard')}
             className="btn-primary"
           >
-            Ver mis reservas
+            {t('success.viewBookings')}
           </button>
           <button
             onClick={() => {
@@ -537,7 +533,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             }}
             className="btn-secondary"
           >
-            Hacer otra reserva
+            {t('success.makeAnother')}
           </button>
         </div>
       </motion.div>
@@ -554,7 +550,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
         }`}>
           {step > 1 ? <CheckCircle className="w-5 h-5" /> : <User className="w-4 h-4" />}
         </div>
-        <span className="text-sm font-medium hidden sm:block">Datos</span>
+        <span className="text-sm font-medium hidden sm:block">{t('steps.data')}</span>
       </div>
 
       <div className={`w-8 h-0.5 ${step >= 2 ? 'bg-primary' : 'bg-gray-200'}`} />
@@ -566,7 +562,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
         }`}>
           {step > 2 ? <CheckCircle className="w-5 h-5" /> : <Calendar className="w-4 h-4" />}
         </div>
-        <span className="text-sm font-medium hidden sm:block">Cita</span>
+        <span className="text-sm font-medium hidden sm:block">{t('steps.appointment')}</span>
       </div>
 
       <div className={`w-8 h-0.5 ${step >= 3 ? 'bg-primary' : 'bg-gray-200'}`} />
@@ -578,7 +574,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
         }`}>
           <CreditCard className="w-4 h-4" />
         </div>
-        <span className="text-sm font-medium hidden sm:block">Pago</span>
+        <span className="text-sm font-medium hidden sm:block">{t('steps.payment')}</span>
       </div>
     </div>
   )
@@ -603,8 +599,8 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
                 <User className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-dark">Datos Personales</h3>
-                <p className="text-sm text-gray-500">Información requerida para tu cita</p>
+                <h3 className="font-semibold text-dark">{t('step1.title')}</h3>
+                <p className="text-sm text-gray-500">{t('step1.subtitle')}</p>
               </div>
             </div>
 
@@ -623,7 +619,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             {/* Fecha de nacimiento */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Fecha de nacimiento *
+                {t('step1.birthDate')}
               </label>
               <input
                 type="date"
@@ -639,7 +635,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tipo doc. *
+                  {t('step1.docType')}
                 </label>
                 <select
                   value={personalData.documentType}
@@ -654,7 +650,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               </div>
               <div className="col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Número de documento *
+                  {t('step1.docNumber')}
                 </label>
                 <input
                   type="text"
@@ -672,13 +668,13 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <MapPin className="w-4 h-4 inline mr-1" />
-                Dirección *
+                {t('step1.address')}
               </label>
               <input
                 type="text"
                 value={personalData.address}
                 onChange={(e) => setPersonalData({ ...personalData, address: e.target.value })}
-                placeholder="Av. Principal 123, Distrito"
+                placeholder={t('step1.addressPlaceholder')}
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                 required
               />
@@ -687,7 +683,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             {/* Ciudad */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ciudad *
+                {t('step1.city')}
               </label>
               <select
                 value={personalData.city}
@@ -695,10 +691,11 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                 required
               >
-                <option value="">Selecciona tu ciudad</option>
+                <option value="">{t('step1.selectCity')}</option>
                 {PERU_CITIES.map((city) => (
                   <option key={city} value={city}>{city}</option>
                 ))}
+                <option value={OTHER_CITY}>{t('step1.otherCity')}</option>
               </select>
             </div>
 
@@ -706,13 +703,13 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Briefcase className="w-4 h-4 inline mr-1" />
-                Ocupación <span className="text-gray-400">(opcional)</span>
+                {t('step1.occupation')} <span className="text-gray-400">{t('step1.occupationOptional')}</span>
               </label>
               <input
                 type="text"
                 value={personalData.occupation}
                 onChange={(e) => setPersonalData({ ...personalData, occupation: e.target.value })}
-                placeholder="Ej: Ingeniero, Estudiante, Ama de casa..."
+                placeholder={t('step1.occupationPlaceholder')}
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
               />
             </div>
@@ -724,7 +721,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Continuar
+              {t('step1.continue')}
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </motion.form>
@@ -752,8 +749,8 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
                 <Calendar className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-dark">Datos de la Cita</h3>
-                <p className="text-sm text-gray-500">Selecciona procedimiento, fecha y hora</p>
+                <h3 className="font-semibold text-dark">{t('step2.title')}</h3>
+                <p className="text-sm text-gray-500">{t('step2.subtitle')}</p>
               </div>
             </div>
 
@@ -772,7 +769,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             {/* Procedimiento */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Procedimiento de interés *
+                {t('step2.procedure')}
               </label>
               <select
                 value={appointmentData.procedureId}
@@ -780,7 +777,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                 required
               >
-                <option value="">Selecciona un procedimiento</option>
+                <option value="">{t('step2.selectProcedure')}</option>
                 {Object.entries(
                   procedures.reduce((acc, p) => {
                     if (!acc[p.categoryLabel]) acc[p.categoryLabel] = []
@@ -820,9 +817,9 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
                     <Clock className="w-5 h-5 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-green-800 font-medium">Fecha y hora seleccionada</p>
+                    <p className="text-sm text-green-800 font-medium">{t('step2.dateSelected')}</p>
                     <p className="text-green-700">
-                      {new Date(appointmentData.date).toLocaleDateString('es-PE', {
+                      {parseLocalDate(appointmentData.date).toLocaleDateString('es-PE', {
                         weekday: 'long',
                         day: 'numeric',
                         month: 'long',
@@ -840,7 +837,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <Scale className="w-4 h-4 inline mr-1" />
-                  Peso (kg)
+                  {t('step2.weight')}
                 </label>
                 <input
                   type="number"
@@ -856,7 +853,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <Ruler className="w-4 h-4 inline mr-1" />
-                  Talla (cm)
+                  {t('step2.height')}
                 </label>
                 <input
                   type="number"
@@ -874,14 +871,14 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             {/* ¿Cómo se enteró de nosotros? */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                ¿Cómo se enteró de nosotros?
+                {t('step2.referralSource')}
               </label>
               <select
                 value={appointmentData.referralSource}
                 onChange={(e) => setAppointmentData({ ...appointmentData, referralSource: e.target.value })}
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
               >
-                <option value="">Selecciona una opción</option>
+                <option value="">{t('step2.selectOption')}</option>
                 {REFERRAL_SOURCES.map((source) => (
                   <option key={source} value={source}>{source}</option>
                 ))}
@@ -892,13 +889,13 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <FileText className="w-4 h-4 inline mr-2" />
-                Mensaje adicional <span className="text-gray-400">(opcional)</span>
+                {t('step2.message')} <span className="text-gray-400">{t('step2.messageOptional')}</span>
               </label>
               <textarea
                 value={appointmentData.message}
                 onChange={(e) => setAppointmentData({ ...appointmentData, message: e.target.value })}
                 rows={3}
-                placeholder="Cuéntanos más sobre lo que buscas..."
+                placeholder={t('step2.messagePlaceholder')}
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
               />
             </div>
@@ -906,8 +903,8 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
             {/* Price Preview */}
             <div className="bg-gray-50 rounded-xl p-4 flex justify-between items-center">
               <div>
-                <p className="text-sm text-gray-600">Costo de la consulta</p>
-                <p className="text-xs text-gray-500">Evaluación personalizada</p>
+                <p className="text-sm text-gray-600">{t('step2.consultationCost')}</p>
+                <p className="text-xs text-gray-500">{t('step2.personalizedEvaluation')}</p>
               </div>
               <p className="text-2xl font-bold text-primary">S/. {CONSULTATION_PRICE}</p>
             </div>
@@ -923,11 +920,11 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Reservando horario...
+                  {t('step2.bookingSlot')}
                 </>
               ) : (
                 <>
-                  Continuar al Pago
+                  {t('step2.continueToPayment')}
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}

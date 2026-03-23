@@ -161,6 +161,106 @@ const vitaminaCData: ProcedureData = {
         title: 'Revitaliza tu cuerpo desde adentro',
         description: 'Agenda tu sesión de vitamina C endovenosa para mejorar tu piel e inmunidad.',
     },
+
+    en: {
+        categoryLabel: 'Aesthetic Medicine',
+        hero: {
+            badge: 'Intravenous Therapy',
+            title: 'Intravenous Vitamin C',
+            description: 'Powerful antioxidant therapy that improves skin quality, stimulates the immune system and provides energy. Direct and effective absorption into the bloodstream.',
+            duration: '30-60 min',
+            recovery: 'Immediate',
+            anesthesia: 'None required',
+        },
+        info: {
+            title: 'What is Intravenous Vitamin C?',
+            content: [
+                'Intravenous vitamin C is a therapy that administers high doses of ascorbic acid directly into the bloodstream, achieving concentrations much higher than those possible by oral intake.',
+                'This therapy is a <strong class="text-primary">potent antioxidant</strong> that combats free radicals, <strong class="text-primary">stimulates collagen production</strong> for firmer skin, and <strong class="text-primary">strengthens the immune system</strong>. It also provides energy and vitality.',
+            ],
+            highlights: {
+                title: 'Therapy Benefits',
+                items: [
+                    'Potent antioxidant',
+                    'Stimulates collagen',
+                    'Improves skin radiance',
+                    'Strengthens immune system',
+                    'Increases energy',
+                    'Accelerates recovery',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Radiant Skin',
+                description: 'Improves natural skin texture and glow.',
+            },
+            {
+                title: 'Antioxidant',
+                description: 'Combats damage from free radicals.',
+            },
+            {
+                title: 'Energy',
+                description: 'Greater vitality and sense of well-being.',
+            },
+            {
+                title: 'Immunity',
+                description: 'Strengthens the body\'s defenses.',
+            },
+        ],
+        process: [
+            {
+                title: 'Initial Evaluation',
+                description: 'Review of your health status and treatment goals.',
+                duration: '15 min',
+            },
+            {
+                title: 'Preparation',
+                description: 'Peripheral IV line placement.',
+                duration: '5 min',
+            },
+            {
+                title: 'Infusion',
+                description: 'Administration of intravenous vitamin C.',
+                duration: '30-60 min',
+            },
+            {
+                title: 'Recovery',
+                description: 'You can resume your activities immediately.',
+                duration: 'Immediate',
+            },
+        ],
+        faqs: [
+            {
+                question: 'Why intravenous and not oral?',
+                answer: 'Taken orally, the intestine only absorbs a limited amount. Intravenously, we achieve blood concentrations 100 times higher.',
+            },
+            {
+                question: 'How often should I have the treatment?',
+                answer: 'For maintenance: once a week or every 2 weeks. For intensive treatment: 2-3 times per week for a set period.',
+            },
+            {
+                question: 'Is it safe?',
+                answer: 'Yes, it is a very safe treatment for healthy individuals. Prior evaluation is required to rule out certain conditions such as G6PD deficiency.',
+            },
+            {
+                question: 'Are there side effects?',
+                answer: 'Rarely. There may be a sensation of cold during the infusion or slight irritation at the puncture site. Serious effects are very rare.',
+            },
+            {
+                question: 'When will I see results in my skin?',
+                answer: 'Many patients notice improvement in radiance from the first sessions. Firmness benefits accumulate over time.',
+            },
+            {
+                question: 'Can I combine it with other aesthetic treatments?',
+                answer: 'Yes, in fact it enhances the results of other treatments such as laser, peels and biostimulators.',
+            },
+        ],
+        cta: {
+            title: 'Revitalize your body from within',
+            description: 'Schedule your intravenous vitamin C session to improve your skin and immunity.',
+        },
+    },
 }
 
 // ============================================

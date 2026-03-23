@@ -192,6 +192,111 @@ const gluteoplastiaData: ProcedureData = {
         title: 'Logra los glúteos que siempre soñaste',
         description: 'Agenda tu consulta de valoración y descubre cuál es la mejor técnica para ti.',
     },
+
+    en: {
+        categoryLabel: 'Body Plastic Surgery',
+        hero: {
+            badge: 'Buttock Augmentation',
+            title: 'Gluteoplasty',
+            description: 'Augment and shape your buttocks to achieve a more curvaceous and proportionate figure. Implants or fat transfer (BBL) depending on your needs.',
+            duration: '2-3 hours',
+            recovery: '14-21 days recovery',
+            anesthesia: 'General anesthesia',
+        },
+        info: {
+            title: 'What is Gluteoplasty?',
+            content: [
+                'Gluteoplasty is a surgical procedure that increases the volume and improves the shape of the buttocks. It can be performed using silicone implants or through fat transfer (also known as BBL - Brazilian Butt Lift).',
+                'The <strong class="text-primary">fat transfer or BBL</strong> technique uses your own fat extracted from other areas of the body (abdomen, waist, back) and reinjected into the buttocks, achieving a natural result with a dual benefit.',
+            ],
+            highlights: {
+                title: 'Available Techniques',
+                items: [
+                    'Fat transfer (BBL)',
+                    'Buttock implants',
+                    'Combined technique',
+                    'Buttock lift',
+                    'Contour reshaping',
+                    'Asymmetry correction',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Voluminous Buttocks',
+                description: 'Increases size and projection naturally.',
+            },
+            {
+                title: 'Curvaceous Figure',
+                description: 'Improves body proportion and harmony.',
+            },
+            {
+                title: 'Natural BBL',
+                description: 'Uses your own fat without external materials.',
+            },
+            {
+                title: 'Dual Benefit',
+                description: 'Shapes other areas while extracting fat for BBL.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Body evaluation, analysis of available fat, and technique selection.',
+                duration: '45-60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Lab tests, cardiological evaluation, and preparation.',
+                duration: '2 weeks prior',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Liposuction + fat transfer or implant placement.',
+                duration: '2-3 hours',
+            },
+            {
+                title: 'Initial Recovery',
+                description: 'Special care when sitting. Use of compression garment.',
+                duration: '2-3 weeks',
+            },
+            {
+                title: 'Final Result',
+                description: 'Fat or implant settling and appreciation of the outcome.',
+                duration: '3-6 months',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is better: BBL or implants?',
+                answer: 'It depends on each case. BBL is ideal if you have enough body fat to transfer and want a natural result. Implants are better if you have little available fat or desire a larger augmentation.',
+            },
+            {
+                question: 'How much fat survives in BBL?',
+                answer: 'Approximately 60-70% of the transferred fat permanently integrates. That is why a larger volume than desired is transferred, anticipating partial reabsorption.',
+            },
+            {
+                question: 'Can I sit after BBL?',
+                answer: 'It is recommended to avoid sitting directly on the buttocks during the first 2-3 weeks. You should use a special cushion and prefer lying down or standing.',
+            },
+            {
+                question: 'Are buttock implants safe?',
+                answer: 'Yes, silicone buttock implants are safe and have been used for decades. They are firmer than breast implants and are designed to withstand pressure.',
+            },
+            {
+                question: 'How long do the results last?',
+                answer: 'BBL is permanent once the fat integrates (3-6 months). Implants are also permanent, although they may require revision after 10-15 years.',
+            },
+            {
+                question: 'Can I exercise afterward?',
+                answer: 'Light walks from the second week. Light cardiovascular exercise at 4-6 weeks. Squats and glute exercises after 8-12 weeks.',
+            },
+        ],
+        cta: {
+            title: 'Achieve the buttocks you have always dreamed of',
+            description: 'Schedule your assessment consultation and discover which technique is best for you.',
+        },
+    },
 }
 
 // ============================================

@@ -197,6 +197,115 @@ const liftingFacialData: ProcedureData = {
         title: 'Recupera la juventud de tu rostro',
         description: 'Agenda tu consulta de valoración y descubre cómo el lifting facial puede rejuvenecerte naturalmente.',
     },
+
+    en: {
+        categoryLabel: 'Facial Plastic Surgery',
+        hero: {
+            badge: 'Facelift',
+            title: 'Face Lift and Brow Lift',
+            description: 'Rejuvenate your face with facial lifting techniques. Includes Brow Lift (Fox-eyes), Forehead Lift, full Facelift, and Neck Lift for natural results.',
+            duration: '1-4 hours',
+            recovery: '7-21 days recovery',
+            anesthesia: 'Local with sedation / General',
+        },
+        info: {
+            title: 'What is a Face Lift?',
+            content: [
+                'The facelift or face lifting includes various techniques to rejuvenate different areas of the face. From the popular <strong class="text-primary">Brow Lift (Fox-eyes)</strong> that creates an almond-shaped, feline gaze, to the full facelift that corrects sagging throughout the face.',
+                'We offer: <strong class="text-primary">Brow Lift / Fox-eyes</strong> (eyebrow lifting for a more expressive gaze), <strong class="text-primary">Forehead Lift</strong> (forehead and frown area), <strong class="text-primary">Face Lift</strong> (middle and lower third) and <strong class="text-primary">Neck Lift</strong> (neck and double chin).',
+            ],
+            highlights: {
+                title: 'Available Lifting Types',
+                items: [
+                    'Brow Lift (Fox-eyes)',
+                    'Eyebrow lift',
+                    'Forehead Lift',
+                    'Face Lift (SMAS)',
+                    'Neck Lift',
+                    'Mini-facelift',
+                ],
+            },
+        },
+        benefits: [
+            {
+                title: 'Complete Rejuvenation',
+                description: 'Corrects multiple signs of aging in a single procedure.',
+            },
+            {
+                title: 'Long-lasting Results',
+                description: 'Effects that last between 7-10 years or more.',
+            },
+            {
+                title: 'SMAS Technique',
+                description: 'We work on deep layers for more natural results.',
+            },
+            {
+                title: 'Natural Appearance',
+                description: 'Without the "operated" look, you maintain your natural expression.',
+            },
+        ],
+        process: [
+            {
+                title: 'Assessment Consultation',
+                description: 'Comprehensive facial evaluation, aging analysis, and personalized planning.',
+                duration: '60 min',
+            },
+            {
+                title: 'Pre-surgical Preparation',
+                description: 'Complete exams, cardiological evaluation, and physical preparation.',
+                duration: '2 weeks before',
+            },
+            {
+                title: 'Surgical Procedure',
+                description: 'Surgery with SMAS technique under general anesthesia in a certified clinic.',
+                duration: '3-4 hours',
+            },
+            {
+                title: 'Hospital Recovery',
+                description: 'Post-operative monitoring, pain management, and initial care.',
+                duration: '1 night',
+            },
+            {
+                title: 'Home Recovery',
+                description: 'Progressive suture removal, swelling control, and follow-up.',
+                duration: '14-21 days',
+            },
+        ],
+        faqs: [
+            {
+                question: 'What is a Brow Lift or Fox-eyes?',
+                answer: 'The Brow Lift raises drooping eyebrows to open the gaze. The "Fox-eyes" is a technique that also tilts the eyebrows upward at the outer end, creating an almond-shaped and feline appearance that is very popular today. It is ideal for young patients who desire this specific look.',
+            },
+            {
+                question: 'What is the difference between the types of lifts?',
+                answer: 'The Brow Lift/Fox-eyes only works on the eyebrows. The Forehead Lift includes the forehead and frown area. The Facelift treats cheeks, jawline, and creases. The Neck Lift focuses on the neck and double chin. They can be combined according to your needs.',
+            },
+            {
+                question: 'At what age is a facelift recommended?',
+                answer: 'It depends on the type. Fox-eyes can be done from 25-30 years for aesthetics. Forehead lift from 35-40. A full facelift is generally done between 45-70 years when there is evident sagging.',
+            },
+            {
+                question: 'How long do the results last?',
+                answer: 'Fox-eyes lasts 2-5 years. Forehead lift lasts 5-7 years. Full facelift lasts 7-10 years. Natural aging continues, but you will always look better than if you had not had the surgery.',
+            },
+            {
+                question: 'Does a facelift leave visible scars?',
+                answer: 'Incisions are hidden in the hairline, behind the ears, or in natural folds. For Fox-eyes, thread techniques leave no visible scars. Once healed, they are practically imperceptible.',
+            },
+            {
+                question: 'Can I combine different types of lifts?',
+                answer: 'Yes, it is very common. For example: Fox-eyes + Blepharoplasty, or Facelift + Neck Lift. It is also combined with rhinoplasty, fillers, or fat transfer for more complete results.',
+            },
+            {
+                question: 'How much recovery time do I need?',
+                answer: 'Fox-eyes requires 5-7 days. Forehead lift 7-10 days. A full facelift requires 2-3 weeks of social downtime. Visible swelling gradually disappears.',
+            },
+        ],
+        cta: {
+            title: 'Restore the youth of your face',
+            description: 'Schedule your assessment consultation and discover how a facelift can rejuvenate you naturally.',
+        },
+    },
 }
 
 // ============================================
