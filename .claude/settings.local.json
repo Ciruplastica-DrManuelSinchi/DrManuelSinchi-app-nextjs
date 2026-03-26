@@ -34,7 +34,8 @@
       "Bash(powershell -Command \"\\(Get-Content ''C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\messages\\\\es.json'' -Raw\\).Length\")",
       "Bash(cd:*)",
       "Bash(node:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(git commit:*)"
     ]
   }
 }
