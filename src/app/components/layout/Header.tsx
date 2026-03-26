@@ -28,80 +28,101 @@ interface NavItem {
     categories?: NavCategory[]
 }
 
+interface Category {
+    id: string
+    name: string
+    slug: string
+    urlPath: string | null
+    procedures: { name: string; slug: string }[]
+}
+
 export default function Header() {
     const t = useTranslations('navigation')
     const tCommon = useTranslations('common')
 
+    // Procedimientos fijos por slug de categoría (para las 4 categorías existentes)
+    const categoryItems: Record<string, NavChild[]> = {
+        facial: [
+            { name: t('procedureNames.blepharoplasty'), href: '/cirugia-plastica-facial/blefaroplastia' },
+            { name: t('procedureNames.liftingFoxEyes'), href: '/cirugia-plastica-facial/lifting-facial' },
+            { name: t('procedureNames.rhinoplasty'), href: '/cirugia-plastica-facial/rinoplastia' },
+            { name: t('procedureNames.facialFillers'), href: '/cirugia-plastica-facial/rellenos-faciales' },
+            { name: t('procedureNames.otoplasty'), href: '/cirugia-plastica-facial/otoplastia' },
+            { name: t('procedureNames.moleRemoval'), href: '/cirugia-plastica-facial/extraccion-lunares' },
+            { name: t('procedureNames.mentoplasty'), href: '/cirugia-plastica-facial/mentoplastia' },
+            { name: t('procedureNames.chinLipo'), href: '/cirugia-plastica-facial/lipo-papada' },
+            { name: t('procedureNames.bichectomy'), href: '/cirugia-plastica-facial/bichectomia' },
+            { name: t('procedureNames.cheekAugmentation'), href: '/cirugia-plastica-facial/aumento-pomulos' },
+            { name: t('procedureNames.jawContouring'), href: '/cirugia-plastica-facial/marcacion-mandibular' },
+            { name: t('procedureNames.facialSlimming'), href: '/cirugia-plastica-facial/afinamiento-facial' },
+            { name: t('procedureNames.profiloplasty'), href: '/cirugia-plastica-facial/perfiloplastia' },
+        ],
+        corporal: [
+            { name: t('procedureNames.breastAugmentation'), href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
+            { name: t('procedureNames.mastopexy'), href: '/cirugia-plastica-corporal/mastopexia' },
+            { name: t('procedureNames.breastReduction'), href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
+            { name: t('procedureNames.liposculpture'), href: '/cirugia-plastica-corporal/lipo-escultura' },
+            { name: t('procedureNames.abdominoplasty'), href: '/cirugia-plastica-corporal/abdominoplastia' },
+            { name: t('procedureNames.lipoabdominoplasty'), href: '/cirugia-plastica-corporal/lipoabdominoplastia' },
+            { name: t('procedureNames.gluteoplasty'), href: '/cirugia-plastica-corporal/gluteoplasty' },
+            { name: t('procedureNames.mommyMakeover'), href: '/cirugia-plastica-corporal/mommy-makeover' },
+            { name: t('procedureNames.gynecomastia'), href: '/cirugia-plastica-corporal/ginecomastia' },
+            { name: t('procedureNames.genderSurgery'), href: '/cirugia-plastica-corporal/cirugia-genero' },
+            { name: t('procedureNames.breastReconstruction'), href: '/cirugia-plastica-corporal/reconstruccion-mama' },
+        ],
+        estetica: [
+            { name: t('procedureNames.hyaluronicAcid'), href: '/medicina-estetica/acido-hialuronico' },
+            { name: t('procedureNames.botox'), href: '/medicina-estetica/botox' },
+            { name: t('procedureNames.biostimulators'), href: '/medicina-estetica/bioestimuladores' },
+            { name: t('procedureNames.radiofrequencyUltrasound'), href: '/medicina-estetica/radiofrecuencia-ultrasonido' },
+            { name: t('procedureNames.postoperativeTreatments'), href: '/medicina-estetica/tratamientos-postoperatorios' },
+            { name: t('procedureNames.facialLaser'), href: '/medicina-estetica/laser-facial' },
+            { name: t('procedureNames.prpFacial'), href: '/medicina-estetica/plasma-rico-plaquetas' },
+            { name: t('procedureNames.vitaminC'), href: '/medicina-estetica/vitamina-c-endovenosa' },
+            { name: t('procedureNames.lipFillers'), href: '/medicina-estetica/rellenos-labios' },
+        ],
+        reconstructiva: [
+            { name: t('procedureNames.tumorsCarcinomas'), href: '/cirugia-reconstructiva/tumores-carcinomas' },
+            { name: t('procedureNames.scars'), href: '/cirugia-reconstructiva/cicatrices' },
+            { name: t('procedureNames.woundsUlcers'), href: '/cirugia-reconstructiva/heridas-ulceras' },
+            { name: t('procedureNames.burns'), href: '/cirugia-reconstructiva/quemaduras' },
+            { name: t('procedureNames.biopolymerRemoval'), href: '/cirugia-reconstructiva/retiro-biopolimeros' },
+        ],
+    }
+
+    // Categorías — fallback traducido, se actualiza desde la API
+    const [navCategories, setNavCategories] = useState<Category[]>([
+        { id: 'facial', name: t('categories.facialSurgery'), slug: 'facial', urlPath: 'cirugia-plastica-facial', procedures: [] },
+        { id: 'corporal', name: t('categories.bodySurgery'), slug: 'corporal', urlPath: 'cirugia-plastica-corporal', procedures: [] },
+        { id: 'estetica', name: t('categories.aestheticMedicine'), slug: 'estetica', urlPath: 'medicina-estetica', procedures: [] },
+        { id: 'reconstructiva', name: t('categories.reconstructive'), slug: 'reconstructiva', urlPath: 'cirugia-reconstructiva', procedures: [] },
+    ])
+
+    useEffect(() => {
+        fetch('/api/categories')
+            .then(res => res.json())
+            .then(data => { if (data.categories?.length > 0) setNavCategories(data.categories) })
+            .catch(() => {})
+    }, [])
+
+    // Navegación construida dinámicamente desde las categorías
     const navigation: NavItem[] = [
         { name: t('doctor'), href: '/dr-manuel-sinchi' },
         {
             name: t('procedures'),
             href: '#',
             megaMenu: true,
-            categories: [
-                {
-                    category: t('categories.facialSurgery'),
-                    href: '/cirugia-plastica-facial',
-                    items: [
-                        { name: t('procedureNames.blepharoplasty'), href: '/cirugia-plastica-facial/blefaroplastia' },
-                        { name: t('procedureNames.liftingFoxEyes'), href: '/cirugia-plastica-facial/lifting-facial' },
-                        { name: t('procedureNames.rhinoplasty'), href: '/cirugia-plastica-facial/rinoplastia' },
-                        { name: t('procedureNames.facialFillers'), href: '/cirugia-plastica-facial/rellenos-faciales' },
-                        { name: t('procedureNames.otoplasty'), href: '/cirugia-plastica-facial/otoplastia' },
-                        { name: t('procedureNames.moleRemoval'), href: '/cirugia-plastica-facial/extraccion-lunares' },
-                        { name: t('procedureNames.mentoplasty'), href: '/cirugia-plastica-facial/mentoplastia' },
-                        { name: t('procedureNames.chinLipo'), href: '/cirugia-plastica-facial/lipo-papada' },
-                        { name: t('procedureNames.bichectomy'), href: '/cirugia-plastica-facial/bichectomia' },
-                        { name: t('procedureNames.cheekAugmentation'), href: '/cirugia-plastica-facial/aumento-pomulos' },
-                        { name: t('procedureNames.jawContouring'), href: '/cirugia-plastica-facial/marcacion-mandibular' },
-                        { name: t('procedureNames.facialSlimming'), href: '/cirugia-plastica-facial/afinamiento-facial' },
-                        { name: t('procedureNames.profiloplasty'), href: '/cirugia-plastica-facial/perfiloplastia' },
-                    ],
-                },
-                {
-                    category: t('categories.bodySurgery'),
-                    href: '/cirugia-plastica-corporal',
-                    items: [
-                        { name: t('procedureNames.breastAugmentation'), href: '/cirugia-plastica-corporal/mamoplastia-aumento' },
-                        { name: t('procedureNames.mastopexy'), href: '/cirugia-plastica-corporal/mastopexia' },
-                        { name: t('procedureNames.breastReduction'), href: '/cirugia-plastica-corporal/mamoplastia-reduccion' },
-                        { name: t('procedureNames.liposculpture'), href: '/cirugia-plastica-corporal/lipo-escultura' },
-                        { name: t('procedureNames.abdominoplasty'), href: '/cirugia-plastica-corporal/abdominoplastia' },
-                        { name: t('procedureNames.lipoabdominoplasty'), href: '/cirugia-plastica-corporal/lipoabdominoplastia' },
-                        { name: t('procedureNames.gluteoplasty'), href: '/cirugia-plastica-corporal/gluteoplasty' },
-                        { name: t('procedureNames.mommyMakeover'), href: '/cirugia-plastica-corporal/mommy-makeover' },
-                        { name: t('procedureNames.gynecomastia'), href: '/cirugia-plastica-corporal/ginecomastia' },
-                        { name: t('procedureNames.genderSurgery'), href: '/cirugia-plastica-corporal/cirugia-genero' },
-                        { name: t('procedureNames.breastReconstruction'), href: '/cirugia-plastica-corporal/reconstruccion-mama' },
-                    ],
-                },
-                {
-                    category: t('categories.aestheticMedicine'),
-                    href: '/medicina-estetica',
-                    items: [
-                        { name: t('procedureNames.hyaluronicAcid'), href: '/medicina-estetica/acido-hialuronico' },
-                        { name: t('procedureNames.botox'), href: '/medicina-estetica/botox' },
-                        { name: t('procedureNames.biostimulators'), href: '/medicina-estetica/bioestimuladores' },
-                        { name: t('procedureNames.radiofrequencyUltrasound'), href: '/medicina-estetica/radiofrecuencia-ultrasonido' },
-                        { name: t('procedureNames.postoperativeTreatments'), href: '/medicina-estetica/tratamientos-postoperatorios' },
-                        { name: t('procedureNames.facialLaser'), href: '/medicina-estetica/laser-facial' },
-                        { name: t('procedureNames.prpFacial'), href: '/medicina-estetica/plasma-rico-plaquetas' },
-                        { name: t('procedureNames.vitaminC'), href: '/medicina-estetica/vitamina-c-endovenosa' },
-                        { name: t('procedureNames.lipFillers'), href: '/medicina-estetica/rellenos-labios' },
-                    ],
-                },
-                {
-                    category: t('categories.reconstructive'),
-                    href: '/cirugia-reconstructiva',
-                    items: [
-                        { name: t('procedureNames.tumorsCarcinomas'), href: '/cirugia-reconstructiva/tumores-carcinomas' },
-                        { name: t('procedureNames.scars'), href: '/cirugia-reconstructiva/cicatrices' },
-                        { name: t('procedureNames.woundsUlcers'), href: '/cirugia-reconstructiva/heridas-ulceras' },
-                        { name: t('procedureNames.burns'), href: '/cirugia-reconstructiva/quemaduras' },
-                        { name: t('procedureNames.biopolymerRemoval'), href: '/cirugia-reconstructiva/retiro-biopolimeros' },
-                    ],
-                },
-            ],
+            categories: navCategories.map(cat => {
+                const catPath = `/${cat.urlPath || cat.slug}`
+                return {
+                    category: cat.name,
+                    href: catPath,
+                    items: categoryItems[cat.slug] || cat.procedures.map(p => ({
+                        name: p.name,
+                        href: `${catPath}/${p.slug}`,
+                    })),
+                }
+            }),
         },
         { name: t('results'), href: '/casos-reales' },
     ]

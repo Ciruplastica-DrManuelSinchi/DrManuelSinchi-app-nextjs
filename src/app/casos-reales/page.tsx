@@ -8,13 +8,10 @@ import { ChevronRight, Sparkles, ArrowRight, Camera, Loader2 } from 'lucide-reac
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
 import CaseModal from '@/app/components/ui/case-modal/CaseModal'
 
-// Tipos
-type CaseCategory = 'todos' | 'facial' | 'corporal' | 'estetica' | 'reconstructiva'
-
 interface Case {
     id: string
     procedure: string
-    category: Exclude<CaseCategory, 'todos'>
+    category: string
     categoryLabel: string
     categoryPath: string
     patientInfo: string
@@ -22,19 +19,7 @@ interface Case {
     beforeImage: string
     afterImage: string
     procedureSlug: string
-}
-
-// Keys de categorías para filtros
-const categoryKeys = ['all', 'facial', 'body', 'aesthetic', 'reconstructive'] as const
-type FilterKey = typeof categoryKeys[number]
-
-// Mapeo de keys de traducción a keys de API
-const filterToApiCategory: Record<FilterKey, CaseCategory> = {
-    all: 'todos',
-    facial: 'facial',
-    body: 'corporal',
-    aesthetic: 'estetica',
-    reconstructive: 'reconstructiva',
+    orientation?: 'portrait' | 'landscape'
 }
 
 export default function CasosReales() {
@@ -42,12 +27,9 @@ export default function CasosReales() {
 
     const [cases, setCases] = useState<Case[]>([])
     const [loading, setLoading] = useState(true)
-    const [activeFilter, setActiveFilter] = useState<FilterKey>('all')
+    const [activeFilter, setActiveFilter] = useState<string>('todos')
     const [selectedCase, setSelectedCase] = useState<Case | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
-
-    // Derivar la categoría de API del filtro actual
-    const activeCategory = filterToApiCategory[activeFilter]
 
     // Cargar casos desde la API
     useEffect(() => {
@@ -67,12 +49,23 @@ export default function CasosReales() {
         fetchCases()
     }, [])
 
-    const filteredCases = useMemo(() => {
-        if (activeCategory === 'todos') {
-            return cases
+    // Categorías únicas derivadas de los casos cargados — se actualiza automáticamente
+    const derivedCategories = useMemo(() => {
+        const seen = new Set<string>()
+        const cats: { slug: string; label: string }[] = []
+        for (const c of cases) {
+            if (!seen.has(c.category)) {
+                seen.add(c.category)
+                cats.push({ slug: c.category, label: c.categoryLabel })
+            }
         }
-        return cases.filter(c => c.category === activeCategory)
-    }, [activeCategory, cases])
+        return cats
+    }, [cases])
+
+    const filteredCases = useMemo(() => {
+        if (activeFilter === 'todos') return cases
+        return cases.filter(c => c.category === activeFilter)
+    }, [activeFilter, cases])
 
     const currentIndex = useMemo(() => {
         if (!selectedCase) return 0
@@ -179,32 +172,55 @@ export default function CasosReales() {
                         </div>
                     ) : (
                         <>
-                    {/* Filter Tabs */}
+                    {/* Filter Tabs — dinámicos según categorías en BD */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         className="flex flex-wrap justify-center gap-3 mb-12"
                     >
-                        {categoryKeys.map((filterKey) => {
-                            const apiCategory = filterToApiCategory[filterKey]
-                            const count = apiCategory === 'todos' ? cases.length : cases.filter(c => c.category === apiCategory).length
+                        {/* Tab "Todos" siempre primero */}
+                        <button
+                            onClick={() => setActiveFilter('todos')}
+                            className={`
+                                px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300
+                                ${activeFilter === 'todos'
+                                    ? 'bg-primary text-white shadow-medium'
+                                    : 'bg-white text-gray-600 hover:bg-primary/5 hover:text-primary shadow-soft'
+                                }
+                            `}
+                        >
+                            {t('filters.all')}
+                            <span className={`
+                                ml-2 text-xs px-2 py-0.5 rounded-full
+                                ${activeFilter === 'todos'
+                                    ? 'bg-white/20 text-white'
+                                    : 'bg-gray-100 text-gray-500'
+                                }
+                            `}>
+                                {cases.length}
+                            </span>
+                        </button>
+
+                        {/* Tabs de categoría derivados automáticamente */}
+                        {derivedCategories.map((cat) => {
+                            const count = cases.filter(c => c.category === cat.slug).length
                             return (
                                 <button
-                                    key={filterKey}
-                                    onClick={() => setActiveFilter(filterKey)}
+                                    key={cat.slug}
+                                    onClick={() => setActiveFilter(cat.slug)}
                                     className={`
                                         px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300
-                                        ${activeFilter === filterKey
+                                        ${activeFilter === cat.slug
                                             ? 'bg-primary text-white shadow-medium'
                                             : 'bg-white text-gray-600 hover:bg-primary/5 hover:text-primary shadow-soft'
                                         }
                                     `}
                                 >
-                                    {t(`filters.${filterKey}`)}
+                                    {cat.label}
                                     <span className={`
                                         ml-2 text-xs px-2 py-0.5 rounded-full
-                                        ${activeFilter === filterKey
+                                        ${activeFilter === cat.slug
                                             ? 'bg-white/20 text-white'
                                             : 'bg-gray-100 text-gray-500'
                                         }
@@ -219,7 +235,7 @@ export default function CasosReales() {
                     {/* Cases Grid */}
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={activeCategory}
+                            key={activeFilter}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}

@@ -57,17 +57,25 @@ function getCalendarClient(): calendar_v3.Calendar | null {
 }
 
 /**
- * Convierte timeSlot (ej: "10:00") a objeto Date con hora específica
+ * Convierte timeSlot (ej: "10:00") a objeto Date con hora específica en UTC.
+ * booking.date se almacena como UTC midnight representando la fecha Lima.
+ * Lima = UTC-5 (sin horario de verano), por lo que sumamos 5 horas para convertir hora Lima → UTC.
+ * Date.UTC maneja automáticamente el desbordamiento de día.
  */
 function parseTimeSlot(date: Date, timeSlot: string): { start: Date; end: Date } {
   const [hours, minutes] = timeSlot.split(':').map(Number);
 
-  const start = new Date(date);
-  start.setHours(hours, minutes, 0, 0);
+  const start = new Date(Date.UTC(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    hours + 5,  // Lima (UTC-5) → UTC: sumar 5 horas
+    minutes,
+    0
+  ));
 
-  // La consulta dura 1 hora por defecto
-  const end = new Date(start);
-  end.setHours(end.getHours() + 1);
+  // La consulta dura 30 minutos
+  const end = new Date(start.getTime() + 30 * 60 * 1000);
 
   return { start, end };
 }

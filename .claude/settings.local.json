@@ -32,7 +32,9 @@
       "Bash(dir /s /b \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\cirugia-plastica-facial\\\\*.tsx\" \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\cirugia-plastica-corporal\\\\*.tsx\" \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\medicina-estetica\\\\*.tsx\" \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\app\\\\cirugia-reconstructiva\\\\*.tsx\")",
       "Bash(powershell -Command \"Get-Content ''C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\messages\\\\en.json'' | Select-Object -Last 30\")",
       "Bash(powershell -Command \"\\(Get-Content ''C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\src\\\\messages\\\\es.json'' -Raw\\).Length\")",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(node:*)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }

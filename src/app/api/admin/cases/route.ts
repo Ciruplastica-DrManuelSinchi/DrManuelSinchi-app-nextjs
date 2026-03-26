@@ -71,6 +71,7 @@ export async function POST(request: NextRequest) {
       description,
       beforeImage,
       afterImage,
+      orientation,
       order,
       isActive,
     } = body
@@ -104,6 +105,7 @@ export async function POST(request: NextRequest) {
         description,
         beforeImage: beforeImage || '',
         afterImage: afterImage || '',
+        orientation: orientation || 'portrait',
         order: order || 0,
         isActive: isActive !== undefined ? isActive : true,
       },

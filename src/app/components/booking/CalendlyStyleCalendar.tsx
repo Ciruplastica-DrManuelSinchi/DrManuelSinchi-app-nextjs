@@ -29,26 +29,43 @@ function parseLocalDate(dateStr: string): Date {
 
 interface SlotStatus {
   timeSlot: string
-  type: 'booked' | 'awaiting_payment'
+  type: 'booked' | 'awaiting_payment' | 'admin_blocked'
   isCurrentUser: boolean
   expiresAt?: string | null
+}
+
+interface BlockedDateInfo {
+  hasFullDayBlock: boolean
+  blockedSlots: string[]
+  reasons: string[]
 }
 
 interface CalendlyStyleCalendarProps {
   onSelectDateTime: (date: string, timeSlot: string) => void
   selectedDate?: string
   selectedTimeSlot?: string
+  modalidad?: 'PRESENCIAL' | 'VIRTUAL'
 }
 
-const TIME_SLOTS = [
-  '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00',
-  '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
+// Slots para consulta presencial: Mar-Jue-Sáb, 3:00 PM - 7:00 PM
+const TIME_SLOTS_PRESENCIAL = [
+  '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
 ]
+
+// Slots para consulta virtual: Lun-Vie, 8:00 AM - 11:00 AM
+const TIME_SLOTS_VIRTUAL = [
+  '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+]
+
+// Días permitidos por modalidad (getDay() values: 0=Dom, 1=Lun, ..., 6=Sáb)
+const ALLOWED_DAYS_PRESENCIAL = [2, 4, 6] // Mar, Jue, Sáb
+const ALLOWED_DAYS_VIRTUAL = [1, 2, 3, 4, 5] // Lun - Vie
 
 export default function CalendlyStyleCalendar({
   onSelectDateTime,
   selectedDate,
   selectedTimeSlot,
+  modalidad = 'PRESENCIAL',
 }: CalendlyStyleCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(
@@ -56,6 +73,8 @@ export default function CalendlyStyleCalendar({
   )
   const [isLoadingSlots, setIsLoadingSlots] = useState(false)
   const [occupiedSlots, setOccupiedSlots] = useState<SlotStatus[]>([])
+  const [isFullyBlocked, setIsFullyBlocked] = useState(false)
+  const [blockedDates, setBlockedDates] = useState<Record<string, BlockedDateInfo>>({})
   const [error, setError] = useState('')
 
   // Sincronizar con props externas
@@ -115,14 +134,41 @@ export default function CalendlyStyleCalendar({
     return days
   }, [currentMonth])
 
+  // Cargar fechas bloqueadas del mes actual
+  const fetchBlockedDates = useCallback(async (month: Date) => {
+    try {
+      const year = month.getFullYear()
+      const m = month.getMonth()
+      const start = toLocalDateString(new Date(year, m, 1))
+      const end = toLocalDateString(new Date(year, m + 1, 0))
+      const res = await fetch(
+        `/api/bookings/blocked-dates?start=${start}&end=${end}&modalidad=${modalidad}`
+      )
+      if (res.ok) {
+        const data = await res.json()
+        setBlockedDates(data.blockedDates || {})
+      }
+    } catch {
+      // ignorar errores silenciosamente
+    }
+  }, [modalidad])
+
+  // Recargar fechas bloqueadas cuando cambia el mes o la modalidad
+  useEffect(() => {
+    fetchBlockedDates(currentMonth)
+  }, [currentMonth, fetchBlockedDates])
+
   // Cargar slots ocupados cuando se selecciona una fecha
   const fetchSlotAvailability = useCallback(async (date: Date) => {
     setIsLoadingSlots(true)
+    setIsFullyBlocked(false)
     setError('')
 
     try {
       const dateStr = toLocalDateString(date)
-      const response = await fetch(`/api/bookings/availability?date=${dateStr}`)
+      const response = await fetch(
+        `/api/bookings/availability?date=${dateStr}&modalidad=${modalidad}`
+      )
 
       if (!response.ok) {
         throw new Error('Error al cargar disponibilidad')
@@ -130,12 +176,13 @@ export default function CalendlyStyleCalendar({
 
       const data = await response.json()
       setOccupiedSlots(data.occupiedSlots || [])
+      setIsFullyBlocked(data.isFullyBlocked || false)
     } catch {
       setError('No se pudo cargar la disponibilidad')
     } finally {
       setIsLoadingSlots(false)
     }
-  }, [])
+  }, [modalidad])
 
   // Cargar disponibilidad al seleccionar fecha
   useEffect(() => {
@@ -186,6 +233,22 @@ export default function CalendlyStyleCalendar({
       return { selectable: false, reason: blockCheck.reason }
     }
 
+    // Verificar días permitidos según modalidad
+    const dayOfWeek = date.getDay()
+    const allowedDays = modalidad === 'VIRTUAL' ? ALLOWED_DAYS_VIRTUAL : ALLOWED_DAYS_PRESENCIAL
+    if (!allowedDays.includes(dayOfWeek)) {
+      const reason = modalidad === 'VIRTUAL'
+        ? 'Solo disponible Lun - Vie'
+        : 'Solo disponible Mar, Jue y Sáb'
+      return { selectable: false, reason }
+    }
+
+    // Verificar bloqueo de día completo por admin
+    const dateKey = toLocalDateString(date)
+    if (blockedDates[dateKey]?.hasFullDayBlock) {
+      return { selectable: false, reason: 'Día bloqueado' }
+    }
+
     // Verificar límite de 3 meses
     const maxDate = new Date()
     maxDate.setMonth(maxDate.getMonth() + 3)
@@ -206,13 +269,17 @@ export default function CalendlyStyleCalendar({
 
   // Obtener estado de un slot de tiempo
   const getSlotStatus = (timeSlot: string): {
-    status: 'available' | 'booked' | 'awaiting_payment' | 'user_reservation'
+    status: 'available' | 'booked' | 'awaiting_payment' | 'user_reservation' | 'admin_blocked'
     reason?: string
   } => {
     const slot = occupiedSlots.find(s => s.timeSlot === timeSlot)
 
     if (!slot) {
       return { status: 'available' }
+    }
+
+    if (slot.type === 'admin_blocked') {
+      return { status: 'admin_blocked', reason: 'No disponible' }
     }
 
     // Si es del usuario actual y está esperando pago
@@ -236,7 +303,11 @@ export default function CalendlyStyleCalendar({
   // Seleccionar slot de tiempo
   const handleTimeSlotSelect = (timeSlot: string) => {
     const slotStatus = getSlotStatus(timeSlot)
-    if (slotStatus.status === 'booked' || slotStatus.status === 'awaiting_payment') {
+    if (
+      slotStatus.status === 'booked' ||
+      slotStatus.status === 'awaiting_payment' ||
+      slotStatus.status === 'admin_blocked'
+    ) {
       return
     }
 
@@ -270,7 +341,11 @@ export default function CalendlyStyleCalendar({
           <CalendarIcon className="w-6 h-6" />
           <div>
             <h3 className="font-semibold">Selecciona fecha y hora</h3>
-            <p className="text-sm text-white/80">Consulta presencial en clínica</p>
+            <p className="text-sm text-white/80">
+              {modalidad === 'VIRTUAL'
+                ? 'Consulta virtual · Lun - Vie · 8:00 AM - 11:00 AM'
+                : 'Consulta presencial · Mar - Jue - Sáb · 3:00 PM - 7:00 PM'}
+            </p>
           </div>
         </div>
       </div>
@@ -419,14 +494,23 @@ export default function CalendlyStyleCalendar({
                   <Loader2 className="w-6 h-6 text-primary animate-spin" />
                   <span className="ml-2 text-gray-500">Cargando horarios...</span>
                 </div>
+              ) : isFullyBlocked ? (
+                <div className="flex flex-col items-center justify-center py-8 text-center">
+                  <Lock className="w-8 h-8 text-gray-300 mb-2" />
+                  <p className="text-gray-500 font-medium text-sm">Día no disponible</p>
+                  <p className="text-gray-400 text-xs mt-1">Por favor selecciona otra fecha</p>
+                </div>
               ) : (
                 <>
                   <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
-                    {TIME_SLOTS.map((slot) => {
+                    {(modalidad === 'VIRTUAL' ? TIME_SLOTS_VIRTUAL : TIME_SLOTS_PRESENCIAL).map((slot) => {
                       const slotStatus = getSlotStatus(slot)
                       const isSelectedSlot = selectedTimeSlot === slot
+                      const isAdminBlocked = slotStatus.status === 'admin_blocked'
                       const isUnavailable =
-                        slotStatus.status === 'booked' || slotStatus.status === 'awaiting_payment'
+                        slotStatus.status === 'booked' ||
+                        slotStatus.status === 'awaiting_payment' ||
+                        isAdminBlocked
                       const isUserReservation = slotStatus.status === 'user_reservation'
 
                       return (
@@ -440,6 +524,8 @@ export default function CalendlyStyleCalendar({
                               ${
                                 isSelectedSlot
                                   ? 'bg-primary text-white shadow-lg'
+                                  : isAdminBlocked
+                                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
                                   : isUnavailable
                                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                   : isUserReservation

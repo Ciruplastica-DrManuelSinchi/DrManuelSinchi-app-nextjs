@@ -279,9 +279,9 @@ export default function StatsPage() {
           {(dateFrom || dateTo) && (
             <p className="mt-3 text-sm text-gray-500">
               Mostrando estadísticas{' '}
-              {dateFrom && `desde ${new Date(dateFrom).toLocaleDateString('es-PE')}`}
+              {dateFrom && `desde ${new Date(dateFrom).toLocaleDateString('es-PE', { timeZone: 'UTC' })}`}
               {dateFrom && dateTo && ' '}
-              {dateTo && `hasta ${new Date(dateTo).toLocaleDateString('es-PE')}`}
+              {dateTo && `hasta ${new Date(dateTo).toLocaleDateString('es-PE', { timeZone: 'UTC' })}`}
             </p>
           )}
         </motion.div>
@@ -487,6 +487,7 @@ export default function StatsPage() {
                             {new Date(booking.date).toLocaleDateString('es-PE', {
                               day: '2-digit',
                               month: 'short',
+                              timeZone: 'UTC',
                             })}
                           </p>
                           <p className="text-xs text-gray-400">{booking.timeSlot}</p>

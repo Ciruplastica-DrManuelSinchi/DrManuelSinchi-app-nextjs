@@ -458,6 +458,7 @@ export const generateBookingsPDF = (
         id: string
         procedureName: string
         procedureCategory: string
+        modalidad?: string
         date: string
         timeSlot: string
         message?: string
@@ -480,16 +481,22 @@ export const generateBookingsPDF = (
         EXPIRED: 'Expirada',
     }
 
+    const modalidadLabels: Record<string, string> = {
+        PRESENCIAL: 'Presencial',
+        VIRTUAL: 'Virtual',
+    }
+
     const formattedData = bookings.map((booking) => ({
         patient: booking.user.name || 'Sin nombre',
         email: booking.user.email,
         phone: booking.user.phone || '—',
         procedure: booking.procedureName,
+        modalidad: modalidadLabels[booking.modalidad || 'PRESENCIAL'] || booking.modalidad || 'Presencial',
         date: new Date(booking.date).toLocaleDateString('es-PE', {
             day: '2-digit',
             month: 'short',
             year: 'numeric',
-            timeZone: 'America/Lima',
+            timeZone: 'UTC',
         }),
         time: booking.timeSlot,
         status: statusLabels[booking.status] || booking.status,
@@ -504,6 +511,7 @@ export const generateBookingsPDF = (
             { header: 'Email', dataKey: 'email' },
             { header: 'Teléfono', dataKey: 'phone' },
             { header: 'Procedimiento', dataKey: 'procedure' },
+            { header: 'Modalidad', dataKey: 'modalidad' },
             { header: 'Fecha', dataKey: 'date' },
             { header: 'Hora', dataKey: 'time' },
             { header: 'Estado', dataKey: 'status' },

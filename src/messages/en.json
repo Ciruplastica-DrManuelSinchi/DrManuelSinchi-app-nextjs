@@ -381,7 +381,8 @@
       "passwordUppercase": "Must contain at least one uppercase letter",
       "passwordLowercase": "Must contain at least one lowercase letter",
       "passwordNumber": "Must contain at least one number",
-      "passwordsNotMatch": "Passwords do not match"
+      "passwordsNotMatch": "Passwords do not match",
+      "phoneRequired": "Phone number is required"
     }
   },
   "userMenu": {
@@ -1027,12 +1028,12 @@
       "backToForm": "Back to form"
     },
     "success": {
-      "title": "Booking Registered!",
+      "title": "Appointment Confirmed!",
       "yourAppointmentFor": "Your appointment for",
-      "hasBeenRegistered": "has been registered.",
+      "hasBeenRegistered": "has been confirmed.",
       "date": "Date",
       "at": "at",
-      "verificationNotice": "Your payment will be verified and we will contact you to confirm your appointment within 24 hours.",
+      "verificationNotice": "Your appointment has been confirmed. You will receive the details in your email shortly.",
       "viewBookings": "View my bookings",
       "makeAnother": "Make another booking"
     },
@@ -1085,10 +1086,12 @@
       "securePaymentBadge": "Processed by Culqi - PCI DSS Certified",
       "scheduleTitle": "Office hours",
       "schedule": {
-        "weekdays": "Monday - Friday",
-        "saturday": "Saturdays",
-        "sunday": "Sundays",
-        "closed": "Closed"
+        "presencial": "In-Person",
+        "presencialDays": "Tue - Thu - Sat",
+        "presencialHours": "3:00 PM - 7:00 PM",
+        "virtual": "Virtual",
+        "virtualDays": "Monday to Friday",
+        "virtualHours": "8:00 AM - 11:00 AM"
       }
     }
   },

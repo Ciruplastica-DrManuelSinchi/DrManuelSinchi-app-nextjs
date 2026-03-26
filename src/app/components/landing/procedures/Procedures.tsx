@@ -49,13 +49,6 @@ const procedures = {
     ],
 }
 
-// Mapeo de slugs a rutas URL (fallback)
-const categoryPathsMap: Record<string, string> = {
-    facial: 'cirugia-plastica-facial',
-    corporal: 'cirugia-plastica-corporal',
-    estetica: 'medicina-estetica',
-    reconstructiva: 'cirugia-reconstructiva',
-}
 
 // Componente de Card 3D
 function ProcedureCard3D({
@@ -160,7 +153,6 @@ function ProcedureCard3D({
 export default function Procedures() {
     const t = useTranslations('proceduresSection')
     const tCommon = useTranslations('common')
-    const tNav = useTranslations('navigation.categories')
 
     const [categories, setCategories] = useState<Category[]>(defaultCategories)
     const [activeCategory, setActiveCategory] = useState('facial')
@@ -187,18 +179,7 @@ export default function Procedures() {
     // Obtener la ruta URL de la categoría activa
     const getActiveCategoryPath = () => {
         const category = categories.find(c => c.slug === activeCategory)
-        return category?.urlPath || categoryPathsMap[activeCategory] || activeCategory
-    }
-
-    // Obtener nombre de categoría traducido
-    const getCategoryName = (slug: string) => {
-        const keyMap: Record<string, string> = {
-            facial: 'facialSurgery',
-            corporal: 'bodySurgery',
-            estetica: 'aestheticMedicine',
-            reconstructiva: 'reconstructive',
-        }
-        return tNav(keyMap[slug] || slug)
+        return category?.urlPath || activeCategory
     }
 
     return (
@@ -244,7 +225,7 @@ export default function Procedures() {
                                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                 />
                             )}
-                            <span className="relative z-10">{getCategoryName(category.slug)}</span>
+                            <span className="relative z-10">{category.name}</span>
                         </motion.button>
                     ))}
                 </motion.div>

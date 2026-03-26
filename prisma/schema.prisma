@@ -53,6 +53,7 @@ model User {
   accounts              Account[]
   sessions              Session[]
   bookings              Booking[]
+  blockedSlots          BlockedSlot[]
 
   @@index([email])
   @@index([role])
@@ -168,6 +169,7 @@ model RealCase {
   description     String            @db.Text
   beforeImage     String            // URL de imagen antes
   afterImage      String            // URL de imagen después
+  orientation     String            @default("portrait") // "portrait" | "landscape"
   order           Int               @default(0)
   isActive        Boolean           @default(true)
 
@@ -208,6 +210,11 @@ enum DocumentType {
   PASSPORT
 }
 
+enum ModalidadConsulta {
+  PRESENCIAL
+  VIRTUAL
+}
+
 model Booking {
   id                String        @id @default(cuid())
   userId            String
@@ -224,6 +231,7 @@ model Booking {
   procedureId       String
   procedureName     String
   procedureCategory String
+  modalidad         ModalidadConsulta @default(PRESENCIAL)  // Modalidad de consulta
   date              DateTime
   timeSlot          String
   weight            Decimal?      @db.Decimal(5, 2)  // Peso en kg (ej: 75.50)
@@ -264,6 +272,34 @@ model Payment {
 
   @@index([bookingId])
   @@map("payments")
+}
+
+// ============================================
+// BLOQUEO DE HORARIOS
+// ============================================
+
+enum BlockReason {
+  OPERACION       // Cirugía o procedimiento quirúrgico
+  PACIENTE_PREVIO // Atención a paciente recurrente con cita especial
+  OTRO            // Otro motivo
+}
+
+model BlockedSlot {
+  id          String             @id @default(cuid())
+  date        DateTime           // Fecha bloqueada
+  timeSlot    String?            // null = día completo bloqueado
+  reason      BlockReason
+  modalidad   ModalidadConsulta? // null = bloquea todas las modalidades
+  notes       String?            @db.Text
+  createdById String
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  createdBy   User               @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([date])
+  @@index([createdById])
+  @@map("blocked_slots")
 }
 
 // ============================================

@@ -18,6 +18,7 @@ interface Case {
     beforeImage: string
     afterImage: string
     procedureSlug: string
+    orientation?: 'portrait' | 'landscape'
 }
 
 interface CaseModalProps {
@@ -72,6 +73,7 @@ export default function CaseModal({
     }
 
     const categoryLabel = currentCase.categoryLabel || categoryLabels[currentCase.category] || currentCase.category
+    const isLandscape = currentCase.orientation === 'landscape'
 
     return (
         <AnimatePresence>
@@ -97,7 +99,7 @@ export default function CaseModal({
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                        className="relative z-10 w-full max-w-5xl max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
+                        className={`relative z-10 w-full max-w-5xl max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col${isLandscape ? '' : ' md:flex-row'}`}
                     >
                         {/* Close Button */}
                         <button
@@ -108,11 +110,11 @@ export default function CaseModal({
                         </button>
 
                         {/* Image Section */}
-                        <div className="relative w-full md:w-3/5 bg-gray-100">
+                        <div className={`relative bg-gray-100 ${isLandscape ? 'w-full' : 'w-full md:w-3/5'}`}>
                             <BeforeAfterSlider
                                 beforeImage={currentCase.beforeImage}
                                 afterImage={currentCase.afterImage}
-                                className="!rounded-none md:!rounded-l-3xl !aspect-[4/5] md:!aspect-auto md:h-full"
+                                className={isLandscape ? '!rounded-t-3xl !rounded-b-none' : '!rounded-none md:!rounded-l-3xl !aspect-[4/5] md:!aspect-auto md:h-full'}
                             />
 
                             {/* Navigation Arrows */}
@@ -137,7 +139,7 @@ export default function CaseModal({
                         </div>
 
                         {/* Info Section */}
-                        <div className="w-full md:w-2/5 p-6 md:p-8 flex flex-col justify-between">
+                        <div className={`p-6 md:p-8 flex flex-col justify-between overflow-y-auto ${isLandscape ? 'w-full' : 'w-full md:w-2/5'}`}>
                             <div>
                                 {/* Category Badge */}
                                 <span className="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4">

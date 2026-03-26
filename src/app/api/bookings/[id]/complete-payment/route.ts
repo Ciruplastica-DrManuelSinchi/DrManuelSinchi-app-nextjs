@@ -106,11 +106,11 @@ export async function POST(
         },
       })
 
-      // Actualizar la reserva a PENDING
+      // Actualizar la reserva a CONFIRMED directamente
       const updated = await tx.booking.update({
         where: { id },
         data: {
-          status: 'PENDING',
+          status: 'CONFIRMED',
           paymentDeadline: null, // Ya no necesita deadline
         },
         include: {
@@ -146,8 +146,8 @@ export async function POST(
       booking: updatedBooking,
       calendarEventCreated: calendarResult.success,
       message: calendarResult.success
-        ? 'Pago completado. Recibirás una invitación de calendario en tu correo.'
-        : 'Pago completado. Te contactaremos pronto para confirmar tu cita.',
+        ? 'Pago completado. Tu cita ha sido confirmada. Recibirás una invitación de calendario en tu correo.'
+        : 'Pago completado. Tu cita ha sido confirmada.',
     })
   } catch (error) {
     console.error('Error completing payment:', error)

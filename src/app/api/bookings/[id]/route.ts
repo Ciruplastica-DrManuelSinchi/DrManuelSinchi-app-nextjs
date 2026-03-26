@@ -116,7 +116,7 @@ export async function PATCH(
   }
 }
 
-// DELETE /api/bookings/[id] - Cancelar reserva
+// DELETE /api/bookings/[id] - Eliminar reserva (solo si ya está CANCELLED o EXPIRED)
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -144,33 +144,27 @@ export async function DELETE(
       )
     }
 
-    // No permitir cancelar reservas ya completadas
-    if (existingBooking.status === 'COMPLETED') {
+    // Solo se puede eliminar si ya está cancelada o expirada
+    if (!['CANCELLED', 'EXPIRED'].includes(existingBooking.status)) {
       return NextResponse.json(
-        { error: 'No se puede cancelar una reserva completada' },
+        { error: 'Solo se pueden eliminar reservas canceladas o expiradas' },
         { status: 400 }
       )
     }
 
-    // Cancelar evento en Google Calendar si existe
-    if (existingBooking.calendarEventId) {
-      await cancelCalendarEvent(existingBooking.calendarEventId)
-    }
-
-    // Cancelar en lugar de eliminar (soft delete)
-    await prisma.booking.update({
+    // Eliminar definitivamente
+    await prisma.booking.delete({
       where: { id },
-      data: { status: 'CANCELLED' },
     })
 
     return NextResponse.json({
       success: true,
-      message: 'Reserva cancelada exitosamente',
+      message: 'Reserva eliminada exitosamente',
     })
   } catch (error) {
-    console.error('Error cancelling booking:', error)
+    console.error('Error deleting booking:', error)
     return NextResponse.json(
-      { error: 'Error al cancelar reserva' },
+      { error: 'Error al eliminar reserva' },
       { status: 500 }
     )
   }

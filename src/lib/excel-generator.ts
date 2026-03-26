@@ -344,7 +344,7 @@ export const generateStatsExcel = async (
                     day: '2-digit',
                     month: '2-digit',
                     year: 'numeric',
-                    timeZone: 'America/Lima',
+                    timeZone: 'UTC',
                 }),
                 time: booking.timeSlot,
                 status: statusLabels[booking.status] || booking.status,
@@ -410,6 +410,7 @@ export const generateBookingsExcel = async (
         id: string
         procedureName: string
         procedureCategory: string
+        modalidad?: string
         date: string
         timeSlot: string
         message?: string
@@ -432,12 +433,17 @@ export const generateBookingsExcel = async (
         EXPIRED: 'Expirada',
     }
 
+    const modalidadLabels: Record<string, string> = {
+        PRESENCIAL: 'Presencial',
+        VIRTUAL: 'Virtual',
+    }
+
     const formatDate = (dateString: string): string => {
         return new Date(dateString).toLocaleDateString('es-PE', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
-            timeZone: 'America/Lima',
+            timeZone: 'UTC',
         })
     }
 
@@ -458,6 +464,7 @@ export const generateBookingsExcel = async (
         patientPhone: booking.user.phone || '—',
         procedure: booking.procedureName,
         category: booking.procedureCategory,
+        modalidad: modalidadLabels[booking.modalidad || 'PRESENCIAL'] || booking.modalidad || 'Presencial',
         date: formatDate(booking.date),
         time: booking.timeSlot,
         status: statusLabels[booking.status] || booking.status,
@@ -484,6 +491,7 @@ export const generateBookingsExcel = async (
                     { header: 'Teléfono', key: 'patientPhone', width: 15 },
                     { header: 'Procedimiento', key: 'procedure', width: 25 },
                     { header: 'Categoría', key: 'category', width: 20 },
+                    { header: 'Modalidad', key: 'modalidad', width: 14 },
                     { header: 'Fecha', key: 'date', width: 12 },
                     { header: 'Hora', key: 'time', width: 10 },
                     { header: 'Estado', key: 'status', width: 18 },

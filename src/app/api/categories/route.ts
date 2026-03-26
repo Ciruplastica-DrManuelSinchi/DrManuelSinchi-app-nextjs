@@ -13,6 +13,11 @@ export async function GET() {
         urlPath: true,
         description: true,
         order: true,
+        procedures: {
+          where: { isActive: true },
+          select: { name: true, slug: true },
+          orderBy: { order: 'asc' },
+        },
       },
       orderBy: { order: 'asc' },
     })

@@ -79,6 +79,7 @@ export default function BookingList({ bookings, onCancelBooking, onPaymentComple
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      timeZone: 'UTC',
     })
   }
 
@@ -91,27 +92,34 @@ export default function BookingList({ bookings, onCancelBooking, onPaymentComple
     const bookingDate = new Date(booking.date)
     const [hours, minutes] = booking.timeSlot.split(':').map(Number)
 
-    // Formato local sin conversión UTC: YYYYMMDDTHHmmss
-    const year = bookingDate.getFullYear()
-    const month = String(bookingDate.getMonth() + 1).padStart(2, '0')
-    const day = String(bookingDate.getDate()).padStart(2, '0')
-    const startHour = String(hours).padStart(2, '0')
-    const startMin = String(minutes).padStart(2, '0')
-    const endHour = String(hours + 1).padStart(2, '0')
+    // Lima es UTC-5 sin horario de verano. Convertir hora local Lima → UTC absoluto
+    // Date.UTC maneja automáticamente el desbordamiento de día (ej: 20:00 Lima = 01:00+1d UTC)
+    const startUTC = new Date(Date.UTC(
+      bookingDate.getUTCFullYear(),
+      bookingDate.getUTCMonth(),
+      bookingDate.getUTCDate(),
+      hours + 5,
+      minutes,
+      0
+    ))
+    const endUTC = new Date(startUTC.getTime() + 30 * 60 * 1000)
 
-    const startDateTime = `${year}${month}${day}T${startHour}${startMin}00`
-    const endDateTime = `${year}${month}${day}T${endHour}${startMin}00`
+    const fmtUTC = (d: Date) => {
+      const y = d.getUTCFullYear()
+      const mo = String(d.getUTCMonth() + 1).padStart(2, '0')
+      const da = String(d.getUTCDate()).padStart(2, '0')
+      const h = String(d.getUTCHours()).padStart(2, '0')
+      const mi = String(d.getUTCMinutes()).padStart(2, '0')
+      return `${y}${mo}${da}T${h}${mi}00Z`
+    }
 
-    const params = new URLSearchParams({
-      action: 'TEMPLATE',
-      text: `Consulta: ${booking.procedureName} - Dr. Manuel Sinchi`,
-      dates: `${startDateTime}/${endDateTime}`,
-      details: `Procedimiento: ${booking.procedureName}\nCategoría: ${booking.procedureCategory}${booking.message ? `\nNotas: ${booking.message}` : ''}\n\nCiruplástica - Dr. Manuel Sinchi\nTel: +51 961 360 074`,
-      location: 'Av. Javier Prado Este 499, San Isidro, Lima, Perú',
-      ctz: 'America/Lima',
-    })
+    // Construcción manual de URL para evitar que URLSearchParams codifique el "/" en dates
+    const text = encodeURIComponent(`Consulta: ${booking.procedureName} - Dr. Manuel Sinchi`)
+    const details = encodeURIComponent(`Procedimiento: ${booking.procedureName}\nCategoría: ${booking.procedureCategory}${booking.message ? `\nNotas: ${booking.message}` : ''}\n\nCiruplástica - Dr. Manuel Sinchi\nTel: +51 961 360 074`)
+    const location = encodeURIComponent('Av. Javier Prado Este 499, San Isidro, Lima, Perú')
+    const dates = `${fmtUTC(startUTC)}/${fmtUTC(endUTC)}`
 
-    return `https://calendar.google.com/calendar/render?${params.toString()}`
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`
   }
 
   if (bookings.length === 0) {

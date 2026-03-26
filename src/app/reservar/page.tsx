@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import BookingForm from '@/app/components/booking/BookingForm'
 import { prisma } from '@/lib/prisma'
-import { Calendar, Clock, Shield } from 'lucide-react'
+import { Calendar, Clock, Shield, MapPin, Video } from 'lucide-react'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('bookingPage')
@@ -117,18 +117,26 @@ export default async function ReservarPage({
                   <h3 className="font-semibold text-dark mb-4">
                     {t('sidebar.scheduleTitle')}
                   </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">{t('sidebar.schedule.weekdays')}</span>
-                      <span className="font-medium text-dark">9:00 - 18:00</span>
+                  <div className="space-y-3 text-sm">
+                    {/* Presencial */}
+                    <div className="flex items-center gap-2 mb-1">
+                      <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="font-semibold text-primary">{t('sidebar.schedule.presencial')}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">{t('sidebar.schedule.saturday')}</span>
-                      <span className="font-medium text-dark">9:00 - 13:00</span>
+                    <div className="flex justify-between pl-6">
+                      <span className="text-gray-600">{t('sidebar.schedule.presencialDays')}</span>
+                      <span className="font-medium text-dark">{t('sidebar.schedule.presencialHours')}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">{t('sidebar.schedule.sunday')}</span>
-                      <span className="text-gray-400">{t('sidebar.schedule.closed')}</span>
+                    <div className="border-t border-gray-100 pt-3">
+                      {/* Virtual */}
+                      <div className="flex items-center gap-2 mb-1">
+                        <Video className="w-4 h-4 text-primary flex-shrink-0" />
+                        <span className="font-semibold text-primary">{t('sidebar.schedule.virtual')}</span>
+                      </div>
+                      <div className="flex justify-between pl-6">
+                        <span className="text-gray-600">{t('sidebar.schedule.virtualDays')}</span>
+                        <span className="font-medium text-dark">{t('sidebar.schedule.virtualHours')}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

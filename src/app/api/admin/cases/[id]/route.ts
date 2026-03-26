@@ -64,6 +64,7 @@ export async function PATCH(
       description,
       beforeImage,
       afterImage,
+      orientation,
       order,
       isActive,
     } = body
@@ -101,6 +102,7 @@ export async function PATCH(
     if (description !== undefined) updateData.description = description
     if (beforeImage !== undefined) updateData.beforeImage = beforeImage
     if (afterImage !== undefined) updateData.afterImage = afterImage
+    if (orientation !== undefined) updateData.orientation = orientation
     if (order !== undefined) updateData.order = order
     if (isActive !== undefined) updateData.isActive = isActive
 

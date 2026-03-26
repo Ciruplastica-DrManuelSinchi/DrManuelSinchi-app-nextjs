@@ -4,6 +4,7 @@ import { SessionProvider } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import Header from '@/app/components/layout/Header'
 import Footer from '@/app/components/layout/Footer'
+import { Toaster } from 'sonner'
 
 export default function ProtectedLayout({
   children,
@@ -18,6 +19,7 @@ export default function ProtectedLayout({
     return (
       <SessionProvider>
         {children}
+        <Toaster richColors position="top-right" />
       </SessionProvider>
     )
   }
@@ -30,6 +32,7 @@ export default function ProtectedLayout({
         {children}
       </main>
       <Footer />
+      <Toaster richColors position="top-right" />
     </SessionProvider>
   )
 }

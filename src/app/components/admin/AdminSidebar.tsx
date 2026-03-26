@@ -18,6 +18,7 @@ import {
   ChevronRight,
   LogOut,
   Shield,
+  ShieldAlert,
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
@@ -38,6 +39,7 @@ const menuSections: MenuSection[] = [
     items: [
       { title: 'Dashboard', href: '/admin', icon: LayoutDashboard },
       { title: 'Reservas', href: '/admin/bookings', icon: Calendar },
+      { title: 'Bloqueos', href: '/admin/blocked-slots', icon: ShieldAlert },
       { title: 'Usuarios', href: '/admin/users', icon: Users },
       { title: 'Estadísticas', href: '/admin/stats', icon: BarChart3 },
     ],

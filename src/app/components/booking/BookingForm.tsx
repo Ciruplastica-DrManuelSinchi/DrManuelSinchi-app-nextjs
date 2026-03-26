@@ -18,6 +18,7 @@ import {
   XCircle,
   CreditCard,
   MapPin,
+  Video,
   Briefcase,
   Scale,
   Ruler
@@ -111,6 +112,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
   // Paso 2: Datos de la cita
   const [appointmentData, setAppointmentData] = useState({
     procedureId: preSelectedProcedure || '',
+    modalidad: 'PRESENCIAL' as 'PRESENCIAL' | 'VIRTUAL',
     date: '',
     timeSlot: '',
     weight: '',
@@ -177,6 +179,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           procedureId: appointmentData.procedureId,
           procedureName: selectedProcedure.name,
           procedureCategory: selectedProcedure.category,
+          modalidad: appointmentData.modalidad,
           date: appointmentData.date,
           timeSlot: appointmentData.timeSlot,
           weight: appointmentData.weight ? parseFloat(appointmentData.weight) : undefined,
@@ -510,8 +513,8 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
         <p className="text-gray-600 mb-6">
           {t('success.date')}: <strong>{parseLocalDate(appointmentData.date).toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</strong> {t('success.at')} <strong>{appointmentData.timeSlot}</strong>
         </p>
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
-          <p className="text-sm text-amber-800">
+        <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
+          <p className="text-sm text-green-800">
             {t('success.verificationNotice')}
           </p>
         </div>
@@ -529,7 +532,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               setBookingId(null)
               setPaymentDeadline(null)
               setPersonalData({ birthDate: '', documentType: 'DNI', documentNumber: '', address: '', city: '', occupation: '' })
-              setAppointmentData({ procedureId: '', date: '', timeSlot: '', weight: '', height: '', referralSource: '', message: '' })
+              setAppointmentData({ procedureId: '', modalidad: 'PRESENCIAL', date: '', timeSlot: '', weight: '', height: '', referralSource: '', message: '' })
             }}
             className="btn-secondary"
           >
@@ -766,6 +769,44 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               </motion.div>
             )}
 
+            {/* Modalidad */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Modalidad de consulta
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setAppointmentData({ ...appointmentData, modalidad: 'PRESENCIAL', date: '', timeSlot: '' })}
+                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-all font-medium text-sm ${
+                    appointmentData.modalidad === 'PRESENCIAL'
+                      ? 'border-primary bg-primary/5 text-primary'
+                      : 'border-gray-200 text-gray-600 hover:border-primary/50'
+                  }`}
+                >
+                  <MapPin className="w-4 h-4" />
+                  Presencial
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAppointmentData({ ...appointmentData, modalidad: 'VIRTUAL', date: '', timeSlot: '' })}
+                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-all font-medium text-sm ${
+                    appointmentData.modalidad === 'VIRTUAL'
+                      ? 'border-primary bg-primary/5 text-primary'
+                      : 'border-gray-200 text-gray-600 hover:border-primary/50'
+                  }`}
+                >
+                  <Video className="w-4 h-4" />
+                  Virtual
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {appointmentData.modalidad === 'PRESENCIAL'
+                  ? 'Mar - Jue - Sáb · 3:00 PM - 7:00 PM'
+                  : 'Lun - Vie · 8:00 AM - 11:00 AM'}
+              </p>
+            </div>
+
             {/* Procedimiento */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -802,6 +843,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
                 onSelectDateTime={handleDateTimeSelect}
                 selectedDate={appointmentData.date}
                 selectedTimeSlot={appointmentData.timeSlot}
+                modalidad={appointmentData.modalidad}
               />
             </div>
 

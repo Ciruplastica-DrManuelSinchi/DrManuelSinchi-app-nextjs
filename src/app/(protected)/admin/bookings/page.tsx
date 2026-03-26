@@ -26,6 +26,8 @@ import {
   TimerOff,
   FileDown,
   FileSpreadsheet,
+  MapPin,
+  Video,
 } from 'lucide-react'
 import { generateBookingsPDF } from '@/lib/pdf-generator'
 import { generateBookingsExcel } from '@/lib/excel-generator'
@@ -41,6 +43,7 @@ interface Booking {
   id: string
   procedureName: string
   procedureCategory: string
+  modalidad: 'PRESENCIAL' | 'VIRTUAL'
   date: string
   timeSlot: string
   message?: string
@@ -235,6 +238,7 @@ export default function AdminBookingsPage() {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
+      timeZone: 'UTC',
     })
   }
 
@@ -550,6 +554,9 @@ export default function AdminBookingsPage() {
                     Procedimiento
                   </th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase">
+                    Modalidad
+                  </th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase">
                     Fecha y Hora
                   </th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase">
@@ -594,6 +601,19 @@ export default function AdminBookingsPage() {
                         <p className="text-xs text-gray-500">{booking.procedureCategory}</p>
                       </td>
                       <td className="px-6 py-4">
+                        {booking.modalidad === 'VIRTUAL' ? (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                            <Video className="w-3 h-3" />
+                            Virtual
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 border border-purple-200">
+                            <MapPin className="w-3 h-3" />
+                            Presencial
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4 text-gray-400" />
                           <span className="text-sm">{formatDate(booking.date)}</span>
@@ -611,14 +631,14 @@ export default function AdminBookingsPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-end gap-2 relative">
-                          {/* Botón para marcar como pagado (AWAITING_PAYMENT -> PENDING) */}
+                          {/* Botón para confirmar pago manualmente (AWAITING_PAYMENT -> CONFIRMED) */}
                           {booking.status === 'AWAITING_PAYMENT' && (
                             <>
                               <button
-                                onClick={() => updateBookingStatus(booking.id, 'PENDING')}
+                                onClick={() => updateBookingStatus(booking.id, 'CONFIRMED')}
                                 disabled={updating === booking.id}
                                 className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors disabled:opacity-50"
-                                title="Marcar como pagado"
+                                title="Confirmar pago"
                               >
                                 <Check className="w-4 h-4" />
                               </button>
@@ -632,26 +652,16 @@ export default function AdminBookingsPage() {
                               </button>
                             </>
                           )}
-                          {/* Botones para PENDING */}
+                          {/* Botón para PENDING (cancelar reservas legacy) */}
                           {booking.status === 'PENDING' && (
-                            <>
-                              <button
-                                onClick={() => updateBookingStatus(booking.id, 'CONFIRMED')}
-                                disabled={updating === booking.id}
-                                className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors disabled:opacity-50"
-                                title="Confirmar"
-                              >
-                                <Check className="w-4 h-4" />
-                              </button>
-                              <button
-                                onClick={() => updateBookingStatus(booking.id, 'CANCELLED')}
-                                disabled={updating === booking.id}
-                                className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                                title="Cancelar"
-                              >
-                                <X className="w-4 h-4" />
-                              </button>
-                            </>
+                            <button
+                              onClick={() => updateBookingStatus(booking.id, 'CANCELLED')}
+                              disabled={updating === booking.id}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                              title="Cancelar"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
                           )}
                           {/* Botón para CONFIRMED */}
                           {booking.status === 'CONFIRMED' && (
@@ -847,6 +857,20 @@ export default function AdminBookingsPage() {
                     <div>
                       <p className="text-xs text-gray-500">Categoría</p>
                       <p className="text-sm text-gray-600">{selectedBooking.procedureCategory}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 mb-1">Modalidad</p>
+                      {selectedBooking.modalidad === 'VIRTUAL' ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                          <Video className="w-3 h-3" />
+                          Virtual
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 border border-purple-200">
+                          <MapPin className="w-3 h-3" />
+                          Presencial
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

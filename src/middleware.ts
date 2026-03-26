@@ -168,6 +168,29 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
+  // Categorías dinámicas nuevas: rutas de 1-2 segmentos no reconocidas
+  // Ej: /nueva-categoria  →  reescribe internamente a /categoria/nueva-categoria
+  //     /nueva-categoria/procedimiento  →  /categoria/nueva-categoria/procedimiento
+  // La URL del navegador permanece limpia (sin /categoria/).
+  if (!localeFromPath && pathname !== '/' && !pathname.startsWith('/categoria')) {
+    const segments = pathname.split('/').filter(Boolean)
+    if (segments.length >= 1 && segments.length <= 2) {
+      const locale = request.cookies.get('NEXT_LOCALE')?.value ?? 'es'
+      const url = request.nextUrl.clone()
+      url.pathname = `/categoria/${segments.join('/')}`
+      const response = NextResponse.rewrite(url, {
+        request: {
+          headers: new Headers({
+            ...Object.fromEntries(request.headers),
+            'x-next-intl-locale': locale,
+          }),
+        },
+      })
+      response.cookies.set('NEXT_LOCALE', locale, { path: '/', sameSite: 'lax' })
+      return response
+    }
+  }
+
   // Para rutas que necesitan intl middleware (landing page /, /en, auth pages)
   const response = intlMiddleware(request)
 

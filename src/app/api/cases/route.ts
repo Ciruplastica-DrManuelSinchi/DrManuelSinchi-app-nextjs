@@ -31,6 +31,7 @@ export async function GET() {
       description: c.description,
       beforeImage: c.beforeImage,
       afterImage: c.afterImage,
+      orientation: c.orientation,
     }))
 
     return NextResponse.json({

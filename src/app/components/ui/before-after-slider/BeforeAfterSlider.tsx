@@ -82,7 +82,7 @@ export default function BeforeAfterSlider({
     return (
         <div
             ref={containerRef}
-            className={`relative aspect-[4/5] rounded-3xl overflow-hidden cursor-ew-resize select-none group ${className}`}
+            className={`relative aspect-[4/3] rounded-3xl overflow-hidden cursor-ew-resize select-none group ${className}`}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -128,7 +128,7 @@ export default function BeforeAfterSlider({
                 <div className="absolute inset-0 bg-white blur-sm" />
             </motion.div>
 
-            {/* Handle Circle - Separado para mejor control */}
+            {/* Handle Circle */}
             <motion.div
                 className="absolute top-1/2 z-20 w-14 h-14 rounded-full bg-white shadow-elevation-3 flex items-center justify-center pointer-events-auto cursor-ew-resize"
                 style={{

@@ -55,6 +55,10 @@ export default function RegisterForm() {
       newErrors.password = tValidation('passwordNumber')
     }
 
+    if (!formData.phone || formData.phone.trim().length < 7) {
+      newErrors.phone = tValidation('phoneRequired')
+    }
+
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = tValidation('passwordsNotMatch')
     }
@@ -85,7 +89,7 @@ export default function RegisterForm() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          phone: formData.phone || undefined,
+          phone: formData.phone,
           password: formData.password,
         }),
       })
@@ -197,7 +201,7 @@ export default function RegisterForm() {
       {/* Phone */}
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1.5">
-          {t('phone')} <span className="text-gray-400">{t('phoneOptional')}</span>
+          {t('phone')}
         </label>
         <div className="relative">
           <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -206,10 +210,16 @@ export default function RegisterForm() {
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+            className={`w-full pl-12 pr-4 py-3 bg-white border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all ${
+              errors.phone ? 'border-red-300' : 'border-gray-200'
+            }`}
             placeholder="999 999 999"
+            required
           />
         </div>
+        {errors.phone && (
+          <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+        )}
       </div>
 
       {/* Password */}

@@ -381,7 +381,8 @@
       "passwordUppercase": "Debe contener al menos una mayúscula",
       "passwordLowercase": "Debe contener al menos una minúscula",
       "passwordNumber": "Debe contener al menos un número",
-      "passwordsNotMatch": "Las contraseñas no coinciden"
+      "passwordsNotMatch": "Las contraseñas no coinciden",
+      "phoneRequired": "El número de teléfono es requerido"
     }
   },
   "userMenu": {
@@ -1027,12 +1028,12 @@
       "backToForm": "Volver al formulario"
     },
     "success": {
-      "title": "¡Reserva Registrada!",
+      "title": "¡Cita Confirmada!",
       "yourAppointmentFor": "Tu cita para",
-      "hasBeenRegistered": "ha sido registrada.",
+      "hasBeenRegistered": "ha sido confirmada.",
       "date": "Fecha",
       "at": "a las",
-      "verificationNotice": "Tu pago será verificado y te contactaremos para confirmar tu cita en menos de 24 horas.",
+      "verificationNotice": "Tu cita ha sido confirmada. Pronto recibirás los detalles en tu correo electrónico.",
       "viewBookings": "Ver mis reservas",
       "makeAnother": "Hacer otra reserva"
     },
@@ -1085,10 +1086,12 @@
       "securePaymentBadge": "Procesado por Culqi - Certificado PCI DSS",
       "scheduleTitle": "Horarios de atención",
       "schedule": {
-        "weekdays": "Lunes - Viernes",
-        "saturday": "Sábados",
-        "sunday": "Domingos",
-        "closed": "Cerrado"
+        "presencial": "Presencial",
+        "presencialDays": "Mar - Jue - Sáb",
+        "presencialHours": "3:00 PM - 7:00 PM",
+        "virtual": "Virtual",
+        "virtualDays": "Lunes a Viernes",
+        "virtualHours": "8:00 AM - 11:00 AM"
       }
     }
   },

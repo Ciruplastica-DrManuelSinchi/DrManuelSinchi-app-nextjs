@@ -15,7 +15,6 @@ import {
   Shield,
   Plus,
   CalendarCheck,
-  Hourglass,
   CheckCircle,
   CreditCard,
 } from 'lucide-react'
@@ -131,7 +130,6 @@ export default function DashboardPage() {
 
   // Filtrar reservas
   const awaitingPaymentCount = bookings.filter(b => b.status === 'AWAITING_PAYMENT').length
-  const pendingCount = bookings.filter(b => b.status === 'PENDING').length
   const confirmedCount = bookings.filter(b => b.status === 'CONFIRMED').length
   const completedCount = bookings.filter(b => b.status === 'COMPLETED').length
 
@@ -178,7 +176,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-4 gap-4 mt-6 pt-6 border-t border-white/20">
+        <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/20">
           {awaitingPaymentCount > 0 && (
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 text-2xl font-bold text-orange-300">
@@ -188,13 +186,6 @@ export default function DashboardPage() {
               <p className="text-xs text-white/70 mt-1">Por pagar</p>
             </div>
           )}
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-2xl font-bold">
-              <Hourglass className="w-5 h-5" />
-              {pendingCount}
-            </div>
-            <p className="text-xs text-white/70 mt-1">Pendientes</p>
-          </div>
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 text-2xl font-bold">
               <CalendarCheck className="w-5 h-5" />
@@ -300,11 +291,15 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {bookings.length > 5 && (
+        {bookings.length > 0 && (
           <div className="text-center mt-4">
-            <button className="text-sm text-primary font-medium hover:underline">
+            <Link
+              href="/dashboard/mis-reservas"
+              className="text-sm text-primary font-medium hover:underline inline-flex items-center gap-1"
+            >
               Ver todas las reservas ({bookings.length})
-            </button>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         )}
       </motion.div>
