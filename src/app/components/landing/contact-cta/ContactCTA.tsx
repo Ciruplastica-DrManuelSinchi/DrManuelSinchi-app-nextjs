@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Calendar, MessageCircle, Flame, Users, Clock, Sparkles } from 'lucide-react'
+import { Calendar, MessageCircle, Clock, Sparkles, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
@@ -15,20 +14,6 @@ export default function ContactCTA() {
         ? 'I would like more information about the procedures'
         : 'Deseo más información sobre los procedimientos'
     const whatsappLink = `https://api.whatsapp.com/send?phone=51961360074&text=${encodeURIComponent(whatsappMessage)}`
-
-    // Simulación de personas viendo (en producción sería data real)
-    const [viewingNow, setViewingNow] = useState(14)
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setViewingNow(prev => {
-                const change = Math.floor(Math.random() * 3) - 1
-                const newValue = prev + change
-                return Math.max(8, Math.min(20, newValue))
-            })
-        }, 5000)
-        return () => clearInterval(interval)
-    }, [])
 
     return (
         <section className="py-20 md:py-28 relative overflow-hidden">
@@ -77,28 +62,6 @@ export default function ContactCTA() {
             />
 
             <div className="container-custom relative z-10">
-                {/* Urgency Badges */}
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="flex flex-wrap justify-center gap-3 mb-8"
-                >
-                    <motion.div
-                        className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-dark px-4 py-2 rounded-full text-sm font-medium shadow-lg"
-                        animate={{ scale: [1, 1.02, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    >
-                        <Flame className="w-4 h-4 text-red-500" />
-                        <span>{t('urgency.lastAppointments')}</span>
-                    </motion.div>
-
-                    <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-dark px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-                        <Users className="w-4 h-4 text-primary" />
-                        <span>{t('urgency.peopleViewing', { count: viewingNow })}</span>
-                    </div>
-                </motion.div>
-
                 {/* Main Content */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -185,12 +148,12 @@ export default function ContactCTA() {
                         className="flex flex-wrap justify-center gap-6 text-sm text-dark/60"
                     >
                         <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            <span>{t('trust.responseTime')}</span>
+                            <CheckCircle2 className="w-4 h-4 text-green-600" />
+                            <span>{t('trust.personalizedConsultation')}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                            <span>{t('trust.availableNow')}</span>
+                            <Clock className="w-4 h-4" />
+                            <span>{t('trust.responseTime')}</span>
                         </div>
                     </motion.div>
                 </motion.div>

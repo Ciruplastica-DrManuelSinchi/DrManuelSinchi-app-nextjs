@@ -99,17 +99,10 @@
     }
   },
   "hero": {
-    "badge": "Excellence in Plastic Surgery in Lima",
-    "title": "Your Beauty,",
-    "titleHighlight": "Our Specialty",
-    "subtitle": "Plastic Surgery & Aesthetic Medicine",
-    "discover": "Discover",
-    "description": "Over 15 years of experience transforming lives. Dr. Manuel Sinchi and his team offer the most advanced procedures in plastic surgery, aesthetic medicine and reconstructive surgery.",
-    "stats": {
-      "experience": "Years of experience",
-      "surgeries": "Successful surgeries",
-      "satisfaction": "Satisfaction"
-    }
+    "title": "Transform your image with",
+    "titleHighlight": "safety and confidence",
+    "subtitleShort": "Dr. Manuel Sinchi · Board Certified Plastic Surgeon · Lima, Peru",
+    "cta": "Book your consultation"
   },
   "trustBar": {
     "yearsExperience": "Years of experience",
@@ -123,18 +116,17 @@
     "badge": "Meet the Specialist",
     "title": "Dr. Manuel Sinchi",
     "subtitle": "Board Certified Plastic Surgeon",
-    "description": "With over 15 years of experience, Dr. Sinchi has established himself as one of the most recognized plastic surgeons in Lima. His approach combines cutting-edge surgical techniques with a deep commitment to each patient's well-being.",
-    "quote": "Combining art, science and technology to achieve natural results that enhance your unique beauty.",
-    "credentials": {
-      "title": "Certified",
-      "items": {
-        "cmp": "CMP 58101",
-        "rne": "National Registry",
-        "member": "Member of the Peruvian Society of Plastic Surgery",
-        "certified": "Certified in advanced ultrasonic techniques"
-      }
+    "description": "In 15 years, Dr. Sinchi has helped over 5,000 patients regain their confidence. His technique combines surgical precision with a human approach that prioritizes your safety and natural results.",
+    "quote": "My commitment is that you leave the office feeling better than when you arrived.",
+    "internationalTraining": "International training",
+    "verifyCredentials": "Verify credentials",
+    "stats": {
+      "experience": "Years of experience",
+      "procedures": "Procedures",
+      "googleRating": "On Google Reviews"
     },
-    "cta": "Learn more about Dr. Sinchi"
+    "cta": "View background",
+    "ctaSchedule": "Book consultation"
   },
   "procedures": {
     "badge": "Our Procedures",
@@ -152,9 +144,15 @@
   },
   "proceduresSection": {
     "badge": "Specialties",
-    "title": "Our Procedures",
-    "subtitle": "Personalized treatments with cutting-edge techniques",
+    "title": "Find the procedure",
+    "titleHighlight": "right for you",
+    "subtitle": "Each treatment is personalized according to your needs and goals. Discover the options that can help you achieve the results you want.",
     "viewAll": "View all procedures",
+    "popular": "Popular",
+    "noSurgery": "Non-surgical",
+    "recovery": "Recovery",
+    "ctaText": "Can't find what you're looking for? We'll help you choose",
+    "ctaButton": "Schedule consultation",
     "items": {
       "rhinoplasty": "Rhinoplasty",
       "rhinoplastyDesc": "Nose surgery to improve shape and function",
@@ -196,8 +194,8 @@
     "titleHighlight": "patients say",
     "description": "Learn about the experiences of those who trusted us for their transformation.",
     "fullTitle": "What our patients say",
-    "realStories": "Real stories of transformation and trust",
-    "verifiedIn": "Verified reviews on"
+    "reviewCount": "Based on 50+ reviews",
+    "seeAllReviews": "See all reviews on Google"
   },
   "videos": {
     "badge": "Videos",
@@ -212,8 +210,10 @@
     "badge": "Frequently Asked Questions",
     "title": "We answer",
     "titleHighlight": "your questions",
-    "description": "We answer the most common questions from our patients before their consultation.",
+    "description": "The most common questions from our patients before their consultation.",
     "viewAll": "View all questions",
+    "moreQuestions": "Have another question?",
+    "askWhatsApp": "Ask via WhatsApp",
     "items": {
       "recovery": {
         "question": "How long does recovery take?",
@@ -241,12 +241,15 @@
     "badge": "Location",
     "title": "Visit us in",
     "titleHighlight": "Miraflores",
-    "description": "Our office is located in a central and accessible area of Miraflores, with parking available in the building.",
+    "description": "Central location with parking available",
     "directions": "Get Directions",
+    "contactWhatsApp": "Contact via WhatsApp",
+    "callOrWrite": "Call or text us",
+    "reference": "Reference: One block from Parque Kennedy",
     "contact": {
       "address": "Address",
-      "addressLine1": "Calle Scipión Llona 180, Office 503",
-      "addressLine2": "Miraflores, Lima - Peru",
+      "addressLine1": "Calle Scipión Llona 180, Of. 503 (5th floor)",
+      "addressLine2": "Miraflores, Lima",
       "phone": "Phone",
       "phoneNumber": "961 360 074",
       "email": "Email",
@@ -257,20 +260,16 @@
     }
   },
   "contactCta": {
-    "badge": "Free Consultation",
+    "badge": "Take the First Step",
     "title": "Ready to take the",
     "titleHighlight": "first step",
     "description": "Schedule your personalized consultation with Dr. Sinchi and discover the ideal options to achieve your goals.",
     "scheduleNow": "Book consultation now",
     "whatsapp": "Contact via WhatsApp",
     "whatsappDirect": "Direct WhatsApp",
-    "urgency": {
-      "lastAppointments": "Last 3 appointments this week",
-      "peopleViewing": "{count} people viewing now"
-    },
     "trust": {
-      "responseTime": "Response in less than 2 hours",
-      "availableNow": "Available now"
+      "personalizedConsultation": "Personalized consultation",
+      "responseTime": "Response in less than 2 hours"
     }
   },
   "blog": {

@@ -23,17 +23,27 @@ export default async function Home({ params }: Props) {
   return (
     <main>
       <AdminRedirect />
+      {/* 1. Atención: Propuesta de valor + CTA prominente */}
       <Hero />
+      {/* 2. Credenciales rápidas */}
       <TrustBar />
-      <BeforeAfter />
-      <Procedures />
+      {/* 3. Construir confianza PRIMERO - quién es el doctor */}
       <DoctorSection />
+      {/* 4. Prueba visual inmediata - resultados reales */}
+      <BeforeAfter />
+      {/* 5. Validación social - testimonios */}
       <Testimonials />
+      {/* 6. Qué ofreces - procedimientos */}
+      <Procedures />
+      {/* 7. Resolver objeciones */}
+      <FAQ />
+      {/* 8. CTA Final */}
+      <ContactCTA />
+      {/* 9. Para los que están listos - ubicación */}
+      <Location />
+      {/* 10. Contenido secundario */}
       <Videos />
       <BlogSection />
-      <FAQ />
-      <Location />
-      <ContactCTA />
     </main>
   )
 }

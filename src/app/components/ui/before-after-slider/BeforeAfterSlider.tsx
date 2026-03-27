@@ -11,6 +11,7 @@ interface BeforeAfterSliderProps {
     beforeLabel?: string
     afterLabel?: string
     className?: string
+    aspectClass?: string
 }
 
 export default function BeforeAfterSlider({
@@ -19,6 +20,7 @@ export default function BeforeAfterSlider({
     beforeLabel,
     afterLabel,
     className = '',
+    aspectClass = 'aspect-[4/3]',
 }: BeforeAfterSliderProps) {
     const t = useTranslations('beforeAfterSlider')
     const finalBeforeLabel = beforeLabel ?? t('before')
@@ -82,7 +84,7 @@ export default function BeforeAfterSlider({
     return (
         <div
             ref={containerRef}
-            className={`relative aspect-[4/3] rounded-3xl overflow-hidden cursor-ew-resize select-none group ${className}`}
+            className={`relative ${aspectClass} rounded-3xl overflow-hidden cursor-ew-resize select-none group ${className}`}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}

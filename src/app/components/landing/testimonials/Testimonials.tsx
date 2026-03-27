@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Star } from 'lucide-react'
+import { Star, ExternalLink } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import styles from './Testimonials.module.css'
 
@@ -13,6 +13,7 @@ interface Testimonial {
     text: string
     rating: number
     source: TestimonialSource
+    procedure?: string
 }
 
 const testimonials: Testimonial[] = [
@@ -22,13 +23,15 @@ const testimonials: Testimonial[] = [
         text: 'Excelente atención y resultados. El Dr. Sinchi me explicó todo el proceso con mucha claridad y profesionalismo. Los resultados superaron mis expectativas.',
         rating: 5,
         source: 'google',
+        procedure: 'Rinoplastia',
     },
     {
         id: 2,
         name: 'Eduardo Carhuas',
         text: 'Muy buen servicio y profesionalismo por parte del doctor. Me sentí en confianza desde la primera consulta. Lo recomiendo ampliamente.',
         rating: 5,
-        source: 'whatsapp',
+        source: 'google',
+        procedure: 'Lipoescultura',
     },
     {
         id: 3,
@@ -42,21 +45,23 @@ const testimonials: Testimonial[] = [
         name: 'Vilma Rodriguez Quiroz',
         text: 'Excelente profesional, resultado 100% garantizado.',
         rating: 5,
-        source: 'facebook',
+        source: 'google',
+        procedure: 'Blefaroplastia',
     },
     {
         id: 5,
         name: 'Ana García',
         text: 'Después de mucho buscar, encontré al Dr. Sinchi y fue la mejor decisión. Profesionalismo y resultados excepcionales.',
         rating: 5,
-        source: 'instagram',
+        source: 'google',
+        procedure: 'Mamoplastia',
     },
     {
         id: 6,
         name: 'Roberto Mendoza',
         text: 'Excelente doctor, muy profesional y atento. Los resultados fueron exactamente lo que esperaba. Totalmente recomendado.',
         rating: 5,
-        source: 'whatsapp',
+        source: 'google',
     },
 ]
 
@@ -127,7 +132,12 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
     return (
         <div className={styles.card}>
-            <StarRating rating={testimonial.rating} />
+            <div className={styles.cardHeader}>
+                <StarRating rating={testimonial.rating} />
+                {testimonial.procedure && (
+                    <span className={styles.procedureTag}>{testimonial.procedure}</span>
+                )}
+            </div>
             <p className={styles.text}>
                 &ldquo;{testimonial.text}&rdquo;
             </p>
@@ -135,7 +145,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
                 <span className={styles.name}>{testimonial.name}</span>
                 <div className={styles.sourceWrapper}>
                     {source.icon}
-                    <span className={styles.source}>{source.name}</span>
+                    <span className={styles.source}>Google</span>
                 </div>
             </div>
         </div>
@@ -148,7 +158,7 @@ export default function Testimonials() {
 
     return (
         <section className={styles.section}>
-            {/* Header */}
+            {/* Header con Google Rating */}
             <div className="container-custom">
                 <motion.div
                     className={styles.header}
@@ -156,12 +166,27 @@ export default function Testimonials() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
+                    {/* Google Rating Badge */}
+                    <div className={styles.googleBadge}>
+                        <div className={styles.googleIcon}>
+                            {sourceConfig.google.icon}
+                        </div>
+                        <div className={styles.ratingInfo}>
+                            <div className={styles.ratingScore}>
+                                <span className={styles.ratingNumber}>4.9</span>
+                                <div className={styles.ratingStars}>
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                    ))}
+                                </div>
+                            </div>
+                            <span className={styles.reviewCount}>{t('reviewCount')}</span>
+                        </div>
+                    </div>
+
                     <h2 className={styles.title}>
                         {t('fullTitle')}
                     </h2>
-                    <p className={styles.subtitle}>
-                        {t('realStories')}
-                    </p>
                 </motion.div>
             </div>
 
@@ -173,7 +198,6 @@ export default function Testimonials() {
                         testimonial={testimonial}
                     />
                 ))}
-                {/* Spacer para mostrar parte del siguiente */}
                 <div className={styles.mobileCarouselSpacer} aria-hidden="true" />
             </div>
 
@@ -199,34 +223,24 @@ export default function Testimonials() {
                 </div>
             </div>
 
-            {/* Trusted Sources */}
+            {/* CTA a Google Reviews */}
             <div className="container-custom">
                 <motion.div
-                    className={styles.trustedSources}
+                    className={styles.reviewsCta}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.3 }}
                 >
-                    <span className={styles.trustedText}>{t('verifiedIn')}</span>
-                    <div className={styles.sourcesLogos}>
-                        <div className={styles.sourceLogo}>
-                            {sourceConfig.google.icon}
-                            <span>Google</span>
-                        </div>
-                        <div className={styles.sourceLogo}>
-                            {sourceConfig.facebook.icon}
-                            <span>Facebook</span>
-                        </div>
-                        <div className={styles.sourceLogo}>
-                            {sourceConfig.whatsapp.icon}
-                            <span>WhatsApp</span>
-                        </div>
-                        <div className={styles.sourceLogo}>
-                            {sourceConfig.instagram.icon}
-                            <span>Instagram</span>
-                        </div>
-                    </div>
+                    <a
+                        href="https://g.page/r/CQfZbVpTuGLmEBM/review"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.reviewsLink}
+                    >
+                        {t('seeAllReviews')}
+                        <ExternalLink className="w-4 h-4" />
+                    </a>
                 </motion.div>
             </div>
         </section>

@@ -99,17 +99,10 @@
     }
   },
   "hero": {
-    "badge": "Cirugía Plástica de Excelencia en Lima",
-    "title": "Tu Belleza,",
-    "titleHighlight": "Nuestra Especialidad",
-    "subtitle": "Cirugía Plástica & Medicina Estética",
-    "discover": "Descubrir",
-    "description": "Más de 15 años de experiencia transformando vidas. El Dr. Manuel Sinchi y su equipo ofrecen los procedimientos más avanzados en cirugía plástica, medicina estética y cirugía reconstructiva.",
-    "stats": {
-      "experience": "Años de experiencia",
-      "surgeries": "Cirugías exitosas",
-      "satisfaction": "Satisfacción"
-    }
+    "title": "Transforma tu imagen con",
+    "titleHighlight": "seguridad y confianza",
+    "subtitleShort": "Dr. Manuel Sinchi · Cirujano Plástico Certificado · Lima, Perú",
+    "cta": "Agenda tu consulta"
   },
   "trustBar": {
     "yearsExperience": "Años de experiencia",
@@ -123,18 +116,17 @@
     "badge": "Conoce al Especialista",
     "title": "Dr. Manuel Sinchi",
     "subtitle": "Cirujano Plástico Certificado",
-    "description": "Con más de 15 años de experiencia, el Dr. Sinchi se ha consolidado como uno de los cirujanos plásticos más reconocidos de Lima. Su enfoque combina técnicas quirúrgicas de vanguardia con un profundo compromiso por el bienestar de cada paciente.",
-    "quote": "Combinando arte, ciencia y tecnología para lograr resultados naturales que realcen tu belleza única.",
-    "credentials": {
-      "title": "Certificado",
-      "items": {
-        "cmp": "CMP 58101",
-        "rne": "Registro Nacional",
-        "member": "Miembro de la Sociedad Peruana de Cirugía Plástica",
-        "certified": "Certificado en técnicas ultrasónicas avanzadas"
-      }
+    "description": "En 15 años, el Dr. Sinchi ha ayudado a más de 5,000 pacientes a recuperar su confianza. Su técnica combina precisión quirúrgica con un enfoque humano que prioriza tu seguridad y resultados naturales.",
+    "quote": "Mi compromiso es que salgas del consultorio sintiéndote mejor de lo que entraste.",
+    "internationalTraining": "Formación internacional",
+    "verifyCredentials": "Verificar credenciales",
+    "stats": {
+      "experience": "Años de experiencia",
+      "procedures": "Procedimientos",
+      "googleRating": "En Google Reviews"
     },
-    "cta": "Conocer más sobre el Dr. Sinchi"
+    "cta": "Conocer trayectoria",
+    "ctaSchedule": "Agendar consulta"
   },
   "procedures": {
     "badge": "Nuestros Procedimientos",
@@ -152,9 +144,15 @@
   },
   "proceduresSection": {
     "badge": "Especialidades",
-    "title": "Nuestros Procedimientos",
-    "subtitle": "Tratamientos personalizados con técnicas de vanguardia",
+    "title": "Encuentra el procedimiento",
+    "titleHighlight": "ideal para ti",
+    "subtitle": "Cada tratamiento es personalizado según tus necesidades y objetivos. Descubre las opciones que pueden ayudarte a lograr los resultados que deseas.",
     "viewAll": "Ver todos los procedimientos",
+    "popular": "Popular",
+    "noSurgery": "Sin cirugía",
+    "recovery": "Recuperación",
+    "ctaText": "¿No encuentras lo que buscas? Te ayudamos a elegir",
+    "ctaButton": "Agendar consulta",
     "items": {
       "rhinoplasty": "Rinoplastia",
       "rhinoplastyDesc": "Cirugía de nariz para mejorar forma y función",
@@ -196,8 +194,8 @@
     "titleHighlight": "nuestros pacientes",
     "description": "Conoce las experiencias de quienes confiaron en nosotros para su transformación.",
     "fullTitle": "Lo que dicen nuestros pacientes",
-    "realStories": "Historias reales de transformación y confianza",
-    "verifiedIn": "Reseñas verificadas en"
+    "reviewCount": "Basado en +50 reseñas",
+    "seeAllReviews": "Ver todas las reseñas en Google"
   },
   "videos": {
     "badge": "Videos",
@@ -212,8 +210,10 @@
     "badge": "Preguntas Frecuentes",
     "title": "Resolvemos",
     "titleHighlight": "tus dudas",
-    "description": "Resolvemos las dudas más comunes de nuestros pacientes antes de su consulta.",
+    "description": "Las preguntas más comunes de nuestros pacientes antes de su consulta.",
     "viewAll": "Ver todas las preguntas",
+    "moreQuestions": "¿Tienes otra pregunta?",
+    "askWhatsApp": "Preguntar por WhatsApp",
     "items": {
       "recovery": {
         "question": "¿Cuánto tiempo dura la recuperación?",
@@ -241,12 +241,15 @@
     "badge": "Ubicación",
     "title": "Visítanos en",
     "titleHighlight": "Miraflores",
-    "description": "Nuestro consultorio está ubicado en una zona céntrica y accesible de Miraflores, con estacionamiento disponible en el edificio.",
+    "description": "Zona céntrica con estacionamiento disponible",
     "directions": "Cómo Llegar",
+    "contactWhatsApp": "Contactar por WhatsApp",
+    "callOrWrite": "Llámanos o escríbenos",
+    "reference": "Referencia: A una cuadra del Parque Kennedy",
     "contact": {
       "address": "Dirección",
-      "addressLine1": "Calle Scipión Llona 180, Consultorio 503",
-      "addressLine2": "Miraflores, Lima - Perú",
+      "addressLine1": "Calle Scipión Llona 180, Of. 503 (5to piso)",
+      "addressLine2": "Miraflores, Lima",
       "phone": "Teléfono",
       "phoneNumber": "961 360 074",
       "email": "Email",
@@ -257,20 +260,16 @@
     }
   },
   "contactCta": {
-    "badge": "Consulta de Valoración Gratuita",
+    "badge": "Da el Primer Paso",
     "title": "¿Listo para dar el",
     "titleHighlight": "primer paso",
     "description": "Agenda tu consulta personalizada con el Dr. Sinchi y descubre las opciones ideales para alcanzar tus objetivos.",
     "scheduleNow": "Agendar consulta ahora",
     "whatsapp": "Consultar por WhatsApp",
     "whatsappDirect": "WhatsApp Directo",
-    "urgency": {
-      "lastAppointments": "Últimas 3 citas esta semana",
-      "peopleViewing": "{count} personas viendo ahora"
-    },
     "trust": {
-      "responseTime": "Respuesta en menos de 2 horas",
-      "availableNow": "Disponible ahora"
+      "personalizedConsultation": "Consulta personalizada",
+      "responseTime": "Respuesta en menos de 2 horas"
     }
   },
   "blog": {

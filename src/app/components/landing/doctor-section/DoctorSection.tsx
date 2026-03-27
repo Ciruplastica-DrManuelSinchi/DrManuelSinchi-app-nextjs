@@ -1,164 +1,196 @@
 'use client'
 
 import Image from 'next/image'
-import { ArrowRight, Award, Calendar, Users, Shield, CheckCircle } from 'lucide-react'
+import { ArrowRight, Calendar, Users, Star, CheckCircle2, ExternalLink, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { doctorData } from '@/data/doctor'
 
-const iconMap = {
-    calendar: Calendar,
-    users: Users,
-    shield: Shield,
-}
-
 export default function DoctorSection() {
     const t = useTranslations('doctorSection')
 
     return (
-        <section className="section bg-white overflow-hidden">
+        <section className="section bg-gradient-to-b from-white to-gray-50 overflow-hidden">
             <div className="container-custom">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* Badge */}
+                <motion.div
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <span className="badge-accent">{t('badge')}</span>
+                </motion.div>
+
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
                     {/* Imagen del doctor */}
                     <motion.div
-                        className="relative"
+                        className="relative order-2 lg:order-1"
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7 }}
                         viewport={{ once: true }}
                     >
-                        <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0">
+                        <div className="relative max-w-md mx-auto lg:mx-0">
                             {/* Fondo decorativo */}
-                            <div className="absolute -inset-4 bg-gradient-to-br from-primary-100 to-accent-100 rounded-3xl -rotate-3" />
+                            <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl -rotate-2" />
 
                             {/* Imagen principal */}
-                            <div className="relative h-full rounded-2xl overflow-hidden shadow-strong">
+                            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-strong">
                                 <Image
                                     src={doctorData.images.full}
                                     alt={`${t('title')} - ${t('subtitle')}`}
                                     fill
                                     className="object-cover"
+                                    priority
                                 />
-
-                                {/* Overlay sutil */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
                             </div>
 
-                            {/* Badge de certificación */}
+                            {/* Badge de formación internacional */}
                             <motion.div
-                                className="absolute -bottom-4 -right-4 lg:-right-8 bg-white p-4 rounded-xl shadow-strong border border-accent-200"
+                                className="absolute -bottom-4 -right-4 lg:-right-8 bg-white p-4 rounded-xl shadow-strong border border-gray-100"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5, delay: 0.4 }}
                                 viewport={{ once: true }}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
-                                        <Award className="w-6 h-6 text-accent-600" />
-                                    </div>
+                                    <div className="text-2xl">🇸🇪</div>
                                     <div>
-                                        <div className="text-xs text-gray-500 uppercase tracking-wider">{t('credentials.title')}</div>
-                                        <div className="font-semibold text-dark">{t('credentials.items.cmp')}</div>
+                                        <div className="text-xs text-gray-500 uppercase tracking-wider">{t('internationalTraining')}</div>
+                                        <div className="font-semibold text-dark text-sm">Uppsala, Suecia</div>
                                     </div>
                                 </div>
                             </motion.div>
 
-                            {/* Credenciales adicionales */}
-                            <motion.div
-                                className="absolute -top-2 -left-2 lg:-left-6 bg-primary text-white px-4 py-2 rounded-lg shadow-medium"
+                            {/* Badge de verificación */}
+                            <motion.a
+                                href="https://www.cmp.org.pe/conoce-a-tu-medico/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="absolute -top-2 -left-2 lg:-left-6 bg-primary text-white px-3 py-2 rounded-lg shadow-medium flex items-center gap-2 hover:bg-primary-dark transition-colors group"
                                 initial={{ opacity: 0, y: -20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.5 }}
                                 viewport={{ once: true }}
                             >
-                                <div className="text-xs opacity-80">{t('credentials.items.rne')}</div>
-                                <div className="font-semibold text-sm">RNE {doctorData.credentials.rne}</div>
-                            </motion.div>
+                                <CheckCircle2 className="w-4 h-4 text-accent" />
+                                <div>
+                                    <div className="font-semibold text-sm">CMP {doctorData.credentials.cmp}</div>
+                                    <div className="text-xs opacity-80 flex items-center gap-1">
+                                        {t('verifyCredentials')}
+                                        <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                                    </div>
+                                </div>
+                            </motion.a>
                         </div>
                     </motion.div>
 
                     {/* Contenido */}
                     <motion.div
+                        className="order-1 lg:order-2"
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7 }}
                         viewport={{ once: true }}
                     >
-                        {/* Encabezado */}
+                        {/* Nombre y título */}
                         <div className="mb-6">
                             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-dark mb-2">
                                 {t('title')}
                             </h2>
-                            <p className="text-primary font-medium text-lg">
+                            <p className="text-primary font-medium text-lg flex items-center gap-2">
+                                <CheckCircle2 className="w-5 h-5 text-accent" />
                                 {t('subtitle')}
                             </p>
                         </div>
 
-                        {/* Cita */}
-                        <blockquote className="relative pl-6 border-l-4 border-accent mb-8">
+                        {/* Stats destacados */}
+                        <div className="grid grid-cols-3 gap-3 mb-8">
+                            <motion.div
+                                className="text-center p-4 bg-white rounded-xl shadow-soft border border-gray-100"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: 0.2 }}
+                                viewport={{ once: true }}
+                            >
+                                <Calendar className="w-5 h-5 text-primary mx-auto mb-1" />
+                                <div className="font-display text-2xl md:text-3xl text-primary font-bold">15+</div>
+                                <div className="text-xs text-gray-500">{t('stats.experience')}</div>
+                            </motion.div>
+
+                            <motion.div
+                                className="text-center p-4 bg-white rounded-xl shadow-soft border border-gray-100"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: 0.3 }}
+                                viewport={{ once: true }}
+                            >
+                                <Users className="w-5 h-5 text-primary mx-auto mb-1" />
+                                <div className="font-display text-2xl md:text-3xl text-primary font-bold">5,000+</div>
+                                <div className="text-xs text-gray-500">{t('stats.procedures')}</div>
+                            </motion.div>
+
+                            <motion.div
+                                className="text-center p-4 bg-white rounded-xl shadow-soft border border-gray-100"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: 0.4 }}
+                                viewport={{ once: true }}
+                            >
+                                <Star className="w-5 h-5 text-accent fill-accent mx-auto mb-1" />
+                                <div className="font-display text-2xl md:text-3xl text-primary font-bold">4.9</div>
+                                <div className="text-xs text-gray-500">{t('stats.googleRating')}</div>
+                            </motion.div>
+                        </div>
+
+                        {/* Cita del doctor */}
+                        <blockquote className="relative pl-6 border-l-4 border-accent mb-6">
                             <p className="text-gray-600 italic text-lg leading-relaxed">
                                 &ldquo;{t('quote')}&rdquo;
                             </p>
                         </blockquote>
 
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-4 mb-8">
-                            {doctorData.stats.map((stat, index) => {
-                                const Icon = iconMap[stat.icon as keyof typeof iconMap]
-                                return (
-                                    <motion.div
-                                        key={stat.label}
-                                        className="text-center p-4 bg-light rounded-xl"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                                        viewport={{ once: true }}
-                                    >
-                                        <Icon className="w-6 h-6 text-accent mx-auto mb-2" />
-                                        <div className="font-display text-2xl text-primary font-bold">
-                                            {stat.value}
-                                        </div>
-                                        <div className="text-xs text-gray-500 leading-tight">
-                                            {stat.label}
-                                        </div>
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-
-                        {/* Credenciales y membresías */}
-                        <div className="mb-8">
-                            <div className="flex flex-wrap gap-2">
-                                {doctorData.memberships.slice(0, 4).map((membership) => (
-                                    <span
-                                        key={membership.acronym}
-                                        className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 px-3 py-1.5 rounded-full text-sm font-medium"
-                                    >
-                                        <CheckCircle className="w-3.5 h-3.5" />
-                                        {membership.acronym}
-                                    </span>
-                                ))}
-                                <span className="inline-flex items-center gap-1.5 bg-accent-100 text-accent-700 px-3 py-1.5 rounded-full text-sm font-medium">
-                                    🇸🇪 Uppsala, Suecia
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Descripción corta */}
-                        <p className="text-gray-600 leading-relaxed mb-8">
+                        {/* Descripción */}
+                        <p className="text-gray-600 leading-relaxed mb-6">
                             {t('description')}
                         </p>
 
-                        {/* CTA */}
-                        <Link
-                            href="/dr-manuel-sinchi"
-                            className="btn-primary inline-flex group"
-                        >
-                            {t('cta')}
-                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        </Link>
+                        {/* Membresías */}
+                        <div className="flex flex-wrap gap-2 mb-8">
+                            {doctorData.memberships.slice(0, 3).map((membership) => (
+                                <span
+                                    key={membership.acronym}
+                                    className="inline-flex items-center gap-1.5 bg-primary/5 text-primary px-3 py-1.5 rounded-full text-sm font-medium"
+                                >
+                                    <CheckCircle2 className="w-3.5 h-3.5" />
+                                    {membership.acronym}
+                                </span>
+                            ))}
+                            <span className="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-sm">
+                                <MapPin className="w-3.5 h-3.5" />
+                                Lima, Perú
+                            </span>
+                        </div>
+
+                        {/* CTAs */}
+                        <div className="flex flex-wrap gap-4">
+                            <Link
+                                href="/dr-manuel-sinchi"
+                                className="btn-primary inline-flex group"
+                            >
+                                {t('cta')}
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
+                            <Link
+                                href="/reservar"
+                                className="btn-outline inline-flex group"
+                            >
+                                {t('ctaSchedule')}
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
             </div>

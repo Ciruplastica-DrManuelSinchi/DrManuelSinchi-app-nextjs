@@ -6,9 +6,9 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapPin, Phone, Clock, ExternalLink } from 'lucide-react'
 
-// Coordenadas de la clínica
-const CLINIC_POSITION: [number, number] = [-12.107718742990034, -77.03253448893925]
-const GOOGLE_MAPS_URL = 'https://www.google.com/maps/place/Dr.+Manuel+Sinchi+-+Cirupl%C3%A1stica/@-12.107718742990034,-77.03253448893925,17z'
+// Coordenadas de la clínica - Calle Scipión Llona 180, Miraflores
+const CLINIC_POSITION: [number, number] = [-12.1219, -77.0303]
+const GOOGLE_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Calle+Scipi%C3%B3n+Llona+180%2C+Miraflores%2C+Lima%2C+Peru'
 
 // Componente para centrar el mapa
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles, Clock, TrendingUp, Shield, Smile, Activity, Heart } from 'lucide-react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
@@ -12,40 +12,41 @@ interface Category {
     name: string
     slug: string
     urlPath: string | null
+    icon: React.ReactNode
 }
 
 // Categorías por defecto (fallback si la API falla)
 const defaultCategories: Category[] = [
-    { id: 'facial', name: 'Cirugía Facial', slug: 'facial', urlPath: 'cirugia-plastica-facial' },
-    { id: 'corporal', name: 'Cirugía Corporal', slug: 'corporal', urlPath: 'cirugia-plastica-corporal' },
-    { id: 'estetica', name: 'Medicina Estética', slug: 'estetica', urlPath: 'medicina-estetica' },
-    { id: 'reconstructiva', name: 'Reconstructiva', slug: 'reconstructiva', urlPath: 'cirugia-reconstructiva' },
+    { id: 'facial', name: 'Cirugía Facial', slug: 'facial', urlPath: 'cirugia-plastica-facial', icon: <Smile className="w-4 h-4" /> },
+    { id: 'corporal', name: 'Cirugía Corporal', slug: 'corporal', urlPath: 'cirugia-plastica-corporal', icon: <Activity className="w-4 h-4" /> },
+    { id: 'estetica', name: 'Medicina Estética', slug: 'estetica', urlPath: 'medicina-estetica', icon: <Sparkles className="w-4 h-4" /> },
+    { id: 'reconstructiva', name: 'Reconstructiva', slug: 'reconstructiva', urlPath: 'cirugia-reconstructiva', icon: <Heart className="w-4 h-4" /> },
 ]
 
 const procedures = {
     facial: [
-        { nameKey: 'rhinoplasty', descKey: 'rhinoplastyDesc', slug: 'rinoplastia', image: '/images/procedures/rinoplastia.jpg' },
-        { nameKey: 'blepharoplasty', descKey: 'blepharoplastyDesc', slug: 'blefaroplastia', image: '/images/procedures/blefaroplastia.jpg' },
-        { nameKey: 'facelift', descKey: 'faceliftDesc', slug: 'lifting-facial', image: '/images/procedures/lifting-facial.jpg' },
-        { nameKey: 'bichectomy', descKey: 'bichectomyDesc', slug: 'bichectomia', image: '/images/procedures/bichectomia.jpg' },
+        { nameKey: 'rhinoplasty', descKey: 'rhinoplastyDesc', slug: 'rinoplastia', image: '/images/procedures/rinoplastia.jpg', popular: true, recovery: '7-10 días' },
+        { nameKey: 'blepharoplasty', descKey: 'blepharoplastyDesc', slug: 'blefaroplastia', image: '/images/procedures/blefaroplastia.jpg', popular: false, recovery: '5-7 días' },
+        { nameKey: 'facelift', descKey: 'faceliftDesc', slug: 'lifting-facial', image: '/images/procedures/lifting-facial.jpg', popular: false, recovery: '14-21 días' },
+        { nameKey: 'bichectomy', descKey: 'bichectomyDesc', slug: 'bichectomia', image: '/images/procedures/bichectomia.jpg', popular: true, recovery: '3-5 días' },
     ],
     corporal: [
-        { nameKey: 'liposculpture', descKey: 'liposculptureDesc', slug: 'lipo-escultura', image: '/images/procedures/lipoescultura.jpg' },
-        { nameKey: 'abdominoplasty', descKey: 'abdominoplastyDesc', slug: 'abdominoplastia', image: '/images/procedures/abdominoplastia.jpg' },
-        { nameKey: 'mammoplasty', descKey: 'mammoplastyDesc', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia-aumento.jpg' },
-        { nameKey: 'gluteoplasty', descKey: 'gluteoplastyDesc', slug: 'gluteoplastia', image: '/images/procedures/gluteoplastia.jpg' },
+        { nameKey: 'liposculpture', descKey: 'liposculptureDesc', slug: 'lipo-escultura', image: '/images/procedures/lipoescultura.jpg', popular: true, recovery: '7-14 días' },
+        { nameKey: 'abdominoplasty', descKey: 'abdominoplastyDesc', slug: 'abdominoplastia', image: '/images/procedures/abdominoplastia.jpg', popular: false, recovery: '14-21 días' },
+        { nameKey: 'mammoplasty', descKey: 'mammoplastyDesc', slug: 'mamoplastia-aumento', image: '/images/procedures/mamoplastia-aumento.jpg', popular: true, recovery: '7-14 días' },
+        { nameKey: 'gluteoplasty', descKey: 'gluteoplastyDesc', slug: 'gluteoplastia', image: '/images/procedures/gluteoplastia.jpg', popular: false, recovery: '14-21 días' },
     ],
     estetica: [
-        { nameKey: 'botox', descKey: 'botoxDesc', slug: 'botox', image: '/images/procedures/botox.jpg' },
-        { nameKey: 'hyaluronicAcid', descKey: 'hyaluronicAcidDesc', slug: 'acido-hialuronico', image: '/images/procedures/acido-hialuronico.jpg' },
-        { nameKey: 'lipFillers', descKey: 'lipFillersDesc', slug: 'rellenos-labios', image: '/images/procedures/relleno-labios.jpg' },
-        { nameKey: 'prp', descKey: 'prpDesc', slug: 'plasma-rico-plaquetas', image: '/images/procedures/prp.jpg' },
+        { nameKey: 'botox', descKey: 'botoxDesc', slug: 'botox', image: '/images/procedures/botox.jpg', popular: true, recovery: 'Sin reposo', noSurgery: true },
+        { nameKey: 'hyaluronicAcid', descKey: 'hyaluronicAcidDesc', slug: 'acido-hialuronico', image: '/images/procedures/acido-hialuronico.jpg', popular: true, recovery: '1-2 días', noSurgery: true },
+        { nameKey: 'lipFillers', descKey: 'lipFillersDesc', slug: 'rellenos-labios', image: '/images/procedures/relleno-labios.jpg', popular: false, recovery: '1-2 días', noSurgery: true },
+        { nameKey: 'prp', descKey: 'prpDesc', slug: 'plasma-rico-plaquetas', image: '/images/procedures/prp.jpg', popular: false, recovery: '1 día', noSurgery: true },
     ],
     reconstructiva: [
-        { nameKey: 'tumors', descKey: 'tumorsDesc', slug: 'tumores-carcinomas', image: '/images/procedures/tumores-y-carcinomas.jpg' },
-        { nameKey: 'scars', descKey: 'scarsDesc', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg' },
-        { nameKey: 'burns', descKey: 'burnsDesc', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg' },
-        { nameKey: 'biopolymers', descKey: 'biopolymersDesc', slug: 'retiro-biopolimeros', image: '/images/procedures/retiro-de-biopolimeros.jpg' },
+        { nameKey: 'tumors', descKey: 'tumorsDesc', slug: 'tumores-carcinomas', image: '/images/procedures/tumores-y-carcinomas.jpg', popular: false, recovery: '7-21 días' },
+        { nameKey: 'scars', descKey: 'scarsDesc', slug: 'cicatrices', image: '/images/procedures/cicatrices.jpg', popular: false, recovery: '7-14 días' },
+        { nameKey: 'burns', descKey: 'burnsDesc', slug: 'quemaduras', image: '/images/procedures/quemaduras.jpg', popular: false, recovery: '14-30 días' },
+        { nameKey: 'biopolymers', descKey: 'biopolymersDesc', slug: 'retiro-biopolimeros', image: '/images/procedures/retiro-de-biopolimeros.jpg', popular: true, recovery: '14-21 días' },
     ],
 }
 
@@ -58,7 +59,7 @@ function ProcedureCard3D({
     t,
     tCommon,
 }: {
-    proc: { nameKey: string; descKey: string; slug: string; image: string }
+    proc: { nameKey: string; descKey: string; slug: string; image: string; popular?: boolean; recovery?: string; noSurgery?: boolean }
     categoryPath: string
     index: number
     t: (key: string) => string
@@ -122,6 +123,26 @@ function ProcedureCard3D({
                     />
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    {/* Popular badge */}
+                    {proc.popular && (
+                        <div className="absolute top-3 left-3 z-10">
+                            <span className="inline-flex items-center gap-1 bg-accent text-dark text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+                                <TrendingUp className="w-3 h-3" />
+                                {t('popular')}
+                            </span>
+                        </div>
+                    )}
+
+                    {/* No surgery badge */}
+                    {proc.noSurgery && (
+                        <div className="absolute top-3 right-3 z-10">
+                            <span className="inline-flex items-center gap-1 bg-green-500 text-white text-xs font-medium px-2.5 py-1 rounded-full shadow-md">
+                                <Shield className="w-3 h-3" />
+                                {t('noSurgery')}
+                            </span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Info */}
@@ -132,9 +153,18 @@ function ProcedureCard3D({
                     <h3 className="font-semibold text-dark mb-2 group-hover:text-primary transition-colors duration-300">
                         {t(`items.${proc.nameKey}`)}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                    <p className="text-sm text-gray-500 mb-3 line-clamp-2">
                         {t(`items.${proc.descKey}`)}
                     </p>
+
+                    {/* Recovery time indicator */}
+                    {proc.recovery && (
+                        <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span>{t('recovery')}: {proc.recovery}</span>
+                        </div>
+                    )}
+
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all duration-300">
                         {tCommon('buttons.learnMore')}
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -187,19 +217,21 @@ export default function Procedures() {
             <div className="container-custom">
                 {/* Header */}
                 <motion.div
-                    className="section-header"
+                    className="text-center mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
                     <span className="badge-primary mb-4">{t('badge')}</span>
-                    <h2 className="section-title">{t('title')}</h2>
-                    <p className="section-subtitle">
+                    <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-dark mb-4">
+                        {t('title')} <span className="text-primary">{t('titleHighlight')}</span>
+                    </h2>
+                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                         {t('subtitle')}
                     </p>
                 </motion.div>
 
-                {/* Tabs de categorías */}
+                {/* Tabs de categorías con iconos */}
                 <motion.div
                     className="flex flex-wrap justify-center gap-3 mb-12"
                     initial={{ opacity: 0, y: 20 }}
@@ -207,27 +239,33 @@ export default function Procedures() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
                 >
-                    {categories.map((category) => (
-                        <motion.button
-                            key={category.id}
-                            onClick={() => setActiveCategory(category.slug)}
-                            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden ${activeCategory === category.slug
-                                ? 'bg-primary text-white shadow-glow-primary-sm'
-                                : 'bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary'
-                                }`}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            {activeCategory === category.slug && (
-                                <motion.span
-                                    className="absolute inset-0 bg-primary"
-                                    layoutId="activeTab"
-                                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                                />
-                            )}
-                            <span className="relative z-10">{category.name}</span>
-                        </motion.button>
-                    ))}
+                    {categories.map((category) => {
+                        const defaultCat = defaultCategories.find(c => c.slug === category.slug)
+                        return (
+                            <motion.button
+                                key={category.id}
+                                onClick={() => setActiveCategory(category.slug)}
+                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden ${activeCategory === category.slug
+                                    ? 'bg-primary text-white shadow-glow-primary-sm'
+                                    : 'bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary'
+                                    }`}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                {activeCategory === category.slug && (
+                                    <motion.span
+                                        className="absolute inset-0 bg-primary"
+                                        layoutId="activeTab"
+                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                <span className="relative z-10 flex items-center gap-2">
+                                    {defaultCat?.icon}
+                                    {category.name}
+                                </span>
+                            </motion.button>
+                        )
+                    })}
                 </motion.div>
 
                 {/* Grid de procedimientos - Carrusel deslizable en móvil */}
@@ -263,21 +301,32 @@ export default function Procedures() {
                     </motion.div>
                 </AnimatePresence>
 
-                {/* Link ver todos */}
+                {/* CTA mejorado */}
                 <motion.div
-                    className="text-center mt-12"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    className="text-center mt-12 pt-8 border-t border-gray-200"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                 >
-                    <Link
-                        href={`/${getActiveCategoryPath()}`}
-                        className="group inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
-                    >
-                        {t('viewAll')}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    <p className="text-gray-500 mb-4">{t('ctaText')}</p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <Link
+                            href={`/${getActiveCategoryPath()}`}
+                            className="group inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+                        >
+                            {t('viewAll')}
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                        <span className="text-gray-300">|</span>
+                        <Link
+                            href="/reservar"
+                            className="group inline-flex items-center gap-2 bg-accent text-dark font-semibold px-6 py-2 rounded-full hover:bg-accent/90 transition-all shadow-md hover:shadow-lg"
+                        >
+                            {t('ctaButton')}
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                    </div>
                 </motion.div>
             </div>
         </section>
