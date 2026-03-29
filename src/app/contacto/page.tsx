@@ -1,9 +1,5 @@
-import React from 'react'
+import { redirect } from 'next/navigation'
 
 export default function Contacto() {
-    return (
-        <div>
-            Contacto
-        </div>
-    )
+    redirect('/reservar')
 }

@@ -208,7 +208,7 @@ export default function DynamicCategoryPage() {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link href="/contacto" className="btn-primary">
+                                <Link href="/reservar" className="btn-primary">
                                     {tCommon('cta.scheduleButton')}
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>

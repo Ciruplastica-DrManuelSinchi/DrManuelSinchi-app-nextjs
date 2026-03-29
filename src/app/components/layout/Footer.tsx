@@ -21,7 +21,7 @@ export default function Footer() {
             { name: t('linkLabels.realCases'), href: '/casos-reales' },
             { name: t('linkLabels.videos'), href: '/videos' },
             { name: t('linkLabels.faq'), href: '/preguntas-frecuentes' },
-            { name: t('linkLabels.contactPage'), href: '/contacto' },
+            { name: t('linkLabels.contactPage'), href: '/reservar' },
         ],
         social: [
             { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/Ciruplastica.pe' },

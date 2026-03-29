@@ -21,7 +21,8 @@ import {
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 
-import { ProcedureData, defaultCTA, defaultCTAEn } from './types'
+import { ProcedureData, defaultCTA, defaultCTAEn, defaultAssessmentQuestions, defaultAssessmentQuestionsEn } from './types'
+import SelfAssessment from '@/app/components/ui/self-assessment/SelfAssessment'
 
 interface ProcedurePageProps {
     data: ProcedureData
@@ -80,6 +81,10 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
     const ctaBase = isEn ? { ...defaultCTA, ...defaultCTAEn } : defaultCTA
     const ctaEn = isEn && enData?.cta ? enData.cta : {}
     const cta = { ...ctaBase, ...data.cta, ...ctaEn }
+
+    // Self-assessment questions
+    const showSelfAssessment = data.selfAssessment?.enabled !== false
+    const assessmentQuestions = data.selfAssessment?.questions || (isEn ? defaultAssessmentQuestionsEn : defaultAssessmentQuestions)
 
     const whatsappMessage = data.hero.whatsappMessage || `Hola, me interesa información sobre ${data.hero.title.toLowerCase()}`
 
@@ -168,7 +173,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                             transition={{ delay: 0.4 }}
                             className="flex flex-col sm:flex-row justify-start gap-4"
                         >
-                            <Link href="/contacto" className="btn-primary">
+                            <Link href="/reservar" className="btn-primary">
                                 <Calendar className="w-4 h-4" />
                                 {t('hero.scheduleAppointment')}
                             </Link>
@@ -357,6 +362,16 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                     </div>
                 </div>
             </section>
+
+            {/* ==================== SELF-ASSESSMENT ==================== */}
+            {showSelfAssessment && (
+                <SelfAssessment
+                    procedureName={hero.title}
+                    procedureSlug={data.slug}
+                    questions={assessmentQuestions}
+                    whatsappNumber={cta.whatsappNumber}
+                />
+            )}
 
             {/* ==================== PROCESS & RECOVERY ==================== */}
             <section className="section bg-light">
@@ -612,7 +627,7 @@ export default function ProcedurePage({ data }: ProcedurePageProps) {
                                 transition={{ delay: 0.2 }}
                                 className="flex flex-col sm:flex-row gap-4 justify-center"
                             >
-                                <Link href="/contacto" className="btn-primary">
+                                <Link href="/reservar" className="btn-primary">
                                     <Calendar className="w-4 h-4" />
                                     {t('hero.scheduleAppointment')}
                                 </Link>

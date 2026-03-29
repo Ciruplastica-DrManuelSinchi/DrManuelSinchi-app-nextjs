@@ -114,7 +114,8 @@ export default function CaseModal({
                             <BeforeAfterSlider
                                 beforeImage={currentCase.beforeImage}
                                 afterImage={currentCase.afterImage}
-                                className={isLandscape ? '!rounded-t-3xl !rounded-b-none' : '!rounded-none md:!rounded-l-3xl !aspect-[4/5] md:!aspect-auto md:h-full'}
+                                aspectClass={isLandscape ? 'aspect-[4/3]' : 'aspect-[3/4]'}
+                                className={isLandscape ? '!rounded-t-3xl !rounded-b-none' : '!rounded-none md:!rounded-l-3xl'}
                             />
 
                             {/* Navigation Arrows */}

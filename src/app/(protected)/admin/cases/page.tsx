@@ -16,9 +16,10 @@ import {
   Filter,
   ArrowUp,
   ArrowDown,
-  Upload,
+  Crop,
 } from 'lucide-react'
 import Image from 'next/image'
+import { ImageCropper } from '@/app/components/ui/image-cropper'
 
 interface Category {
   id: string
@@ -32,6 +33,7 @@ interface Procedure {
   slug: string
   categoryId: string
   category: Category
+  isActive?: boolean
 }
 
 interface RealCase {
@@ -67,6 +69,11 @@ export default function AdminCasesPage() {
   const [isUploadingAfter, setIsUploadingAfter] = useState(false)
   const beforeImageRef = useRef<HTMLInputElement>(null)
   const afterImageRef = useRef<HTMLInputElement>(null)
+
+  // Cropper state
+  const [cropperOpen, setCropperOpen] = useState(false)
+  const [imageToCrop, setImageToCrop] = useState<string | null>(null)
+  const [cropField, setCropField] = useState<'beforeImage' | 'afterImage'>('beforeImage')
 
   // Modal
   const [showModal, setShowModal] = useState(false)
@@ -174,19 +181,37 @@ export default function AdminCasesPage() {
     setActionMenuOpen(null)
   }
 
-  // Upload de imagen
-  const handleImageUpload = async (file: File, field: 'beforeImage' | 'afterImage') => {
-    if (file.size > 5 * 1024 * 1024) {
-      alert('La imagen no puede superar los 5MB')
+  // Seleccionar imagen para recortar
+  const handleImageSelect = (file: File, field: 'beforeImage' | 'afterImage') => {
+    if (file.size > 10 * 1024 * 1024) {
+      alert('La imagen no puede superar los 10MB')
       return
     }
+
+    // Crear URL temporal para mostrar en el cropper
+    const imageUrl = URL.createObjectURL(file)
+    setImageToCrop(imageUrl)
+    setCropField(field)
+    setCropperOpen(true)
+
+    // Limpiar el input
+    if (field === 'beforeImage' && beforeImageRef.current) {
+      beforeImageRef.current.value = ''
+    } else if (afterImageRef.current) {
+      afterImageRef.current.value = ''
+    }
+  }
+
+  // Subir imagen recortada
+  const handleCroppedImage = async (croppedFile: File) => {
+    const field = cropField
 
     if (field === 'beforeImage') setIsUploadingBefore(true)
     else setIsUploadingAfter(true)
 
     try {
       const uploadData = new FormData()
-      uploadData.append('file', file)
+      uploadData.append('file', croppedFile)
       uploadData.append('folder', 'cases')
 
       const response = await fetch('/api/upload', {
@@ -205,11 +230,23 @@ export default function AdminCasesPage() {
     } finally {
       if (field === 'beforeImage') {
         setIsUploadingBefore(false)
-        if (beforeImageRef.current) beforeImageRef.current.value = ''
       } else {
         setIsUploadingAfter(false)
-        if (afterImageRef.current) afterImageRef.current.value = ''
       }
+      // Limpiar URL temporal
+      if (imageToCrop) {
+        URL.revokeObjectURL(imageToCrop)
+        setImageToCrop(null)
+      }
+    }
+  }
+
+  // Cerrar cropper sin subir
+  const handleCloseCropper = () => {
+    setCropperOpen(false)
+    if (imageToCrop) {
+      URL.revokeObjectURL(imageToCrop)
+      setImageToCrop(null)
     }
   }
 
@@ -680,13 +717,13 @@ export default function AdminCasesPage() {
                               accept="image/jpeg,image/png,image/webp,image/gif"
                               onChange={(e) => {
                                 const file = e.target.files?.[0]
-                                if (file) handleImageUpload(file, 'beforeImage')
+                                if (file) handleImageSelect(file, 'beforeImage')
                               }}
                               className="hidden"
                             />
                             {isUploadingBefore
                               ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                              : <Upload className="w-3.5 h-3.5" />
+                              : <Crop className="w-3.5 h-3.5" />
                             }
                             Cambiar
                           </label>
@@ -707,7 +744,7 @@ export default function AdminCasesPage() {
                           accept="image/jpeg,image/png,image/webp,image/gif"
                           onChange={(e) => {
                             const file = e.target.files?.[0]
-                            if (file) handleImageUpload(file, 'beforeImage')
+                            if (file) handleImageSelect(file, 'beforeImage')
                           }}
                           className="hidden"
                         />
@@ -715,9 +752,9 @@ export default function AdminCasesPage() {
                           <Loader2 className="w-6 h-6 text-primary animate-spin" />
                         ) : (
                           <>
-                            <Upload className="w-6 h-6 text-gray-400 mb-1" />
-                            <span className="text-xs text-gray-500 font-medium">Subir imagen</span>
-                            <span className="text-xs text-gray-400">5MB · JPG/PNG/WebP</span>
+                            <Crop className="w-6 h-6 text-gray-400 mb-1" />
+                            <span className="text-xs text-gray-500 font-medium">Subir y recortar</span>
+                            <span className="text-xs text-gray-400">10MB · JPG/PNG/WebP</span>
                           </>
                         )}
                       </label>
@@ -747,13 +784,13 @@ export default function AdminCasesPage() {
                               accept="image/jpeg,image/png,image/webp,image/gif"
                               onChange={(e) => {
                                 const file = e.target.files?.[0]
-                                if (file) handleImageUpload(file, 'afterImage')
+                                if (file) handleImageSelect(file, 'afterImage')
                               }}
                               className="hidden"
                             />
                             {isUploadingAfter
                               ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                              : <Upload className="w-3.5 h-3.5" />
+                              : <Crop className="w-3.5 h-3.5" />
                             }
                             Cambiar
                           </label>
@@ -774,7 +811,7 @@ export default function AdminCasesPage() {
                           accept="image/jpeg,image/png,image/webp,image/gif"
                           onChange={(e) => {
                             const file = e.target.files?.[0]
-                            if (file) handleImageUpload(file, 'afterImage')
+                            if (file) handleImageSelect(file, 'afterImage')
                           }}
                           className="hidden"
                         />
@@ -782,9 +819,9 @@ export default function AdminCasesPage() {
                           <Loader2 className="w-6 h-6 text-primary animate-spin" />
                         ) : (
                           <>
-                            <Upload className="w-6 h-6 text-gray-400 mb-1" />
-                            <span className="text-xs text-gray-500 font-medium">Subir imagen</span>
-                            <span className="text-xs text-gray-400">5MB · JPG/PNG/WebP</span>
+                            <Crop className="w-6 h-6 text-gray-400 mb-1" />
+                            <span className="text-xs text-gray-500 font-medium">Subir y recortar</span>
+                            <span className="text-xs text-gray-400">10MB · JPG/PNG/WebP</span>
                           </>
                         )}
                       </label>
@@ -859,6 +896,20 @@ export default function AdminCasesPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Modal de recorte de imagen */}
+      {imageToCrop && (
+        <ImageCropper
+          isOpen={cropperOpen}
+          imageSrc={imageToCrop}
+          onClose={handleCloseCropper}
+          onCropComplete={handleCroppedImage}
+          aspectRatio={formData.orientation === 'landscape' ? 4 / 3 : 3 / 4}
+          title={cropField === 'beforeImage' ? 'Recortar imagen Antes' : 'Recortar imagen Después'}
+          lockAspectRatio={true}
+          aspectRatioLabel={formData.orientation === 'landscape' ? 'Horizontal 4:3' : 'Vertical 3:4'}
+        />
+      )}
     </div>
   )
 }

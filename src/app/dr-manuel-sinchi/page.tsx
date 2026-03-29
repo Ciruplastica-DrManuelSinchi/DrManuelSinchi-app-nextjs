@@ -16,7 +16,6 @@ import {
     Star,
     ArrowRight,
     Phone,
-    CheckCircle,
     MapPin,
     ChevronDown,
     Building,

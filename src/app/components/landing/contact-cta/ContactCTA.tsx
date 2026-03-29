@@ -116,7 +116,7 @@ export default function ContactCTA() {
                             whileTap={{ scale: 0.95 }}
                         >
                             <Link
-                                href="/contacto"
+                                href="/reservar"
                                 className="btn-dark btn-shine text-base px-8 py-4 shadow-elevation-3"
                             >
                                 <Calendar className="w-5 h-5" />

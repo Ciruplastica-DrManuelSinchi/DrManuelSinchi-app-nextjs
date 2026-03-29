@@ -258,6 +258,7 @@ export default function CasosReales() {
                                                 beforeImage={caseItem.beforeImage}
                                                 afterImage={caseItem.afterImage}
                                                 className="!rounded-t-2xl !rounded-b-none"
+                                                aspectClass={caseItem.orientation === 'portrait' ? 'aspect-[3/4]' : 'aspect-[4/3]'}
                                             />
                                         </div>
 
@@ -314,7 +315,7 @@ export default function CasosReales() {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link href="/contacto" className="btn-primary">
+                                <Link href="/reservar" className="btn-primary">
                                     {t('cta.scheduleButton')}
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>

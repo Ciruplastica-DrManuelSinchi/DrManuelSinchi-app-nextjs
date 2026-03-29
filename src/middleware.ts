@@ -27,7 +27,6 @@ const publicLandingRoutes = [
   '/casos-reales',
   '/videos',
   '/dr-manuel-sinchi',
-  '/contacto',
   '/preguntas-frecuentes',
   '/reservar',
   '/terminos',
