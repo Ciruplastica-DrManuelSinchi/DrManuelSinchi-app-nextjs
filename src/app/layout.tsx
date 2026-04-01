@@ -45,7 +45,7 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${playfair.variable} ${montserrat.variable}`}>
+    <html lang={locale} className={`${playfair.variable} ${montserrat.variable} overflow-x-hidden`}>
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -57,7 +57,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased overflow-x-hidden w-full">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             {children}

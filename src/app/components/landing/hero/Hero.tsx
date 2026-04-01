@@ -10,9 +10,9 @@ export default function Hero() {
 
     return (
         <section className="relative h-screen w-full overflow-hidden">
-            {/* Background Video - Desktop only */}
+            {/* Background Video - All devices */}
             <motion.div
-                className="absolute inset-0 w-full h-full hidden md:block"
+                className="absolute inset-0 w-full h-full"
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 2, ease: "easeOut" }}
@@ -28,19 +28,6 @@ export default function Hero() {
                     <source src="/videos/hero.mp4" type="video/mp4" />
                 </video>
             </motion.div>
-
-            {/* Background Image - Mobile fallback */}
-            <motion.div
-                className="absolute inset-0 w-full h-full md:hidden"
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.5 }}
-                style={{
-                    backgroundImage: 'url(/images/hero-captura.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            />
 
             {/* Gradient Overlay */}
             <div

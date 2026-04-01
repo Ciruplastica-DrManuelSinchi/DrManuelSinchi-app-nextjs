@@ -20,11 +20,11 @@ export default function ClientLayout({
 
   // Layout normal para el resto del sitio
   return (
-    <>
+    <div className="overflow-x-hidden w-full">
       <Header />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen w-full overflow-x-hidden">{children}</main>
       <Footer />
       <WhatsAppButton />
-    </>
+    </div>
   )
 }
