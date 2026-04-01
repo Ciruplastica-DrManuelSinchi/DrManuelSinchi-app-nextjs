@@ -35,7 +35,10 @@
       "Bash(cd:*)",
       "Bash(node:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(dir \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\public\\\\images\" /b)",
+      "Bash(rm:*)",
+      "Bash(cp:*)"
     ]
   }
 }
