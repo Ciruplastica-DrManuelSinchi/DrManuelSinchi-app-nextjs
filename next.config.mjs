@@ -4,6 +4,14 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config) => {
+    // Suprimir warning de next-intl relacionado con webpack cache
+    config.ignoreWarnings = [
+      { module: /node_modules\/next-intl\/dist/ },
+      ...(config.ignoreWarnings || [])
+    ];
+    return config;
+  },
   images: {
     remotePatterns: [
       {
