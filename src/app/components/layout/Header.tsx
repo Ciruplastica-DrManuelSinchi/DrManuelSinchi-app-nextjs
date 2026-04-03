@@ -98,19 +98,16 @@ export default function Header() {
         { id: 'reconstructiva', name: t('categories.reconstructive'), slug: 'reconstructiva', urlPath: 'cirugia-reconstructiva', procedures: [] },
     ])
 
-    useEffect(() => {
-        fetch('/api/categories')
-            .then(res => res.json())
-            .then(data => { if (data.categories?.length > 0) setNavCategories(data.categories) })
-            .catch(() => {})
-    }, [])
+    // Solo mostrar las 4 categorías principales (ignorar las de la API)
+    // Las categorías están definidas en el estado inicial y no se actualizan desde la API
+    // para mantener control sobre qué se muestra en el navbar
 
-    // Navegación construida dinámicamente desde las categorías
+    // Navegación con mega menu mostrando las 4 categorías y sus procedimientos
     const navigation: NavItem[] = [
         { name: t('doctor'), href: '/dr-manuel-sinchi' },
         {
             name: t('procedures'),
-            href: '#',
+            href: '/procedimientos',
             megaMenu: true,
             categories: navCategories.map(cat => {
                 const catPath = `/${cat.urlPath || cat.slug}`
@@ -242,7 +239,7 @@ export default function Header() {
                                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
                                     </Link>
 
-                                    {/* Mega Menu */}
+                                    {/* Mega Menu - 4 categorías con todos sus procedimientos */}
                                     <AnimatePresence>
                                         {item.megaMenu && item.categories && openDropdown === item.name && (
                                             <motion.div

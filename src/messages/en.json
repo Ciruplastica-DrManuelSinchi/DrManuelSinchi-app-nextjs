@@ -34,7 +34,8 @@
       "facialSurgery": "Facial Surgery",
       "bodySurgery": "Body Surgery",
       "aestheticMedicine": "Aesthetic Medicine",
-      "reconstructive": "Reconstructive"
+      "reconstructive": "Reconstructive",
+      "hairSurgery": "Hair Surgery"
     },
     "procedureNames": {
       "blepharoplasty": "Blepharoplasty",
@@ -74,7 +75,10 @@
       "scars": "Scars",
       "woundsUlcers": "Wounds and Ulcers",
       "burns": "Burns",
-      "biopolymerRemoval": "Biopolymer Removal"
+      "biopolymerRemoval": "Biopolymer Removal",
+      "hairTransplant": "Hair Transplant",
+      "hairMicrografting": "Hair Micrografting",
+      "scalpPrp": "Scalp PRP"
     }
   },
   "footer": {
@@ -333,10 +337,16 @@
       "and": "and the",
       "privacyPolicy": "privacy policy",
       "mustAcceptTerms": "You must accept the terms and conditions",
-      "successTitle": "Registration successful!",
-      "successMessage": "We have sent a verification link to",
+      "successTitle": "Check your email!",
+      "successMessage": "We have sent you a verification email to activate your account.",
       "successInstructions": "Check your inbox to activate your account.",
-      "goToLogin": "Go to login",
+      "sentTo": "Sent to",
+      "nextStepsTitle": "Next steps:",
+      "step1": "Open your email",
+      "step2": "Click on the verification link",
+      "step3": "Sign in with your credentials",
+      "checkSpam": "Can't find the email? Check your spam or junk folder.",
+      "goToLogin": "Back to login",
       "registerError": "Registration error",
       "connectionError": "Connection error"
     },
@@ -1357,6 +1367,208 @@
           "discuss": "I would like to discuss my expectations",
           "unsure": "I'm not sure what to expect"
         }
+      }
+    }
+  },
+  "proceduresPage": {
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "badge": "Plastic & Aesthetic Surgery",
+    "title": "Procedures",
+    "heroTitle": "Transform your",
+    "heroHighlight": "image",
+    "description": "Discover our wide range of aesthetic and reconstructive procedures, performed with cutting-edge techniques and personalized care by Dr. Manuel Sinchi.",
+    "proceduresTitle": "Featured procedures",
+    "viewAll": "View all",
+    "stats": {
+      "procedures": "Procedures performed",
+      "satisfaction": "Satisfaction",
+      "experience": "Years of experience",
+      "specialties": "Specialties"
+    },
+    "categoriesTitle": "Our specialties",
+    "categoriesSubtitle": "Select a category to explore all available procedures",
+    "categories": {
+      "facial": {
+        "description": "Procedures to enhance the harmony and natural beauty of your face"
+      },
+      "corporal": {
+        "description": "Shape and sculpt your figure with advanced body surgery techniques"
+      },
+      "estetica": {
+        "description": "Non-invasive treatments to rejuvenate and revitalize your skin"
+      },
+      "reconstructiva": {
+        "description": "Functional and aesthetic restoration with the highest medical standards"
+      },
+      "cabello": {
+        "description": "Advanced solutions for hair loss with transplant and hair regeneration techniques"
+      }
+    },
+    "whyUs": {
+      "badge": "Why choose us",
+      "title": "Excellence in every procedure",
+      "description": "With over 15 years of experience, Dr. Manuel Sinchi combines cutting-edge techniques with a personalized approach to achieve natural and harmonious results.",
+      "feature1": {
+        "title": "State-of-the-art technology",
+        "desc": "Most advanced equipment and techniques available"
+      },
+      "feature2": {
+        "title": "Natural results",
+        "desc": "Focus on harmony and natural beauty"
+      },
+      "feature3": {
+        "title": "Personalized follow-up",
+        "desc": "Complete pre and post-operative support"
+      }
+    },
+    "cta": {
+      "title": "Ready to transform your image?",
+      "description": "Schedule your evaluation consultation and receive personalized advice from Dr. Manuel Sinchi.",
+      "scheduleBtn": "Schedule Consultation",
+      "casesBtn": "View Real Cases"
+    }
+  },
+  "faqPage": {
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "badge": "Help Center",
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to the most common questions about our procedures, consultation process, recovery, and more.",
+    "searchPlaceholder": "Search for a question...",
+    "stats": {
+      "totalQuestions": "Questions answered",
+      "categories": "Categories",
+      "support": "Support available"
+    },
+    "categories": {
+      "all": "All",
+      "general": "General",
+      "procedures": "Procedures",
+      "recovery": "Recovery",
+      "safety": "Safety",
+      "costs": "Costs",
+      "scheduling": "Appointments"
+    },
+    "needMoreHelp": "Need more help?",
+    "emptyState": {
+      "title": "No results found",
+      "description": "Try different search terms or explore the categories.",
+      "reset": "View all questions"
+    },
+    "contact": {
+      "title": "Didn't find what you were looking for?",
+      "description": "Our team is ready to answer all your questions personally.",
+      "whatsapp": "WhatsApp",
+      "whatsappDesc": "Response in less than 2 hours",
+      "phone": "Phone",
+      "whatsappBtn": "Message on WhatsApp",
+      "scheduleBtn": "Schedule Consultation"
+    },
+    "cta": {
+      "title": "Ready to take the first step?",
+      "description": "Schedule your evaluation consultation and receive personalized advice from Dr. Manuel Sinchi.",
+      "scheduleBtn": "Schedule Consultation",
+      "casesBtn": "View Real Cases"
+    },
+    "items": {
+      "g1": {
+        "question": "What is Dr. Manuel Sinchi's experience?",
+        "answer": "Dr. Manuel Sinchi has over 15 years of experience in plastic, aesthetic, and reconstructive surgery. He is a board-certified surgeon by the Medical College of Peru, with training at the best institutions in the country and international training in Sweden, United States, Argentina, Uruguay, Mexico, and Bolivia. He has performed more than 5,000 successful procedures."
+      },
+      "g2": {
+        "question": "Where are the procedures performed?",
+        "answer": "Surgical procedures are performed at authorized and certified clinics in Lima, which meet all safety standards and have state-of-the-art equipment. Consultations and non-invasive treatments are performed at our office in Miraflores."
+      },
+      "g3": {
+        "question": "Do you treat patients from abroad?",
+        "answer": "Yes, we treat international patients. We offer prior virtual consultations to evaluate your case and coordinate the entire process including accommodation recommendations near the clinic. The team provides complete support during your stay in Lima."
+      },
+      "g4": {
+        "question": "How can I schedule a consultation?",
+        "answer": "You can schedule your consultation in three ways: 1) Through our website in the 'Book' section, 2) Via WhatsApp at 961 360 074, or 3) By calling the same number directly. In-person consultations are held in Miraflores, and we also offer virtual consultations."
+      },
+      "p1": {
+        "question": "What procedures does Dr. Sinchi offer?",
+        "answer": "We offer a wide range of procedures:\n\n• Facial Surgery: Rhinoplasty, blepharoplasty, facelift, mentoplasty, otoplasty, bichectomy.\n• Body Surgery: Liposculpture, tummy tuck, breast augmentation, mastopexy, gluteoplasty, mommy makeover.\n• Aesthetic Medicine: Botox, hyaluronic acid, biostimulators, facial PRP.\n• Reconstructive Surgery: Breast reconstruction, scar treatment, biopolymer removal."
+      },
+      "p2": {
+        "question": "How long does a typical surgery take?",
+        "answer": "Duration varies by procedure:\n\n• Minor facial procedures (botox, fillers): 15-30 minutes\n• Blepharoplasty: 1-2 hours\n• Rhinoplasty: 2-3 hours\n• Liposculpture: 2-4 hours\n• Tummy tuck: 2-4 hours\n• Breast augmentation: 1-2 hours\n• Mommy Makeover: 4-6 hours\n\nDr. Sinchi will explain specific times during your consultation."
+      },
+      "p3": {
+        "question": "What type of anesthesia is used?",
+        "answer": "The type of anesthesia depends on the procedure:\n\n• Local anesthesia: For minor procedures like fillers, botox, mole removal.\n• Sedation: For intermediate procedures requiring greater comfort.\n• General anesthesia: For major surgeries like rhinoplasty, liposculpture, tummy tuck, breast augmentation.\n\nAll procedures with anesthesia are performed with a certified anesthesiologist present."
+      },
+      "p4": {
+        "question": "Are the results permanent?",
+        "answer": "It depends on the procedure:\n\n• Permanent: Rhinoplasty, blepharoplasty, otoplasty, liposculpture (removed fat cells don't return), breast implants.\n• Semi-permanent: Facelift (lasts 7-10 years), tummy tuck.\n• Temporary: Botox (4-6 months), hyaluronic acid (12-18 months), biostimulators (up to 2 years).\n\nNatural aging continues, but surgical results are long-lasting."
+      },
+      "p5": {
+        "question": "Can I combine multiple procedures?",
+        "answer": "Yes, it's possible and often recommended to combine procedures for more harmonious results and reduced total recovery time. Popular combinations include:\n\n• Rhinoplasty + mentoplasty (profiloplasty)\n• Liposculpture + tummy tuck\n• Mommy Makeover (breasts + abdomen + lipo)\n• Bichectomy + chin lipo\n\nDr. Sinchi will evaluate if you're a candidate for combined procedures."
+      },
+      "r1": {
+        "question": "How long is the recovery time?",
+        "answer": "Recovery times vary:\n\n• Non-invasive procedures (botox, fillers): No recovery, immediate normal activities.\n• Blepharoplasty: 5-7 days for normal activities.\n• Rhinoplasty: 7-10 days, nasal splint for 1 week.\n• Liposculpture: 7-14 days, wearing compression garment for 4-6 weeks.\n• Tummy tuck: 14-21 days, relative rest for 4-6 weeks.\n• Breast augmentation: 7-14 days, exercise after 4-6 weeks.\n\nEach patient is different and you'll receive personalized instructions."
+      },
+      "r2": {
+        "question": "Will I have a lot of pain after surgery?",
+        "answer": "Postoperative pain is manageable with prescribed medication. Most patients describe more discomfort than intense pain. We provide:\n\n• Appropriate pain medication for your procedure\n• Anti-inflammatories to reduce swelling\n• Clear postoperative care instructions\n• 24/7 emergency contact line\n\nPain is usually greater in the first 2-3 days and gradually decreases."
+      },
+      "r3": {
+        "question": "When can I return to work?",
+        "answer": "It depends on the type of work and procedure:\n\n• Office work:\n  - Minor procedures: 1-2 days\n  - Facial surgeries: 5-7 days\n  - Body surgeries: 10-14 days\n\n• Physical work:\n  - Minor procedures: 3-5 days\n  - Facial surgeries: 2 weeks\n  - Body surgeries: 4-6 weeks\n\nIt's important to follow recommendations for optimal recovery."
+      },
+      "r4": {
+        "question": "When will I see the final results?",
+        "answer": "Results evolve over time:\n\n• Initial results: Visible from the first weeks.\n• Swelling reduction: 70% in the first month, 90% at 3 months.\n• Final results:\n  - Facial procedures: 3-6 months\n  - Liposculpture: 3-6 months\n  - Tummy tuck: 6-12 months\n  - Breast augmentation: 3-6 months\n  - Rhinoplasty: 12 months (nose continues refining)\n\nPatience is key to appreciate the complete results."
+      },
+      "s1": {
+        "question": "How safe is plastic surgery?",
+        "answer": "Plastic surgery is very safe when performed by a certified surgeon in authorized facilities. Our safety standards include:\n\n• Complete preoperative evaluation\n• Laboratory and cardiac exams\n• Certified operating rooms with modern equipment\n• Certified anesthesiologists\n• Strict sterilization protocols\n• Close postoperative follow-up\n\nThe rate of serious complications is less than 1% in well-selected patients."
+      },
+      "s2": {
+        "question": "Am I a candidate for plastic surgery?",
+        "answer": "Ideal candidates generally:\n\n• Are in good overall health\n• Don't smoke or can quit 4 weeks before/after\n• Have realistic expectations\n• Maintain a stable weight\n• Don't have uncontrolled medical conditions\n\nDuring the consultation, Dr. Sinchi will evaluate your medical history, perform a physical exam, and determine if you're a suitable candidate for the desired procedure."
+      },
+      "s3": {
+        "question": "What happens if I have an emergency after surgery?",
+        "answer": "Your safety is our priority. We have:\n\n• 24/7 emergency line from Dr. Sinchi\n• Clear warning sign instructions\n• Coordination with clinics for immediate care if necessary\n• Scheduled follow-up appointments\n\nThe team is available to answer any concerns during your recovery."
+      },
+      "s4": {
+        "question": "Will there be visible scars?",
+        "answer": "Dr. Sinchi uses techniques that minimize scarring:\n\n• Incisions in natural folds or hidden areas\n• High-quality sutures\n• Multi-layer closure techniques\n• Scar care instructions\n\nScars mature and fade over time (12-18 months). We offer additional treatments if needed such as laser or injections to optimize healing."
+      },
+      "c1": {
+        "question": "How much does a consultation cost?",
+        "answer": "The evaluation consultation has a cost that includes:\n\n• Complete evaluation of your case\n• Detailed physical examination\n• Explanation of recommended procedure\n• Results simulation (when applicable)\n• Personalized treatment plan\n• Detailed quote\n\nThe consultation cost can be applied to the procedure if you decide to proceed. Contact us to learn the current price."
+      },
+      "c2": {
+        "question": "Do you offer financing?",
+        "answer": "Yes, we understand that investing in your wellbeing is important. We offer:\n\n• Payment plans in installments\n• Agreements with financial institutions\n• Discounts for cash payment\n• Special promotions on certain dates\n\nDuring your consultation, the administrative team will explain all available financing options."
+      },
+      "c3": {
+        "question": "What does the surgery price include?",
+        "answer": "Our quotes are transparent and include:\n\n• Surgeon's fees\n• Anesthesiologist's fees\n• Operating room and recovery room use\n• Medical materials and supplies\n• Compression garments (when applicable)\n• Medications for the first days\n• Postoperative follow-up appointments\n\nThere are no hidden costs. Any additional elements are communicated in advance."
+      },
+      "c4": {
+        "question": "Can I get a quote without an in-person consultation?",
+        "answer": "We can give you an indicative price range via WhatsApp or email, but for an accurate quote we need:\n\n• In-person or virtual evaluation\n• Understanding your specific goals\n• Evaluating your anatomy and current condition\n• Determining the best approach for your case\n\nEach patient is unique, and the final quote depends on your particular case's complexity."
+      },
+      "a1": {
+        "question": "How far in advance should I schedule my surgery?",
+        "answer": "We recommend:\n\n• Initial consultation: Schedule 1-2 weeks in advance\n• Surgery: Schedule 2-4 weeks in advance after consultation\n• Preoperative exams: Complete 1-2 weeks before surgery\n\nFor specific dates (vacations, events), we recommend planning 2-3 months in advance considering recovery time."
+      },
+      "a2": {
+        "question": "What should I bring to my first consultation?",
+        "answer": "For your first consultation, we recommend bringing:\n\n• ID document\n• List of medications you take\n• History of previous surgeries\n• Recent medical exams (if you have them)\n• Reference photos of results you like\n• List of questions you want to ask\n\nCome in comfortable clothing, especially if the evaluation is for body procedures."
+      },
+      "a3": {
+        "question": "Can I reschedule or cancel my appointment?",
+        "answer": "Yes, we understand that unforeseen circumstances can arise:\n\n• Rescheduling: Let us know at least 24 hours in advance\n• Consultation cancellation: No charge if you notify in advance\n• Surgery cancellation: Policies vary depending on advance notice\n\nWe ask that you communicate as soon as possible so we can offer the slot to another patient. Contact us via WhatsApp or phone for any changes."
       }
     }
   }

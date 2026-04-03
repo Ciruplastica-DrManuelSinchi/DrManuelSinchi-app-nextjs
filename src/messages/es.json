@@ -34,7 +34,8 @@
       "facialSurgery": "Cirugía Facial",
       "bodySurgery": "Cirugía Corporal",
       "aestheticMedicine": "Medicina Estética",
-      "reconstructive": "Reconstructiva"
+      "reconstructive": "Reconstructiva",
+      "hairSurgery": "Cirugía Capilar"
     },
     "procedureNames": {
       "blepharoplasty": "Blefaroplastia",
@@ -74,7 +75,10 @@
       "scars": "Cicatrices",
       "woundsUlcers": "Heridas y Úlceras",
       "burns": "Quemaduras",
-      "biopolymerRemoval": "Retiro de Biopolímeros"
+      "biopolymerRemoval": "Retiro de Biopolímeros",
+      "hairTransplant": "Transplante Capilar",
+      "hairMicrografting": "Microinjerto Capilar",
+      "scalpPrp": "PRP Capilar"
     }
   },
   "footer": {
@@ -333,10 +337,16 @@
       "and": "y la",
       "privacyPolicy": "política de privacidad",
       "mustAcceptTerms": "Debes aceptar los términos y condiciones",
-      "successTitle": "¡Registro exitoso!",
-      "successMessage": "Hemos enviado un enlace de verificación a",
+      "successTitle": "¡Revisa tu correo!",
+      "successMessage": "Te hemos enviado un correo de verificación para activar tu cuenta.",
       "successInstructions": "Revisa tu bandeja de entrada para activar tu cuenta.",
-      "goToLogin": "Ir a iniciar sesión",
+      "sentTo": "Enviado a",
+      "nextStepsTitle": "Pasos siguientes:",
+      "step1": "Abre tu correo electrónico",
+      "step2": "Haz clic en el enlace de verificación",
+      "step3": "Inicia sesión con tus datos",
+      "checkSpam": "¿No encuentras el correo? Revisa tu carpeta de spam o correo no deseado.",
+      "goToLogin": "Volver a iniciar sesión",
       "registerError": "Error al registrar",
       "connectionError": "Error de conexión"
     },
@@ -1357,6 +1367,208 @@
           "discuss": "Me gustaría discutir mis expectativas",
           "unsure": "No estoy seguro(a) de qué esperar"
         }
+      }
+    }
+  },
+  "proceduresPage": {
+    "breadcrumbs": {
+      "home": "Inicio"
+    },
+    "badge": "Cirugía Plástica & Estética",
+    "title": "Procedimientos",
+    "heroTitle": "Transforma tu",
+    "heroHighlight": "imagen",
+    "description": "Descubre nuestra amplia gama de procedimientos estéticos y reconstructivos, realizados con técnicas de vanguardia y atención personalizada por el Dr. Manuel Sinchi.",
+    "proceduresTitle": "Procedimientos destacados",
+    "viewAll": "Ver todos los procedimientos de",
+    "stats": {
+      "procedures": "Procedimientos realizados",
+      "satisfaction": "Satisfacción",
+      "experience": "Años de experiencia",
+      "specialties": "Especialidades"
+    },
+    "categoriesTitle": "Nuestras especialidades",
+    "categoriesSubtitle": "Selecciona una categoría para explorar todos los procedimientos disponibles",
+    "categories": {
+      "facial": {
+        "description": "Procedimientos para realzar la armonía y belleza natural de tu rostro"
+      },
+      "corporal": {
+        "description": "Moldea y esculpe tu figura con técnicas avanzadas de cirugía corporal"
+      },
+      "estetica": {
+        "description": "Tratamientos no invasivos para rejuvenecer y revitalizar tu piel"
+      },
+      "reconstructiva": {
+        "description": "Restauración funcional y estética con los más altos estándares médicos"
+      },
+      "cabello": {
+        "description": "Soluciones avanzadas para la pérdida de cabello con técnicas de transplante y regeneración capilar"
+      }
+    },
+    "whyUs": {
+      "badge": "Por qué elegirnos",
+      "title": "Excelencia en cada procedimiento",
+      "description": "Con más de 15 años de experiencia, el Dr. Manuel Sinchi combina técnicas de vanguardia con un enfoque personalizado para lograr resultados naturales y armónicos.",
+      "feature1": {
+        "title": "Tecnología de última generación",
+        "desc": "Equipos y técnicas más avanzadas del mercado"
+      },
+      "feature2": {
+        "title": "Resultados naturales",
+        "desc": "Enfoque en la armonía y belleza natural"
+      },
+      "feature3": {
+        "title": "Seguimiento personalizado",
+        "desc": "Acompañamiento completo pre y post operatorio"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para transformar tu imagen?",
+      "description": "Agenda tu consulta de valoración y recibe asesoría personalizada del Dr. Manuel Sinchi.",
+      "scheduleBtn": "Agendar Consulta",
+      "casesBtn": "Ver Casos Reales"
+    }
+  },
+  "faqPage": {
+    "breadcrumbs": {
+      "home": "Inicio"
+    },
+    "badge": "Centro de Ayuda",
+    "title": "Preguntas Frecuentes",
+    "description": "Encuentra respuestas a las preguntas más comunes sobre nuestros procedimientos, proceso de consulta, recuperación y más.",
+    "searchPlaceholder": "Buscar una pregunta...",
+    "stats": {
+      "totalQuestions": "Preguntas respondidas",
+      "categories": "Categorías",
+      "support": "Soporte disponible"
+    },
+    "categories": {
+      "all": "Todas",
+      "general": "General",
+      "procedures": "Procedimientos",
+      "recovery": "Recuperación",
+      "safety": "Seguridad",
+      "costs": "Costos",
+      "scheduling": "Citas"
+    },
+    "needMoreHelp": "¿Necesitas más ayuda?",
+    "emptyState": {
+      "title": "No se encontraron resultados",
+      "description": "Intenta con otros términos de búsqueda o explora las categorías.",
+      "reset": "Ver todas las preguntas"
+    },
+    "contact": {
+      "title": "¿No encontraste lo que buscabas?",
+      "description": "Nuestro equipo está listo para responder todas tus preguntas de forma personalizada.",
+      "whatsapp": "WhatsApp",
+      "whatsappDesc": "Respuesta en menos de 2 horas",
+      "phone": "Teléfono",
+      "whatsappBtn": "Escribir por WhatsApp",
+      "scheduleBtn": "Agendar Consulta"
+    },
+    "cta": {
+      "title": "¿Listo para dar el primer paso?",
+      "description": "Agenda tu consulta de valoración y recibe asesoría personalizada del Dr. Manuel Sinchi.",
+      "scheduleBtn": "Agendar Consulta",
+      "casesBtn": "Ver Casos Reales"
+    },
+    "items": {
+      "g1": {
+        "question": "¿Cuál es la experiencia del Dr. Manuel Sinchi?",
+        "answer": "El Dr. Manuel Sinchi cuenta con más de 15 años de experiencia en cirugía plástica, estética y reconstructiva. Es cirujano certificado por el Colegio Médico del Perú, con formación en las mejores instituciones del país y entrenamiento internacional en Suecia, Estados Unidos, Argentina, Uruguay, México y Bolivia. Ha realizado más de 5,000 procedimientos exitosos."
+      },
+      "g2": {
+        "question": "¿Dónde se realizan los procedimientos?",
+        "answer": "Los procedimientos quirúrgicos se realizan en clínicas autorizadas y certificadas en Lima, que cuentan con todos los estándares de seguridad y equipamiento de última generación. Las consultas y tratamientos no invasivos se realizan en nuestro consultorio en Miraflores."
+      },
+      "g3": {
+        "question": "¿Atienden pacientes del extranjero?",
+        "answer": "Sí, atendemos pacientes internacionales. Ofrecemos consultas virtuales previas para evaluar tu caso, y coordinamos todo el proceso incluyendo recomendaciones de hospedaje cercano a la clínica. El equipo te brinda acompañamiento completo durante tu estadía en Lima."
+      },
+      "g4": {
+        "question": "¿Cómo puedo agendar una consulta?",
+        "answer": "Puedes agendar tu consulta de tres formas: 1) A través de nuestra página web en la sección 'Reservar', 2) Por WhatsApp al 961 360 074, o 3) Llamando directamente al mismo número. Las consultas presenciales se realizan en Miraflores, y también ofrecemos consultas virtuales."
+      },
+      "p1": {
+        "question": "¿Qué procedimientos ofrece el Dr. Sinchi?",
+        "answer": "Ofrecemos una amplia gama de procedimientos:\n\n• Cirugía Facial: Rinoplastia, blefaroplastia, lifting facial, mentoplastia, otoplastia, bichectomía.\n• Cirugía Corporal: Lipoescultura, abdominoplastia, aumento de mamas, mastopexia, gluteoplastia, mommy makeover.\n• Medicina Estética: Botox, ácido hialurónico, bioestimuladores, PRP facial.\n• Cirugía Reconstructiva: Reconstrucción mamaria, tratamiento de cicatrices, retiro de biopolímeros."
+      },
+      "p2": {
+        "question": "¿Cuánto dura una cirugía típica?",
+        "answer": "La duración varía según el procedimiento:\n\n• Procedimientos faciales menores (botox, rellenos): 15-30 minutos\n• Blefaroplastia: 1-2 horas\n• Rinoplastia: 2-3 horas\n• Lipoescultura: 2-4 horas\n• Abdominoplastia: 2-4 horas\n• Aumento de mamas: 1-2 horas\n• Mommy Makeover: 4-6 horas\n\nEl Dr. Sinchi te explicará los tiempos específicos durante tu consulta."
+      },
+      "p3": {
+        "question": "¿Qué tipo de anestesia se utiliza?",
+        "answer": "El tipo de anestesia depende del procedimiento:\n\n• Anestesia local: Para procedimientos menores como rellenos, botox, extracción de lunares.\n• Sedación: Para procedimientos intermedios que requieren mayor comodidad.\n• Anestesia general: Para cirugías mayores como rinoplastia, lipoescultura, abdominoplastia, aumento de mamas.\n\nTodos los procedimientos con anestesia se realizan con un anestesiólogo certificado presente."
+      },
+      "p4": {
+        "question": "¿Los resultados son permanentes?",
+        "answer": "Depende del procedimiento:\n\n• Permanentes: Rinoplastia, blefaroplastia, otoplastia, lipoescultura (las células de grasa eliminadas no regresan), implantes mamarios.\n• Semi-permanentes: Lifting facial (dura 7-10 años), abdominoplastia.\n• Temporales: Botox (4-6 meses), ácido hialurónico (12-18 meses), bioestimuladores (hasta 2 años).\n\nEl envejecimiento natural continúa, pero los resultados quirúrgicos son duraderos."
+      },
+      "p5": {
+        "question": "¿Puedo combinar varios procedimientos?",
+        "answer": "Sí, es posible y a menudo recomendable combinar procedimientos para obtener resultados más armónicos y reducir tiempos de recuperación total. Combinaciones populares incluyen:\n\n• Rinoplastia + mentoplastia (perfiloplastia)\n• Lipoescultura + abdominoplastia\n• Mommy Makeover (mamas + abdomen + lipo)\n• Bichectomía + lipo de papada\n\nEl Dr. Sinchi evaluará si eres candidato(a) para procedimientos combinados."
+      },
+      "r1": {
+        "question": "¿Cuánto tiempo dura la recuperación?",
+        "answer": "Los tiempos de recuperación varían:\n\n• Procedimientos no invasivos (botox, rellenos): Sin recuperación, actividades normales inmediatas.\n• Blefaroplastia: 5-7 días para actividades normales.\n• Rinoplastia: 7-10 días, férula nasal por 1 semana.\n• Lipoescultura: 7-14 días, uso de faja por 4-6 semanas.\n• Abdominoplastia: 14-21 días, reposo relativo por 4-6 semanas.\n• Aumento de mamas: 7-14 días, ejercicio después de 4-6 semanas.\n\nCada paciente es diferente y recibirás instrucciones personalizadas."
+      },
+      "r2": {
+        "question": "¿Tendré mucho dolor después de la cirugía?",
+        "answer": "El dolor postoperatorio es manejable con la medicación prescrita. La mayoría de los pacientes describen más incomodidad que dolor intenso. Proporcionamos:\n\n• Analgésicos adecuados para tu procedimiento\n• Antiinflamatorios para reducir hinchazón\n• Instrucciones claras de cuidados postoperatorios\n• Línea de contacto 24/7 para emergencias\n\nEl dolor suele ser mayor los primeros 2-3 días y disminuye progresivamente."
+      },
+      "r3": {
+        "question": "¿Cuándo podré volver al trabajo?",
+        "answer": "Depende del tipo de trabajo y procedimiento:\n\n• Trabajo de oficina:\n  - Procedimientos menores: 1-2 días\n  - Cirugías faciales: 5-7 días\n  - Cirugías corporales: 10-14 días\n\n• Trabajo físico:\n  - Procedimientos menores: 3-5 días\n  - Cirugías faciales: 2 semanas\n  - Cirugías corporales: 4-6 semanas\n\nEs importante seguir las recomendaciones para una óptima recuperación."
+      },
+      "r4": {
+        "question": "¿Cuándo veré los resultados finales?",
+        "answer": "Los resultados evolucionan con el tiempo:\n\n• Resultados iniciales: Visibles desde las primeras semanas.\n• Reducción de hinchazón: 70% en el primer mes, 90% a los 3 meses.\n• Resultados finales:\n  - Procedimientos faciales: 3-6 meses\n  - Lipoescultura: 3-6 meses\n  - Abdominoplastia: 6-12 meses\n  - Aumento de mamas: 3-6 meses\n  - Rinoplastia: 12 meses (nariz sigue refinándose)\n\nLa paciencia es clave para apreciar los resultados completos."
+      },
+      "s1": {
+        "question": "¿Qué tan segura es la cirugía plástica?",
+        "answer": "La cirugía plástica es muy segura cuando se realiza por un cirujano certificado en instalaciones autorizadas. Nuestros estándares de seguridad incluyen:\n\n• Evaluación preoperatoria completa\n• Exámenes de laboratorio y cardiológicos\n• Quirófanos certificados con equipamiento moderno\n• Anestesiólogos certificados\n• Protocolos estrictos de esterilización\n• Seguimiento postoperatorio cercano\n\nLa tasa de complicaciones serias es menor al 1% en pacientes bien seleccionados."
+      },
+      "s2": {
+        "question": "¿Soy candidato(a) para cirugía plástica?",
+        "answer": "Los candidatos ideales generalmente:\n\n• Tienen buena salud general\n• No fuman o pueden dejar de fumar 4 semanas antes/después\n• Tienen expectativas realistas\n• Mantienen un peso estable\n• No tienen condiciones médicas no controladas\n\nDurante la consulta, el Dr. Sinchi evaluará tu historial médico, realizará un examen físico y determinará si eres candidato(a) adecuado(a) para el procedimiento deseado."
+      },
+      "s3": {
+        "question": "¿Qué pasa si tengo una emergencia después de la cirugía?",
+        "answer": "Tu seguridad es nuestra prioridad. Contamos con:\n\n• Línea de emergencia 24/7 del Dr. Sinchi\n• Instrucciones claras de signos de alarma\n• Coordinación con clínicas para atención inmediata si es necesario\n• Citas de seguimiento programadas\n\nEl equipo está disponible para responder cualquier inquietud durante tu recuperación."
+      },
+      "s4": {
+        "question": "¿Quedarán cicatrices visibles?",
+        "answer": "El Dr. Sinchi utiliza técnicas que minimizan las cicatrices:\n\n• Incisiones en pliegues naturales o zonas ocultas\n• Suturas de alta calidad\n• Técnicas de cierre multicapa\n• Instrucciones de cuidado de cicatrices\n\nLas cicatrices maduran y se desvanecen con el tiempo (12-18 meses). Ofrecemos tratamientos adicionales si es necesario como láser o inyecciones para optimizar la cicatrización."
+      },
+      "c1": {
+        "question": "¿Cuánto cuesta una consulta?",
+        "answer": "La consulta de valoración tiene un costo que incluye:\n\n• Evaluación completa de tu caso\n• Examen físico detallado\n• Explicación del procedimiento recomendado\n• Simulación de resultados (cuando aplica)\n• Plan de tratamiento personalizado\n• Cotización detallada\n\nEl costo de la consulta puede aplicarse al procedimiento si decides realizarlo. Contáctanos para conocer el precio actual."
+      },
+      "c2": {
+        "question": "¿Ofrecen financiamiento?",
+        "answer": "Sí, entendemos que la inversión en tu bienestar es importante. Ofrecemos:\n\n• Facilidades de pago en cuotas\n• Convenios con entidades financieras\n• Descuentos por pago al contado\n• Promociones especiales en fechas determinadas\n\nDurante tu consulta, el equipo administrativo te explicará todas las opciones de financiamiento disponibles."
+      },
+      "c3": {
+        "question": "¿Qué incluye el precio de la cirugía?",
+        "answer": "Nuestras cotizaciones son transparentes e incluyen:\n\n• Honorarios del cirujano\n• Honorarios del anestesiólogo\n• Uso de quirófano y sala de recuperación\n• Materiales e insumos médicos\n• Prendas de compresión (cuando aplica)\n• Medicamentos para los primeros días\n• Citas de seguimiento postoperatorio\n\nNo hay costos ocultos. Cualquier elemento adicional se comunica previamente."
+      },
+      "c4": {
+        "question": "¿Puedo obtener una cotización sin consulta presencial?",
+        "answer": "Podemos darte un rango de precios orientativo por WhatsApp o correo, pero para una cotización precisa necesitamos:\n\n• Evaluación presencial o virtual\n• Entender tus objetivos específicos\n• Evaluar tu anatomía y condición actual\n• Determinar el mejor abordaje para tu caso\n\nCada paciente es único, y la cotización final depende de la complejidad de tu caso particular."
+      },
+      "a1": {
+        "question": "¿Con cuánta anticipación debo agendar mi cirugía?",
+        "answer": "Recomendamos:\n\n• Consulta inicial: Agendar con 1-2 semanas de anticipación\n• Cirugía: Programar con 2-4 semanas de anticipación después de la consulta\n• Exámenes preoperatorios: Realizarlos 1-2 semanas antes de la cirugía\n\nPara fechas específicas (vacaciones, eventos), recomendamos planificar con 2-3 meses de anticipación considerando el tiempo de recuperación."
+      },
+      "a2": {
+        "question": "¿Qué debo llevar a mi primera consulta?",
+        "answer": "Para tu primera consulta, te recomendamos traer:\n\n• Documento de identidad\n• Lista de medicamentos que tomas\n• Historial de cirugías previas\n• Exámenes médicos recientes (si los tienes)\n• Fotos de referencia de resultados que te gustan\n• Lista de preguntas que quieras hacer\n\nVen con ropa cómoda, especialmente si la evaluación es para procedimientos corporales."
+      },
+      "a3": {
+        "question": "¿Puedo reprogramar o cancelar mi cita?",
+        "answer": "Sí, entendemos que pueden surgir imprevistos:\n\n• Reprogramación: Avísanos con al menos 24 horas de anticipación\n• Cancelación de consulta: Sin cargo si avisas con anticipación\n• Cancelación de cirugía: Las políticas varían según el tiempo de anticipación\n\nTe pedimos comunicarte lo antes posible para poder ofrecer el espacio a otro paciente. Contáctanos por WhatsApp o teléfono para cualquier cambio."
       }
     }
   }

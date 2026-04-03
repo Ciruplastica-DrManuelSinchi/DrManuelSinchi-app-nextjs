@@ -4,7 +4,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Usar dominio de prueba de Resend si no hay dominio verificado
 // Para producción, verificar dominio en https://resend.com/domains
-const FROM_EMAIL ='onboarding@resend.dev'
+const FROM_EMAIL = process.env.EMAIL_FROM 
 const APP_URL = process.env.NEXTAUTH_URL || 'http://localhost:3000'
 
 export async function sendVerificationEmail(
@@ -12,7 +12,7 @@ export async function sendVerificationEmail(
   token: string,
   name?: string
 ): Promise<{ success: boolean; error?: string }> {
-  const verifyUrl = `${APP_URL}/verify-email?token=${token}`
+  const verifyUrl = `${APP_URL}/api/auth/verify-email?token=${token}`
 
   console.log('📧 Enviando email de verificación a:', email)
   console.log('📧 Desde:', FROM_EMAIL)

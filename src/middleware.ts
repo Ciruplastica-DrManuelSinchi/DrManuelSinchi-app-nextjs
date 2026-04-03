@@ -23,6 +23,8 @@ const publicLandingRoutes = [
   '/cirugia-plastica-corporal',
   '/cirugia-reconstructiva',
   '/medicina-estetica',
+  '/cirugia-capilar',
+  '/procedimientos',
   '/blog',
   '/casos-reales',
   '/videos',

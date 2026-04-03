@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { motion } from 'framer-motion'
-import { User, Mail, Phone, Lock, Eye, EyeOff, Loader2, AlertCircle, CheckCircle } from 'lucide-react'
+import { User, Mail, Phone, Lock, Eye, EyeOff, Loader2, AlertCircle, CheckCircle, ArrowLeft, MailCheck } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 
@@ -114,22 +114,59 @@ export default function RegisterForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-8"
+        className="text-center py-6"
       >
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-green-600" />
+        {/* Icono de email animado */}
+        <div className="relative w-20 h-20 mx-auto mb-6">
+          <div className="absolute inset-0 bg-primary/10 rounded-full animate-ping opacity-75" />
+          <div className="relative w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center">
+            <MailCheck className="w-10 h-10 text-primary" />
+          </div>
         </div>
+
         <h2 className="text-xl font-semibold text-dark mb-2">
           {t('successTitle')}
         </h2>
-        <p className="text-gray-600 mb-6">
-          {t('successMessage')} <strong>{formData.email}</strong>.
-          {' '}{t('successInstructions')}
+
+        <p className="text-gray-600 mb-4">
+          {t('successMessage')}
         </p>
+
+        {/* Email destacado */}
+        <div className="bg-gray-50 rounded-xl p-4 mb-4">
+          <p className="text-sm text-gray-500 mb-1">{t('sentTo')}</p>
+          <p className="font-semibold text-dark break-all">{formData.email}</p>
+        </div>
+
+        {/* Instrucciones */}
+        <div className="bg-primary/5 rounded-xl p-4 mb-6 text-left">
+          <p className="text-sm font-medium text-primary mb-2">{t('nextStepsTitle')}</p>
+          <ul className="text-sm text-gray-600 space-y-2">
+            <li className="flex items-start gap-2">
+              <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+              <span>{t('step1')}</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+              <span>{t('step2')}</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+              <span>{t('step3')}</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Nota sobre spam */}
+        <p className="text-xs text-gray-500 mb-6">
+          {t('checkSpam')}
+        </p>
+
         <Link
           href="/login"
           className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors"
         >
+          <ArrowLeft className="w-4 h-4" />
           {t('goToLogin')}
         </Link>
       </motion.div>
