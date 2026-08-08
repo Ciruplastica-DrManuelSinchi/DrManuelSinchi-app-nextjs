@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { motion } from 'framer-motion'
@@ -10,7 +10,6 @@ import {
     ArrowRight,
     ArrowUpRight,
     Star,
-    Users,
     Award,
     CheckCircle2,
     Smile,
@@ -29,15 +28,6 @@ const categoryIcons: Record<string, React.ElementType> = {
     cabello: Scissors,
 }
 
-// Tipo para categorías de la API
-interface ApiCategory {
-    id: string
-    name: string
-    slug: string
-    urlPath: string | null
-    description: string | null
-    procedures: { name: string; slug: string }[]
-}
 
 export default function Procedimientos() {
     const t = useTranslations('proceduresPage')

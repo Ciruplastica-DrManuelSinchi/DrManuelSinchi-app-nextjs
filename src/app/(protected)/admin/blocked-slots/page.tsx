@@ -282,7 +282,9 @@ export default function BlockedSlotsPage() {
 
   // ── Upcoming blocks (sorted, upcoming first) ──
   const upcomingBlocks = useMemo(() => {
-    const todayStr = toLocalDateStr(today)
+    const now = new Date()
+    now.setHours(0, 0, 0, 0)
+    const todayStr = toLocalDateStr(now)
     return blocks
       .filter(b => b.date.split('T')[0] >= todayStr)
       .sort((a, b) => {

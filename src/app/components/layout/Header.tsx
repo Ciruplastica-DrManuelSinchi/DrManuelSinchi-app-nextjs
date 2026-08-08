@@ -91,7 +91,7 @@ export default function Header() {
     }
 
     // Categorías — fallback traducido, se actualiza desde la API
-    const [navCategories, setNavCategories] = useState<Category[]>([
+    const [navCategories] = useState<Category[]>([
         { id: 'facial', name: t('categories.facialSurgery'), slug: 'facial', urlPath: 'cirugia-plastica-facial', procedures: [] },
         { id: 'corporal', name: t('categories.bodySurgery'), slug: 'corporal', urlPath: 'cirugia-plastica-corporal', procedures: [] },
         { id: 'estetica', name: t('categories.aestheticMedicine'), slug: 'estetica', urlPath: 'medicina-estetica', procedures: [] },
