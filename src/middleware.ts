@@ -7,6 +7,14 @@ import { routing } from '@/i18n/routing'
 // Crear middleware de internacionalización
 const intlMiddleware = createIntlMiddleware(routing)
 
+// Helper: leer JWT compatible con NextAuth v5 (cookie __Secure-authjs.*)
+const authSecret = process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET
+
+async function getSessionToken(req: NextRequest) {
+  const secureCookie = req.nextUrl.protocol === 'https:'
+  return getToken({ req, secret: authSecret, secureCookie })
+}
+
 // Rutas de autenticación (redirigir si ya está logueado)
 const authRoutes = ['/login', '/register', '/forgot-password', '/reset-password']
 
@@ -113,10 +121,7 @@ export async function middleware(request: NextRequest) {
   // Para rutas raíz sin prefijo, no aplicar intlMiddleware
   if (isRootLevelRoute(pathname)) {
     // Obtener token de sesión para rutas protegidas
-    const token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-    })
+    const token = await getSessionToken(request)
 
     const isAuthenticated = !!token
     const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route))
@@ -196,10 +201,7 @@ export async function middleware(request: NextRequest) {
   const response = intlMiddleware(request)
 
   // Obtener token de sesión
-  const token = await getToken({
-    req: request,
-    secret: process.env.NEXTAUTH_SECRET,
-  })
+  const token = await getSessionToken(request)
 
   const isAuthenticated = !!token
   const isAuthRoute = authRoutes.some((route) => pathnameWithoutLocale.startsWith(route))
