@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -280,5 +280,5 @@ const prpData: ProcedureData = {
 // ============================================
 
 export default function PlasmaRicoPlaquetasPage() {
-    return <ProcedurePage data={prpData} />
+    return <DynamicProcedurePage data={prpData} />
 }

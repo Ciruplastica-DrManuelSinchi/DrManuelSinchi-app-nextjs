@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -307,5 +307,5 @@ const bichectomiaData: ProcedureData = {
 // ============================================
 
 export default function BichectomiaPage() {
-    return <ProcedurePage data={bichectomiaData} />
+    return <DynamicProcedurePage data={bichectomiaData} />
 }

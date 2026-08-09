@@ -1,6 +1,8 @@
 "use client"
+
+
 //La dirección llega a una carpeta, no a archivos especificos
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Zap,
     Eye,
@@ -317,5 +319,5 @@ const rinoplastiaData: ProcedureData = {
 // ============================================
 
 export default function RinoplastiaPage() {
-    return <ProcedurePage data={rinoplastiaData} />
+    return <DynamicProcedurePage data={rinoplastiaData} />
 }

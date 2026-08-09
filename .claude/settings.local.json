@@ -38,7 +38,10 @@
       "Bash(git commit:*)",
       "Bash(dir \"C:\\\\Dr Sinchi\\\\manuel-sinchi-app\\\\public\\\\images\" /b)",
       "Bash(rm:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(grep -rl \"import { ProcedurePage\" --include=\"page.tsx\" src/app/cirugia-* src/app/medicina-* src/app/categoria)",
+      "Bash(grep -rh \"DynamicProcedurePage\" --include=\"page.tsx\" src/app/cirugia-* src/app/medicina-*)",
+      "Bash(grep -rl \"{ ProcedurePage,\" --include=\"page.tsx\" src/app/cirugia-* src/app/medicina-*)"
     ]
   }
 }

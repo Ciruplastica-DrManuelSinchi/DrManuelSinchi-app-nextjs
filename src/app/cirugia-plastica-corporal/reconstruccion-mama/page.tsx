@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -269,5 +269,5 @@ const reconstruccionMamaData: ProcedureData = {
 // ============================================
 
 export default function ReconstruccionMamaPage() {
-    return <ProcedurePage data={reconstruccionMamaData} />
+    return <DynamicProcedurePage data={reconstruccionMamaData} />
 }

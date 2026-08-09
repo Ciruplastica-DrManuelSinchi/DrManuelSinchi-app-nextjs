@@ -56,7 +56,7 @@ export async function PATCH(
     }
 
     const body = await request.json()
-    const { name, slug, categoryId, order, isActive } = body
+    const { name, slug, categoryId, order, isActive, infoImage, videos } = body
 
     // Verificar que el procedimiento existe
     const existing = await prisma.procedure.findUnique({
@@ -102,6 +102,8 @@ export async function PATCH(
     if (categoryId !== undefined) updateData.categoryId = categoryId
     if (order !== undefined) updateData.order = order
     if (isActive !== undefined) updateData.isActive = isActive
+    if (infoImage !== undefined) updateData.infoImage = infoImage || null
+    if (videos !== undefined) updateData.videos = videos
 
     const procedure = await prisma.procedure.update({
       where: { id },

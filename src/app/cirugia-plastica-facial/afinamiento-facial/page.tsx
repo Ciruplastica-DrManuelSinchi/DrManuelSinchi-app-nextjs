@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -268,5 +268,5 @@ const afinamientoFacialData: ProcedureData = {
 // ============================================
 
 export default function AfinamientoFacialPage() {
-    return <ProcedurePage data={afinamientoFacialData} />
+    return <DynamicProcedurePage data={afinamientoFacialData} />
 }

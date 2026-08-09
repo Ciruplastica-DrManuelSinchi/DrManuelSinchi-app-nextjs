@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -268,5 +268,5 @@ const aumentoPomulosData: ProcedureData = {
 // ============================================
 
 export default function AumentoPomulosPage() {
-    return <ProcedurePage data={aumentoPomulosData} />
+    return <DynamicProcedurePage data={aumentoPomulosData} />
 }

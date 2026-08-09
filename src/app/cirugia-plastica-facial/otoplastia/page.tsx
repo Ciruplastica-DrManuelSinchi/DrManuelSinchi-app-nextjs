@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -300,5 +300,5 @@ const otoplastiaData: ProcedureData = {
 // ============================================
 
 export default function OtoplastiaPage() {
-    return <ProcedurePage data={otoplastiaData} />
+    return <DynamicProcedurePage data={otoplastiaData} />
 }

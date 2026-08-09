@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Search,
@@ -14,12 +14,22 @@ import {
   X,
   Loader2,
   Stethoscope,
+  Image as ImageIcon,
+  Youtube,
+  Crop,
 } from 'lucide-react'
+import Image from 'next/image'
+import { ImageCropper } from '@/app/components/ui/image-cropper'
 
 interface Category {
   id: string
   name: string
   slug: string
+}
+
+interface VideoItem {
+  title: string
+  youtubeId: string
 }
 
 interface Procedure {
@@ -28,6 +38,8 @@ interface Procedure {
   slug: string
   order: number
   isActive: boolean
+  infoImage: string | null
+  videos: VideoItem[] | null
   category: Category
   createdAt: string
 }
@@ -55,6 +67,17 @@ export default function AdminProceduresPage() {
     isActive: true,
   })
   const [saving, setSaving] = useState(false)
+
+  // Media modal
+  const [showMediaModal, setShowMediaModal] = useState(false)
+  const [mediaProcedure, setMediaProcedure] = useState<Procedure | null>(null)
+  const [mediaInfoImage, setMediaInfoImage] = useState('')
+  const [mediaVideos, setMediaVideos] = useState<VideoItem[]>([])
+  const [savingMedia, setSavingMedia] = useState(false)
+  const [isUploadingInfo, setIsUploadingInfo] = useState(false)
+  const [cropperOpen, setCropperOpen] = useState(false)
+  const [imageToCrop, setImageToCrop] = useState<string | null>(null)
+  const infoImageRef = useRef<HTMLInputElement>(null)
 
   // Menú de acciones
   const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null)
@@ -201,6 +224,73 @@ export default function AdminProceduresPage() {
     setActionMenuOpen(null)
   }
 
+  // ── Media modal handlers ──
+  const handleOpenMedia = (procedure: Procedure) => {
+    setMediaProcedure(procedure)
+    setMediaInfoImage(procedure.infoImage || '')
+    setMediaVideos(procedure.videos && Array.isArray(procedure.videos) ? procedure.videos : [])
+    setShowMediaModal(true)
+    setActionMenuOpen(null)
+  }
+
+  const handleMediaImageSelect = (file: File) => {
+    if (file.size > 10 * 1024 * 1024) { alert('Max 10MB'); return }
+    const url = URL.createObjectURL(file)
+    setImageToCrop(url)
+    setCropperOpen(true)
+    if (infoImageRef.current) infoImageRef.current.value = ''
+  }
+
+  const handleMediaCropped = async (croppedFile: File) => {
+    setIsUploadingInfo(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', croppedFile)
+      fd.append('folder', 'procedures')
+      const res = await fetch('/api/upload', { method: 'POST', body: fd })
+      const data = await res.json()
+      if (data.url) setMediaInfoImage(data.url)
+      else alert(data.error || 'Error al subir')
+    } catch { alert('Error al subir imagen') }
+    finally {
+      setIsUploadingInfo(false)
+      if (imageToCrop) { URL.revokeObjectURL(imageToCrop); setImageToCrop(null) }
+    }
+  }
+
+  const handleAddVideo = () => {
+    setMediaVideos([...mediaVideos, { title: '', youtubeId: '' }])
+  }
+
+  const handleRemoveVideo = (idx: number) => {
+    setMediaVideos(mediaVideos.filter((_, i) => i !== idx))
+  }
+
+  const handleSaveMedia = async () => {
+    if (!mediaProcedure) return
+    setSavingMedia(true)
+    setError(null)
+    try {
+      const validVideos = mediaVideos.filter(v => v.youtubeId.trim())
+      const res = await fetch(`/api/admin/procedures/${mediaProcedure.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          infoImage: mediaInfoImage || null,
+          videos: validVideos.length > 0 ? validVideos : null,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error)
+      setSuccess('Contenido actualizado')
+      setShowMediaModal(false)
+      fetchProcedures()
+      setTimeout(() => setSuccess(null), 3000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al guardar')
+    } finally { setSavingMedia(false) }
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -326,7 +416,15 @@ export default function AdminProceduresPage() {
                     <td className="px-6 py-4">
                       <div>
                         <p className="font-medium text-dark">{procedure.name}</p>
-                        <p className="text-sm text-gray-500">{procedure.slug}</p>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <span className="text-sm text-gray-500">{procedure.slug}</span>
+                          {procedure.infoImage && (
+                            <span title="Tiene imagen" className="text-green-500"><ImageIcon className="w-3.5 h-3.5" /></span>
+                          )}
+                          {procedure.videos && Array.isArray(procedure.videos) && procedure.videos.length > 0 && (
+                            <span title={`${procedure.videos.length} video(s)`} className="text-red-500"><Youtube className="w-3.5 h-3.5" /></span>
+                          )}
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -377,6 +475,12 @@ export default function AdminProceduresPage() {
                                 className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
                               >
                                 <Edit2 className="w-4 h-4" /> Editar
+                              </button>
+                              <button
+                                onClick={() => handleOpenMedia(procedure)}
+                                className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                              >
+                                <ImageIcon className="w-4 h-4" /> Contenido
                               </button>
                               <button
                                 onClick={() => handleToggleActive(procedure)}
@@ -545,6 +649,188 @@ export default function AdminProceduresPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Modal de Contenido / Media ── */}
+      <AnimatePresence>
+        {showMediaModal && mediaProcedure && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-black/50 overflow-y-auto"
+            onClick={() => setShowMediaModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl my-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl font-bold text-dark">Contenido</h2>
+                  <p className="text-sm text-gray-500">{mediaProcedure.name}</p>
+                </div>
+                <button onClick={() => setShowMediaModal(false)} className="p-2 hover:bg-gray-100 rounded-lg">
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              <div className="space-y-6">
+                {/* ── Imagen "¿Qué es?" ── */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Imagen &quot;¿Qué es?&quot;
+                  </label>
+                  <p className="text-xs text-gray-400 mb-2">Se muestra en la sección informativa del procedimiento</p>
+                  {mediaInfoImage ? (
+                    <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+                      <div className="relative h-40">
+                        <Image src={mediaInfoImage} alt="Info" fill className="object-cover" />
+                      </div>
+                      <div className="flex gap-1.5 p-1.5">
+                        <label className="flex-1 flex items-center justify-center gap-1 text-xs font-medium text-gray-600 bg-white border border-gray-200 rounded-lg py-1.5 cursor-pointer hover:bg-gray-50 transition-colors">
+                          <input
+                            ref={infoImageRef}
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleMediaImageSelect(f) }}
+                            className="hidden"
+                          />
+                          {isUploadingInfo ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Crop className="w-3.5 h-3.5" />}
+                          Cambiar
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setMediaInfoImage('')}
+                          className="px-2 text-red-500 bg-white border border-gray-200 rounded-lg hover:bg-red-50 transition-colors"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-colors">
+                      <input
+                        ref={infoImageRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        onChange={(e) => { const f = e.target.files?.[0]; if (f) handleMediaImageSelect(f) }}
+                        className="hidden"
+                      />
+                      {isUploadingInfo ? (
+                        <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                      ) : (
+                        <>
+                          <Crop className="w-6 h-6 text-gray-400 mb-1" />
+                          <span className="text-xs text-gray-500 font-medium">Subir imagen</span>
+                          <span className="text-xs text-gray-400">Si no se sube, se usa la imagen por defecto</span>
+                        </>
+                      )}
+                    </label>
+                  )}
+                </div>
+
+                {/* ── Videos ── */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-semibold text-gray-700">
+                      Videos de YouTube
+                    </label>
+                    <button
+                      type="button"
+                      onClick={handleAddVideo}
+                      className="text-xs text-primary font-medium hover:text-primary/80 flex items-center gap-1"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Agregar
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-400 mb-3">Si no se agregan, se usan los videos por defecto</p>
+
+                  {mediaVideos.length === 0 ? (
+                    <p className="text-sm text-gray-400 text-center py-4 border border-dashed border-gray-200 rounded-xl">
+                      Sin videos personalizados
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {mediaVideos.map((video, idx) => (
+                        <div key={idx} className="flex gap-2 items-start">
+                          <div className="flex-1 space-y-1.5">
+                            <input
+                              type="text"
+                              placeholder="Título del video"
+                              value={video.title}
+                              onChange={(e) => {
+                                const updated = [...mediaVideos]
+                                updated[idx] = { ...updated[idx], title: e.target.value }
+                                setMediaVideos(updated)
+                              }}
+                              className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                            />
+                            <input
+                              type="text"
+                              placeholder="ID de YouTube (ej: dQw4w9WgXcQ)"
+                              value={video.youtubeId}
+                              onChange={(e) => {
+                                const updated = [...mediaVideos]
+                                updated[idx] = { ...updated[idx], youtubeId: e.target.value }
+                                setMediaVideos(updated)
+                              }}
+                              className="w-full px-3 py-1.5 text-sm font-mono border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveVideo(idx)}
+                            className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors mt-1"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Botones */}
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowMediaModal(false)}
+                    className="flex-1 py-2.5 px-4 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveMedia}
+                    disabled={savingMedia || isUploadingInfo}
+                    className="flex-1 py-2.5 px-4 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {savingMedia && <Loader2 className="w-4 h-4 animate-spin" />}
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Modal de recorte */}
+      {imageToCrop && (
+        <ImageCropper
+          isOpen={cropperOpen}
+          imageSrc={imageToCrop}
+          onClose={() => { setCropperOpen(false); if (imageToCrop) { URL.revokeObjectURL(imageToCrop); setImageToCrop(null) } }}
+          onCropComplete={handleMediaCropped}
+          aspectRatio={1}
+          title="Recortar imagen ¿Qué es?"
+          lockAspectRatio={true}
+          aspectRatioLabel="Cuadrada 1:1"
+        />
+      )}
     </div>
   )
 }

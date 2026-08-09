@@ -123,6 +123,7 @@ model ProcedureCategory {
   slug        String      @unique  // "facial"
   urlPath     String?     // "cirugia-plastica-facial" - para construir URLs
   description String?
+  image       String?     // Imagen principal de la categoría (administrable)
   order       Int         @default(0)
   isActive    Boolean     @default(true)
 
@@ -142,6 +143,8 @@ model Procedure {
   name        String            // "Rinoplastia"
   slug        String            @unique  // "rinoplastia"
   categoryId  String
+  infoImage   String?           // Imagen "¿Qué es?" (administrable, sobreescribe la estática)
+  videos      Json?             // [{title: string, youtubeId: string}] (administrable)
   order       Int               @default(0)
   isActive    Boolean           @default(true)
 

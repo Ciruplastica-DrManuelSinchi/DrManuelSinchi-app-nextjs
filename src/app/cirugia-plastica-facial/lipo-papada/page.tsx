@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -304,5 +304,5 @@ const lipoPapadaData: ProcedureData = {
 // ============================================
 
 export default function LipoPapadaPage() {
-    return <ProcedurePage data={lipoPapadaData} />
+    return <DynamicProcedurePage data={lipoPapadaData} />
 }

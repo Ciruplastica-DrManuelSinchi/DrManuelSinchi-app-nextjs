@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -306,5 +306,5 @@ const abdominoplastiaData: ProcedureData = {
 // ============================================
 
 export default function AbdominoplastiaPage() {
-    return <ProcedurePage data={abdominoplastiaData} />
+    return <DynamicProcedurePage data={abdominoplastiaData} />
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -269,5 +269,5 @@ const retiroBiopolimerosData: ProcedureData = {
 // ============================================
 
 export default function RetiroBiopolimerosPage() {
-    return <ProcedurePage data={retiroBiopolimerosData} />
+    return <DynamicProcedurePage data={retiroBiopolimerosData} />
 }

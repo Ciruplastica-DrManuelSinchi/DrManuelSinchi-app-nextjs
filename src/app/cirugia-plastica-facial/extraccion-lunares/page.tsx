@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -278,5 +278,5 @@ const extraccionLunaresData: ProcedureData = {
 // ============================================
 
 export default function ExtraccionLunaresPage() {
-    return <ProcedurePage data={extraccionLunaresData} />
+    return <DynamicProcedurePage data={extraccionLunaresData} />
 }

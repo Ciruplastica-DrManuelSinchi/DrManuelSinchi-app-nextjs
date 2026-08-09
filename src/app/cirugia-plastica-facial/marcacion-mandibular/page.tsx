@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -268,5 +268,5 @@ const marcacionMandibularData: ProcedureData = {
 // ============================================
 
 export default function MarcacionMandibularPage() {
-    return <ProcedurePage data={marcacionMandibularData} />
+    return <DynamicProcedurePage data={marcacionMandibularData} />
 }

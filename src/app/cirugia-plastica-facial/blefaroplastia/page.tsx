@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Eye,
     Sparkles,
@@ -320,5 +320,5 @@ const blefaroplastiaData: ProcedureData = {
 // ============================================
 
 export default function BlefaroplastiaPage() {
-    return <ProcedurePage data={blefaroplastiaData} />
+    return <DynamicProcedurePage data={blefaroplastiaData} />
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -268,5 +268,5 @@ const radiofrecuenciaData: ProcedureData = {
 // ============================================
 
 export default function RadiofrecuenciaUltrasonidoPage() {
-    return <ProcedurePage data={radiofrecuenciaData} />
+    return <DynamicProcedurePage data={radiofrecuenciaData} />
 }

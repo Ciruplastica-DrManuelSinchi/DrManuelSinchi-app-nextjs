@@ -1,6 +1,6 @@
 "use client"
 
-import { ProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
+import { DynamicProcedurePage, ProcedureData } from '@/app/components/templates/procedure-page'
 import {
     Sparkles,
     Shield,
@@ -291,5 +291,5 @@ const rellenosLabiosData: ProcedureData = {
 // ============================================
 
 export default function RellenosLabiosPage() {
-    return <ProcedurePage data={rellenosLabiosData} />
+    return <DynamicProcedurePage data={rellenosLabiosData} />
 }
