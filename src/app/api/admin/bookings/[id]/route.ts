@@ -116,15 +116,32 @@ export async function PATCH(
     })
 
     // Sincronizar con Google Calendar (import dinámico)
-    if (existingBooking.calendarEventId) {
+    if (status === 'CONFIRMED' && !existingBooking.calendarEventId) {
+      // Crear evento en Google Calendar al confirmar pago manual
+      const { createCalendarEvent } = await import('@/lib/google-calendar')
+      const calendarResult = await createCalendarEvent({
+        patientName: booking.user.name || 'Paciente',
+        patientEmail: booking.user.email!,
+        procedureName: existingBooking.procedureName,
+        procedureCategory: existingBooking.procedureCategory,
+        date: existingBooking.date,
+        timeSlot: existingBooking.timeSlot,
+        message: existingBooking.message || undefined,
+        bookingId: existingBooking.id,
+      })
+
+      if (calendarResult.success && calendarResult.eventId) {
+        await prisma.booking.update({
+          where: { id },
+          data: { calendarEventId: calendarResult.eventId },
+        })
+      }
+    } else if (existingBooking.calendarEventId) {
       const { cancelCalendarEvent, updateCalendarEvent } = await import('@/lib/google-calendar')
 
-      // Si se canceló la reserva, cancelar el evento del calendario
       if (status === 'CANCELLED') {
         await cancelCalendarEvent(existingBooking.calendarEventId)
-      }
-      // Si se cambió la fecha/hora, actualizar el evento
-      else if (date || timeSlot) {
+      } else if (date || timeSlot) {
         await updateCalendarEvent(existingBooking.calendarEventId, {
           date: date ? new Date(date) : existingBooking.date,
           timeSlot: timeSlot || existingBooking.timeSlot,
