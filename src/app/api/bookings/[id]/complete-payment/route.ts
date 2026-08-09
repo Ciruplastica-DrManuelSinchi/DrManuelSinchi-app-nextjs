@@ -92,26 +92,27 @@ export async function POST(
       )
     }
 
+    // Determinar si el pago se verifica automáticamente o requiere revisión manual
+    const isManualPayment = ['yape', 'whatsapp'].includes(paymentMethod)
+    const newStatus = isManualPayment ? 'PENDING' : 'CONFIRMED'
+
     // Actualizar reserva y crear pago en transacción
     const updatedBooking = await prisma.$transaction(async (tx) => {
-      // Crear el pago
-      const isAutoCompleted = ['culqi', 'card', 'simulated'].includes(paymentMethod)
       await tx.payment.create({
         data: {
           bookingId: id,
           amount: paymentAmount,
           method: paymentMethodMap[paymentMethod],
-          culqiChargeId: ['culqi', 'card'].includes(paymentMethod) ? paymentReference : null,
-          status: isAutoCompleted ? 'completed' : 'pending',
+          culqiChargeId: paymentReference || null,
+          status: isManualPayment ? 'pending' : 'completed',
         },
       })
 
-      // Actualizar la reserva a CONFIRMED directamente
       const updated = await tx.booking.update({
         where: { id },
         data: {
-          status: 'CONFIRMED',
-          paymentDeadline: null, // Ya no necesita deadline
+          status: newStatus,
+          paymentDeadline: null,
         },
         include: {
           payment: true,
@@ -121,33 +122,40 @@ export async function POST(
       return updated
     })
 
-    // Crear evento en Google Calendar
-    const calendarResult = await createCalendarEvent({
-      patientName: session.user.name || 'Paciente',
-      patientEmail: session.user.email!,
-      procedureName: booking.procedureName,
-      procedureCategory: booking.procedureCategory,
-      date: booking.date,
-      timeSlot: booking.timeSlot,
-      message: booking.message || undefined,
-      bookingId: booking.id,
-    })
-
-    // Guardar el ID del evento si se creó exitosamente
-    if (calendarResult.success && calendarResult.eventId) {
-      await prisma.booking.update({
-        where: { id: booking.id },
-        data: { calendarEventId: calendarResult.eventId },
+    // Solo crear evento en Google Calendar si se confirma automáticamente
+    let calendarEventCreated = false
+    if (!isManualPayment) {
+      const calendarResult = await createCalendarEvent({
+        patientName: session.user.name || 'Paciente',
+        patientEmail: session.user.email!,
+        procedureName: booking.procedureName,
+        procedureCategory: booking.procedureCategory,
+        date: booking.date,
+        timeSlot: booking.timeSlot,
+        message: booking.message || undefined,
+        bookingId: booking.id,
       })
+
+      if (calendarResult.success && calendarResult.eventId) {
+        await prisma.booking.update({
+          where: { id: booking.id },
+          data: { calendarEventId: calendarResult.eventId },
+        })
+        calendarEventCreated = true
+      }
     }
+
+    const message = isManualPayment
+      ? 'Pago registrado. Un administrador verificará tu pago y confirmará tu cita.'
+      : calendarEventCreated
+        ? 'Pago completado. Tu cita ha sido confirmada. Recibirás una invitación de calendario en tu correo.'
+        : 'Pago completado. Tu cita ha sido confirmada.'
 
     return NextResponse.json({
       success: true,
       booking: updatedBooking,
-      calendarEventCreated: calendarResult.success,
-      message: calendarResult.success
-        ? 'Pago completado. Tu cita ha sido confirmada. Recibirás una invitación de calendario en tu correo.'
-        : 'Pago completado. Tu cita ha sido confirmada.',
+      calendarEventCreated,
+      message,
     })
   } catch (error) {
     console.error('Error completing payment:', error)

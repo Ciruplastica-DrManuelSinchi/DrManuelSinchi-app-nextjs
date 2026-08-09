@@ -4,15 +4,17 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   X,
-  CreditCard,
   Smartphone,
   Clock,
   Calendar,
   AlertTriangle,
   Loader2,
   CheckCircle,
-  Shield,
+  Building2,
+  Copy,
+  MessageCircle,
 } from 'lucide-react'
+import Image from 'next/image'
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -28,8 +30,17 @@ interface PaymentModalProps {
 }
 
 const CONSULTATION_PRICE = 50
+const WHATSAPP_NUMBER = '961360074'
 
-// Componente de countdown
+const BANK_INFO = {
+  yapeNumber: '961360074',
+  yapeName: 'Manuel Sinchi',
+  bankName: 'BCP',
+  accountNumber: 'XXXX-XXXX-XXXX-XXXX',
+  cci: 'XXX-XXX-XXXXXXXXXX-XX',
+  accountHolder: 'Manuel Sinchi Castañeda',
+}
+
 function CountdownTimer({
   expiresAt,
   onExpired
@@ -52,21 +63,17 @@ function CountdownTimer({
         return null
       }
 
-      const minutes = Math.floor((difference / 1000 / 60) % 60)
-      const seconds = Math.floor((difference / 1000) % 60)
-
-      return { minutes, seconds }
+      return {
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      }
     }
 
     setTimeLeft(calculateTimeLeft())
-
     const timer = setInterval(() => {
       const remaining = calculateTimeLeft()
-      if (remaining === null) {
-        clearInterval(timer)
-      } else {
-        setTimeLeft(remaining)
-      }
+      if (remaining === null) clearInterval(timer)
+      else setTimeLeft(remaining)
     }, 1000)
 
     return () => clearInterval(timer)
@@ -85,7 +92,6 @@ function CountdownTimer({
   }
 
   if (!timeLeft) return null
-
   const isLowTime = timeLeft.minutes < 5
 
   return (
@@ -105,24 +111,28 @@ function CountdownTimer({
   )
 }
 
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <button
+      type="button"
+      onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2000) }}
+      className="p-1 hover:bg-gray-200 rounded transition-colors"
+    >
+      {copied ? <CheckCircle className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-400" />}
+    </button>
+  )
+}
+
 export default function PaymentModal({ isOpen, onClose, booking, onPaymentComplete }: PaymentModalProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [expired, setExpired] = useState(false)
-  const [isDev, setIsDev] = useState(false)
+  const [selectedTab, setSelectedTab] = useState<'yape' | 'transfer'>('yape')
 
   useEffect(() => {
-    setIsDev(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost')
-  }, [])
-
-  // Reset states when modal opens
-  useEffect(() => {
-    if (isOpen) {
-      setError('')
-      setSuccess(false)
-      setExpired(false)
-    }
+    if (isOpen) { setError(''); setSuccess(false); setExpired(false) }
   }, [isOpen])
 
   const handleExpired = useCallback(() => {
@@ -130,11 +140,15 @@ export default function PaymentModal({ isOpen, onClose, booking, onPaymentComple
     setError('Tu tiempo de reserva ha expirado. Por favor, crea una nueva reserva.')
   }, [])
 
-  const handlePayment = async (paymentMethod: string, paymentReference?: string) => {
-    if (expired) {
-      setError('Tu tiempo de reserva ha expirado')
-      return
-    }
+  const bookingCode = booking.id.slice(-6).toUpperCase()
+
+  const formatDate = (dateString: string) =>
+    new Date(dateString).toLocaleDateString('es-PE', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    })
+
+  const handleConfirmPayment = async () => {
+    if (expired) { setError('Tu tiempo de reserva ha expirado'); return }
 
     setIsLoading(true)
     setError('')
@@ -144,20 +158,32 @@ export default function PaymentModal({ isOpen, onClose, booking, onPaymentComple
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          paymentMethod,
-          paymentReference,
+          paymentMethod: selectedTab === 'yape' ? 'yape' : 'whatsapp',
+          paymentReference: `MANUAL-${Date.now()}`,
           paymentAmount: CONSULTATION_PRICE,
         }),
       })
 
       const data = await response.json()
-
-      if (!response.ok) {
-        setError(data.error || 'Error al procesar el pago')
-        return
-      }
+      if (!response.ok) { setError(data.error || 'Error al procesar el pago'); return }
 
       setSuccess(true)
+
+      // Abrir WhatsApp
+      const message = encodeURIComponent(
+`Hola, ya realicé el pago de mi consulta.
+
+*CÓDIGO DE RESERVA:* ${bookingCode}
+*Procedimiento:* ${booking.procedureName}
+*Fecha:* ${formatDate(booking.date)}
+*Hora:* ${booking.timeSlot}
+*Monto:* S/. ${CONSULTATION_PRICE}.00
+*Método:* ${selectedTab === 'yape' ? 'Yape' : 'Transferencia bancaria'}
+
+Por favor, verificar mi pago. ¡Gracias!`
+      )
+      window.open(`https://wa.me/51${WHATSAPP_NUMBER}?text=${message}`, '_blank')
+
       setTimeout(() => {
         onPaymentComplete()
         onClose()
@@ -167,22 +193,6 @@ export default function PaymentModal({ isOpen, onClose, booking, onPaymentComple
     } finally {
       setIsLoading(false)
     }
-  }
-
-  const handleSimulatedPayment = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      handlePayment('simulated', `SIM-${Date.now()}`)
-    }, 1500)
-  }
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('es-PE', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })
   }
 
   if (!isOpen) return null
@@ -201,20 +211,17 @@ export default function PaymentModal({ isOpen, onClose, booking, onPaymentComple
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden"
+          className="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-white relative">
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors"
-            >
+            <button onClick={onClose} className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors">
               <X className="w-5 h-5" />
             </button>
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                <CreditCard className="w-6 h-6" />
+                <Smartphone className="w-6 h-6" />
               </div>
               <div>
                 <h2 className="text-xl font-bold">Completar Pago</h2>
@@ -223,33 +230,19 @@ export default function PaymentModal({ isOpen, onClose, booking, onPaymentComple
             </div>
           </div>
 
-          {/* Content */}
           <div className="p-6 space-y-4">
-            {/* Success State */}
             {success ? (
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="text-center py-8"
-              >
+              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-8">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-10 h-10 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
-                  ¡Pago Completado!
-                </h3>
-                <p className="text-gray-600">
-                  Tu cita ha sido confirmada exitosamente.
-                </p>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">¡Pago Registrado!</h3>
+                <p className="text-gray-600">Un administrador verificará tu pago y confirmará tu cita.</p>
               </motion.div>
             ) : (
               <>
-                {/* Countdown */}
                 {booking.paymentDeadline && !expired && (
-                  <CountdownTimer
-                    expiresAt={new Date(booking.paymentDeadline)}
-                    onExpired={handleExpired}
-                  />
+                  <CountdownTimer expiresAt={new Date(booking.paymentDeadline)} onExpired={handleExpired} />
                 )}
 
                 {/* Booking Details */}
@@ -271,81 +264,81 @@ export default function PaymentModal({ isOpen, onClose, booking, onPaymentComple
                   <p className="text-3xl font-bold text-primary">S/. {CONSULTATION_PRICE}.00</p>
                 </div>
 
-                {/* Error */}
                 {error && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"
-                  >
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
                     <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                     <span>{error}</span>
                   </motion.div>
                 )}
 
-                {/* Payment Buttons */}
-                <div className={`space-y-3 ${expired ? 'opacity-50 pointer-events-none' : ''}`}>
-                  {/* Card Payment */}
-                  <button
-                    onClick={() => handlePayment('card', `CARD-${Date.now()}`)}
-                    disabled={isLoading || expired}
-                    className="w-full flex items-center gap-4 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-blue-400 hover:bg-blue-50/50 transition-all disabled:opacity-50"
-                  >
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                      <CreditCard className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div className="flex-1 text-left">
-                      <p className="font-medium text-gray-800">Tarjeta de Crédito/Débito</p>
-                      <p className="text-sm text-gray-500">Visa, Mastercard, American Express</p>
-                    </div>
-                  </button>
+                <div className={expired ? 'opacity-50 pointer-events-none' : ''}>
+                  {/* Tabs */}
+                  <div className="flex rounded-xl bg-gray-100 p-1 mb-4">
+                    <button type="button" onClick={() => setSelectedTab('yape')}
+                      className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${
+                        selectedTab === 'yape' ? 'bg-white text-purple-700 shadow-sm' : 'text-gray-500'
+                      }`}>
+                      <Smartphone className="w-4 h-4" /> Yape
+                    </button>
+                    <button type="button" onClick={() => setSelectedTab('transfer')}
+                      className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${
+                        selectedTab === 'transfer' ? 'bg-white text-blue-700 shadow-sm' : 'text-gray-500'
+                      }`}>
+                      <Building2 className="w-4 h-4" /> Transferencia
+                    </button>
+                  </div>
 
-                  {/* Yape */}
-                  <button
-                    onClick={() => handlePayment('yape', `YAPE-${Date.now()}`)}
-                    disabled={isLoading || expired}
-                    className="w-full flex items-center gap-4 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-purple-400 hover:bg-purple-50/50 transition-all disabled:opacity-50"
-                  >
-                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                      <Smartphone className="w-6 h-6 text-purple-600" />
+                  {selectedTab === 'yape' ? (
+                    <div className="bg-purple-50 rounded-xl p-4 space-y-3">
+                      <div className="flex justify-center">
+                        <div className="bg-white rounded-xl p-3 shadow-sm">
+                          <div className="w-36 h-36 relative">
+                            <Image src="/images/yape-qr.png" alt="QR Yape" fill className="object-contain"
+                              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-white rounded-lg p-3 flex items-center justify-between">
+                        <div>
+                          <p className="text-xs text-gray-500">Yapea al</p>
+                          <p className="font-bold text-purple-800">{BANK_INFO.yapeNumber}</p>
+                        </div>
+                        <CopyButton text={BANK_INFO.yapeNumber} />
+                      </div>
                     </div>
-                    <div className="flex-1 text-left">
-                      <p className="font-medium text-gray-800">Yape</p>
-                      <p className="text-sm text-gray-500">Pago rápido desde tu celular</p>
-                    </div>
-                  </button>
-
-                  {/* Simulated Payment (Dev only) */}
-                  {isDev && (
-                    <div className="border-t-2 border-dashed border-orange-300 pt-4">
-                      <button
-                        onClick={handleSimulatedPayment}
-                        disabled={isLoading || expired}
-                        className="w-full flex items-center justify-center gap-2 p-4 bg-orange-500 text-white rounded-xl font-medium hover:bg-orange-600 transition-colors disabled:opacity-50"
-                      >
-                        {isLoading ? (
-                          <>
-                            <Loader2 className="w-5 h-5 animate-spin" />
-                            Procesando...
-                          </>
-                        ) : (
-                          <>
-                            <CheckCircle className="w-5 h-5" />
-                            Simular Pago (Dev)
-                          </>
-                        )}
-                      </button>
-                      <p className="text-xs text-orange-600 text-center mt-2">
-                        Solo visible en desarrollo
-                      </p>
+                  ) : (
+                    <div className="bg-blue-50 rounded-xl p-4 space-y-3">
+                      <div className="bg-white rounded-lg p-3 space-y-2 text-sm">
+                        <div><span className="text-gray-500">Banco:</span> <span className="font-medium">{BANK_INFO.bankName}</span></div>
+                        <div className="flex items-center justify-between">
+                          <div><span className="text-gray-500">Cuenta:</span> <span className="font-mono font-medium">{BANK_INFO.accountNumber}</span></div>
+                          <CopyButton text={BANK_INFO.accountNumber} />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div><span className="text-gray-500">CCI:</span> <span className="font-mono font-medium">{BANK_INFO.cci}</span></div>
+                          <CopyButton text={BANK_INFO.cci} />
+                        </div>
+                        <div><span className="text-gray-500">Titular:</span> <span className="font-medium">{BANK_INFO.accountHolder}</span></div>
+                      </div>
                     </div>
                   )}
-                </div>
 
-                {/* Security Badge */}
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
-                  <Shield className="w-4 h-4" />
-                  <span>Pago 100% seguro y encriptado</span>
+                  {/* Confirm Button */}
+                  <button
+                    onClick={handleConfirmPayment}
+                    disabled={isLoading || expired}
+                    className="w-full mt-4 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {isLoading ? (
+                      <><Loader2 className="w-5 h-5 animate-spin" /> Registrando...</>
+                    ) : (
+                      <><MessageCircle className="w-5 h-5" /> Sí, ya pagué. ¡Verifícalo!</>
+                    )}
+                  </button>
+                  <p className="text-xs text-center text-gray-500 mt-2">
+                    Se abrirá WhatsApp para notificar tu pago.
+                  </p>
                 </div>
               </>
             )}

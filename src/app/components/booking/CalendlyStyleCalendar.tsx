@@ -79,10 +79,19 @@ export default function CalendlyStyleCalendar({
 
   // Sincronizar con props externas
   useEffect(() => {
-    if (selectedDate) {
-      setInternalSelectedDate(parseLocalDate(selectedDate))
-    }
+    setInternalSelectedDate(selectedDate ? parseLocalDate(selectedDate) : null)
   }, [selectedDate])
+
+  // ponytail: deseleccionar fecha si no es válida para la nueva modalidad
+  useEffect(() => {
+    if (!internalSelectedDate) return
+    const dayOfWeek = internalSelectedDate.getDay()
+    const allowedDays = modalidad === 'VIRTUAL' ? ALLOWED_DAYS_VIRTUAL : ALLOWED_DAYS_PRESENCIAL
+    if (!allowedDays.includes(dayOfWeek)) {
+      setInternalSelectedDate(null)
+      onSelectDateTime('', '')
+    }
+  }, [modalidad]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Calcular días del mes
   const calendarDays = useMemo(() => {

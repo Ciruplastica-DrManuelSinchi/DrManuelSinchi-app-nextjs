@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  CreditCard,
   Smartphone,
   MessageCircle,
   ChevronLeft,
@@ -12,7 +11,11 @@ import {
   AlertCircle,
   Clock,
   AlertTriangle,
+  Building2,
+  Copy,
+  QrCode,
 } from 'lucide-react'
+import Image from 'next/image'
 
 // Parse "YYYY-MM-DD" as a local date (not UTC midnight)
 function parseLocalDate(dateStr: string): Date {
@@ -33,10 +36,18 @@ interface PaymentStepProps {
   onHoldExpired?: () => void
 }
 
-type PaymentMethod = 'card' | 'yape' | 'whatsapp' | null
-
 const WHATSAPP_NUMBER = '961360074'
 const CONSULTATION_PRICE = 50
+
+// Datos bancarios (el admin puede actualizar estos valores)
+const BANK_INFO = {
+  yapeNumber: '961360074',
+  yapeName: 'Manuel Sinchi',
+  bankName: 'BCP',
+  accountNumber: 'XXXX-XXXX-XXXX-XXXX', // ponytail: placeholder, el admin debe actualizar
+  cci: 'XXX-XXX-XXXXXXXXXX-XX',
+  accountHolder: 'Manuel Sinchi Castañeda',
+}
 
 // Componente de countdown
 function CountdownTimer({
@@ -67,10 +78,8 @@ function CountdownTimer({
       return { minutes, seconds }
     }
 
-    // Calcular inmediatamente
     setTimeLeft(calculateTimeLeft())
 
-    // Actualizar cada segundo
     const timer = setInterval(() => {
       const remaining = calculateTimeLeft()
       if (remaining === null) {
@@ -133,6 +142,31 @@ function CountdownTimer({
   )
 }
 
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className="p-1 hover:bg-gray-200 rounded transition-colors"
+      title="Copiar"
+    >
+      {copied ? (
+        <CheckCircle className="w-4 h-4 text-green-600" />
+      ) : (
+        <Copy className="w-4 h-4 text-gray-400" />
+      )}
+    </button>
+  )
+}
+
 // Verificar si estamos en modo desarrollo
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -148,18 +182,16 @@ export default function PaymentStep({
   holdExpiresAt,
   onHoldExpired,
 }: PaymentStepProps) {
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>(null)
+  const [selectedTab, setSelectedTab] = useState<'yape' | 'transfer'>('yape')
   const [paymentLoading, setPaymentLoading] = useState(false)
   const [error, setError] = useState('')
   const [holdExpired, setHoldExpired] = useState(false)
   const [isDev, setIsDev] = useState(false)
 
-  // Verificar modo desarrollo en el cliente
   useEffect(() => {
     setIsDev(IS_DEVELOPMENT || window.location.hostname === 'localhost')
   }, [])
 
-  // Generar código corto de reserva (últimos 6 caracteres del ID)
   const bookingCode = bookingId.slice(-6).toUpperCase()
 
   const handleHoldExpired = useCallback(() => {
@@ -170,8 +202,15 @@ export default function PaymentStep({
     }
   }, [onHoldExpired])
 
-  // Función genérica para iniciar pago con Culqi
-  const initCulqiPayment = async (enableYape: boolean) => {
+  const formattedDate = parseLocalDate(date).toLocaleDateString('es-PE', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+
+  // "Ya pagué" → registra el pago como pendiente de verificación y abre WhatsApp
+  const handleConfirmPayment = async () => {
     if (holdExpired) {
       setError('Tu tiempo de reserva ha expirado')
       return
@@ -181,112 +220,31 @@ export default function PaymentStep({
     setError('')
 
     try {
-      // Load Culqi.js if not loaded
-      if (!(window as unknown as { Culqi?: CulqiType }).Culqi) {
-        await new Promise<void>((resolve, reject) => {
-          const script = document.createElement('script')
-          script.src = 'https://checkout.culqi.com/js/v4'
-          script.onload = () => resolve()
-          script.onerror = () => reject(new Error('Error al cargar Culqi'))
-          document.body.appendChild(script)
-        })
-      }
-
-      // Wait a bit for Culqi to initialize
-      await new Promise(resolve => setTimeout(resolve, 500))
-
-      // Configure Culqi
-      const Culqi = (window as unknown as { Culqi: CulqiType }).Culqi
-      Culqi.publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY || 'pk_test_90667d0a57d45c48'
-
-      Culqi.settings({
-        title: 'Ciruplástica',
-        currency: 'PEN',
-        amount: amount * 100, // Culqi uses cents
-        order: `consulta-${Date.now()}`,
-      })
-
-      Culqi.options({
-        lang: 'es',
-        installments: false,
-        paymentMethods: {
-          tarjeta: !enableYape, // Solo tarjeta si no es Yape
-          yape: enableYape,     // Solo Yape si enableYape es true
-          bancaMovil: false,
-          agente: false,
-          billetera: false,
-          cuotealo: false,
-        },
-      })
-
-      // Set up global callback
-      const paymentMethod = enableYape ? 'yape' : 'card'
-      ;(window as unknown as { culqi: () => void }).culqi = async () => {
-        const culqiInstance = (window as unknown as { Culqi: CulqiType }).Culqi
-        if (culqiInstance.token) {
-          try {
-            const response = await fetch('/api/payments/culqi', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                token: culqiInstance.token.id,
-                amount: amount * 100,
-                description: `Consulta: ${procedureName}`,
-              }),
-            })
-
-            const data = await response.json()
-
-            if (response.ok) {
-              onComplete(paymentMethod, data.chargeId)
-            } else {
-              setError(data.error || 'Error al procesar el pago')
-              setPaymentLoading(false)
-            }
-          } catch {
-            setError('Error de conexión al procesar el pago')
-            setPaymentLoading(false)
-          }
-        } else {
-          setError('No se pudo obtener el token de pago')
-          setPaymentLoading(false)
-        }
-      }
-
-      Culqi.open()
-    } catch {
-      setError('Error al iniciar el proceso de pago')
+      // Registrar en la plataforma como pendiente de verificación
+      const paymentMethod = selectedTab === 'yape' ? 'yape' : 'whatsapp'
+      onComplete(paymentMethod, `MANUAL-${Date.now()}`)
+    } finally {
       setPaymentLoading(false)
     }
-  }
 
-  const handleCardPayment = () => initCulqiPayment(false)
-  const handleYapePayment = () => initCulqiPayment(true)
-
-  // WhatsApp ahora es para consultas, no para pagos
-  const handleWhatsAppContact = () => {
-    const formattedDate = parseLocalDate(date).toLocaleDateString('es-PE', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })
-
+    // Abrir WhatsApp con el mensaje de confirmación
     const message = encodeURIComponent(
-`Hola, tengo una consulta sobre mi reserva de cita.
+`Hola, ya realicé el pago de mi consulta.
 
 *CÓDIGO DE RESERVA:* ${bookingCode}
 *Procedimiento:* ${procedureName}
 *Fecha:* ${formattedDate}
 *Hora:* ${timeSlot}
+*Monto:* S/. ${amount}.00
+*Método:* ${selectedTab === 'yape' ? 'Yape' : 'Transferencia bancaria'}
 
-Mi consulta es:`
+Por favor, verificar mi pago. ¡Gracias!`
     )
     window.open(`https://wa.me/51${WHATSAPP_NUMBER}?text=${message}`, '_blank')
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Header */}
       <div className="flex items-center gap-4 pb-4 border-b border-gray-100">
         <button
@@ -298,7 +256,7 @@ Mi consulta es:`
           <ChevronLeft className="w-5 h-5 text-gray-600" />
         </button>
         <div>
-          <h3 className="font-semibold text-dark">Método de Pago</h3>
+          <h3 className="font-semibold text-dark">Realizar Pago</h3>
           <p className="text-sm text-gray-500">Consulta: {procedureName}</p>
         </div>
       </div>
@@ -318,18 +276,9 @@ Mi consulta es:`
           <span className="font-medium text-dark">Detalles de tu cita</span>
         </div>
         <div className="text-sm text-gray-600 space-y-1">
-          <p>
-            <span className="font-medium">Fecha:</span>{' '}
-            {parseLocalDate(date).toLocaleDateString('es-PE', {
-              weekday: 'long',
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })}
-          </p>
-          <p>
-            <span className="font-medium">Hora:</span> {timeSlot}
-          </p>
+          <p><span className="font-medium">Código:</span> {bookingCode}</p>
+          <p><span className="font-medium">Fecha:</span> {formattedDate}</p>
+          <p><span className="font-medium">Hora:</span> {timeSlot}</p>
         </div>
       </div>
 
@@ -351,163 +300,161 @@ Mi consulta es:`
         </motion.div>
       )}
 
-      {/* Payment Methods - disabled if hold expired */}
-      <div className={`space-y-3 ${holdExpired ? 'opacity-50 pointer-events-none' : ''}`}>
-        {/* Card Payment */}
-        <motion.button
-          type="button"
-          onClick={() => setSelectedMethod(selectedMethod === 'card' ? null : 'card')}
-          className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
-            selectedMethod === 'card'
-              ? 'border-primary bg-primary/5'
-              : 'border-gray-200 hover:border-gray-300'
-          }`}
-          whileTap={{ scale: 0.98 }}
-          disabled={holdExpired}
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-              <CreditCard className="w-6 h-6 text-blue-600" />
-            </div>
-            <div className="flex-1">
-              <p className="font-medium text-dark">Tarjeta de Crédito/Débito</p>
-              <p className="text-sm text-gray-500">Visa, Mastercard, American Express</p>
-            </div>
-            <div className={`w-5 h-5 rounded-full border-2 ${
-              selectedMethod === 'card' ? 'border-primary bg-primary' : 'border-gray-300'
-            }`}>
-              {selectedMethod === 'card' && (
-                <CheckCircle className="w-full h-full text-white" />
-              )}
-            </div>
-          </div>
-        </motion.button>
-
-        {/* Expanded Card */}
-        <AnimatePresence>
-          {selectedMethod === 'card' && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="p-4 bg-blue-50 rounded-xl">
-                <p className="text-sm text-gray-600 mb-4">
-                  Serás redirigido a la pasarela segura de Culqi para completar tu pago.
-                </p>
-                <button
-                  type="button"
-                  onClick={handleCardPayment}
-                  disabled={paymentLoading || holdExpired}
-                  className="w-full py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
-                >
-                  {paymentLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Procesando...
-                    </span>
-                  ) : (
-                    'Pagar con Tarjeta'
-                  )}
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Yape - Validación automática */}
-        <motion.button
-          type="button"
-          onClick={() => setSelectedMethod(selectedMethod === 'yape' ? null : 'yape')}
-          className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
-            selectedMethod === 'yape'
-              ? 'border-primary bg-primary/5'
-              : 'border-gray-200 hover:border-gray-300'
-          }`}
-          whileTap={{ scale: 0.98 }}
-          disabled={holdExpired}
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-              <Smartphone className="w-6 h-6 text-purple-600" />
-            </div>
-            <div className="flex-1">
-              <p className="font-medium text-dark">Yape</p>
-              <p className="text-sm text-gray-500">Pago rápido y validación automática</p>
-            </div>
-            <div className={`w-5 h-5 rounded-full border-2 ${
-              selectedMethod === 'yape' ? 'border-primary bg-primary' : 'border-gray-300'
-            }`}>
-              {selectedMethod === 'yape' && (
-                <CheckCircle className="w-full h-full text-white" />
-              )}
-            </div>
-          </div>
-        </motion.button>
-
-        {/* Expanded Yape */}
-        <AnimatePresence>
-          {selectedMethod === 'yape' && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="p-4 bg-purple-50 rounded-xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-purple-800">Validación automática</p>
-                    <p className="text-sm text-purple-600">Tu pago se verifica al instante</p>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">
-                  Ingresa tu número de celular y aprueba el pago desde tu app de Yape.
-                  No necesitas enviar comprobantes.
-                </p>
-                <button
-                  type="button"
-                  onClick={handleYapePayment}
-                  disabled={paymentLoading || holdExpired}
-                  className="w-full py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors disabled:opacity-50"
-                >
-                  {paymentLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Procesando...
-                    </span>
-                  ) : (
-                    'Pagar con Yape'
-                  )}
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* WhatsApp - Canal de consultas */}
-        <div className="border-t border-gray-100 pt-3 mt-3">
-          <p className="text-xs text-gray-500 text-center mb-3">¿Tienes dudas antes de pagar?</p>
+      {/* Payment Methods Tabs */}
+      <div className={holdExpired ? 'opacity-50 pointer-events-none' : ''}>
+        <div className="flex rounded-xl bg-gray-100 p-1 mb-4">
           <button
             type="button"
-            onClick={handleWhatsAppContact}
-            className="w-full p-4 rounded-xl border-2 border-gray-200 hover:border-green-300 hover:bg-green-50/50 transition-all text-left"
+            onClick={() => setSelectedTab('yape')}
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              selectedTab === 'yape'
+                ? 'bg-white text-purple-700 shadow-sm'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
           >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                <MessageCircle className="w-6 h-6 text-green-600" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-dark">Contactar por WhatsApp</p>
-                <p className="text-sm text-gray-500">Resuelve tus dudas antes de reservar</p>
-              </div>
-            </div>
+            <Smartphone className="w-4 h-4" />
+            Yape
+          </button>
+          <button
+            type="button"
+            onClick={() => setSelectedTab('transfer')}
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              selectedTab === 'transfer'
+                ? 'bg-white text-blue-700 shadow-sm'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            <Building2 className="w-4 h-4" />
+            Transferencia
           </button>
         </div>
+
+        <AnimatePresence mode="wait">
+          {/* Yape Tab */}
+          {selectedTab === 'yape' && (
+            <motion.div
+              key="yape"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              className="bg-purple-50 rounded-xl p-5 space-y-4"
+            >
+              <div className="text-center">
+                <h4 className="font-semibold text-purple-800 mb-1">Paga con Yape</h4>
+                <p className="text-sm text-purple-600">Escanea el código QR o yapea al número</p>
+              </div>
+
+              {/* QR Code */}
+              <div className="flex justify-center">
+                <div className="bg-white rounded-2xl p-4 shadow-sm">
+                  <div className="w-48 h-48 relative">
+                    <Image
+                      src="/images/yape-qr.png"
+                      alt="Código QR de Yape"
+                      fill
+                      className="object-contain"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none'
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Número de Yape */}
+              <div className="bg-white rounded-xl p-3 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-gray-500">Número de Yape</p>
+                  <p className="font-bold text-purple-800 text-lg">{BANK_INFO.yapeNumber}</p>
+                  <p className="text-xs text-gray-500">{BANK_INFO.yapeName}</p>
+                </div>
+                <CopyButton text={BANK_INFO.yapeNumber} />
+              </div>
+
+              <div className="bg-purple-100/50 rounded-lg p-3 text-xs text-purple-700">
+                <p className="font-medium mb-1">Importante:</p>
+                <p>Monto exacto: <strong>S/. {amount}.00</strong></p>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Transfer Tab */}
+          {selectedTab === 'transfer' && (
+            <motion.div
+              key="transfer"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              className="bg-blue-50 rounded-xl p-5 space-y-4"
+            >
+              <div className="text-center">
+                <h4 className="font-semibold text-blue-800 mb-1">Transferencia Bancaria</h4>
+                <p className="text-sm text-blue-600">Realiza una transferencia a la siguiente cuenta</p>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">Banco</p>
+                    <p className="font-medium text-gray-800">{BANK_INFO.bankName}</p>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-100 pt-3 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">N° de cuenta</p>
+                    <p className="font-mono font-medium text-gray-800">{BANK_INFO.accountNumber}</p>
+                  </div>
+                  <CopyButton text={BANK_INFO.accountNumber} />
+                </div>
+
+                <div className="border-t border-gray-100 pt-3 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-500">CCI (interbancario)</p>
+                    <p className="font-mono font-medium text-gray-800">{BANK_INFO.cci}</p>
+                  </div>
+                  <CopyButton text={BANK_INFO.cci} />
+                </div>
+
+                <div className="border-t border-gray-100 pt-3">
+                  <p className="text-xs text-gray-500">Titular</p>
+                  <p className="font-medium text-gray-800">{BANK_INFO.accountHolder}</p>
+                </div>
+              </div>
+
+              <div className="bg-blue-100/50 rounded-lg p-3 text-xs text-blue-700">
+                <p className="font-medium mb-1">Importante:</p>
+                <p>Monto exacto: <strong>S/. {amount}.00</strong></p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Botón principal: Ya pagué */}
+        <motion.button
+          type="button"
+          onClick={handleConfirmPayment}
+          disabled={paymentLoading || holdExpired || isLoading}
+          className="w-full mt-5 py-4 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 text-base shadow-lg shadow-green-600/20"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          {paymentLoading || isLoading ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Registrando pago...
+            </>
+          ) : (
+            <>
+              <MessageCircle className="w-5 h-5" />
+              Sí, ya pagué. ¡Verifícalo!
+            </>
+          )}
+        </motion.button>
+
+        <p className="text-xs text-center text-gray-500 mt-2">
+          Se abrirá WhatsApp para notificar tu pago. Un administrador verificará y confirmará tu cita.
+        </p>
 
         {/* MODO DESARROLLO: Botón de pago simulado */}
         {isDev && (
@@ -517,14 +464,10 @@ Mi consulta es:`
                 <AlertTriangle className="w-5 h-5 text-orange-600" />
                 <span className="text-sm font-medium text-orange-800">Modo Desarrollo</span>
               </div>
-              <p className="text-xs text-orange-700 mb-3">
-                Este botón solo aparece en desarrollo. Simula un pago exitoso sin procesar dinero real.
-              </p>
               <button
                 type="button"
                 onClick={() => {
                   setPaymentLoading(true)
-                  // Simular delay de procesamiento
                   setTimeout(() => {
                     onComplete('simulated', `SIM-${Date.now()}`)
                     setPaymentLoading(false)
@@ -549,44 +492,6 @@ Mi consulta es:`
           </div>
         )}
       </div>
-
-      {/* Info */}
-      <p className="text-xs text-center text-gray-500">
-        Tu pago se valida automáticamente y recibirás confirmación inmediata de tu cita.
-      </p>
     </div>
   )
-}
-
-// Culqi types
-interface CulqiType {
-  publicKey: string
-  settings: (config: {
-    title: string
-    currency: string
-    amount: number
-    order: string
-  }) => void
-  options: (config: {
-    lang: string
-    installments: boolean
-    paymentMethods: {
-      tarjeta: boolean
-      yape: boolean
-      bancaMovil: boolean
-      agente: boolean
-      billetera: boolean
-      cuotealo: boolean
-    }
-  }) => void
-  open: () => void
-  close: () => void
-  token: {
-    id: string
-    email: string
-  } | null
-  error?: {
-    user_message: string
-    merchant_message: string
-  }
 }

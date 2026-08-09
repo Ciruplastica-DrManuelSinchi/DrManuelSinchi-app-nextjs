@@ -429,7 +429,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           <button
             onClick={cancelExistingBooking}
             disabled={isCancellingBooking}
-            className="btn-secondary flex items-center justify-center gap-2 text-red-600 border-red-200 hover:bg-red-50"
+            className="btn border-2 border-red-200 text-red-600 hover:bg-red-50 flex items-center justify-center gap-2"
           >
             {isCancellingBooking ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -479,7 +479,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
           </Link>
           <Link
             href="/register?callbackUrl=/reservar"
-            className="btn-secondary inline-flex items-center justify-center"
+            className="btn-outline inline-flex items-center justify-center"
           >
             {t('loginPrompt.createAccount')}
           </Link>
@@ -534,7 +534,7 @@ export default function BookingForm({ procedures, preSelectedProcedure }: Bookin
               setPersonalData({ birthDate: '', documentType: 'DNI', documentNumber: '', address: '', city: '', occupation: '' })
               setAppointmentData({ procedureId: '', modalidad: 'PRESENCIAL', date: '', timeSlot: '', weight: '', height: '', referralSource: '', message: '' })
             }}
-            className="btn-secondary"
+            className="btn-outline"
           >
             {t('success.makeAnother')}
           </button>

@@ -75,7 +75,7 @@ const statusConfig: Record<string, { label: string; color: string; icon: typeof 
     icon: CreditCard,
   },
   PENDING: {
-    label: 'Pendiente',
+    label: 'Por verificar pago',
     color: 'bg-yellow-100 text-yellow-800 border-yellow-200',
     icon: Hourglass,
   },
@@ -652,16 +652,26 @@ export default function AdminBookingsPage() {
                               </button>
                             </>
                           )}
-                          {/* Botón para PENDING (cancelar reservas legacy) */}
+                          {/* Botón para PENDING (verificar pago y confirmar o rechazar) */}
                           {booking.status === 'PENDING' && (
-                            <button
-                              onClick={() => updateBookingStatus(booking.id, 'CANCELLED')}
-                              disabled={updating === booking.id}
-                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                              title="Cancelar"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
+                            <>
+                              <button
+                                onClick={() => updateBookingStatus(booking.id, 'CONFIRMED')}
+                                disabled={updating === booking.id}
+                                className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors disabled:opacity-50"
+                                title="Confirmar pago"
+                              >
+                                <Check className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => updateBookingStatus(booking.id, 'CANCELLED')}
+                                disabled={updating === booking.id}
+                                className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                                title="Rechazar"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            </>
                           )}
                           {/* Botón para CONFIRMED */}
                           {booking.status === 'CONFIRMED' && (
