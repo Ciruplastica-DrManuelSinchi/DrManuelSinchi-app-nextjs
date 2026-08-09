@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Plus,
@@ -347,10 +348,13 @@ export default function AdminVideosPage() {
                     {/* Thumbnail + título */}
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <img
+                        <Image
                           src={`https://img.youtube.com/vi/${video.youtubeId}/default.jpg`}
                           alt={video.title}
+                          width={80}
+                          height={56}
                           className="w-20 h-14 object-cover rounded-lg flex-shrink-0"
+                          unoptimized
                         />
                         <div className="min-w-0">
                           <p className="font-medium text-dark truncate">{video.title}</p>
@@ -546,10 +550,13 @@ export default function AdminVideosPage() {
                   />
                   {formData.youtubeId && (
                     <div className="mt-2">
-                      <img
+                      <Image
                         src={`https://img.youtube.com/vi/${formData.youtubeId}/mqdefault.jpg`}
                         alt="Vista previa"
+                        width={160}
+                        height={90}
                         className="w-40 h-auto rounded-lg border border-gray-200"
+                        unoptimized
                       />
                     </div>
                   )}
