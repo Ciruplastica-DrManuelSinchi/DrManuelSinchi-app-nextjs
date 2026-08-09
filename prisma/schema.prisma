@@ -189,6 +189,48 @@ model RealCase {
 }
 
 // ============================================
+// VIDEOS & TESTIMONIOS
+// ============================================
+
+model Video {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @default("")
+  youtubeId   String
+  category    String   @default("facial") // facial, corporal, estetica, reconstructiva
+  views       String   @default("")
+  isFeatured  Boolean  @default(false)
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([isActive])
+  @@index([order])
+  @@map("videos")
+}
+
+model Testimonial {
+  id        String  @id @default(cuid())
+  name      String
+  text      String  @db.Text
+  rating    Int     @default(5)
+  source    String  @default("google") // google, whatsapp, facebook, instagram
+  procedure String? // Nombre del procedimiento (opcional)
+  order     Int     @default(0)
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([order])
+  @@map("testimonials")
+}
+
+// ============================================
 // SISTEMA DE RESERVAS
 // ============================================
 

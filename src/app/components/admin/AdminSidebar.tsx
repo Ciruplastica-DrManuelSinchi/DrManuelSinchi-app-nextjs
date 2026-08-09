@@ -19,6 +19,8 @@ import {
   LogOut,
   Shield,
   ShieldAlert,
+  Youtube,
+  MessageSquareQuote,
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
@@ -50,6 +52,8 @@ const menuSections: MenuSection[] = [
       { title: 'Categorías', href: '/admin/categories', icon: FolderOpen },
       { title: 'Procedimientos', href: '/admin/procedures', icon: Stethoscope },
       { title: 'Casos Reales', href: '/admin/cases', icon: Image },
+      { title: 'Videos', href: '/admin/videos', icon: Youtube },
+      { title: 'Testimonios', href: '/admin/testimonials', icon: MessageSquareQuote },
       { title: 'Blog', href: '/admin/blog', icon: FileText },
     ],
   },

@@ -337,16 +337,82 @@ async function main() {
     console.log(`   ✅ ${caseData.procedureName} - ${caseData.patientInfo}`)
   }
 
+  // ==================== VIDEOS ====================
+  console.log('')
+  console.log('🎬 Creando videos...')
+
+  const videosData = [
+    { title: 'Todo sobre la Rinoplastia', description: 'El Dr. Manuel Sinchi explica todo lo que necesitas saber sobre la rinoplastia.', youtubeId: 'cy5N4Z_DRmM', category: 'facial', views: '2.5K', isFeatured: true, order: 1 },
+    { title: 'Rinoplastia ultrasónica vs convencional', description: 'Comparativa entre técnicas de rinoplastia y sus beneficios.', youtubeId: 'EfC0TdjHIv8', category: 'facial', views: '1.8K', isFeatured: false, order: 2 },
+    { title: 'Resultados naturales con Rinoseptoplastia Ultrasónica', description: 'Caso real mostrando resultados naturales de rinoseptoplastia.', youtubeId: '7oveiyGPTW8', category: 'facial', views: '1.2K', isFeatured: false, order: 3 },
+    { title: 'Caso real: Perfilamiento facial', description: 'Resultado de perfilamiento facial con bichectomía.', youtubeId: 'r_ptdooFxDA', category: 'facial', views: '980', isFeatured: false, order: 4 },
+    { title: 'Caso real: Afinamiento de rostro', description: 'Transformación con afinamiento de rostro.', youtubeId: '9isCtT3yYk0', category: 'facial', views: '1.1K', isFeatured: false, order: 5 },
+    { title: 'Caso real: Rinoplastia y Afinamiento Facial', description: 'Combinación de procedimientos para un resultado armónico.', youtubeId: '9rmvDWxDHIE', category: 'facial', views: '1.5K', isFeatured: false, order: 6 },
+    { title: 'PERFILOPLASTIA: Rinoplastia ultrasónica + Mentoplastia', description: 'Perfiloplastia completa con rinoplastia y mentoplastia.', youtubeId: 'PnuhU1EBdXQ', category: 'facial', views: '2.1K', isFeatured: false, order: 7 },
+    { title: 'Mentoplastia: lo que debes saber', description: 'Información completa sobre la cirugía de mentón.', youtubeId: 'WDsZMaIWFYk', category: 'facial', views: '890', isFeatured: false, order: 8 },
+    { title: 'Liposucción de papada: antes y después', description: 'Resultados reales de liposucción de papada.', youtubeId: '8ldGYrTf488', category: 'facial', views: '1.3K', isFeatured: false, order: 9 },
+    { title: 'Caso de liposucción de papada', description: 'Transformación con liposucción de papada.', youtubeId: '24c5BD3LU1s', category: 'facial', views: '760', isFeatured: false, order: 10 },
+    { title: 'Cambio sutil, resultado natural - Lifting', description: 'Caso de lifting facial con resultado natural.', youtubeId: 'kEQEN_kO4a0', category: 'facial', views: '1.4K', isFeatured: false, order: 11 },
+    { title: 'PERFILOPLASTIA: Rinoplastia + Afinamiento facial', description: 'Combinación de procedimientos faciales.', youtubeId: '0zQ0cvgBYrs', category: 'facial', views: '1.7K', isFeatured: false, order: 12 },
+    { title: 'Lipoescultura, Rinoseptoplastia y Afinamiento facial', description: 'Transformación completa con múltiples procedimientos.', youtubeId: 'wxMCK-kXHeg', category: 'facial', views: '2.3K', isFeatured: false, order: 13 },
+    { title: 'Resultado de una Blefaroplastia Inferior', description: 'Caso real de blefaroplastia inferior.', youtubeId: 't4CJHFDtT-w', category: 'facial', views: '1.6K', isFeatured: false, order: 14 },
+    { title: 'Rinoseptoplastia y Blefaroplastia', description: 'Combinación de cirugía de nariz y párpados.', youtubeId: '2UThbvUrJ0Y', category: 'facial', views: '1.2K', isFeatured: false, order: 15 },
+    { title: 'Caso real de OTOPLASTIA', description: 'Corrección de orejas prominentes.', youtubeId: 'POg1Mb-UHcs', category: 'facial', views: '890', isFeatured: false, order: 16 },
+    { title: '¿Desde qué edad se puede corregir las orejas?', description: 'Información sobre otoplastia en diferentes edades.', youtubeId: 'cTv5VZm7o6k', category: 'facial', views: '1.1K', isFeatured: false, order: 17 },
+    { title: '¿Tienes las orejas prominentes?', description: 'Todo sobre la corrección de orejas prominentes.', youtubeId: 'UnkpLmMddCw', category: 'facial', views: '980', isFeatured: false, order: 18 },
+    { title: 'Lo que debes saber sobre la lipoescultura', description: 'Entrevista en Radio Miraflores sobre lipoescultura.', youtubeId: 'fUUGe4-wLnc', category: 'corporal', views: '3.1K', isFeatured: true, order: 19 },
+    { title: 'Lipoescultura vs. Lipoabdominoplastia', description: 'Diferencias entre estos dos procedimientos corporales.', youtubeId: 'ZBiNoZkeF2E', category: 'corporal', views: '2.1K', isFeatured: false, order: 20 },
+    { title: 'Resultado real de lipoescultura', description: 'Caso real mostrando resultados de lipoescultura.', youtubeId: '8GrpYNpd9Js', category: 'corporal', views: '1.9K', isFeatured: false, order: 21 },
+    { title: 'Caso real: Mamá de 2 hijos recupera su figura', description: 'Transformación con abdominoplastia post embarazo.', youtubeId: 'Z6Jq0DVJdzs', category: 'corporal', views: '2.8K', isFeatured: false, order: 22 },
+    { title: 'Caso de Pilar: Lipoabdominoplastia', description: 'Resultado de lipoabdominoplastia.', youtubeId: '7GFKXZEwiis', category: 'corporal', views: '1.5K', isFeatured: false, order: 23 },
+    { title: '¿Cómo elegir el IMPLANTE MAMARIO ideal?', description: 'Guía completa para elegir implantes mamarios.', youtubeId: '7PJPZJw9AL8', category: 'corporal', views: '3.2K', isFeatured: true, order: 24 },
+    { title: 'Implantes mamarios: Cirugía de aumento', description: 'Todo sobre la cirugía de aumento de mamas.', youtubeId: 'kgu9YpK7uzs', category: 'corporal', views: '2.4K', isFeatured: false, order: 25 },
+    { title: 'Caso real de mamoplastia', description: 'Resultado de aumento mamario.', youtubeId: '6pN61A1gLHI', category: 'corporal', views: '1.8K', isFeatured: false, order: 26 },
+    { title: '¿Te hiciste una lipotransferencia? ¡Cuídala así!', description: 'Cuidados post lipotransferencia glútea.', youtubeId: 'LZeJiFcQtnI', category: 'corporal', views: '1.6K', isFeatured: false, order: 27 },
+    { title: 'Transformación con Liposucción + Transferencia de grasa', description: 'Caso de lipoescultura con transferencia a glúteos.', youtubeId: '5-75lv9Q4nI', category: 'corporal', views: '2.2K', isFeatured: false, order: 28 },
+    { title: 'Descubre todo sobre el Lip Lift', description: 'El Dr. Manuel Sinchi explica el procedimiento de Lip Lift.', youtubeId: 'pkUsW_-EHBI', category: 'estetica', views: '1.9K', isFeatured: false, order: 29 },
+    { title: 'Todo lo que debes saber sobre el Lip Lift', description: 'Información completa sobre el levantamiento de labio.', youtubeId: '61QYlk7UzFk', category: 'estetica', views: '1.4K', isFeatured: false, order: 30 },
+  ]
+
+  await prisma.video.deleteMany({})
+  for (const video of videosData) {
+    await prisma.video.create({ data: video })
+  }
+  console.log(`   ✅ ${videosData.length} videos creados`)
+
+  // ==================== TESTIMONIOS ====================
+  console.log('')
+  console.log('💬 Creando testimonios...')
+
+  const testimonialsData = [
+    { name: 'Pilar del Castillo', text: 'Excelente atención y resultados. El Dr. Sinchi me explicó todo el proceso con mucha claridad y profesionalismo. Los resultados superaron mis expectativas.', rating: 5, source: 'google', procedure: 'Rinoplastia', order: 1 },
+    { name: 'Eduardo Carhuas', text: 'Muy buen servicio y profesionalismo por parte del doctor. Me sentí en confianza desde la primera consulta. Lo recomiendo ampliamente.', rating: 5, source: 'google', procedure: 'Lipoescultura', order: 2 },
+    { name: 'Daniel Castañeda', text: 'Quiero expresar mi agradecimiento al Dr. Sinchi por el excelente trabajo realizado en mi cirugía. El trato fue 10/10, siempre amable y profesional.', rating: 5, source: 'google', order: 3 },
+    { name: 'Vilma Rodriguez Quiroz', text: 'Excelente profesional, resultado 100% garantizado.', rating: 5, source: 'google', procedure: 'Blefaroplastia', order: 4 },
+    { name: 'Ana García', text: 'Después de mucho buscar, encontré al Dr. Sinchi y fue la mejor decisión. Profesionalismo y resultados excepcionales.', rating: 5, source: 'google', procedure: 'Mamoplastia', order: 5 },
+    { name: 'Roberto Mendoza', text: 'Excelente doctor, muy profesional y atento. Los resultados fueron exactamente lo que esperaba. Totalmente recomendado.', rating: 5, source: 'google', order: 6 },
+  ]
+
+  await prisma.testimonial.deleteMany({})
+  for (const testimonial of testimonialsData) {
+    await prisma.testimonial.create({ data: testimonial })
+  }
+  console.log(`   ✅ ${testimonialsData.length} testimonios creados`)
+
   // Contar totales
   const totalCategories = await prisma.procedureCategory.count()
   const totalProcedures = await prisma.procedure.count()
   const totalCases = await prisma.realCase.count()
+  const totalVideos = await prisma.video.count()
+  const totalTestimonials = await prisma.testimonial.count()
 
   console.log('')
   console.log(`🎉 Seed completado:`)
   console.log(`   - ${totalCategories} categorías`)
   console.log(`   - ${totalProcedures} procedimientos`)
   console.log(`   - ${totalCases} casos reales`)
+  console.log(`   - ${totalVideos} videos`)
+  console.log(`   - ${totalTestimonials} testimonios`)
 }
 
 main()

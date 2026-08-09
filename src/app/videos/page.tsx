@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -17,263 +17,25 @@ import { useTranslations } from 'next-intl'
 
 // Tipos
 interface Video {
-    id: number
+    id: string
     title: string
     description: string
     youtubeId: string
     category: string
     views: string
-    featured?: boolean
+    isFeatured?: boolean
+    featured?: boolean // ponytail: compat with static fallback
 }
 
-// Videos reales del canal (sin duplicados)
-const videos: Video[] = [
-    // CIRUGÍA FACIAL
-    {
-        id: 1,
-        title: 'Todo sobre la Rinoplastia',
-        description: 'El Dr. Manuel Sinchi explica todo lo que necesitas saber sobre la rinoplastia.',
-        youtubeId: 'cy5N4Z_DRmM',
-        category: 'facial',
-        views: '2.5K',
-        featured: true,
-    },
-    {
-        id: 2,
-        title: 'Rinoplastia ultrasónica vs convencional',
-        description: 'Comparativa entre técnicas de rinoplastia y sus beneficios.',
-        youtubeId: 'EfC0TdjHIv8',
-        category: 'facial',
-        views: '1.8K',
-    },
-    {
-        id: 3,
-        title: 'Resultados naturales con Rinoseptoplastia Ultrasónica',
-        description: 'Caso real mostrando resultados naturales de rinoseptoplastia.',
-        youtubeId: '7oveiyGPTW8',
-        category: 'facial',
-        views: '1.2K',
-    },
-    {
-        id: 4,
-        title: 'Caso real: Perfilamiento facial',
-        description: 'Resultado de perfilamiento facial con bichectomía.',
-        youtubeId: 'r_ptdooFxDA',
-        category: 'facial',
-        views: '980',
-    },
-    {
-        id: 5,
-        title: 'Caso real: Afinamiento de rostro',
-        description: 'Transformación con afinamiento de rostro.',
-        youtubeId: '9isCtT3yYk0',
-        category: 'facial',
-        views: '1.1K',
-    },
-    {
-        id: 6,
-        title: 'Caso real: Rinoplastia y Afinamiento Facial',
-        description: 'Combinación de procedimientos para un resultado armónico.',
-        youtubeId: '9rmvDWxDHIE',
-        category: 'facial',
-        views: '1.5K',
-    },
-    {
-        id: 7,
-        title: 'PERFILOPLASTIA: Rinoplastia ultrasónica + Mentoplastia',
-        description: 'Perfiloplastia completa con rinoplastia y mentoplastia.',
-        youtubeId: 'PnuhU1EBdXQ',
-        category: 'facial',
-        views: '2.1K',
-    },
-    {
-        id: 8,
-        title: 'Mentoplastia: lo que debes saber',
-        description: 'Información completa sobre la cirugía de mentón.',
-        youtubeId: 'WDsZMaIWFYk',
-        category: 'facial',
-        views: '890',
-    },
-    {
-        id: 9,
-        title: 'Liposucción de papada: antes y después',
-        description: 'Resultados reales de liposucción de papada.',
-        youtubeId: '8ldGYrTf488',
-        category: 'facial',
-        views: '1.3K',
-    },
-    {
-        id: 10,
-        title: 'Caso de liposucción de papada',
-        description: 'Transformación con liposucción de papada.',
-        youtubeId: '24c5BD3LU1s',
-        category: 'facial',
-        views: '760',
-    },
-    {
-        id: 11,
-        title: 'Cambio sutil, resultado natural - Lifting',
-        description: 'Caso de lifting facial con resultado natural.',
-        youtubeId: 'kEQEN_kO4a0',
-        category: 'facial',
-        views: '1.4K',
-    },
-    {
-        id: 12,
-        title: 'PERFILOPLASTIA: Rinoplastia + Afinamiento facial',
-        description: 'Combinación de procedimientos faciales.',
-        youtubeId: '0zQ0cvgBYrs',
-        category: 'facial',
-        views: '1.7K',
-    },
-    {
-        id: 13,
-        title: 'Lipoescultura, Rinoseptoplastia y Afinamiento facial',
-        description: 'Transformación completa con múltiples procedimientos.',
-        youtubeId: 'wxMCK-kXHeg',
-        category: 'facial',
-        views: '2.3K',
-    },
-    {
-        id: 14,
-        title: 'Resultado de una Blefaroplastia Inferior',
-        description: 'Caso real de blefaroplastia inferior.',
-        youtubeId: 't4CJHFDtT-w',
-        category: 'facial',
-        views: '1.6K',
-    },
-    {
-        id: 15,
-        title: 'Rinoseptoplastia y Blefaroplastia',
-        description: 'Combinación de cirugía de nariz y párpados.',
-        youtubeId: '2UThbvUrJ0Y',
-        category: 'facial',
-        views: '1.2K',
-    },
-    {
-        id: 16,
-        title: 'Caso real de OTOPLASTIA',
-        description: 'Corrección de orejas prominentes.',
-        youtubeId: 'POg1Mb-UHcs',
-        category: 'facial',
-        views: '890',
-    },
-    {
-        id: 17,
-        title: '¿Desde qué edad se puede corregir las orejas?',
-        description: 'Información sobre otoplastia en diferentes edades.',
-        youtubeId: 'cTv5VZm7o6k',
-        category: 'facial',
-        views: '1.1K',
-    },
-    {
-        id: 18,
-        title: '¿Tienes las orejas prominentes?',
-        description: 'Todo sobre la corrección de orejas prominentes.',
-        youtubeId: 'UnkpLmMddCw',
-        category: 'facial',
-        views: '980',
-    },
-    // CIRUGÍA CORPORAL
-    {
-        id: 19,
-        title: 'Lo que debes saber sobre la lipoescultura',
-        description: 'Entrevista en Radio Miraflores sobre lipoescultura.',
-        youtubeId: 'fUUGe4-wLnc',
-        category: 'corporal',
-        views: '3.1K',
-        featured: true,
-    },
-    {
-        id: 20,
-        title: 'Lipoescultura vs. Lipoabdominoplastia',
-        description: 'Diferencias entre estos dos procedimientos corporales.',
-        youtubeId: 'ZBiNoZkeF2E',
-        category: 'corporal',
-        views: '2.1K',
-    },
-    {
-        id: 21,
-        title: 'Resultado real de lipoescultura',
-        description: 'Caso real mostrando resultados de lipoescultura.',
-        youtubeId: '8GrpYNpd9Js',
-        category: 'corporal',
-        views: '1.9K',
-    },
-    {
-        id: 22,
-        title: 'Caso real: Mamá de 2 hijos recupera su figura',
-        description: 'Transformación con abdominoplastia post embarazo.',
-        youtubeId: 'Z6Jq0DVJdzs',
-        category: 'corporal',
-        views: '2.8K',
-    },
-    {
-        id: 23,
-        title: 'Caso de Pilar: Lipoabdominoplastia',
-        description: 'Resultado de lipoabdominoplastia.',
-        youtubeId: '7GFKXZEwiis',
-        category: 'corporal',
-        views: '1.5K',
-    },
-    {
-        id: 24,
-        title: '¿Cómo elegir el IMPLANTE MAMARIO ideal?',
-        description: 'Guía completa para elegir implantes mamarios.',
-        youtubeId: '7PJPZJw9AL8',
-        category: 'corporal',
-        views: '3.2K',
-        featured: true,
-    },
-    {
-        id: 25,
-        title: 'Implantes mamarios: Cirugía de aumento',
-        description: 'Todo sobre la cirugía de aumento de mamas.',
-        youtubeId: 'kgu9YpK7uzs',
-        category: 'corporal',
-        views: '2.4K',
-    },
-    {
-        id: 26,
-        title: 'Caso real de mamoplastia',
-        description: 'Resultado de aumento mamario.',
-        youtubeId: '6pN61A1gLHI',
-        category: 'corporal',
-        views: '1.8K',
-    },
-    {
-        id: 27,
-        title: '¿Te hiciste una lipotransferencia? ¡Cuídala así!',
-        description: 'Cuidados post lipotransferencia glútea.',
-        youtubeId: 'LZeJiFcQtnI',
-        category: 'corporal',
-        views: '1.6K',
-    },
-    {
-        id: 28,
-        title: 'Transformación con Liposucción + Transferencia de grasa',
-        description: 'Caso de lipoescultura con transferencia a glúteos.',
-        youtubeId: '5-75lv9Q4nI',
-        category: 'corporal',
-        views: '2.2K',
-    },
-    // MEDICINA ESTÉTICA
-    {
-        id: 29,
-        title: 'Descubre todo sobre el Lip Lift',
-        description: 'El Dr. Manuel Sinchi explica el procedimiento de Lip Lift.',
-        youtubeId: 'pkUsW_-EHBI',
-        category: 'estetica',
-        views: '1.9K',
-    },
-    {
-        id: 30,
-        title: 'Todo lo que debes saber sobre el Lip Lift',
-        description: 'Información completa sobre el levantamiento de labio.',
-        youtubeId: '61QYlk7UzFk',
-        category: 'estetica',
-        views: '1.4K',
-    },
+// Fallback estático por si la DB está vacía
+const fallbackVideos: Video[] = [
+    { id: '1', title: 'Todo sobre la Rinoplastia', description: 'El Dr. Manuel Sinchi explica todo lo que necesitas saber sobre la rinoplastia.', youtubeId: 'cy5N4Z_DRmM', category: 'facial', views: '2.5K', featured: true },
+    { id: '2', title: 'Rinoplastia ultrasónica vs convencional', description: 'Comparativa entre técnicas de rinoplastia y sus beneficios.', youtubeId: 'EfC0TdjHIv8', category: 'facial', views: '1.8K' },
+    { id: '3', title: 'Resultados naturales con Rinoseptoplastia Ultrasónica', description: 'Caso real mostrando resultados naturales de rinoseptoplastia.', youtubeId: '7oveiyGPTW8', category: 'facial', views: '1.2K' },
+    { id: '19', title: 'Lo que debes saber sobre la lipoescultura', description: 'Entrevista en Radio Miraflores sobre lipoescultura.', youtubeId: 'fUUGe4-wLnc', category: 'corporal', views: '3.1K', featured: true },
+    { id: '20', title: 'Lipoescultura vs. Lipoabdominoplastia', description: 'Diferencias entre estos dos procedimientos corporales.', youtubeId: 'ZBiNoZkeF2E', category: 'corporal', views: '2.1K' },
+    { id: '24', title: '¿Cómo elegir el IMPLANTE MAMARIO ideal?', description: 'Guía completa para elegir implantes mamarios.', youtubeId: '7PJPZJw9AL8', category: 'corporal', views: '3.2K', featured: true },
+    { id: '29', title: 'Descubre todo sobre el Lip Lift', description: 'El Dr. Manuel Sinchi explica el procedimiento de Lip Lift.', youtubeId: 'pkUsW_-EHBI', category: 'estetica', views: '1.9K' },
 ]
 
 // Componente de Video Card
@@ -439,9 +201,19 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
 
 export default function VideosPage() {
     const t = useTranslations('videosPage')
+    const [videos, setVideos] = useState<Video[]>(fallbackVideos)
     const [activeCategory, setActiveCategory] = useState('todos')
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null)
     const [showFilters, setShowFilters] = useState(false)
+
+    useEffect(() => {
+        fetch('/api/videos')
+            .then(r => r.json())
+            .then(data => {
+                if (data.videos?.length > 0) setVideos(data.videos)
+            })
+            .catch(() => {})
+    }, [])
 
     const categories = [
         { id: 'todos', name: t('categories.all'), icon: Sparkles },
@@ -456,7 +228,7 @@ export default function VideosPage() {
         : videos.filter(v => v.category === activeCategory)
 
     // Video destacado
-    const featuredVideo = videos.find(v => v.featured) || videos[0]
+    const featuredVideo = videos.find(v => v.isFeatured || v.featured) || videos[0]
 
     return (
         <>

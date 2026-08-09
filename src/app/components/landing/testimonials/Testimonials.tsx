@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Star, ExternalLink } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -8,7 +9,7 @@ import styles from './Testimonials.module.css'
 type TestimonialSource = 'google' | 'whatsapp' | 'facebook' | 'instagram'
 
 interface Testimonial {
-    id: number
+    id: string
     name: string
     text: string
     rating: number
@@ -16,9 +17,9 @@ interface Testimonial {
     procedure?: string
 }
 
-const testimonials: Testimonial[] = [
+const fallbackTestimonials: Testimonial[] = [
     {
-        id: 1,
+        id: '1',
         name: 'Pilar del Castillo',
         text: 'Excelente atención y resultados. El Dr. Sinchi me explicó todo el proceso con mucha claridad y profesionalismo. Los resultados superaron mis expectativas.',
         rating: 5,
@@ -26,7 +27,7 @@ const testimonials: Testimonial[] = [
         procedure: 'Rinoplastia',
     },
     {
-        id: 2,
+        id: '2',
         name: 'Eduardo Carhuas',
         text: 'Muy buen servicio y profesionalismo por parte del doctor. Me sentí en confianza desde la primera consulta. Lo recomiendo ampliamente.',
         rating: 5,
@@ -34,14 +35,14 @@ const testimonials: Testimonial[] = [
         procedure: 'Lipoescultura',
     },
     {
-        id: 3,
+        id: '3',
         name: 'Daniel Castañeda',
         text: 'Quiero expresar mi agradecimiento al Dr. Sinchi por el excelente trabajo realizado en mi cirugía. El trato fue 10/10, siempre amable y profesional.',
         rating: 5,
         source: 'google',
     },
     {
-        id: 4,
+        id: '4',
         name: 'Vilma Rodriguez Quiroz',
         text: 'Excelente profesional, resultado 100% garantizado.',
         rating: 5,
@@ -49,7 +50,7 @@ const testimonials: Testimonial[] = [
         procedure: 'Blefaroplastia',
     },
     {
-        id: 5,
+        id: '5',
         name: 'Ana García',
         text: 'Después de mucho buscar, encontré al Dr. Sinchi y fue la mejor decisión. Profesionalismo y resultados excepcionales.',
         rating: 5,
@@ -57,7 +58,7 @@ const testimonials: Testimonial[] = [
         procedure: 'Mamoplastia',
     },
     {
-        id: 6,
+        id: '6',
         name: 'Roberto Mendoza',
         text: 'Excelente doctor, muy profesional y atento. Los resultados fueron exactamente lo que esperaba. Totalmente recomendado.',
         rating: 5,
@@ -145,7 +146,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
                 <span className={styles.name}>{testimonial.name}</span>
                 <div className={styles.sourceWrapper}>
                     {source.icon}
-                    <span className={styles.source}>Google</span>
+                    <span className={styles.source}>{source.name}</span>
                 </div>
             </div>
         </div>
@@ -154,6 +155,19 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
 export default function Testimonials() {
     const t = useTranslations('testimonials')
+    const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials)
+
+    useEffect(() => {
+        fetch('/api/testimonials')
+            .then(r => r.json())
+            .then(data => {
+                if (data.testimonials?.length > 0) {
+                    setTestimonials(data.testimonials)
+                }
+            })
+            .catch(() => {})
+    }, [])
+
     const duplicatedTestimonials = [...testimonials, ...testimonials]
 
     return (

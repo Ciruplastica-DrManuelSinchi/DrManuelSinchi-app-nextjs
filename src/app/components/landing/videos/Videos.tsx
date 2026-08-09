@@ -1,23 +1,30 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 
-const videos = [
+interface VideoItem {
+    id: string
+    title: string
+    youtubeId: string
+}
+
+const fallbackVideos: VideoItem[] = [
     {
-        id: 1,
+        id: '1',
         title: 'Lipoescultura vs. Lipoabdominoplastia 🧐',
         youtubeId: 'ZBiNoZkeF2E',
     },
     {
-        id: 2,
+        id: '2',
         title: 'Rinoplastia ultrasónica vs convencional',
         youtubeId: 'EfC0TdjHIv8',
     },
     {
-        id: 3,
+        id: '3',
         title: '🎥 ¿Cómo elegir el IMPLANTE MAMARIO ideal?',
         youtubeId: '7PJPZJw9AL8',
     },
@@ -25,6 +32,18 @@ const videos = [
 
 export default function Videos() {
     const t = useTranslations('videos')
+    const [videos, setVideos] = useState<VideoItem[]>(fallbackVideos)
+
+    useEffect(() => {
+        fetch('/api/videos?featured=true')
+            .then(r => r.json())
+            .then(data => {
+                if (data.videos?.length > 0) {
+                    setVideos(data.videos.slice(0, 3))
+                }
+            })
+            .catch(() => {})
+    }, [])
 
     return (
         <section className="section bg-light">
