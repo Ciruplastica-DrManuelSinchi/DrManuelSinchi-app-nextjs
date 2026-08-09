@@ -1,12 +1,22 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import BeforeAfterSlider from '@/app/components/ui/before-after-slider/BeforeAfterSlider'
 
-const cases = [
+interface CaseItem {
+    id: string | number
+    procedure: string
+    detail: string
+    quote: string
+    beforeImage: string
+    afterImage: string
+}
+
+const fallbackCases: CaseItem[] = [
     {
         id: 1,
         procedure: 'Rinoplastia',
@@ -35,6 +45,25 @@ const cases = [
 
 export default function BeforeAfter() {
     const t = useTranslations('beforeAfterSection')
+    const [cases, setCases] = useState<CaseItem[]>(fallbackCases)
+
+    useEffect(() => {
+        fetch('/api/cases?featured=true')
+            .then(r => r.json())
+            .then(data => {
+                if (data.cases && data.cases.length > 0) {
+                    setCases(data.cases.slice(0, 3).map((c: { id: string; procedure: string; patientInfo: string; description: string; beforeImage: string; afterImage: string }) => ({
+                        id: c.id,
+                        procedure: c.procedure,
+                        detail: c.patientInfo,
+                        quote: c.description,
+                        beforeImage: c.beforeImage,
+                        afterImage: c.afterImage,
+                    })))
+                }
+            })
+            .catch(() => { /* use fallback */ })
+    }, [])
 
     return (
         <section className="section bg-primary">

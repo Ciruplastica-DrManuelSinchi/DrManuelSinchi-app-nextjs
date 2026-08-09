@@ -1,11 +1,15 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 // GET /api/cases - Obtener casos reales activos (público)
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const featured = request.nextUrl.searchParams.get('featured')
+    const where: Record<string, unknown> = { isActive: true }
+    if (featured === 'true') where.isFeatured = true
+
     const cases = await prisma.realCase.findMany({
-      where: { isActive: true },
+      where,
       orderBy: { order: 'asc' },
       include: {
         category: {
