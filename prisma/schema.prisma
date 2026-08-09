@@ -172,6 +172,7 @@ model RealCase {
   orientation     String            @default("portrait") // "portrait" | "landscape"
   order           Int               @default(0)
   isActive        Boolean           @default(true)
+  isFeatured      Boolean           @default(false) // "Foto referencial" — aparece en la sección de la categoría
 
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt

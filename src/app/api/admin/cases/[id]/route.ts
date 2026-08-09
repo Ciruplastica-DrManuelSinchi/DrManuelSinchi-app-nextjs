@@ -67,6 +67,7 @@ export async function PATCH(
       orientation,
       order,
       isActive,
+      isFeatured,
     } = body
 
     // Verificar que el caso existe
@@ -105,6 +106,16 @@ export async function PATCH(
     if (orientation !== undefined) updateData.orientation = orientation
     if (order !== undefined) updateData.order = order
     if (isActive !== undefined) updateData.isActive = isActive
+    if (isFeatured !== undefined) updateData.isFeatured = isFeatured
+
+    // Si se marca como foto referencial, desmarcar las demás de la misma categoría
+    if (isFeatured === true) {
+      const targetCategoryId = categoryId || existing.categoryId
+      await prisma.realCase.updateMany({
+        where: { categoryId: targetCategoryId, isFeatured: true, id: { not: id } },
+        data: { isFeatured: false },
+      })
+    }
 
     const realCase = await prisma.realCase.update({
       where: { id },

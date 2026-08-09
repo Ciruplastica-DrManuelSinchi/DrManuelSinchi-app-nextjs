@@ -48,6 +48,7 @@ interface RealCase {
   orientation: string
   order: number
   isActive: boolean
+  isFeatured: boolean
   category: Category
   createdAt: string
 }
@@ -90,6 +91,7 @@ export default function AdminCasesPage() {
     orientation: 'portrait',
     order: 0,
     isActive: true,
+    isFeatured: false,
   })
   const [saving, setSaving] = useState(false)
 
@@ -156,6 +158,7 @@ export default function AdminCasesPage() {
       orientation: 'portrait',
       order: cases.length + 1,
       isActive: true,
+      isFeatured: false,
     })
     setShowModal(true)
   }
@@ -176,6 +179,7 @@ export default function AdminCasesPage() {
       orientation: realCase.orientation,
       order: realCase.order,
       isActive: realCase.isActive,
+      isFeatured: realCase.isFeatured,
     })
     setShowModal(true)
     setActionMenuOpen(null)
@@ -513,6 +517,11 @@ export default function AdminCasesPage() {
                       >
                         {realCase.isActive ? 'Activo' : 'Inactivo'}
                       </span>
+                      {realCase.isFeatured && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 bg-amber-100 text-amber-700">
+                          Foto referencial
+                        </span>
+                      )}
                     </div>
                     <p className="text-sm text-gray-500 mt-1 truncate">{realCase.patientInfo}</p>
                     <p className="text-xs text-primary mt-1">
@@ -861,7 +870,7 @@ export default function AdminCasesPage() {
                 </div>
 
                 {/* Activo */}
-                <div>
+                <div className="space-y-3">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
@@ -870,6 +879,16 @@ export default function AdminCasesPage() {
                       className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
                     />
                     <span className="text-sm text-gray-700">Publicar caso (visible en la web)</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formData.isFeatured}
+                      onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                      className="w-5 h-5 rounded border-gray-300 text-amber-500 focus:ring-amber-500"
+                    />
+                    <span className="text-sm text-gray-700">Foto referencial</span>
+                    <span className="text-xs text-gray-400">(aparece en la sección de la categoría)</span>
                   </label>
                 </div>
 

@@ -32,6 +32,7 @@ export async function GET() {
       beforeImage: c.beforeImage,
       afterImage: c.afterImage,
       orientation: c.orientation,
+      isFeatured: c.isFeatured,
     }))
 
     return NextResponse.json({

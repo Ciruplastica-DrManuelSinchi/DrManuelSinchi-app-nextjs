@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
       orientation,
       order,
       isActive,
+      isFeatured,
     } = body
 
     // Validaciones
@@ -96,6 +97,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Si se marca como foto referencial, desmarcar las demás de la misma categoría
+    if (isFeatured) {
+      await prisma.realCase.updateMany({
+        where: { categoryId, isFeatured: true },
+        data: { isFeatured: false },
+      })
+    }
+
     const realCase = await prisma.realCase.create({
       data: {
         procedureName,
@@ -108,6 +117,7 @@ export async function POST(request: NextRequest) {
         orientation: orientation || 'portrait',
         order: order || 0,
         isActive: isActive !== undefined ? isActive : true,
+        isFeatured: isFeatured || false,
       },
       include: {
         category: {
